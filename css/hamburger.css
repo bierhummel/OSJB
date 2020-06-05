@@ -1,0 +1,106 @@
+@charset "utf 8";
+
+/*offene Problematik: Wird ein kleines Fenster mit geöffneter Sidebar vergrößert, wird die Sidebar automatisch geschlossen.. schlimm?*/
+
+/*auf kleinen Bildschirmen aside ausgeblendet*/
+aside {
+    display: none;
+}
+
+
+/*Hamburger nach Vorlage von https://www.mediaevent.de/tutorial/css-transform.html. Leicht angepasst, um aside aus- und einblenden zu können*/
+label.hamburg {
+    display: block;
+    background: #555;
+    width: 75px;
+    height: 50px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 4px;
+}
+
+input#hamburg {
+    display: none
+}
+
+.line {
+    position: absolute;
+    left: 10px;
+    height: 4px;
+    width: 55px;
+    background: #fff;
+    border-radius: 2px;
+    display: block;
+    transition: 0.5s;
+    transform-origin: center;
+}
+
+.line:nth-child(1) {
+    top: 12px;
+}
+
+.line:nth-child(2) {
+    top: 24px;
+}
+
+.line:nth-child(3) {
+    top: 36px;
+}
+
+#hamburg:checked + section .hamburg .line:nth-child(1) {
+    transform: translateY(12px) rotate(-45deg);
+}
+
+#hamburg:checked + section .hamburg .line:nth-child(2) {
+    opacity: 0;
+}
+
+#hamburg:checked + section .hamburg .line:nth-child(3) {
+    transform: translateY(-12px) rotate(45deg);
+}
+
+/* Ende Vorlage*/
+
+/*Durch Klick aside einblenden*/
+#hamburg:checked ~ aside {
+    display: block;
+}
+
+/*Auf großen Bildschirmen Sidebar automatisch einblenden und ggf. Hamburgertransition abspielen. Hamburgerfunktionsweise invertieren*/
+@media screen and (min-width: 576px) {
+    aside {
+        display: block;
+    }
+
+    /*Hamburgertransition abspielen*/
+    section .hamburg .line:nth-child(1) {
+        transform: translateY(12px) rotate(-45deg);
+    }
+
+    section .hamburg .line:nth-child(2) {
+        opacity: 0;
+    }
+
+    section .hamburg .line:nth-child(3) {
+        transform: translateY(-12px) rotate(45deg);
+    }
+
+
+    /*Hamburgerfunktionsweise invertieren*/
+    #hamburg:checked + section .hamburg .line:nth-child(1) {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    #hamburg:checked + section .hamburg .line:nth-child(2) {
+        opacity: 1;
+    }
+
+    #hamburg:checked + section .hamburg .line:nth-child(3) {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    #hamburg:checked ~ aside {
+        display: none;
+    }
+}

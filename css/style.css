@@ -1,0 +1,198 @@
+@charset "utf 8";
+@import url('https://fonts.googleapis.com/css2?family=Raleway');
+
+
+
+.header {
+    text-align: center;
+    padding: 20px;
+}
+
+.search {
+    margin: auto;
+    border: 3px solid #ffffff;
+    padding: 10px;
+    margin-bottom: 2rem;
+}
+
+.center {
+    text-align: center;
+}
+
+.center1{
+    text-align: center;
+}
+
+.right {
+    position: absolute;
+    right: 0px;
+    width: 300px;
+    border: 3px solid #000000;
+    padding: 10px;
+}
+
+html,
+body{
+    overflow-x: hidden;  
+    background-color: rgb(159, 232, 229);
+}
+
+
+.img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+}
+
+.img_about {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 40%;
+}
+
+.adiv {
+    background-color: #ededed;
+}
+
+
+.border {
+    border: 2px solid #000000;
+    padding: 10px;
+}
+
+.jumbotron {
+    font-family: "Raleway", sans-serif;
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    background-color: rgba(103, 178, 164, 0.7);
+}
+
+h1 {
+
+    font-size: 300%;
+    color: #ededed;
+}
+
+h3 {
+
+    font-size: 200%;
+    color: #1e1e52;
+}
+
+/*p {
+    text-align: left;
+    color: black;
+    background-color: white;
+
+}*/
+
+#footer {
+    position:relative;
+    bottom: 0;
+    width: 100%;
+    color: aquamarine;
+    background-color: black;
+    text-align: center;
+}
+
+.container {
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: rgba(211,211,211,0.5);
+}
+
+/*Auskommentiert weil nicht verstanden :( 
+.container.suchergebnisse{
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;     
+}*/
+
+.container_for_login {
+    display: flex;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-bottom: 100px;
+    margin-right: auto;
+    margin-left: auto;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(211,211,211,0.6);
+}
+
+.container_for_profile {
+    display: flex;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-bottom: 100px;
+    margin-right: auto;
+    margin-left: auto;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(211,211,211,0.6);
+}
+
+.goright {}
+
+.foto {
+    display: block;
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+    margin-bottom: 1.5rem;
+
+}
+
+span {
+    display: inline;
+}
+
+span:before {
+    content: "\a ";
+    white-space: pre;
+}
+    
+.last_td {
+    margin-bottom: 3rem;
+}
+
+.end {
+    text-align: end;
+}
+
+.background_index{
+    background-image: url(../bilder/background-landing-page.jpg);
+    background-repeat:no-repeat;
+    background-size: 100% 110%;
+    overflow-x: hidden;  
+}
+
+.background_login{
+    background-image: url(../bilder/oldb-background-about.jpg);
+    background-repeat:no-repeat;
+    background-size: 100% 110%;
+    overflow-x: hidden;  
+}
+
+
+input,
+button,
+select,
+optgroup,
+textarea {
+
+    overflow-x: hidden;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+section {
+    display: block;
+    padding: inherit;
+    margin: auto;
+}
