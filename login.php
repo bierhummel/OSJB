@@ -1,7 +1,6 @@
 <?php
 
-include('php/config-login.php');
-include('php/config-reg.php');
+include('php/dao-user.php');
 
 ?>
 
@@ -31,7 +30,7 @@ include('php/config-reg.php');
     <div class="row">
         <div class="container col-xl-4 border ">
             <section>
-                <form action="php/config-login.php" method="post" class="was-validated">
+                <form action="php/dao-user.php" method="post" class="was-validated">
                     <fieldset>
                         <legend>Log in:</legend>
                         <div class="row form-group">
@@ -84,10 +83,9 @@ include('php/config-reg.php');
                 </form>
             </section>
         </div>
-
         <div class="container col-xl-4 border">
             <section>
-                <form action="php/config-reg.php" method="post" class="was-validated">
+                <form action="php/dao-user.php" method="post" class="was-validated">
                     <fieldset>
                         <legend>Registrierung:</legend>
                         <div class="row form-group">
