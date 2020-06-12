@@ -4,7 +4,6 @@ ini_set("session.use_only_cookies", 0);
 ini_set("session.use_trans_sid", 1);
 
 session_start();
-
    if(isset($_POST['reg'])){
 
 $name = (isset($_POST["name"]) && is_string($_POST["name"]))
@@ -26,7 +25,6 @@ $email1 = htmlspecialchars($email1);
 $passwort1 = htmlspecialchars($passwort1);
 $passwort2 = htmlspecialchars($passwort2);
 $unv = htmlspecialchars($unv);
-       
       
             if ($_POST['passwort1']!= $_POST['passwort2'])
  {
