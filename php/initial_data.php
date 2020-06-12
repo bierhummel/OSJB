@@ -1,16 +1,14 @@
 <?php
-     /***************************************************************
+    /****************************************************************
     * This script adds default users to the database                *
     * Run this script if the database is empty for some reasons     *
     ****************************************************************/
 
   try {
-    /**************************************
-    * Create databases and                *
-    * open connections                    *
-    **************************************/
+    /*
+     Create databases and open connections                    *
+    */
  
-    // Create (connect to) SQLite database in file
     $database = "../database/database.db";
     $file_db = new PDO('sqlite:' . $database); 
       
@@ -18,11 +16,10 @@
     $file_db->setAttribute(PDO::ATTR_ERRMODE, 
                             PDO::ERRMODE_EXCEPTION);
  
-    /**************************************
-    * Create tables                       *
-    **************************************/
- 
-    // Create table messages
+
+    /*
+        Create tables                  
+    */
     $file_db->exec("CREATE TABLE IF NOT EXISTS users (
                     id INTEGER PRIMARY KEY, 
                     name TEXT, 
@@ -30,11 +27,11 @@
                     password TEXT)");
  
  
-    /**************************************
-    * Set initial data                    *
-    **************************************/
+    /*
+        Set initial data                    
+    */
  
-    // Array with some test data to insert to database             
+    // Array with some test data            
     $messages = array(
                   array('name' => 'wael',
                         'email' => 'wael1@yahoo.de',
@@ -48,10 +45,7 @@
                 );
  
  
-    /**************************************
-    * A little bit of binding             *
-    **************************************/
- 
+
     // Prepare INSERT statement to SQLite3 file db
     $insert = "INSERT INTO messages (name, email, password) 
                 VALUES (:name, :email, :password)";
@@ -62,9 +56,9 @@
     $stmt->bindParam(':email', $email);
     $stmt->bindParam(':password', $password);
  
-    // Loop thru all messages and execute prepared insert statement
+    // Loop thru all users and execute the statement
     foreach ($users as $user) {
-      // Set values to bound variables
+      // Set values to vars
       $name = $user['name'];
       $email = $user['email'];
       $password = $user['password'];
