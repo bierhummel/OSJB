@@ -4,7 +4,7 @@ ini_set("session.use_only_cookies", 0);
 ini_set("session.use_trans_sid", 1);
 
 session_start();
-   if(isset($_POST['reg'])){
+
 
 $name = (isset($_POST["name"]) && is_string($_POST["name"]))
 ? $_POST["name"] : "";
@@ -40,14 +40,16 @@ $unv = htmlspecialchars($unv);
         
  if ($passwort1 == $passwort2 and $email1 != $emaildummy and $name != $namedummy )
  {
-                                        header("location: ../profil.php");
+                                        
+                                        return true;
 
         } 
        else {
-                                                echo("Name oder Email ist bereits vorhanden ");
+                                                
+                                                return false;
 
        }
-                        }
+                        
             
 
 ?>

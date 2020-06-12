@@ -1,7 +1,6 @@
 <?php
 
 include('php/config-login.php');
-include('php/config-reg.php');
 include('php/addUser.php');
 ?>
 
@@ -87,7 +86,7 @@ include('php/addUser.php');
 
         <div class="container col-xl-4 border">
             <section>
-                <form action="php/config-reg.php" method="post" class="was-validated">
+                
                     <form action="php/addUser.php" method= "post">
                     <fieldset>
                         <legend>Registrierung:</legend>
@@ -150,7 +149,7 @@ include('php/addUser.php');
                         </div>
                     </fieldset>
                 </form>
-            </form>
+            
             </section>
         </div>
 
