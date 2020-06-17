@@ -8,8 +8,6 @@ session_start();
 
 //Abmelden
 if ( isset ($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ) {
-
-    echo "test";
     
     session_unset();
     session_destroy();
@@ -18,6 +16,5 @@ if ( isset ($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ) {
     header( 'location: ../index.php' );
     exit;
 }
-
 
 ?>
