@@ -60,7 +60,16 @@ class SQLiteUserDAO implements UserDAO {
     
     
     
-    public function updateUser( $User ){}
+    public function updateUser( $User ){
+        $user_id = null; //Array mit aktualisierten wichtigen Informationen des Users (z.b. kein PW und Logo)
+        
+        /*test*/
+        $user_id = array("id" => 0, "vorname" => "test", "nachname" => "jas");
+        
+        
+        return $user_id;
+        
+    }
 
     public function registerUser( $User ){
         $succes = false;

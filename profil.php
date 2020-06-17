@@ -34,7 +34,10 @@ include('php/calc-job.php');
     <div class="container-fluid">
         <div class="container border">
             <section>
-                <form action="php/config-profil.php" method="post">
+                
+ <!--Durch überprüfung von $_SESSION["update"] = "failed"; prüfen ob update fehlgeschlagen ist -> meldung ausgeben und $_SESSION["update"] auf "false" ändern-->
+                
+                <form action="php/config-reg.php" method="post">
                     <h3 class="center mb-3">Profil von <?php echo($_SESSION["vorname"] . " " . $_SESSION["nachname"]) ?> </h3>
                     
                     <div class="row form-group">
@@ -140,7 +143,7 @@ include('php/calc-job.php');
                 -->
 
                     <div class="form-group ">
-                        <input type="submit" value="Absenden" name="ab" class="btn btn-primary">
+                        <input type="submit" value="Daten aktualisieren" name="updaten" class="btn btn-primary">
                     </div>
                 </form>
             </section>
