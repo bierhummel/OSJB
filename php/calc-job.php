@@ -1,5 +1,7 @@
 <?php
 
+//Datei nach merge umbennen zu controller-job
+
 //Überprüfung der Eingabedaten
     include('check-inputs.php'); 
     /*$get_checked = check_get($_GET);
@@ -8,7 +10,7 @@
 
     
 
-//Geschäftslogik
+//Geschäftslogik der Verwaltung von Jobangeboten
 
     //Einbindung des DAO
     include('dao-job.php'); 

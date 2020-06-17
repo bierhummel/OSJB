@@ -41,7 +41,7 @@ session_start();
                     <div class="row">
                         <div class="col-md-5 last_td">
                             <select class="form-control" name="art" size="1" required>
-                                <option value="">Beschäftigunsart</option>
+                                <option value="">Beschäftigungsart</option>
                                 <option value="Festanstellung">Festanstellung</option>
                                 <option value="Praktikum">Praktikum</option>
                                 <option value="Aushilfe">Aushilfe</option>
