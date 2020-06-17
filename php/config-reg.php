@@ -51,7 +51,7 @@ if (!($user->checkIfExists($name,$email1,$passwort1))){
 
             }
             else {
-            echo("Name oder Email ist bereits vorhanden ");
+            echo("Passwörter stimmen nicht überein.");
 
             }
 
