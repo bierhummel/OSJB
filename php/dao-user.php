@@ -62,7 +62,12 @@ class SQLiteUserDAO implements UserDAO {
     
     public function updateUser( $User ){}
 
-    public function registerUser( $User ){}
+    public function registerUser( $User ){
+        $succes = false;
+        
+        
+        return $succes;        
+    }
     
     public function deleteUser(  $user_id, $password ){}
     

@@ -34,7 +34,7 @@ session_start();
         <div class="container col-xl-4 border ">
             
             <section id="login">
-    <!--Durch überprüfung von $_SESSION["logged_in"] = "failed"; prüfen ob anmeldung fehlgeschlagen ist -> meldung ausgeben und $_SESSION["logged_in"] auf "false" ändern-->
+    <!--Durch überprüfung von $_SESSION["eingeloggt"] = "failed"; prüfen ob anmeldung fehlgeschlagen ist -> meldung ausgeben und $_SESSION["eingeloggt"] auf "false" ändern-->
                 <form action="php/config-reg.php" method="post" class="was-validated">
                     <fieldset>
                         <legend>Log in:</legend>
@@ -96,6 +96,7 @@ session_start();
         
         <div class="container col-xl-4 border">
             <section id="registrierung">
+ <!--Durch überprüfung von $_SESSION["registriert"] = "failed"; prüfen ob anmeldung fehlgeschlagen ist -> meldung ausgeben und $_SESSION["registriert"] auf "false" ändern-->                
                 <form action="php/config-reg.php" method="post" class="was-validated">
                     <fieldset>
                         <legend>Registrierung:</legend>

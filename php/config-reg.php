@@ -31,7 +31,9 @@
         $user_id = $UserDAO->loginUser($request_checked['email'], $request_checked['passwort']);
         
         if( $user_id != NULL ){            
-            $_SESSION["logged_in"] = "true";
+            $_SESSION["eingeloggt"] = "true";
+            
+            //Alle unkritischen infos des Users in Session zwischenspeichern (sowas lieber in cookie oder in session?)
             foreach ($user_id as $index => $value){
                 $_SESSION[$index] = htmlspecialchars($value);
             }
@@ -40,7 +42,7 @@
             exit;
         }
         else{
-            $_SESSION["logged_in"] = "failed";
+            $_SESSION["eingeloggt"] = "failed";
             header( 'location: ../login.php' );
             exit;
         }      
@@ -50,8 +52,21 @@
     //Registrierung
     if ( isset( $request_checked['registrieren'] ) ) {
         
-        //Aufruf von loginUser des UserDAO
-        $user_id = $UserDAO->registerUser($request_checked);
+        //Aufruf von registerUser des UserDAO
+        $succes = $UserDAO->registerUser($request_checked);
+        
+        /* Dibo: Entweder ihr implementiert die Registrierung durch versenden von E-Mails oder um das immer wieder aufkommende Problem mit Mails und Mail-Servern zu umgehen, simuliert ihr es wie folgt: Nach dem Registrieren wird keine echte E-Mail verschickt, sondern es kommt der Hinweis: „Es wurde eine E-Mail an die angegebene Adresse verschickt mit weiteren Infos.“ + Link zu einer (temporären) txt-Datei, wo der E-Mail-Text drin steht. -> umsetzung fehlt noch */        
+        
+        if( $succes == true ){            
+            $_SESSION["registriert"] = "true"; 
+        }
+        else{
+            $_SESSION["registriert"] = "failed";
+            
+        }
+        
+        header( 'location: ../login.php' );
+        exit;
         
     }
 
