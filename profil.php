@@ -1,6 +1,4 @@
 <?php
-include('php/config-login.php');
-
 include('php/calc-job.php');
 ?>
 
