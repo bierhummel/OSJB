@@ -28,6 +28,15 @@ session_start();
         $title = "OSJB";
         include "php/header.php";
     ?>
+    
+    <!--Alles nur anzeigen wenn nicht eingelogt, sonst Weiterleitung ins Profil-->
+    <?php 
+        if(isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == true){ 
+            header( 'location: profil.php' );
+            exit;
+        }
+        else { ?>
+    
 
     <!--Später über Javascript vllt nur eins von beiden anzeigen lassen und über knopf Ansicht wechseln-->
     <div class="row">
@@ -166,6 +175,8 @@ session_start();
         </div>
 
     </div>
+    
+    <?php } //End of else ?>    
 
     <?php
         include "php/footer.php";

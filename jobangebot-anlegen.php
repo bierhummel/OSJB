@@ -30,6 +30,13 @@ session_start();
         $title = "OSJB";
         include "php/header.php";
     ?>
+    
+    <!--Alles nur anzeigen wenn eingelogt, sonst Fehlermeldung-->
+    <?php if(!isset($_SESSION["eingeloggt"]) || $_SESSION["eingeloggt"] != true){ ?>
+    
+    <p class="center">Bitte anmelden!</p>
+    
+    <?php } else { ?>    
 
     <div class="container border">
         <section>
@@ -293,6 +300,8 @@ session_start();
             </form>
         </section>
     </div>
+    
+    <?php } //End of else ?>    
     
     <?php
         include "php/footer.php";
