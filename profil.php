@@ -6,6 +6,7 @@ include('php/calc-job.php');
 
 <!doctype html>
 <html lang="de">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,8 +24,8 @@ include('php/calc-job.php');
         $title = "OSJB";
         include "php/header.php";
     ?>
-    
-     <div class="container-fluid">
+
+    <div class="container-fluid">
         <div class="container border">
             <section>
                 <form action="php/config-profil.php" method="post">
@@ -32,12 +33,12 @@ include('php/calc-job.php');
                     <div class="row form-group">
                         <div class="col">
                             <label for="name">Name:</label>
-                        </div>                        
+                        </div>
                         <div class="col-sm">
                             <input type="text" id="name" name="name" readonly>
                         </div>
                     </div>
-                    
+
                     <div class="row form-group">
                         <div class="col-sm">
                             <label for="email">Email:</label>
@@ -46,7 +47,7 @@ include('php/calc-job.php');
                             <input type="email" id="email" name="email">
                         </div>
                     </div>
-                    
+
                     <div class="row form-group">
                         <div class="col-sm">
                             <label for="password">Passwort:&nbsp;&nbsp;</label>
@@ -55,7 +56,7 @@ include('php/calc-job.php');
                             <input type="password" id="password" name="passwort">
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <h4>Adresse:
                             <!-- <input type="button" value="Bearbeiten" class="btn btn-secondary"-->
@@ -79,7 +80,7 @@ include('php/calc-job.php');
                             <input type="number" id="plz" name="plz">
                         </div>
                     </div>
-                    
+
                     <div class="row form-group">
                         <div class="col-sm">
                             <label for="stadt">Stadt:</label>
@@ -88,11 +89,11 @@ include('php/calc-job.php');
                             <input type="text" id="stadt" name="stadt">
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <input type="button" value="Bearbeiten" class="btn btn-secondary">
                     </div>
-                    
+
                     <div class="form-group ">
                         <input type="submit" value="Absenden" name="ab" class="btn btn-primary">
                     </div>
@@ -136,4 +137,5 @@ include('php/calc-job.php');
         include "php/footer.php";
     ?>
 </body>
+
 </html>
