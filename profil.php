@@ -1,4 +1,10 @@
 <?php
+ini_set("session.use_cookies", 1); 
+ini_set("session.use_only_cookies", 0);
+ini_set("session.use_trans_sid", 1);
+
+session_start();
+
 include('php/calc-job.php');
 ?>
 
@@ -23,46 +29,49 @@ include('php/calc-job.php');
         include "php/header.php";
     ?>
 
+<!--Alles nur anzeigen wenn eingelogt, sonst Fehlermeldung-->
+    
     <div class="container-fluid">
         <div class="container border">
             <section>
                 <form action="php/config-profil.php" method="post">
-                    <h3 class="center mb-3">Profil von (Name):</h3>
+                    <h3 class="center mb-3">Profil von <?php echo($_SESSION["vorname"] . " " . $_SESSION["nachname"]) ?> </h3>
+                    
                     <div class="row form-group">
                         <div class="col">
-                            <label for="name">Vorname:</label>
+                            <label for="firma">Firma:</label>
                         </div>
                         <div class="col-sm">
-                            <input type="text" id="name" name="name" readonly>
+                            <input type="text" id="firma" name="firma" readonly>
                         </div>
                     </div>
                     
                     <div class="row form-group">
                         <div class="col">
-                            <label for="name">Nachname:</label>
+                            <label for="logo">Firmenlogo:</label>
                         </div>
                         <div class="col-sm">
-                            <input type="text" id="name" name="name" readonly>
+                            <input class="btn btn-secondary" type="file" name="logo" id="logo">  <!--Sicherstellen, dass nur Bilder hochgeladen werden?-->
+                        </div>
+                    </div>    
+                    
+                    <div class="row form-group">
+                        <div class="col">
+                            <label for="vorname">Vorname:</label>
+                        </div>
+                        <div class="col-sm">
+                            <input type="text" id="vorname" name="vorname" readonly>
                         </div>
                     </div>
                     
                     <div class="row form-group">
                         <div class="col">
-                            <label for="name">Firma:</label>
+                            <label for="nachname">Nachname:</label>
                         </div>
                         <div class="col-sm">
-                            <input type="text" id="name" name="name" readonly>
+                            <input type="text" id="nachname" name="nachname" readonly>
                         </div>
                     </div>
-                    
-                    <div class="row form-group">
-                        <div class="col">
-                            <label for="name">Firmenlogo:</label>
-                        </div>
-                        <div class="col-sm">
-                            <input class="btn btn-secondary" type="file" name="image">  <!--Sicherstellen, dass nur Bilder hochgeladen werden?-->
-                        </div>
-                    </div>                    
 
                     <div class="row form-group">
                         <div class="col-sm">
@@ -75,7 +84,7 @@ include('php/calc-job.php');
 
                     <div class="row form-group">
                         <div class="col-sm">
-                            <label for="password">Passwort:&nbsp;&nbsp;</label>
+                            <label for="password">Passwort:</label>
                         </div>
                         <div class="col-sm">
                             <input type="password" id="password" name="passwort">
