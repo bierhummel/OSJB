@@ -5,10 +5,6 @@
  private $name;
  private $password;
      
- //TODO: Sollte ausgelagert werden für andere DAOs     
- private $database = "../database/database.db";
- private $file_db = new PDO('sqlite:' . $database);
-     
  public function getName()
  {
  return $this->name;
@@ -63,15 +59,16 @@ $x->setEmail($password);
 
 }
     
-public function checkIfExists($name,$email,$password){
-$this->file_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+public function checkIfExists($name,$email,$password){ 
+
+$file_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 try{
  $file_db->exec("create table if not exists user (id integer primary key, vname text NOT NULL, nname text NOT NULL, password text NOT NULL, mail text NOT NULL, uname text, strasse text, hausnr text, plz text, verified integer NOT NULL, mail_verified integer NOT NULL);");
  
- $exists = "SELECT COUNT(*) FROM user WHERE mail = :mail";
+ $exists = "select count(*) from user where mail = :mail";
  $stmt = $file_db->prepare($exists);
- $stmt->bindParam(':mail', $this->email);
- $result = stmt->execute();
+ $stmt->bindParam(':mail', $email);
+ $result = $stmt->execute();
     
  if ($result = 0){
      return true;
@@ -86,8 +83,10 @@ try{
   }
 }
 
-public function register_in_db ()  {
-$this->file_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+public function register_in_db ($name,$email,$password)  {
+$database = "../database/database.db";
+$file_db = new PDO('sqlite:' . $database);
+$file_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 try{
     
  $register = "insert into user (nname, vname, password, mail, verified, mail_verified) VALUES (:nname,:vname,:password,:mail,0,0);";
