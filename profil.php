@@ -32,12 +32,39 @@ include('php/calc-job.php');
                     <h3 class="center mb-3">Profil von (Name):</h3>
                     <div class="row form-group">
                         <div class="col">
-                            <label for="name">Name:</label>
+                            <label for="name">Vorname:</label>
                         </div>
                         <div class="col-sm">
                             <input type="text" id="name" name="name" readonly>
                         </div>
                     </div>
+                    
+                    <div class="row form-group">
+                        <div class="col">
+                            <label for="name">Nachname:</label>
+                        </div>
+                        <div class="col-sm">
+                            <input type="text" id="name" name="name" readonly>
+                        </div>
+                    </div>
+                    
+                    <div class="row form-group">
+                        <div class="col">
+                            <label for="name">Firma:</label>
+                        </div>
+                        <div class="col-sm">
+                            <input type="text" id="name" name="name" readonly>
+                        </div>
+                    </div>
+                    
+                    <div class="row form-group">
+                        <div class="col">
+                            <label for="name">Firmenlogo:</label>
+                        </div>
+                        <div class="col-sm">
+                            <input class="btn btn-secondary" type="file" name="image">  <!--Sicherstellen, dass nur Bilder hochgeladen werden?-->
+                        </div>
+                    </div>                    
 
                     <div class="row form-group">
                         <div class="col-sm">
@@ -65,7 +92,16 @@ include('php/calc-job.php');
 
                     <div class="row form-group">
                         <div class="col-sm">
-                            <label for="straße">Straße und Hausnummer:</label>
+                            <label for="straße">Straße:</label>
+                        </div>
+                        <div class="col-sm">
+                            <input type="text" id="straße" name="straße">
+                        </div>
+                    </div>
+                    
+                    <div class="row form-group">
+                        <div class="col-sm">
+                            <label for="straße">Hausnummer:</label>
                         </div>
                         <div class="col-sm">
                             <input type="text" id="straße" name="straße">
@@ -90,9 +126,11 @@ include('php/calc-job.php');
                         </div>
                     </div>
 
+                <!--Inhaltsreduzierung
                     <div class="form-group">
                         <input type="button" value="Bearbeiten" class="btn btn-secondary">
                     </div>
+                -->
 
                     <div class="form-group ">
                         <input type="submit" value="Absenden" name="ab" class="btn btn-primary">
@@ -116,11 +154,14 @@ include('php/calc-job.php');
                 ?>
 
                 <div class="border">
-                    <a href="jobangebot-anzeigen.php?id=<?php echo($id)?>"> <?php echo($bez)?></a>
+                    <a class="mr-3" href="jobangebot-anzeigen.php?id=<?php echo($id)?>"> <?php echo($bez)?></a>
+                    
+                <!--Inhaltsreduzierung
                     (Datum an dem Jobangebot erstellt wurde)
                     (Jobangeobt aktiv/inaktiv)
+                -->
 
-                    <a href="jobangebot-anlegen.php?id=<?php echo($id)?>" class="btn btn-secondary">Bearbeiten</a>
+                    <a href="jobangebot-anlegen.php?id=<?php echo($id)?>" class="btn btn-secondary mr-3">Bearbeiten</a>
 
                     <a href="profil.php?del=1&id=<?php echo($id)?>" class="btn btn-light">Löschen</a>
                 </div>

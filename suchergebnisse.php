@@ -49,6 +49,8 @@ session_start();
                     <fieldset>
                         <header>
                             <h3 class="center">Filteroptionen</h3>
+                            <p class="center">(Noch in Bearbeitung)</p>
+                            
                         </header>
 
                         <section>
@@ -184,8 +186,6 @@ session_start();
                                     <option value="50+">50+ km</option>
                                 </select>
                             </div>
-
-                            <div>Gewählter Filter: XXX</div>
                         </section>
                     </fieldset>
                 </aside>
@@ -219,76 +219,6 @@ session_start();
             <?php endforeach; ?>
                 
                 <p class="center">Ende der Liste. Es wurden <?php echo $count ?> Jobangebote gefunden.</p>
-
-                <!--Restliche Jobangebote nur noch drin um Darstellung der Seite mit etwas mehr Jobangeboten zu zeigen, kommt raus sobald DB eingebunden-->
-                <section class="border mb-4">
-                    <div class="row">
-                        <div class="col-md-5 col-lg-4 col-xl-3 center align-self-center mb-3">
-                            <img class="img-fluid" src="bilder/logo.png" alt="muster_firmenlogo" width="150" height="150">
-                        </div>
-                        <div class="col-md-7 col-lg-8 col-xl-9">
-                            <h5>Werkstudent (m/w/d) - IT Servicedesk</h5>
-                            <p>20h/Woche</p>
-                            <p>Kurze Informationen zur Anzeige</p>
-                            <p class="end">
-                                <a class="btn btn-primary" href="jobangebot-anzeigen.php">Weitere Informationen</a>
-                                <!--Später formatieren wie Button-->
-                            </p>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="border mb-4">
-                    <div class="row">
-                        <div class="col-md-5 col-lg-4 col-xl-3 center align-self-center mb-3">
-                            <img class="img-fluid" src="bilder/logo.png" alt="muster_firmenlogo" width="150" height="150">
-                        </div>
-                        <div class="col-md-7 col-lg-8 col-xl-9">
-                            <h5>Werkstudent (m/w/d) - IT Servicedesk</h5>
-                            <p>20h/Woche</p>
-                            <p>Kurze Informationen zur Anzeige</p>
-                            <p class="end">
-                                <a class="btn btn-primary" href="jobangebot-anzeigen.php">Weitere Informationen</a>
-                                <!--Später formatieren wie Button-->
-                            </p>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="border mb-4">
-                    <div class="row">
-                        <div class="col-md-5 col-lg-4 col-xl-3 center align-self-center mb-3">
-                            <img class="img-fluid" src="bilder/logo.png" alt="muster_firmenlogo" width="150" height="150">
-                        </div>
-                        <div class="col-md-7 col-lg-8 col-xl-9">
-                            <h5>Werkstudent (m/w/d) - IT Servicedesk</h5>
-                            <p>20h/Woche</p>
-                            <p>Kurze Informationen zur Anzeige</p>
-                            <p class="end">
-                                <a class="btn btn-primary" href="jobangebot-anzeigen.php">Weitere Informationen</a>
-                                <!--Später formatieren wie Button-->
-                            </p>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="border mb-4">
-                    <div class="row">
-                        <div class="col-md-5 col-lg-4 col-xl-3 center align-self-center mb-3">
-                            <img class="img-fluid" src="bilder/logo.png" alt="muster_firmenlogo" width="150" height="150">
-                        </div>
-                        <div class="col-md-7 col-lg-8 col-xl-9">
-                            <h5>Werkstudent (m/w/d) - IT Servicedesk</h5>
-                            <p>20h/Woche</p>
-                            <p>Kurze Informationen zur Anzeige</p>
-                            <p class="end">
-                                <a class="btn btn-primary" href="jobangebot-anzeigen.php">Weitere Informationen</a>
-                                <!--Später formatieren wie Button-->
-                            </p>
-                        </div>
-                    </div>
-                </section>
-
             </div>
         </div>
     </div>
