@@ -56,7 +56,7 @@ session_start();
                         </label></p>
 
                     <p class="center"><label>
-                            <select name="fachrichtung" class="custom-select custom-select-lg" size="1" required>
+                            <select name="fachrichtung" class="custom-select custom-select-lg" size="1">
                                 <option value="">Fachrichtung auswählen</option>
                                 <option value="fr1">Bildungs- und Sozialwissenschaften</option>
                                 <option value="fr2">Informatik, Wirtschafts- und Rechtswissenschaften</option>

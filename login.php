@@ -62,23 +62,27 @@ include('php/config-reg.php');
                             </div>
                         </div>
 
+                    <!--Inhaltreduzierung
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Bitte ausfüllen.</div>
                         <div class="form-check d-flex align-items-end flex-column">
 
-
+                            
                             <input type="checkbox" class="custom-control-input" id="customCheck" name="ckbox">
                             <label class="custom-control-label" for="customCheck">Angemeldet bleiben</label>
                         </div>
+                    -->
+                        
                         <div class="form-check  d-flex align-items-end flex-column ">
                             <input type="submit" class="btn btn-primary m-2 " name="log" value="Login">
                         </div>
+                        
+                    <!--Inhaltreduzierung
                         <div class="form-check d-flex align-items-end flex-column">
-
-                            <!--(Submit soll auf entsprechende Profil weiterleiten.. js? Bis dahin auch als Link)-->
-
                             <input type="button" class="btn btn-light  " value="Passwort vergessen">
                         </div>
+                    -->
+                        
                     </fieldset>
                 </form>
             </section>
@@ -112,38 +116,24 @@ include('php/config-reg.php');
                                 <label for="r_passwort">Passwort:</label>
                             </div>
                             <div class="col-sm">
-
                                 <input type="password" id="r_passwort" placeholder="Passwort" name="passwort1" minlength="8" required>
                             </div>
                         </div>
 
                         <div class="row form-group">
                             <div class="col-sm">
-
-
                                 <label for="r_passwort2">Passwort bestätigen:</label>
                             </div>
+                            
                             <div class="col-sm">
-
                                 <input type="password" id="r_passwort2" placeholder="Passwort" name="passwort2" minlength="8" required>
                             </div>
                         </div>
-                        <div class="d-flex align-items-end flex-column">
-                            <p><label>
-                                    <select name="unv" size="1" required>
-                                        <option value="">Unternehemensverzeichnis</option>
-                                        <option value="test">test</option>
-                                        <option value="test2">test2</option>
-                                    </select>
-                                </label></p>
 
-                        </div>
                         <div class="form-group d-flex align-items-end flex-column">
 
 
                             <input type="submit" class="btn btn-primary" name="reg" value="Registrieren">
-                            <!--<a href="profil.html">Registrieren</a> -->
-                            <!--(Submit soll auf neues Profil weiterleiten.. js? Bis dahin auch als Link)-->
                         </div>
                     </fieldset>
                 </form>

@@ -47,9 +47,13 @@ session_start();
                 <p>Zeitintensität: (Zeitintesität)</p>
                 <p>Beginn: (Beginn)</p>
                 <p>(Firma)</p>
-                <p>(Hauptsitz oder Alternativer Standort)</p>
+                <p>(Hauptsitz oder Alternativer Standort)</p> <!--später alternativer Standort ggf. möglich?-->
+                
+            <!--später hinzufügen?
                 <p>(Optional): Kontaktperson: Max Mustermann</p>
                 <p>(Optional): E-Mailadresse: ABC@irgendwas.test</p>
+            -->
+                
             </section>
         </div>
 
@@ -65,6 +69,8 @@ session_start();
                         <li>Merkmal3</li>
                     </ul>
                 </div>
+                
+            <!--Inhaltsreduzierung
                 <div class="col-md-4">
                     <p>Liste der angegebenen Module</p>
                     <ul>
@@ -81,17 +87,19 @@ session_start();
                         <li>Merkmal3</li>
                     </ul>
                 </div>
-            </div>
+            -->
+                
+            </div>            
         </section>
 
         <section>
             <h5>Weitere Beschreibung des Jobangebots: </h5> <!--(Falls vorhanden: Inhalt des Textfelds mit individueller Beschreibung)-->
             <p>(Text aus dem Textfeld)</p>
-            <p><img src="dummy" alt="Bild mit individueller Beschreibung des Jobangebots" width="10" height="10"> <!--(Nur angezeigt falls vorhanden?)-->
+            <!--<p><img src="dummy" alt="Bild mit individueller Beschreibung des Jobangebots" width="10" height="10"> (Nur angezeigt falls vorhanden?)-->
         </section>
 
         <section class="end">
-            <a href="http://www.google.com" class="btn btn-primary" role="button">Bewerben</a>
+            <a href="http://www.google.com" class="btn btn-primary" role="button">Direkt beim Unternehmen bewerben</a>
             <!--(Link zur Seite des Unternehmens (Falls Link angegeben wurde)-->
         </section>
     </div>
