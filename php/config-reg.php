@@ -21,9 +21,14 @@ $email1 = (isset($_POST["email1"]) && is_string($_POST["email1"]))
 
 $passwort1 = (isset($_POST["passwort1"]) && is_string($_POST["passwort1"]))
 ? $_POST["passwort1"] : "";
+    
+$passwort1 = password_hash($passwort1, PASSWORD_DEFAULT);    
+    
 $passwort2 = (isset($_POST["passwort2"]) && is_string($_POST["passwort2"]))
 ? $_POST["passwort2"] : "";
 
+$passwort2 = password_hash($passwort2, PASSWORD_DEFAULT);      
+    
 $unv = (isset($_POST["unv"]) &&
 is_string($_POST["unv"])) ? $_POST["unv"] : "";
     
