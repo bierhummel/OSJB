@@ -60,7 +60,8 @@ $x->setEmail($password);
 }
     
 public function checkIfExists($name,$email,$password){ 
-
+$database = "../database/database.db";
+$file_db = new PDO('sqlite:' . $database);
 $file_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 try{
  $file_db->exec("create table if not exists user (id integer primary key, vname text NOT NULL, nname text NOT NULL, password text NOT NULL, mail text NOT NULL, uname text, strasse text, hausnr text, plz text, verified integer NOT NULL, mail_verified integer NOT NULL);");
@@ -68,9 +69,10 @@ try{
  $exists = "select count(*) from user where mail = :mail";
  $stmt = $file_db->prepare($exists);
  $stmt->bindParam(':mail', $email);
- $result = $stmt->execute();
-    
- if ($result = 0){
+ $stmt->execute();
+ $count = $stmt->fetchColumn();
+ $count = intval($count);
+ if ($count == 0){
      return true;
  }
         else {
@@ -83,16 +85,20 @@ try{
   }
 }
 
-public function register_in_db ($name,$email,$password)  {
+public function register_in_db ($vname,$email,$password)  {
+ $nname= "Nachname";       
+//TODO: VOR UND NACHNAME UEBERGEBEN
 $database = "../database/database.db";
 $file_db = new PDO('sqlite:' . $database);
 $file_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 try{
     
- $register = "insert into user (nname, vname, password, mail, verified, mail_verified) VALUES (:nname,:vname,:password,:mail,0,0);";
+ $register = "insert into user (nname, vname, password, mail, verified, mail_verified) VALUES (:nname,:vname,:password,:mail,0,0)";
  $stmt = $file_db->prepare($register);
- $stmt->bindParam(':name', $name);
- $stmt->bindParam(':email', $email);
+ 
+ $stmt->bindParam(':nname', $nname);    
+ $stmt->bindParam(':vname', $vname);
+ $stmt->bindParam(':mail', $email);
  $stmt->bindParam(':password', $password);
  $stmt->execute();
     

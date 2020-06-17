@@ -6,9 +6,7 @@ ini_set("session.use_trans_sid", 1);
 
 session_start();
 include('dao-user.php'); 
-$namedummy = "wael";
-$emaildummy = "wael.hikal@uol.de";
-$passdummy = "12345678";
+
 $user = new Userimp();
 
 if(isset($_POST['reg'])){
@@ -22,12 +20,12 @@ $email1 = (isset($_POST["email1"]) && is_string($_POST["email1"]))
 $passwort1 = (isset($_POST["passwort1"]) && is_string($_POST["passwort1"]))
 ? $_POST["passwort1"] : "";
     
-$passwort1 = password_hash($passwort1, PASSWORD_DEFAULT);    
+$hashed_passwort1 = password_hash($passwort1, PASSWORD_DEFAULT);    
     
 $passwort2 = (isset($_POST["passwort2"]) && is_string($_POST["passwort2"]))
 ? $_POST["passwort2"] : "";
 
-$passwort2 = password_hash($passwort2, PASSWORD_DEFAULT);      
+$hashed_passwort2 = password_hash($passwort2, PASSWORD_DEFAULT);      
     
 $unv = (isset($_POST["unv"]) &&
 is_string($_POST["unv"])) ? $_POST["unv"] : "";
@@ -35,20 +33,19 @@ is_string($_POST["unv"])) ? $_POST["unv"] : "";
     
 $user->save($name,$email1,$passwort1);
 
-    if ($email1 == $emaildummy and $name == $namedummy){
+    
+if (!($user->checkIfExists($name,$email1,$passwort1))){
 
-    echo("Name oder Email ist bereits vorhanden ");
-
+    echo("Unter dieser Mail-Adresse ist bereits eine Person registriert.");
+    //TODO: Passwort vergessen? 
+    return;
     }
-       
-      
-            if ($_POST['passwort1']!= $_POST['passwort2'])
-            {
-            echo("Passwort nicht übereinstimmen! Versuchen Sie es erneut. ");
-            }
+ 
+
             
-            if ($passwort1 == $passwort2 and $email1 != $emaildummy and $name != $namedummy )
+            if ($passwort1 == $passwort2)
             {
+              $user->register_in_db($name,$email1,$hashed_passwort1);
                 echo("Willkommen");
             header("location: ../profil.php");
 
