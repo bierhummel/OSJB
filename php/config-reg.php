@@ -73,7 +73,7 @@
 
 
     //Userdaten updaten
-    if ( isset( $request_checked['updaten'] ) ) {
+    if ( isset( $request_checked['updaten']) && isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true"  ) {
         
         //Aufruf von updateUser() des UserDAO
         $user_id = $UserDAO->updateUser($request_checked);
@@ -94,12 +94,17 @@
             header( 'location: ../login.php' );
             exit;
         } 
+        
     }
 
 
 //Erzeugung von Ausgabedaten
 
 
+
+//Unerlaubter oder fehlerhafter Aufruf -> Weiterleitung zum Index
+header( 'location: ../index.php' );
+exit;
 
 
 

@@ -111,4 +111,10 @@ class DummyUserDAO implements UserDAO {
 }
 */
 
+
+//Unerlaubter oder fehlerhafter Aufruf -> Weiterleitung zum Index
+header( 'location: ../index.php' );
+exit;
+
+
 ?>

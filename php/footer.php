@@ -22,3 +22,5 @@
         </div>
     </nav>
 </footer>
+
+<!--Behandlung von unerwünschten Aufrufen?-->

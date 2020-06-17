@@ -30,14 +30,14 @@
 
 
     //Anlegen neuer Jobangebote
-     if(isset($request_checked["submit_n_job"]) && is_string($request_checked["submit_n_job"]) && $request_checked["submit_n_job"] === "Jobanzeige erstellen"){
+     if(isset($request_checked["submit_n_job"]) && isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ) {
          $jobs = $JobDAO->saveJob($request_checked);
          $id_set = true;         
      }
 
 
     //Löschen (provisorisch über get -> bessere Lösung folgt)
-    if(isset($request_checked["del"]) && is_string($request_checked["del"]) && $request_checked["del"] === "1" && isset($request_checked["id"]) && is_string($request_checked["id"])){
+    if(isset($request_checked["del"]) && is_string($request_checked["del"]) && $request_checked["del"] === "1" && isset($request_checked["id"]) && is_string($request_checked["id"]) && isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ){
         $jobs = $JobDAO->deleteJob($request_checked["id"]);
     }
 
@@ -52,6 +52,12 @@
         $job_found = true; 
         extract(array_values($jobs)[0]);
     }
+
+
+//Unerlaubter oder fehlerhafter Aufruf -> Weiterleitung zum Index
+header( 'location: ../index.php' );
+exit;
+
 
 
 ?>
