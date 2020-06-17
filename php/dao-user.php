@@ -51,9 +51,9 @@ class SQLiteUserDAO implements UserDAO {
     public function loginUser( $email, $password ){
         $user_id = null; //Array mit allen wichtigen Informationen des Users (z.b. kein PW und Logo)
         
-        /*test
+        /*test*/
         $user_id = array("id" => 0, "vorname" => "abc", "nachname" => "jas");
-        */
+        
         
         return $user_id;
     }
