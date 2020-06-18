@@ -94,4 +94,8 @@ class DummyJobDAO implements JobDAO {
     }
 }
 
+
+//Unerlaubter oder fehlerhafter Aufruf?
+
+
 ?>

@@ -7,7 +7,9 @@
     </h1>
 </header>
 
-<!--alter Header Übergangsweise noch abgespeichert für spätere Zwecke-->
+<!--Behandlung von unerwünschten Aufrufen?-->
+
+<!--alter Header Übergangsweise noch abgespeichert für eventuelle spätere Zwecke-->
 <!--
 <div class="container-fluid jumbotron">
     <header>
