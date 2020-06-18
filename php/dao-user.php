@@ -88,6 +88,8 @@ class SQLiteUserDAO implements UserDAO {
         $verified = 0;
         $mail_verified = 0;
         
+        //Passwort mit bcrypt hashen fürs eintragen in die DB
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);    
         
         if (!UserAlreadyExists($email)){
             try{
@@ -97,7 +99,7 @@ class SQLiteUserDAO implements UserDAO {
                 $stmt->bindParam(':vname', $vname);
                 $stmt->bindParam(':nname', $nname);    
                 $stmt->bindParam(':mail', $email);
-                $stmt->bindParam(':password', $password);
+                $stmt->bindParam(':password', $hashed_password);
                 $stmt->bindParam(':verified', $verified);
                 $stmt->bindParam(':verified', $mail_verified);
                 $stmt->execute();
