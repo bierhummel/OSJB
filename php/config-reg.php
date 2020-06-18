@@ -22,7 +22,7 @@
     //Einbindung des DAO
     include('dao-user.php'); 
     $UserDAO = new SQLiteUserDAO();
-
+    $UserDAO->registerUser();
 
     //Registrierung
     if ( isset( $request_checked['registrieren'] ) ) {

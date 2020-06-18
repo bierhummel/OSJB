@@ -48,8 +48,8 @@ interface UserDAO {
 }
 
 class SQLiteUserDAO implements UserDAO {
-    //Verbindung zur DB neu bei jeder Anfrage oder beim Erstellen des Objekts im Konstruktor?
-    private $db = new Connection->getDatabase();
+    private $database = "../database/database.db";
+    private $db;
     
     public function loginUser( $email, $password ){
         
@@ -75,8 +75,9 @@ class SQLiteUserDAO implements UserDAO {
         
     }
 
-    public function registerUser( $User ){
+    public function registerUser(){
         //Die Prepared Statements auslagern oder drin behalten?
+        $db = $this->connection->getDatabase();
         $succes = false;
         
         //Wie komme ich nun an die Inputs?
@@ -94,7 +95,7 @@ class SQLiteUserDAO implements UserDAO {
         if (!UserAlreadyExists($email)){
             try{
                 $register = "insert into user (uname, vname, nname, password, mail, verified, mail_verified) values (:uname, :vname, :nname, :password, :mail, :verified, :mail_verified)";
-                $stmt = this->$db->prepare($register);
+                $stmt = $db->prepare($register);
                 $stmt->bindParam(':uname', $uname);  
                 $stmt->bindParam(':vname', $vname);
                 $stmt->bindParam(':nname', $nname);    
@@ -123,7 +124,7 @@ class SQLiteUserDAO implements UserDAO {
     private function UserAlreadyExists( $mail ){
     try{
             $exists = "select count(*) from user where mail = :mail";
-            $stmt = this->$db->prepare($exists);
+            $stmt = $db->prepare($exists);
             $stmt->bindParam(':mail', $mail);
             $stmt->execute();
             $count = $stmt->fetchColumn();
