@@ -33,6 +33,7 @@ class Benutzer {
 
 }
 */
+//TODO: Die Prepared Statements auslagern und einen Connector erstellen, damit es übersichtlicher wird
 
 interface UserDAO {
     public function loginUser( $email, $password );
@@ -50,15 +51,57 @@ class SQLiteUserDAO implements UserDAO {
     private $database = "../database/database.db";
     private $db;
     
-    public function loginUser( $email, $password ){
-        
+    public function loginUser( $input_mail, $input_pw ){
+
+        // Skript durchlaufen lassen, um zu überprüfen ob DB vorhanden ist.
+        include_once('check-connection.php'); 
+        $database = "../database/database.db";
+        $db = new PDO('sqlite:' . $database);
+        // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
         $user_id = null; //Array mit allen wichtigen Informationen des Users (z.b. kein PW und Logo)
-        
+
         /*test*/
-        $user_id = array("id" => 0, "vorname" => "abc", "nachname" => "jas");
+        //$user_id = array("id" => 0, "vorname" => "abc", "nachname" => "jas");
+        try{      
+            $hashed_password = "select password from user where mail = :mail";
+            var_dump($input_mail);
+            $stmt = $db->prepare($hashed_password);
+            $stmt->bindParam(':mail', $input_mail);  
+            $stmt->execute();
+     
+            $pw_in_db = $stmt->fetchColumn();
+            if (password_verify($input_pw, $pw_in_db)) {
+                //id
+                $id = "select id from user where mail = :mail";
+                $stmt = $db->prepare($id);
+                $stmt->bindParam(':mail', $input_mail);  
+                $stmt->execute();
+                $id_in_db = $stmt->fetchColumn();
+                $id_in_db = intval($id_in_db);
+                //vorname
+                $vname = "select vname from user where mail = :mail";
+                $stmt1 = $db->prepare($vname);
+                $stmt1->bindParam(':mail', $input_mail);  
+                $stmt1->execute();
+                $vname = $stmt1->fetchColumn();               
+                //nachname
+                $nname = "select nname from user where mail = :mail";
+                $stmt2 = $db->prepare($nname);
+                $stmt2->bindParam(':mail', $input_mail);  
+                $stmt2->execute();
+                $nname = $stmt2->fetchColumn();   
+                //array bilden
+                $user_id = array("id" => $id_in_db, "vorname" => $vname, "nachname" => $nname);
+                return $user_id;
+            } else {
+                return null;
+                }
+            } catch(PDOException $e) {
+                    // Print PDOException message
+                    echo $e->getMessage();
+                }
         
-        
-        return $user_id;
     }
     
 
