@@ -1,6 +1,5 @@
 <?php
 
-include('connect.php');
 
 /*
 class Benutzer {
@@ -62,7 +61,7 @@ class SQLiteUserDAO implements UserDAO {
         return $user_id;
     }
     
-    
+
     
     public function updateUser( $User ){
         $user_id = null; //Array mit aktualisierten wichtigen Informationen des Users (z.b. kein PW und Logo)
@@ -75,11 +74,13 @@ class SQLiteUserDAO implements UserDAO {
         
     }
 
-    public function registerUser(){
+    public function registerUser($User){
+        include_once('check_connection.php');  
         //Die Prepared Statements auslagern oder drin behalten?
-        $db = $this->connection->getDatabase();
+        $database = "../database/database.db";
+        $db = new PDO('sqlite:' . $database);
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $succes = false;
-        
         //Wie komme ich nun an die Inputs?
         $uname = 'Test AG';
         $vname = 'Dieter';
@@ -92,20 +93,20 @@ class SQLiteUserDAO implements UserDAO {
         //Passwort mit bcrypt hashen fürs eintragen in die DB
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);    
         
-        if (!UserAlreadyExists($email)){
+        if (!$this->userAlreadyExists($email)){
             try{
                 $register = "insert into user (uname, vname, nname, password, mail, verified, mail_verified) values (:uname, :vname, :nname, :password, :mail, :verified, :mail_verified)";
                 $stmt = $db->prepare($register);
                 $stmt->bindParam(':uname', $uname);  
                 $stmt->bindParam(':vname', $vname);
                 $stmt->bindParam(':nname', $nname);    
-                $stmt->bindParam(':mail', $email);
+                $stmt->bindParam(':mail', $mail);
                 $stmt->bindParam(':password', $hashed_password);
                 $stmt->bindParam(':verified', $verified);
-                $stmt->bindParam(':verified', $mail_verified);
+                $stmt->bindParam(':mail_verified', $mail_verified);
                 $stmt->execute();
                 $succes = true;
-                
+                $db = null;
 } catch(PDOException $e) {
     // Print PDOException message
     echo $e->getMessage();
@@ -121,8 +122,12 @@ class SQLiteUserDAO implements UserDAO {
     
     public function deleteUser(  $user_id, $password ){}
     
-    private function UserAlreadyExists( $mail ){
+    private function userAlreadyExists($mail){
     try{
+        //Lässt sich nicht ohne Weiteres auslagern.
+            $database = "../database/database.db";
+            $db = new PDO('sqlite:' . $database);
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $exists = "select count(*) from user where mail = :mail";
             $stmt = $db->prepare($exists);
             $stmt->bindParam(':mail', $mail);
@@ -130,9 +135,13 @@ class SQLiteUserDAO implements UserDAO {
             $count = $stmt->fetchColumn();
             $count = intval($count);
             if ($count == 0){
+                //schließe verbindung
+                $db = null;
                 return false;
         }
             else {
+                //schließe verbindung
+                $db = null;
                 return true;
         }
         
