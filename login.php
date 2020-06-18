@@ -115,7 +115,7 @@ session_start();
                                 <label for="firma">Firma:</label>
                             </div>
                             <div class="col-sm">
-                                <input type="text" id="name" placeholder="" name="name" required>
+                                <input type="text" id="name" placeholder="" name="firma" required>
                             </div>
                         </div>
                         
@@ -124,7 +124,7 @@ session_start();
                                 <label for="vorname">Vorname:</label>
                             </div>
                             <div class="col-sm">
-                                <input type="text" id="name" placeholder="" name="name" required>
+                                <input type="text" id="name" placeholder="" name="vorname" required>
                             </div>
                         </div>
                         
@@ -133,7 +133,7 @@ session_start();
                                 <label for="nachname">Nachname:</label>
                             </div>
                             <div class="col-sm">
-                                <input type="text" id="name" placeholder="" name="name" required>
+                                <input type="text" id="name" placeholder="" name="nachname" required>
                             </div>
                         </div>
                         

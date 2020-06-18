@@ -74,27 +74,28 @@ class SQLiteUserDAO implements UserDAO {
         
     }
 
-    public function registerUser($User){
+    public function registerUser($user){
         // Skript durchlaufen lassen, um zu überprüfen ob DB vorhanden ist.
-        include_once('check_connection.php');  
+        include_once('check-connection.php');  
         // Erzeugen eines PDO's für die Transaktion    
         $database = "../database/database.db";
         $db = new PDO('sqlite:' . $database);
         // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $succes = false;
-        //Ich hab keine Ahnung wie ich zur Zeit an die Inputs komme, daher Testvariablen.
-        $uname = 'Test AG';
-        $vname = 'Dieter';
-        $nname = 'Depp';
-        $password = '12345678';
-        $mail = '12g34@gmx.de';
+        //Werte aus dem Array holen
+        $uname = $user[firma];
+        $vname = $user[vorname];
+        $nname = $user[nachname];
+        $password = $user[passwort1];
+        $mail = $user[email1];
+        //Verified und mail_verified sind standardmäßig false (bzw. 0)
         $verified = 0;
         $mail_verified = 0;
         //Passwort mit bcrypt hashen
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);    
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);        
         
-        if (!($this->userAlreadyExists($mail))){
+        if (!($this->userAlreadyExists(($mail)))){
             // Wenn die Mail des Uers noch nicht in der DB ist:
             try{
                 // Bereite die Transaktion vor,
@@ -115,11 +116,11 @@ class SQLiteUserDAO implements UserDAO {
                 // Und schließe die Verbindung zur DB.
                 $db = null;
         
-} catch(PDOException $e) {
-    // Print PDOException message
-    echo $e->getMessage();
-    $success = false;
-  }
+                } catch(PDOException $e) {
+                    // Print PDOException message
+                    echo $e->getMessage();
+                    $success = false;
+                }
 
         } else {
             $success = false;
@@ -162,10 +163,10 @@ class SQLiteUserDAO implements UserDAO {
                 return true;
         }
         
-} catch(PDOException $e) {
-    // Print PDOException message
-    echo $e->getMessage();
-  }
+        } catch(PDOException $e) {
+            // Print PDOException message
+            echo $e->getMessage();
+        }
     }
     
 }
