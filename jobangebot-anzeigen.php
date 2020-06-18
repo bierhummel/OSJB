@@ -30,6 +30,7 @@ session_start();
         include "php/header.php";
     ?>
     
+    <!--Alles nur anzeigen wenn ein exitierendes Jobangebot ausgewählt wurde, sonst Fehlermeldung-->
     <?php if($job_found === false){ ?>
     
     <p class="center">Dieses Jobangebot existiert nicht.</p>
@@ -104,7 +105,7 @@ session_start();
         </section>
     </div>
 
-    <?php } ?>
+    <?php } //End of else ?>
     
     <?php
         include "php/footer.php";

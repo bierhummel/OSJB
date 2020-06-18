@@ -71,7 +71,15 @@ session_start();
                 </form>
             </div>
             <div>
-                <h3 class="center"><a href="login.php" class="btn btn-primary">Anmeldung/Registrierung für Arbeitgeber</a></h3>
+                <?php if ( isset ($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ) { ?>                                    
+                    <h3> Soll hier etwas stehen wenn man eingelogt ist? </h3>
+                
+                <?php } else { ?>
+                
+                    <h3 class="center"><a href="login.php" class="btn btn-primary">Anmeldung/Registrierung für Arbeitgeber</a></h3>
+                
+                <?php } ?>
+
             </div>
         </section>
     </div>

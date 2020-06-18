@@ -30,6 +30,13 @@ session_start();
         $title = "OSJB";
         include "php/header.php";
     ?>
+    
+    <!--Alles nur anzeigen wenn eingelogt, sonst Fehlermeldung-->
+    <?php if(!isset($_SESSION["eingeloggt"]) || $_SESSION["eingeloggt"] != true){ ?>
+    
+    <p class="center">Bitte anmelden!</p>
+    
+    <?php } else { ?>    
 
     <div class="container border">
         <section>
@@ -41,7 +48,7 @@ session_start();
                     <div class="row">
                         <div class="col-md-5 last_td">
                             <select class="form-control" name="art" size="1" required>
-                                <option value="">Beschäftigunsart</option>
+                                <option value="">Beschäftigungsart</option>
                                 <option value="Festanstellung">Festanstellung</option>
                                 <option value="Praktikum">Praktikum</option>
                                 <option value="Aushilfe">Aushilfe</option>
@@ -293,6 +300,8 @@ session_start();
             </form>
         </section>
     </div>
+    
+    <?php } //End of else ?>    
     
     <?php
         include "php/footer.php";
