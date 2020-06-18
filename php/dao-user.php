@@ -78,38 +78,51 @@ class SQLiteUserDAO implements UserDAO {
     public function registerUser( $User ){
         //Die Prepared Statements auslagern oder drin behalten?
         $succes = false;
+        
+        //Wie komme ich nun an die Inputs?
+        $uname = 'Test AG';
+        $vname = 'Dieter';
+        $nname = 'Schröder';
+        $password = '12345678';
+        $mail = '12345@gmx.de';
+        $verified = 0;
+        $mail_verified = 0;
+        
+        
         if (!UserAlreadyExists($email)){
             try{
-                $register = "insert into user (uname, vname, nname, password, mail, verified, mail_verified) values ('Test GmbH', 'Günther', 'Schröder', 'super sicher', 'textGmbH@gmail.com', 0,0)";
+                $register = "insert into user (uname, vname, nname, password, mail, verified, mail_verified) values (:uname, :vname, :nname, :password, :mail, :verified, :mail_verified)";
                 $stmt = this->$db->prepare($register);
                 $stmt->bindParam(':uname', $uname);  
                 $stmt->bindParam(':vname', $vname);
                 $stmt->bindParam(':nname', $nname);    
                 $stmt->bindParam(':mail', $email);
                 $stmt->bindParam(':password', $password);
+                $stmt->bindParam(':verified', $verified);
+                $stmt->bindParam(':verified', $mail_verified);
                 $stmt->execute();
-    
+                $succes = true;
+                
 } catch(PDOException $e) {
     // Print PDOException message
     echo $e->getMessage();
+    $success = false;
   }
-  
 
+        } else {
+            $success = false;
         }
-
-          return $succes;    
-        
-        
+            return $succes;  
           
     }
     
     public function deleteUser(  $user_id, $password ){}
     
-    private function UserAlreadyExists( $email ){
+    private function UserAlreadyExists( $mail ){
     try{
             $exists = "select count(*) from user where mail = :mail";
             $stmt = this->$db->prepare($exists);
-            $stmt->bindParam(':mail', $email);
+            $stmt->bindParam(':mail', $mail);
             $stmt->execute();
             $count = $stmt->fetchColumn();
             $count = intval($count);
