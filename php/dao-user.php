@@ -75,28 +75,32 @@ class SQLiteUserDAO implements UserDAO {
     }
 
     public function registerUser($User){
+        // Skript durchlaufen lassen, um zu überprüfen ob DB vorhanden ist.
         include_once('check_connection.php');  
-        //Die Prepared Statements auslagern oder drin behalten?
+        // Erzeugen eines PDO's für die Transaktion    
         $database = "../database/database.db";
         $db = new PDO('sqlite:' . $database);
+        // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $succes = false;
-        //Wie komme ich nun an die Inputs?
+        //Ich hab keine Ahnung wie ich zur Zeit an die Inputs komme, daher Testvariablen.
         $uname = 'Test AG';
         $vname = 'Dieter';
-        $nname = 'Schröder';
+        $nname = 'Depp';
         $password = '12345678';
-        $mail = '12345@gmx.de';
+        $mail = '12gsd34@gmx.de';
         $verified = 0;
         $mail_verified = 0;
-        
-        //Passwort mit bcrypt hashen fürs eintragen in die DB
+        //Passwort mit bcrypt hashen
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);    
         
-        if (!$this->userAlreadyExists($email)){
+        if (!($this->userAlreadyExists($mail))){
+            // Wenn die Mail des Uers noch nicht in der DB ist:
             try{
+                // Bereite die Transaktion vor,
                 $register = "insert into user (uname, vname, nname, password, mail, verified, mail_verified) values (:uname, :vname, :nname, :password, :mail, :verified, :mail_verified)";
                 $stmt = $db->prepare($register);
+                // Binde die Parameter an die Variablen,
                 $stmt->bindParam(':uname', $uname);  
                 $stmt->bindParam(':vname', $vname);
                 $stmt->bindParam(':nname', $nname);    
@@ -104,9 +108,13 @@ class SQLiteUserDAO implements UserDAO {
                 $stmt->bindParam(':password', $hashed_password);
                 $stmt->bindParam(':verified', $verified);
                 $stmt->bindParam(':mail_verified', $mail_verified);
+                // Und führe die Transaktion letzlich aus.
                 $stmt->execute();
+                // Ist dies passiert, liefere true zurück...
                 $succes = true;
+                // Und schließe die Verbindung zur DB.
                 $db = null;
+        
 } catch(PDOException $e) {
     // Print PDOException message
     echo $e->getMessage();
@@ -124,24 +132,33 @@ class SQLiteUserDAO implements UserDAO {
     
     private function userAlreadyExists($mail){
     try{
-        //Lässt sich nicht ohne Weiteres auslagern.
+            // Erzeugen eines PDO's für die Transaktion   
             $database = "../database/database.db";
             $db = new PDO('sqlite:' . $database);
+            // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            // Bereite die Transaktion vor,
             $exists = "select count(*) from user where mail = :mail";
             $stmt = $db->prepare($exists);
+            // Binde die Parameter an die Variablen,
             $stmt->bindParam(':mail', $mail);
+            // Und führe die Transaktion letzlich aus.
             $stmt->execute();
+            // Wir schnappen uns die einzige Spalte count(*) und zählen nach, ob die Mail vorhanden ist.    
             $count = $stmt->fetchColumn();
+            // Es wird ein String zurückgegeben. Dieser wird zum Integer gecastet    
             $count = intval($count);
+            // Wenn die Mail noch nicht vorhanden ist:
             if ($count == 0){
-                //schließe verbindung
+                // Schließe die Verbindung zur DB.
                 $db = null;
+                // Und gebe, false zurück: Der User existiert noch nicht in unsere Datenbank.
                 return false;
         }
             else {
-                //schließe verbindung
+                // Schließe die Verbindung zur DB.
                 $db = null;
+                 // Und gebe, true zurück: Der User existiert bereits in unsere Datenbank.
                 return true;
         }
         

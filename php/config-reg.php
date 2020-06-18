@@ -91,7 +91,7 @@
         else{
             $_SESSION["update"] = "fail";
             header( 'location: ../login.php' );
-            exit;
+           exit;
         } 
         
     }
