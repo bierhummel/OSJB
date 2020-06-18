@@ -33,6 +33,7 @@ class Benutzer {
 
 }
 */
+//TODO: Die Prepared Statements auslagern und einen Connector erstellen, damit es übersichtlicher wird
 
 interface UserDAO {
     public function loginUser( $email, $password );
