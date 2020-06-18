@@ -95,9 +95,7 @@ class DummyJobDAO implements JobDAO {
 }
 
 
-//Unerlaubter oder fehlerhafter Aufruf -> Weiterleitung zum Index
-header( 'location: ../index.php' );
-exit;
+//Unerlaubter oder fehlerhafter Aufruf?
 
 
 ?>
