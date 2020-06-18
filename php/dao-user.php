@@ -1,5 +1,7 @@
 <?php
 
+include('connect.php');
+
 /*
 class Benutzer {
     private $email;
@@ -47,8 +49,10 @@ interface UserDAO {
 
 class SQLiteUserDAO implements UserDAO {
     //Verbindung zur DB neu bei jeder Anfrage oder beim Erstellen des Objekts im Konstruktor?
+    private $db = new Connection->getDatabase();
     
     public function loginUser( $email, $password ){
+        
         $user_id = null; //Array mit allen wichtigen Informationen des Users (z.b. kein PW und Logo)
         
         /*test*/
@@ -72,13 +76,55 @@ class SQLiteUserDAO implements UserDAO {
     }
 
     public function registerUser( $User ){
+        //Die Prepared Statements auslagern oder drin behalten?
         $succes = false;
+        if (!UserAlreadyExists($email)){
+            try{
+                $register = "insert into user (uname, vname, nname, password, mail, verified, mail_verified) values ('Test GmbH', 'Günther', 'Schröder', 'super sicher', 'textGmbH@gmail.com', 0,0)";
+                $stmt = this->$db->prepare($register);
+                $stmt->bindParam(':uname', $uname);  
+                $stmt->bindParam(':vname', $vname);
+                $stmt->bindParam(':nname', $nname);    
+                $stmt->bindParam(':mail', $email);
+                $stmt->bindParam(':password', $password);
+                $stmt->execute();
+    
+} catch(PDOException $e) {
+    // Print PDOException message
+    echo $e->getMessage();
+  }
+  
+
+        }
+
+          return $succes;    
         
         
-        return $succes;        
+          
     }
     
     public function deleteUser(  $user_id, $password ){}
+    
+    private function UserAlreadyExists( $email ){
+    try{
+            $exists = "select count(*) from user where mail = :mail";
+            $stmt = this->$db->prepare($exists);
+            $stmt->bindParam(':mail', $email);
+            $stmt->execute();
+            $count = $stmt->fetchColumn();
+            $count = intval($count);
+            if ($count == 0){
+                return false;
+        }
+            else {
+                return true;
+        }
+        
+} catch(PDOException $e) {
+    // Print PDOException message
+    echo $e->getMessage();
+  }
+    }
     
 }
 
