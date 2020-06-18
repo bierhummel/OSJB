@@ -88,7 +88,7 @@ class SQLiteUserDAO implements UserDAO {
         $vname = 'Dieter';
         $nname = 'Depp';
         $password = '12345678';
-        $mail = '12gsd34@gmx.de';
+        $mail = '12g34@gmx.de';
         $verified = 0;
         $mail_verified = 0;
         //Passwort mit bcrypt hashen
