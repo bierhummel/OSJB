@@ -120,7 +120,7 @@ include('php/calc-job.php');
                             <label for="straße">Hausnummer:</label>
                         </div>
                         <div class="col-sm">
-                            <input type="text" id="straße" name="hausnr">
+                            <input type="text" id="hausnr" name="hausnr">
                         </div>
                     </div>
 
