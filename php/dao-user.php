@@ -106,14 +106,49 @@ class SQLiteUserDAO implements UserDAO {
     
 
     
-    public function updateUser( $User ){
-        $user_id = null; //Array mit aktualisierten wichtigen Informationen des Users (z.b. kein PW und Logo)
+    public function updateUser( $user ){
+     //   $user_id = null; //Array mit aktualisierten wichtigen Informationen des Users (z.b. kein PW und Logo)
         
         /*test*/
-        $user_id = array("id" => 0, "vorname" => "test", "nachname" => "jas");
+     //   $user_id = array("id" => 0, "vorname" => "test", "nachname" => "jas");
         
         
-        return $user_id;
+        // Skript durchlaufen lassen, um zu überprüfen ob DB vorhanden ist.
+        include_once('check-connection.php');  
+        // Erzeugen eines PDO's für die Transaktion    
+        $database = "../database/database.db";
+        $db = new PDO('sqlite:' . $database);
+        // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        try{      
+
+            $update = "update user set strasse = :strasse, hausnr = :hausnr, plz = :plz, stadt = :stadt where mail = :mail";
+            
+            //Werte aus dem Array holen    
+            $strasse = $user[strasse];
+            $hausnr = $user[hausnr];
+            $plz = $user[plz];
+            $stadt = $user[stadt];
+            $user = [email1];
+            $mail = "der-tuerklinkenputzer@yahoo.de"; //$user[email]""; Nutzer existiert in der DB! 
+            $stmt = $db->prepare($update);
+            // Binde die Parameter an die Variablen,
+            $stmt->bindParam(':strasse', $strasse);
+            $stmt->bindParam(':hausnr', $hausnr);
+            $stmt->bindParam(':plz', $plz);       
+            $stmt->bindParam(':stadt', $stadt);   
+            $stmt->bindParam(':mail', $mail);   
+                        
+            // Und führe die Transaktion letzlich aus.
+            $stmt->execute();
+            $db = NULL;    
+        } catch(PDOException $e) {
+            // Print PDOException message
+            echo $e->getMessage();
+        }
+        
+        return NULL;
         
     }
 
