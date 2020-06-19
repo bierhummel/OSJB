@@ -3,7 +3,7 @@
 //Orientiert an Vorlage von http://best-practice-software-engineering.ifs.tuwien.ac.at/patterns/dao.html
 
 interface JobDAO {
-    public function createJob($job);
+    public function createJob($job, $user_email);
     public function updateJob($job);
     public function loadJobs($suchkrit);
     public function deleteJob($job_id);
@@ -12,23 +12,29 @@ interface JobDAO {
 /* Klasse für Zugriff auf Jobs in DB*/
 class SQLiteJobDAO implements JobDAO {
 
-    public function createJob($job){
-        
-    }
-    public function updateJob($job);{
+    //erhält array mit inputwerten von jobangebot-anlegen.php und gibt true/false zurück
+    public function createJob($job, $user_email){
         
     }
     
+    //erhält array mit inputwerten von jobangebot-anlegen.php und gibt true/false zurück
+    public function updateJob($job){
+        
+    }
+    
+    //erhält entweder array mit inputwerten von index (oder später von filterbox), die e-mail eines nutzers oder eine jobid und gibt zwei-dimensionales array mit den gefundenen jobangeboten als array zurück 
     public function loadJobs($suchkrit){
         
     }
     
+    //erhält job_id und gibt true/false zurück
     public function deleteJob($job_id){
         
     }
 }
 
 
+/*
 class DummyJobDAO implements JobDAO {
     
     private $jobs = array();
@@ -101,7 +107,7 @@ class DummyJobDAO implements JobDAO {
         return $this->jobs;   
     }
 }
-
+*/
 
 //Unerlaubter oder fehlerhafter Aufruf?
 

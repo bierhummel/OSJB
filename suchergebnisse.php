@@ -1,9 +1,9 @@
 <?php 
-ini_set("session.use_cookies", 1); 
+/*ini_set("session.use_cookies", 1); 
 ini_set("session.use_only_cookies", 0);
 ini_set("session.use_trans_sid", 1);
 
-session_start();
+session_start();*/
 
 include('php/calc-job.php'); 
 
@@ -195,11 +195,12 @@ include('php/calc-job.php');
 
             <div class="col-sm-6 col-md-8 col-lg-9">
                 
-            <?php 
+            <?php                  
                 $count = 0;
-                foreach($jobs as $job): 
-                    extract($job);
-                    $count++;
+                if($jobs != null){ 
+                    foreach($jobs as $job): 
+                        extract($job);
+                        $count++;
             ?>
                                 
                 <section class="border mb-4">
@@ -218,7 +219,7 @@ include('php/calc-job.php');
                     </div>
                 </section>
                 
-            <?php endforeach; ?>
+            <?php endforeach; } ?>
                 
                 <p class="center">Ende der Liste. Es wurden <?php echo $count ?> Jobangebote gefunden.</p>
             </div>
