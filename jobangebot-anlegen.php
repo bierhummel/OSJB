@@ -2,11 +2,11 @@
 
 include('php/calc-job.php'); 
 
-ini_set("session.use_cookies", 1); 
+/*ini_set("session.use_cookies", 1); 
 ini_set("session.use_only_cookies", 0);
 ini_set("session.use_trans_sid", 1);
 
-session_start();
+session_start();*/
 ?>
 
 <!DOCTYPE html>
@@ -30,10 +30,17 @@ session_start();
         $title = "OSJB";
         include "php/header.php";
     ?>
+    
+    <!--Alles nur anzeigen wenn eingelogt, sonst Fehlermeldung-->
+    <?php if(!isset($_SESSION["eingeloggt"]) || $_SESSION["eingeloggt"] != true){ ?>
+    
+    <p class="center">Bitte anmelden!</p>
+    
+    <?php } else { ?>    
 
     <div class="container border">
         <section>
-            <form action="jobangebot-anzeigen.php" method="post">
+            <form action="php/calc-job.php" method="post">
                 <section>
                     <h3 class="center">Allgemeine Informationen</h3>
                     <h4 class="center mb-4">Informationen zum Job</h4>
@@ -41,7 +48,7 @@ session_start();
                     <div class="row">
                         <div class="col-md-5 last_td">
                             <select class="form-control" name="art" size="1" required>
-                                <option value="">Beschäftigunsart</option>
+                                <option value="">Beschäftigungsart</option>
                                 <option value="Festanstellung">Festanstellung</option>
                                 <option value="Praktikum">Praktikum</option>
                                 <option value="Aushilfe">Aushilfe</option>
@@ -116,11 +123,12 @@ session_start();
                         </div>
                     </div>
 
+                <!--Inhaltsreduzierung
                     <div class="row">
                         <div class="col-12">
                             <h6>Falls Arbeitstelle nicht der Hauptfirmensitz (optional): </h6>
                         </div>
-                        <!--später vllt. erstmal ausgeblendet und erst nach klick eingeblendet?-->
+                        !--später vllt. erstmal ausgeblendet und erst nach klick eingeblendet?--
                         <div class="col-md-5 last_td">
                             <label>
                                 Adresse der Arbeitsstelle:
@@ -136,6 +144,7 @@ session_start();
                             </label>
                         </div>
                     </div>
+                -->
 
                     <h4 class="center">Informationen zum Unternehmen</h4>
 
@@ -143,13 +152,14 @@ session_start();
                         <div class="col-md-12 center">
                             Firma: ABC GmbH
                         </div>
-                        <div class="col-md-12 center">
+                        <div class="col-md-12 center last_td">
                             Hauptsitz: ABC Straße 123, 55555 Ort
                         </div>
                     </div>
 
+                <!--Inhaltsreduzierung
                     <div class="row">
-                        <!--später nur angezeigt falls vorhanden?-->
+                        !--später nur angezeigt falls vorhanden?--
                         <div class="col-md-12 center">
                             (Optional): Kontaktperson: Max Mustermann
                         </div>
@@ -157,7 +167,9 @@ session_start();
                             (Optional): E-Mailadresse: ABC@irgendwas.test
                         </div>
                     </div>
-                    <!--(Werte später automatisch aus Profil des Arbeitgebers übertragen)-->
+                    !--(Werte später automatisch aus Profil des Arbeitgebers übertragen)--
+                -->
+                    
                 </section>
                 <hr>
 
@@ -176,34 +188,31 @@ session_start();
                             </label>
                         </div>
                         <div class="col-xl-4 col-md-6">
-
                             <label>
                                 <input type="checkbox" name="amaster" value="master"> Master
                             </label>
                         </div>
                         <div class="col-xl-4 col-md-6">
-
                             <label>
                                 <input type="checkbox" name="ibachelor" value="ibachelor"> Im Bachelor immatrikuliert
                             </label>
                         </div>
                         <div class="col-xl-4 col-md-6">
-
                             <label>
                                 <input type="checkbox" name="imaster" value="ibachelor"> Im Master immatrikuliert
                             </label>
                         </div>
                         <div class="col-xl-4 col-md-6 last_td">
-
                             <label>
                                 <input type="checkbox" name="ausbildung" value="ausbildung"> Zus. berufliche Ausbildung
                             </label>
                         </div>
                     </div>
 
+                <!--Inhaltsreduzierung
                     <div class="row">
                         <div class="col-lg-5 last_td">
-                        <!--Später ermöglichen, dass beliebig viele Module + Fähigkeiten angegeben werden.. js?-->
+                        !--Später ermöglichen, dass beliebig viele Module + Fähigkeiten angegeben werden.. js?--
                             <label>
                                 Module:
                                 <input class="form-control" list="module">
@@ -216,7 +225,7 @@ session_start();
                         </div>
                         <div class="col-lg-2">
                         </div>                    
-                        <!--Falls möglich eine Liste aller Module der Uni Oldenburg einbinden-->
+                        !--Falls möglich eine Liste aller Module der Uni Oldenburg einbinden--
                         <div class="col-lg-5 last_td">
                             <label>
                                 Besondere Fähigkeiten und Kenntnisse:
@@ -229,16 +238,20 @@ session_start();
                             </label>
                         </div>
                     </div>
+                -->
                 </section>
 
                 <section>
                     <h3 class="center">Individuelle Beschreibung (optional)</h3>
-                    
+                
+                <!--Inhaltsreduzierung
                     <div class="row">
                         <div class="col">
                             <p>Bitte füllen Sie das Textfeld mit einer individuellen Beschreibung aus und/oder laden Sie ein entsprechendes Dokument hoch.</p>
                         </div>                                                
                     </div>
+                    
+                
                     <div class="row">
                         <div class="col-lg-6 last_td">
                              <textarea class="form-control" name="message" rows="10" cols="100"></textarea>                        
@@ -250,27 +263,49 @@ session_start();
                                 Bild hochladen:
                                 <input class="btn btn-secondary" type="file" name="image">
 
-                                <!--Sicherstellen, dass nur Bilder hochgeladen werden?)-->
+                                !--Sicherstellen, dass nur Bilder hochgeladen werden?)--
                             </label>
                         </div>                                            
                     </div>
+                -->
+                
+                <!--(Übergangsweise?) Nur Textfeld statt Textfeld + Upload-->
+                    <div class="row">
+                        <div class="col">
+                            <p>Bitte füllen Sie das Textfeld mit einer individuellen Beschreibung aus.</p>
+                        </div>                                                
+                    </div>
+                                    
+                    <div class="row">
+                        <div class="col-lg-12 last_td">
+                             <textarea class="form-control" name="message" rows="10" cols="100"></textarea>                        
+                        </div>                                                       
+                    </div>
+                <!--Ende Übergangslösung-->
+                    
                 </section>
                 
                 <div class="row end">
                     <div class="col-md-4 col-lg-6">
                     </div>
                     <div class="col-6 col-md-4 col-lg-3">
-                        <button class="btn btn-secondary" type="button">Vorschau</button> <!--(Soll eine Vorschau anzeigen)-->                            
+                       <!-- <button class="btn btn-secondary" type="button">Vorschau</button> (Soll eine Vorschau anzeigen)-->                            
                     </div>
 
                     <div class="col-6 col-md-4 col-lg-3">
-                        <input type="submit" class="btn btn-primary" name="submit_n_job" value="Jobanzeige erstellen"> <!---(Danach Jobangebot anzeigen)-->
+                        <?php if($_GET["new"]==1){ ?>                    
+                            <input type="submit" class="btn btn-primary" name="erstellen" value="Jobanzeige erstellen"> <!---(Danach Jobangebot anzeigen)-->
+                        <?php } else { ?>
+                            <input type="submit" class="btn btn-primary" name="bearbeiten" value="Jobanzeige bearbeiten"> <!---(Danach Jobangebot anzeigen)-->
+                        <?php } ?>
                     </div>
                 </div>
                 
             </form>
         </section>
     </div>
+    
+    <?php } //End of else ?>    
     
     <?php
         include "php/footer.php";

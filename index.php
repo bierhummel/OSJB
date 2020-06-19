@@ -56,7 +56,7 @@ session_start();
                         </label></p>
 
                     <p class="center"><label>
-                            <select name="fachrichtung" class="custom-select custom-select-lg" size="1" required>
+                            <select name="fachrichtung" class="custom-select custom-select-lg" size="1">
                                 <option value="">Fachrichtung auswählen</option>
                                 <option value="fr1">Bildungs- und Sozialwissenschaften</option>
                                 <option value="fr2">Informatik, Wirtschafts- und Rechtswissenschaften</option>
@@ -71,7 +71,15 @@ session_start();
                 </form>
             </div>
             <div>
-                <h3 class="center"><a href="login.php" class="btn btn-primary">Anmeldung/Registrierung für Arbeitgeber</a></h3>
+                <?php if ( isset ($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ) { ?>                                    
+                    <h3 class="center"><a href="profil.php" class="btn btn-primary">Zum Profil</a></h3>
+                
+                <?php } else { ?>
+                
+                    <h3 class="center"><a href="login.php" class="btn btn-primary">Anmeldung/Registrierung für Arbeitgeber</a></h3>
+                
+                <?php } ?>
+
             </div>
         </section>
     </div>

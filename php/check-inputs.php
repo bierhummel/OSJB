@@ -20,4 +20,7 @@ function check_inputs($input = array()){
 }
     
 
+//Unerlaubter oder fehlerhafter Aufruf?
+
+
 ?>

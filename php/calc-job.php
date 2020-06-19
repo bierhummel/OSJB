@@ -1,5 +1,7 @@
 <?php
 
+//Datei nach merge umbennen zu controller-job
+
 //Überprüfung der Eingabedaten
     include('check-inputs.php'); 
     /*$get_checked = check_get($_GET);
@@ -8,19 +10,29 @@
 
     
 
-//Geschäftslogik
+//Geschäftslogik der Verwaltung von Jobangeboten
+    if(session_status() != 2){
+        //session starten
+        ini_set( 'session.use_cookies', 1 );
+        ini_set( 'session.use_only_cookies', 0 );
+        ini_set( 'session.use_trans_sid', 1 );
+        session_start();  
+    }
+
 
     //Einbindung des DAO
     include('dao-job.php'); 
-    $JobDAO = new DummyJobDAO();
+    $JobDAO = new SQLiteJobDAO();
 
 
-    //Variable mit allen anzuzeigenden Jobangeboten füllen
+    //Variable mit allen anzuzeigenden Jobangeboten füllen (nicht optimal, wird überarbeitet)
     $jobs = $JobDAO->loadJobs($request_checked);   
 
-    //Auswertung der Filteroptionen
+    //Auswertung der Filteroptionen (fehlt noch)
     
-    //falls ID gesetzt -> jobangebot-bearbeiten oder jobangebot-anzeigen
+
+
+    //falls ID gesetzt -> jobangebot-bearbeiten oder jobangebot-anzeigen (nicht optmial, wird überarbeitet)
     $id_set = false;
     if(isset($request_checked["id"]) && is_string($request_checked["id"])){
         $id_set = true;
@@ -28,14 +40,27 @@
 
 
     //Anlegen neuer Jobangebote
-     if(isset($request_checked["submit_n_job"]) && is_string($request_checked["submit_n_job"]) && $request_checked["submit_n_job"] === "Jobanzeige erstellen"){
-         $jobs = $JobDAO->saveJob($request_checked);
-         $id_set = true;         
+     if(isset($request_checked["erstellen"]) && isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ) {
+         $jobs = $JobDAO->createJob($request_checked, $_SESSION["email"]);
+         $id_set = true;   
+         print("test");
+         
+         header( 'location: ../jobangebot-anzeigen.php?id='. print($jobs[id]));
+         exit;
+     }
+
+    
+    //Bearbeiten von Jobangeboten
+    if(isset($request_checked["bearbeiten"]) && isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ) {
+        $jobs = $JobDAO->updateJob($request_checked);
+         
+        header( 'location: ../jobangebot-anzeigen?id=$jobs[id].php' );
+        exit;
      }
 
 
     //Löschen (provisorisch über get -> bessere Lösung folgt)
-    if(isset($request_checked["del"]) && is_string($request_checked["del"]) && $request_checked["del"] === "1" && isset($request_checked["id"]) && is_string($request_checked["id"])){
+    if(isset($request_checked["del"]) && is_string($request_checked["del"]) && $request_checked["del"] === "1" && isset($request_checked["id"]) && is_string($request_checked["id"]) && isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ){
         $jobs = $JobDAO->deleteJob($request_checked["id"]);
     }
 
@@ -46,10 +71,13 @@
 
     //wird nach job id gesucht und existiert dieser job?
     $job_found = false;
-    if($id_set === true && isset(array_values($jobs)[0]["id"])){
+    if($id_set === true && $jobs != null && isset(array_values($jobs)[0]["id"])){
         $job_found = true; 
         extract(array_values($jobs)[0]);
     }
+
+
+//Unerlaubter oder fehlerhafter Aufruf?
 
 
 ?>

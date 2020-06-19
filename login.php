@@ -1,7 +1,9 @@
 <?php
+ini_set("session.use_cookies", 1); 
+ini_set("session.use_only_cookies", 0);
+ini_set("session.use_trans_sid", 1);
 
-include('php/config-login.php');
-include('php/config-reg.php');
+session_start();
 
 ?>
 
@@ -26,20 +28,31 @@ include('php/config-reg.php');
         $title = "OSJB";
         include "php/header.php";
     ?>
+    
+    <!--Alles nur anzeigen wenn nicht eingelogt, sonst Weiterleitung ins Profil-->
+    <?php 
+        if(isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == true){ 
+            header( 'location: profil.php' );
+            exit;
+        }
+        else { ?>
+    
 
     <!--Später über Javascript vllt nur eins von beiden anzeigen lassen und über knopf Ansicht wechseln-->
     <div class="row">
         <div class="container col-xl-4 border ">
-            <section>
-                <form action="php/config-login.php" method="post" class="was-validated">
+            
+            <section id="login">
+    <!--Durch überprüfung von $_SESSION["eingeloggt"] = "failed"; prüfen ob anmeldung fehlgeschlagen ist -> meldung ausgeben und $_SESSION["eingeloggt"] auf "false" ändern-->
+                <form action="php/config-reg.php" method="post" class="was-validated">
                     <fieldset>
                         <legend>Log in:</legend>
+                        
                         <div class="row form-group">
-
                             <div class="col-sm">
-
-                                <label for="email">Email:</label>
+                                <label for="email">Email:</label>                    
                             </div>
+                            
                             <div class="col-sm">
 
                                 <input type="email" id="email" placeholder="Email" name="email" required>
@@ -63,50 +76,80 @@ include('php/config-reg.php');
                             </div>
                         </div>
 
+                    <!--Inhaltreduzierung
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Bitte ausfüllen.</div>
                         <div class="form-check d-flex align-items-end flex-column">
 
-
+                            
                             <input type="checkbox" class="custom-control-input" id="customCheck" name="ckbox">
                             <label class="custom-control-label" for="customCheck">Angemeldet bleiben</label>
                         </div>
+                    -->
+                        
                         <div class="form-check  d-flex align-items-end flex-column ">
-                            <input type="submit" class="btn btn-primary m-2 " name="log" value="Login">
+                            <input type="submit" class="btn btn-primary m-2 " name="login" value="Login">
                         </div>
+                        
+                    <!--Inhaltreduzierung
                         <div class="form-check d-flex align-items-end flex-column">
-
-                            <!--(Submit soll auf entsprechende Profil weiterleiten.. js? Bis dahin auch als Link)-->
-
                             <input type="button" class="btn btn-light  " value="Passwort vergessen">
                         </div>
+                    -->
+                        
+                    <!--Rückmeldung zur Anmeldung übergangsweise anzeigen-->
+                    <?php if (isset ($_SESSION["login"]) ) {
+                        if($_SESSION["login"] == "fail") { ?>
+                            Anmedlung fehlgeschlagen.
+                        <?php } $_SESSION["login"] = ""; } ?>                        
+                        
                     </fieldset>
                 </form>
             </section>
         </div>
-
+        
+        
         <div class="container col-xl-4 border">
-            <section>
+            <section id="registrierung">
+ <!--Durch überprüfung von $_SESSION["registriert"] = "failed"; prüfen ob registrierung fehlgeschlagen ist -> meldung ausgeben und $_SESSION["registriert"] auf "false" ändern-->
                 <form action="php/config-reg.php" method="post" class="was-validated">
                     <fieldset>
                         <legend>Registrierung:</legend>
+                        
                         <div class="row form-group">
                             <div class="col-sm">
-                                <label for="name">Name:</label>
+                                <label for="firma">Firma:</label>
                             </div>
                             <div class="col-sm">
-                                <input type="text" id="name" placeholder="Name" name="name" required>
+                                <input type="text" id="name" placeholder="" name="firma" required>
                             </div>
                         </div>
+                        
+                        <div class="row form-group">
+                            <div class="col-sm">
+                                <label for="vorname">Vorname:</label>
+                            </div>
+                            <div class="col-sm">
+                                <input type="text" id="name" placeholder="" name="vorname" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row form-group">
+                            <div class="col-sm">
+                                <label for="nachname">Nachname:</label>
+                            </div>
+                            <div class="col-sm">
+                                <input type="text" id="name" placeholder="" name="nachname" required>
+                            </div>
+                        </div>
+                        
                         <div class="row form-group">
                             <div class="col">
-
-
                                 <label for="r_email">Email:</label>
                             </div>
                             <div class="col-sm">
 
-                                <input type="email" id="r_email" placeholder="Email" name="email1" required>
+                                <input type="email" id="r_email" placeholder="" name="email1" required>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -114,38 +157,34 @@ include('php/config-reg.php');
                                 <label for="r_passwort">Passwort:</label>
                             </div>
                             <div class="col-sm">
-
-                                <input type="password" id="r_passwort" placeholder="Passwort" name="passwort1" minlength="8" required>
+                                <input type="password" id="r_passwort" placeholder="" name="r_passwort" minlength="8" required>
                             </div>
                         </div>
 
                         <div class="row form-group">
                             <div class="col-sm">
-
-
                                 <label for="r_passwort2">Passwort bestätigen:</label>
                             </div>
+                            
                             <div class="col-sm">
-
-                                <input type="password" id="r_passwort2" placeholder="Passwort" name="passwort2" minlength="8" required>
+                                <input type="password" id="r_passwort2" placeholder="" name="r_passwort2" minlength="8" required>
                             </div>
                         </div>
-                        <div class="d-flex align-items-end flex-column">
-                            <p><label>
-                                    <select name="unv" size="1" required>
-                                        <option value="">Unternehemensverzeichnis</option>
-                                        <option value="test">test</option>
-                                        <option value="test2">test2</option>
-                                    </select>
-                                </label></p>
 
-                        </div>
                         <div class="form-group d-flex align-items-end flex-column">
-
-
-                            <input type="submit" class="btn btn-primary" name="reg" value="Registrieren">
-                            <!--<a href="profil.html">Registrieren</a> -->
-                            <!--(Submit soll auf neues Profil weiterleiten.. js? Bis dahin auch als Link)-->
+                            
+                            <!--Rückmeldung zur Registrierung übergangsweise anzeigen-->
+                            <?php if (isset ($_SESSION["registrierung"]) ) {
+                                if($_SESSION["registrierung"] == "pw_fail") { ?>
+                                    Achtung: Passwörter sind nicht gleich!
+                                <?php } elseif ($_SESSION["registrierung"] == "db_fail") { ?>
+                                    Achtung: Fehler bei Registrierung, möglicherweise bereits registriert?.. (Übergangslösung)
+                                <?php } elseif ($_SESSION["registrierung"] == "success") { ?>
+                                    Benutzer erfolgreich registiert. Bitte anmelden (Übergangslösung
+                                <?php } $_SESSION["registrierung"] = ""; } ?>
+            
+                                                        
+                            <input type="submit" class="btn btn-primary" name="registrieren" value="Registrieren">
                         </div>
                     </fieldset>
                 </form>
@@ -154,6 +193,8 @@ include('php/config-reg.php');
         </div>
 
     </div>
+    
+    <?php } //End of else ?>    
 
     <?php
         include "php/footer.php";
