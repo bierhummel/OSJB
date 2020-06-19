@@ -1,6 +1,6 @@
 <?php
 
-//Datei nach merge umbennen zu controller-user?
+//Datei umbennen zu controller-user?
 
 
 //Überprüfung der Eingabedaten
@@ -26,17 +26,24 @@
     //Registrierung
     if ( isset( $request_checked['registrieren'] ) ) {
         
-        //Aufruf von registerUser() des UserDAO
-        $succes = $UserDAO->registerUser($request_checked);
-        
-        /* Dibo: Entweder ihr implementiert die Registrierung durch versenden von E-Mails oder um das immer wieder aufkommende Problem mit Mails und Mail-Servern zu umgehen, simuliert ihr es wie folgt: Nach dem Registrieren wird keine echte E-Mail verschickt, sondern es kommt der Hinweis: „Es wurde eine E-Mail an die angegebene Adresse verschickt mit weiteren Infos.“ + Link zu einer (temporären) txt-Datei, wo der E-Mail-Text drin steht. -> umsetzung fehlt noch */        
-        
-        if( $succes == true ){            
-            $_SESSION["registrierung"] = "success"; 
+        //Prüfen der Passworteingabe
+        if( $request_checked['r_passwort'] == $request_checked["r_passwort2"] ) {
+            
+            //Aufruf von registerUser() des UserDAO
+            $succes = $UserDAO->registerUser($request_checked);
+
+            /* Dibo: Entweder ihr implementiert die Registrierung durch versenden von E-Mails oder um das immer wieder aufkommende Problem mit Mails und Mail-Servern zu umgehen, simuliert ihr es wie folgt: Nach dem Registrieren wird keine echte E-Mail verschickt, sondern es kommt der Hinweis: „Es wurde eine E-Mail an die angegebene Adresse verschickt mit weiteren Infos.“ + Link zu einer (temporären) txt-Datei, wo der E-Mail-Text drin steht. -> umsetzung fehlt noch */        
+
+            if( $succes == true ){            
+                $_SESSION["registrierung"] = "success"; 
+            }
+            else{
+                $_SESSION["registrierung"] = "db_fail"; //später genauere unterscheidungen
+
+            }
         }
         else{
-            $_SESSION["registrierung"] = "fail";
-            
+            $_SESSION["registrierung"] = "pw_fail";
         }
         
         header( 'location: ../login.php' );

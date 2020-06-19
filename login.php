@@ -151,7 +151,7 @@ session_start();
                                 <label for="r_passwort">Passwort:</label>
                             </div>
                             <div class="col-sm">
-                                <input type="password" id="r_passwort" placeholder="" name="passwort1" minlength="8" required>
+                                <input type="password" id="r_passwort" placeholder="" name="r_passwort" minlength="8" required>
                             </div>
                         </div>
 
@@ -161,11 +161,24 @@ session_start();
                             </div>
                             
                             <div class="col-sm">
-                                <input type="password" id="r_passwort2" placeholder="" name="passwort2" minlength="8" required>
+                                <input type="password" id="r_passwort2" placeholder="" name="r_passwort2" minlength="8" required>
                             </div>
                         </div>
 
                         <div class="form-group d-flex align-items-end flex-column">
+                            
+                            <!--Rückmeldung zur Registrierung übergangsweise anzeigen-->
+                            <?php if (isset ($_SESSION["registrierung"]) ) {
+                                if($_SESSION["registrierung"] == "pw_fail") { ?>
+                                    Achtung: Passwörter sind nicht gleich!
+                                <?php } elseif ($_SESSION["registrierung"] == "db_fail") { ?>
+                                    Achtung: DB-Fehler (Möglicherweise bereits Registriert?.. (Übergangslösung))
+                                <?php } elseif ($_SESSION["registrierung"] == "success") { ?>
+                                    Benutzer erfolgreich registiert. Bitte anmelden (Übergangslösung
+                                <?php } $_SESSION["registrierung"] == ""; } ?>
+            
+                            
+                            
                             <input type="submit" class="btn btn-primary" name="registrieren" value="Registrieren">
                         </div>
                     </fieldset>
