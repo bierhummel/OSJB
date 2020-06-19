@@ -3,23 +3,31 @@
 //Orientiert an Vorlage von http://best-practice-software-engineering.ifs.tuwien.ac.at/patterns/dao.html
 
 interface JobDAO {
-    public function saveJob($job);
+    public function createJob($job);
+    public function updateJob($job);
     public function loadJobs($suchkrit);
     public function deleteJob($job_id);
 }
 
-/* Klasse für Zugriff auf Jobs in DB
-class DBJobDAO implements JobDAO {
+/* Klasse für Zugriff auf Jobs in DB*/
+class SQLiteJobDAO implements JobDAO {
 
-    public DBJobDAO() {
-
+    public function createJob($job){
+        
+    }
+    public function updateJob($job);{
+        
+    }
+    
+    public function loadJobs($suchkrit){
+        
+    }
+    
+    public function deleteJob($job_id){
+        
+    }
 }
 
-    public function saveJob(Job j);
-    public function loadJobs($job_ids);
-    public function deleteJob (Job j);
-}
-*/
 
 class DummyJobDAO implements JobDAO {
     

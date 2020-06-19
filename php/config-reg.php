@@ -48,21 +48,23 @@
     if ( isset( $request_checked['login'] ) ) {
         
         //Aufruf von loginUser() des UserDAO
-        $user_id = $UserDAO->loginUser($request_checked['email'], $request_checked['passwort']);
+        $user = $UserDAO->loginUser($request_checked['email'], $request_checked['passwort']);
         
-        if( $user_id != NULL ){            
+        //Login erfolgreich und auszugebende Userdaten als Array erhalten
+        if( $user != NULL ){            
             $_SESSION["login"] = "success";
             $_SESSION["eingeloggt"] = "true";
             
             
-            //Alle unkritischen infos des Users in Session zwischenspeichern (sowas lieber in cookie oder in session?)
-            foreach ($user_id as $index => $value){
+            //Alle unkritischen infos des Users in Session zwischenspeichern
+            foreach ($user as $index => $value){
                 $_SESSION[$index] = htmlspecialchars($value);
             }
 
             header( 'location: ../profil.php' );
             exit;
         }
+        //Login nicht erfolgreich
         else{
             $_SESSION["login"] = "fail";
             header( 'location: ../login.php' );
@@ -75,19 +77,21 @@
     if ( isset( $request_checked['updaten']) && isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true"  ) {
         
         //Aufruf von updateUser() des UserDAO
-        $user_id = $UserDAO->updateUser($request_checked);
+        $user = $UserDAO->updateUser($request_checked);
         
-        if( $user_id != NULL ){            
+        //Update erfolgreich und neue auszugebende Userdaten als Array erhalten
+        if( $user != NULL ){            
             $_SESSION["update"] = "success";
             
-            //Alle unkritischen infos des Users in Session zwischenspeichern (sowas lieber in cookie oder in session?)
-            foreach ($user_id as $index => $value){
+            //Alle unkritischen infos des Users in Session zwischenspeichern
+            foreach ($user as $index => $value){
                 $_SESSION[$index] = htmlspecialchars($value);
             }
 
             header( 'location: ../profil.php' );
             exit;
-        }        
+        } 
+        //Update nicht erfolgreich
         else{
             $_SESSION["update"] = "fail";
             header( 'location: ../login.php' );
@@ -97,7 +101,7 @@
     }
 
 
-//Erzeugung von Ausgabedaten
+//Erzeugung von Ausgabedaten?
 
 
 
