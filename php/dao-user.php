@@ -121,14 +121,14 @@ class SQLiteUserDAO implements UserDAO {
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         try{        
-            $update = "update user set strasse = :strasse, hausnr = :hausnr, plz = :plz where mail = :mail";
+            $update = "update user set strasse = :strasse, hausnr = :hausnr, plz = :plz, stadt = :stadt where mail = :mail";
             $stmt = $db->prepare($update);
             //Werte aus dem Array holen    
             $strasse = $user[strasse];
             $hausnr = $user[hausnr];
             $plz = $user[plz];
             $stadt = $user[stadt];
-            $mail = "der-tuerklinkenputzer@yahoo.de"; //$user[email]"";
+            $mail = "der-tuerklinkenputzer@yahoo.de"; //$user[email]""; Nutzer existiert in der DB! 
             // Binde die Parameter an die Variablen,
             $stmt->bindParam(':strasse', $strasse);
             $stmt->bindParam(':hausnr', $hausnr);
