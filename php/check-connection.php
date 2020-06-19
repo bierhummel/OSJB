@@ -23,7 +23,7 @@ try{
 
     
 if (!$file_existed){ 
- $register = "insert into user (uname, vname, nname, password, mail, strasse, hausnr, plz, stadt, verified, mail_verified) values (:uname, :vname, :nname, :password, :mail, :strasse :hausnr, :plz, :stadt, :verified, :mail_verified)";    
+ $register = "insert into user (uname, vname, nname, password, mail, strasse, hausnr, plz, stadt, verified, mail_verified) values (:uname, :vname, :nname, :password, :mail, :strasse, :hausnr, :plz, :stadt, :verified, :mail_verified)";    
     
  $uname = "OSJB AG";
  $vname = "Stefan";    
@@ -43,7 +43,7 @@ if (!$file_existed){
  $stmt->bindParam(':vname', $vname);
  $stmt->bindParam(':nname', $nname);    
  $stmt->bindParam(':mail', $mail);
- $stmt->bindParam(':password', password);
+ $stmt->bindParam(':password', $password);
  $stmt->bindParam(':strasse', $strasse);
  $stmt->bindParam(':hausnr', $hausnr);
  $stmt->bindParam(':plz', $plz);
@@ -52,7 +52,6 @@ if (!$file_existed){
  $stmt->bindParam(':mail_verified', $mail_verified);
  // Und führe die Transaktion letzlich aus.
  $stmt->execute();
-     
  $register1 = "insert into jobangebot (user_id, status, titel, strasse, hausnr, plz, stadt, beschreibung, art, im_bachelor, bachelor, im_master, master, ausbildung, fachrichtung, link, beschaeftigungsbeginn) values (1, :status, :titel, :strasse, :hausnr, :plz, :stadt, :beschreibung, :art, :im_bachelor, :bachelor, :im_master, :master, :ausbildung, :fachrichtung, :link, :beschaeftigungsbeginn)";
 
     $status = 0;
