@@ -97,6 +97,12 @@ session_start();
                         </div>
                     -->
                         
+                    <!--Rückmeldung zur Anmeldung übergangsweise anzeigen-->
+                    <?php if (isset ($_SESSION["login"]) ) {
+                        if($_SESSION["login"] == "fail") { ?>
+                            Anmedlung fehlgeschlagen.
+                        <?php } $_SESSION["login"] = ""; } ?>                        
+                        
                     </fieldset>
                 </form>
             </section>
@@ -172,13 +178,12 @@ session_start();
                                 if($_SESSION["registrierung"] == "pw_fail") { ?>
                                     Achtung: Passwörter sind nicht gleich!
                                 <?php } elseif ($_SESSION["registrierung"] == "db_fail") { ?>
-                                    Achtung: DB-Fehler (Möglicherweise bereits Registriert?.. (Übergangslösung))
+                                    Achtung: Fehler bei Registrierung, möglicherweise bereits registriert?.. (Übergangslösung)
                                 <?php } elseif ($_SESSION["registrierung"] == "success") { ?>
                                     Benutzer erfolgreich registiert. Bitte anmelden (Übergangslösung
-                                <?php } $_SESSION["registrierung"] == ""; } ?>
+                                <?php } $_SESSION["registrierung"] = ""; } ?>
             
-                            
-                            
+                                                        
                             <input type="submit" class="btn btn-primary" name="registrieren" value="Registrieren">
                         </div>
                     </fieldset>
