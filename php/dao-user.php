@@ -93,10 +93,8 @@ class SQLiteUserDAO implements UserDAO {
                 $nname = $stmt2->fetchColumn();   
                 //array bilden
                 $user_id = array("id" => $id_in_db, "vorname" => $vname, "nachname" => $nname);
-                $db = NULL;
                 return $user_id;
             } else {
-                $db = NULL;
                 return null;
                 }
             } catch(PDOException $e) {
@@ -108,48 +106,14 @@ class SQLiteUserDAO implements UserDAO {
     
 
     
-    public function updateUser( $user ){
-     //   $user_id = null; //Array mit aktualisierten wichtigen Informationen des Users (z.b. kein PW und Logo)
+    public function updateUser( $User ){
+        $user_id = null; //Array mit aktualisierten wichtigen Informationen des Users (z.b. kein PW und Logo)
         
         /*test*/
-     //   $user_id = array("id" => 0, "vorname" => "test", "nachname" => "jas");
+        $user_id = array("id" => 0, "vorname" => "test", "nachname" => "jas");
         
-        // Skript durchlaufen lassen, um zu überprüfen ob DB vorhanden ist.
-        include_once('check-connection.php');  
-        // Erzeugen eines PDO's für die Transaktion    
-        $database = "../database/database.db";
-        $db = new PDO('sqlite:' . $database);
-        // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        try{      
-
-            $update = "update user set strasse = :strasse, hausnr = :hausnr, plz = :plz, stadt = :stadt where mail = :mail";
-            
-            //Werte aus dem Array holen    
-            $strasse = $user[strasse];
-            $hausnr = $user[hausnr];
-            $plz = $user[plz];
-            $stadt = $user[stadt];
-            $user = [email1];
-            $mail = "der-tuerklinkenputzer@yahoo.de"; //$user[email]""; Nutzer existiert in der DB! 
-            $stmt = $db->prepare($update);
-            // Binde die Parameter an die Variablen,
-            $stmt->bindParam(':strasse', $strasse);
-            $stmt->bindParam(':hausnr', $hausnr);
-            $stmt->bindParam(':plz', $plz);       
-            $stmt->bindParam(':stadt', $stadt);   
-            $stmt->bindParam(':mail', $mail);   
-                        
-            // Und führe die Transaktion letzlich aus.
-            $stmt->execute();
-            $db = NULL;    
-        } catch(PDOException $e) {
-            // Print PDOException message
-            echo $e->getMessage();
-        }
         
-        return NULL;
+        return $user_id;
         
     }
 
@@ -173,9 +137,10 @@ class SQLiteUserDAO implements UserDAO {
         $mail_verified = 0;
         //Passwort mit bcrypt hashen
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);        
-        try{
-            if (!($this->userAlreadyExists(($mail)))){
-                // Wenn die Mail des Uers noch nicht in der DB ist:
+        
+        if (!($this->userAlreadyExists(($mail)))){
+            // Wenn die Mail des Uers noch nicht in der DB ist:
+            try{
                 // Bereite die Transaktion vor,
                 $register = "insert into user (uname, vname, nname, password, mail, verified, mail_verified) values (:uname, :vname, :nname, :password, :mail, :verified, :mail_verified)";
                 $stmt = $db->prepare($register);
@@ -194,16 +159,15 @@ class SQLiteUserDAO implements UserDAO {
                 // Und schließe die Verbindung zur DB.
                 $db = null;
         
-                }
-
-         else {
-            $success = false;
-        }
-    }  catch(PDOException $e) {
+                } catch(PDOException $e) {
                     // Print PDOException message
                     echo $e->getMessage();
                     $success = false;
                 }
+
+        } else {
+            $success = false;
+        }
             return $succes;  
           
     }
