@@ -1,6 +1,13 @@
 <?php 
 
 $database = "../database/database.db";
+$file_existed = false;
+
+
+
+if (file_exists($database)) {
+    $file_existed = true;
+}
 
 // Es wird bei Nichtbestand der DB eine neue Datenbank erzeugt, wenn Skript ausgeführt wird.
 $db = new PDO('sqlite:' . $database);
@@ -9,13 +16,18 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
  
 try{
  //Kreieren der Tables User und Jobangebot    
- $db->exec("create table user (id integer primary key, uname text NOT NULL, vname text NOT NULL, nname text NOT NULL, password text NOT NULL, mail text NOT NULL, strasse text, hausnr text, plz text, stadt text, verified integer NOT NULL, mail_verified integer NOT NULL)");
- $db->exec("create table jobangebot (id integer primary key, user_id integer, status integer NOT NULL, titel text, strasse text, hausnr text, plz text, stadt text, beschreibung text, art text, im_bachelor integer NOT NULL, bachelor integer NOT NULL, im_master integer NOT NULL, master integer NOT NULL, ausbildung integer NOT NULL, fachrichtung text, logo blob, link text, beschaeftigungsbeginn text, FOREIGN KEY (user_id) REFERENCES user(id))");
+ $db->exec("create table if not exists user (id integer primary key, uname text NOT NULL, vname text NOT NULL, nname text NOT NULL, password text NOT NULL, mail text NOT NULL, strasse text, hausnr text, plz text, stadt text, verified integer NOT NULL, mail_verified integer NOT NULL)");
+ $db->exec("create table if not exists jobangebot (id integer primary key, user_id integer, status integer NOT NULL, titel text, strasse text, hausnr text, plz text, stadt text, beschreibung text, art text, im_bachelor integer NOT NULL, bachelor integer NOT NULL, im_master integer NOT NULL, master integer NOT NULL, ausbildung integer NOT NULL, fachrichtung text, logo blob, link text, beschaeftigungsbeginn text, FOREIGN KEY (user_id) REFERENCES user(id))");
  
- $register = "insert into user (uname, vname, nname, password, mail, strasse, hausnr, plz, stadt) values (:uname, :vname, :nname, :password, :mail, :hausnr, :plz, :stadt))";
+
+
+    
+if (!$file_existed){ 
+ $register = "insert into user (uname, vname, nname, password, mail, strasse, hausnr, plz, stadt, verified, mail_verified) values (:uname, :vname, :nname, :password, :mail, :strasse :hausnr, :plz, :stadt, :verified, :mail_verified)";    
+    
  $uname = "OSJB AG";
  $vname = "Stefan";    
- $nname = "Schröder";    
+ $nname = "Schröder"; 
  $password = password_hash("12345678asdf", PASSWORD_DEFAULT);
  $mail = "stefan-schroeder@osjb.de";    
  $strasse = "An der großen Eiche";
@@ -34,14 +46,14 @@ try{
  $stmt->bindParam(':password', password);
  $stmt->bindParam(':strasse', $strasse);
  $stmt->bindParam(':hausnr', $hausnr);
- $stmt->bindParam(':plz', $strasse);
+ $stmt->bindParam(':plz', $plz);
  $stmt->bindParam(':stadt', $stadt);      
  $stmt->bindParam(':verified', $verified);
  $stmt->bindParam(':mail_verified', $mail_verified);
  // Und führe die Transaktion letzlich aus.
  $stmt->execute();
      
- $register1 = "insert into jobangebot (user_id, status, titel, strasse, hausnr, plz, stadt beschreibung, art, im_bachelor, bachelor, im_master, master, ausbildung, fachrichtung, link, beschaeftigungsbeginn) values (1, :status, :titel, :strasse, :hausnr, :plz, :stadt, :beschreibung, :art, :im_bachelor, :bachelor, :im_master, :master, :ausbildung, :fachrichtung, :link, :beschaeftigungsbeginn)";
+ $register1 = "insert into jobangebot (user_id, status, titel, strasse, hausnr, plz, stadt, beschreibung, art, im_bachelor, bachelor, im_master, master, ausbildung, fachrichtung, link, beschaeftigungsbeginn) values (1, :status, :titel, :strasse, :hausnr, :plz, :stadt, :beschreibung, :art, :im_bachelor, :bachelor, :im_master, :master, :ausbildung, :fachrichtung, :link, :beschaeftigungsbeginn)";
 
     $status = 0;
     $titel = "Jobangebot 1";
@@ -60,7 +72,7 @@ try{
     $link = "https://www.osjb.de/";
     $beschaeftigungsbeginn = "20.07.2020";
     
-    $stmt = $db->prepare($register);    
+    $stmt = $db->prepare($register1);    
     $stmt->bindParam(':status', $status);  
     $stmt->bindParam(':titel', $titel);
     $stmt->bindParam(':strasse', $strasse);    
@@ -80,10 +92,12 @@ try{
     
      $stmt->execute();
 }
+}
     catch(PDOException $e) {
     // Zeige PDOException message
     echo $e->getMessage();
   }
+
 
 // Überprüfen der Rechte
 if (!is_writable($database)) {
