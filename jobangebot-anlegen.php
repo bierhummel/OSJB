@@ -2,11 +2,11 @@
 
 include('php/calc-job.php'); 
 
-ini_set("session.use_cookies", 1); 
+/*ini_set("session.use_cookies", 1); 
 ini_set("session.use_only_cookies", 0);
 ini_set("session.use_trans_sid", 1);
 
-session_start();
+session_start();*/
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +40,7 @@ session_start();
 
     <div class="container border">
         <section>
-            <form action="jobangebot-anzeigen.php" method="post">
+            <form action="php/calc-job.php" method="post">
                 <section>
                     <h3 class="center">Allgemeine Informationen</h3>
                     <h4 class="center mb-4">Informationen zum Job</h4>
@@ -293,7 +293,11 @@ session_start();
                     </div>
 
                     <div class="col-6 col-md-4 col-lg-3">
-                        <input type="submit" class="btn btn-primary" name="submit_n_job" value="Jobanzeige erstellen"> <!---(Danach Jobangebot anzeigen)-->
+                        <?php if($_GET["new"]==1){ ?>                    
+                            <input type="submit" class="btn btn-primary" name="erstellen" value="Jobanzeige erstellen"> <!---(Danach Jobangebot anzeigen)-->
+                        <?php } else { ?>
+                            <input type="submit" class="btn btn-primary" name="bearbeiten" value="Jobanzeige bearbeiten"> <!---(Danach Jobangebot anzeigen)-->
+                        <?php } ?>
                     </div>
                 </div>
                 

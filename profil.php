@@ -1,9 +1,9 @@
 <?php
-ini_set("session.use_cookies", 1); 
+/*ini_set("session.use_cookies", 1); 
 ini_set("session.use_only_cookies", 0);
 ini_set("session.use_trans_sid", 1);
 
-session_start();
+session_start();*/
 
 include('php/calc-job.php');
 ?>
@@ -159,14 +159,15 @@ include('php/calc-job.php');
             <section>
                 <h4 class="center">Meine Anzeigen</h4>
                 <p>
-                    <a href="jobangebot-anlegen.php" class="btn btn-primary">Anzeige erstellen</a>
+                    <a href="jobangebot-anlegen.php?new=1" class="btn btn-primary">Anzeige erstellen</a>
                 </p>
 
                 <?php 
-                    $count = 0;
-                    foreach($jobs as $job): 
-                        extract($job);
-                        $count++;
+                     $count = 0;
+                    if($jobs != null){ 
+                        foreach($jobs as $job): 
+                            extract($job);
+                            $count++;
                 ?>
 
                 <div class="border">
@@ -177,12 +178,12 @@ include('php/calc-job.php');
                     (Jobangeobt aktiv/inaktiv)
                 -->
 
-                    <a href="jobangebot-anlegen.php" class="btn btn-secondary mr-3">Bearbeiten</a>
+                    <a href="jobangebot-anlegen.php?new=0" class="btn btn-secondary mr-3">Bearbeiten</a>
 
-                    <a href="profil.php?del=1&id=<?php echo($id)?>" class="btn btn-light">Löschen</a>
+                    <a href="profil.php?del=1&id=<?php echo($id)?>" class="btn btn-light">Löschen (noch in Bearbeitung)</a>
                 </div>
 
-                <?php endforeach; ?>
+                <?php endforeach; } ?>
 
                 <p class="center">Ende der Liste. Es wurden <?php echo $count ?> Jobangebote gefunden.</p>
 
