@@ -72,7 +72,7 @@ session_start();
             </div>
             <div>
                 <?php if ( isset ($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ) { ?>                                    
-                    <h3> Soll hier etwas stehen wenn man eingelogt ist? </h3>
+                    <h3 class="center"><a href="profil.php" class="btn btn-primary">Zum Profil</a></h3>
                 
                 <?php } else { ?>
                 
