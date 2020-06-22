@@ -153,10 +153,10 @@ class SQLiteUserDAO implements UserDAO {
             $update = "update user set strasse = :strasse, hausnr = :hausnr, plz = :plz, stadt = :stadt where mail = :mail";
             
             //Werte aus dem Array holen    
-            $strasse = $user[strasse];
-            $hausnr = $user[hausnr];
-            $plz = $user[plz];
-            $stadt = $user[stadt];
+            $strasse = $user[new_strasse];
+            $hausnr = $user[new_hausnr];
+            $plz = $user[new_plz];
+            $stadt = $user[new_stadt];
             $new_email = $user[new_email];
             $stmt = $db->prepare($update);
             // Binde die Parameter an die Variablen,
