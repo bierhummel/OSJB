@@ -126,7 +126,7 @@ class SQLiteUserDAO implements UserDAO {
                 $stadt = $stmt->fetchColumn();                
                 
                 //array bilden
-                $user = array("uname" => $uname, "vorname" => $vname, "nachname" => $nname, "mail" => $mail, "strass" => $strasse, "hausnr" => $hausnr, "plz" => $plz, "stadt" => $stadt);
+                $user = array("uname" => $uname, "vorname" => $vname, "nachname" => $nname, "mail" => $mail, "strasse" => $strasse, "hausnr" => $hausnr, "plz" => $plz, "stadt" => $stadt);
                 return $user;
             } else {
                 return null;
@@ -220,7 +220,7 @@ class SQLiteUserDAO implements UserDAO {
             $stadt = $stmt->fetchColumn();                
 
             //array bilden
-            $user = array("uname" => $uname, "vorname" => $vname, "nachname" => $nname, "mail" => $mail, "strass" => $strasse, "hausnr" => $hausnr, "plz" => $plz, "stadt" => $stadt);
+            $user = array("uname" => $uname, "vorname" => $vname, "nachname" => $nname, "mail" => $mail, "strasse" => $strasse, "hausnr" => $hausnr, "plz" => $plz, "stadt" => $stadt);
             
             $db = NULL;  
             return $user;
