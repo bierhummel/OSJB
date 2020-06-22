@@ -157,7 +157,7 @@ session_start();
                                 <label for="r_passwort">Passwort:</label>
                             </div>
                             <div class="col-sm">
-                                <input type="password" id="r_passwort" placeholder="" name="r_passwort" minlength="8" required>
+                                <input type="password" id="r_passwort" placeholder="" name="passwort1" minlength="8" required>
                             </div>
                         </div>
 
@@ -167,7 +167,7 @@ session_start();
                             </div>
                             
                             <div class="col-sm">
-                                <input type="password" id="r_passwort2" placeholder="" name="r_passwort2" minlength="8" required>
+                                <input type="password" id="r_passwort2" placeholder="" name="passwort2" minlength="8" required>
                             </div>
                         </div>
 

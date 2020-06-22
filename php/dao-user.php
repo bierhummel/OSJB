@@ -71,6 +71,7 @@ class SQLiteUserDAO implements UserDAO {
             $stmt->execute();
      
             $pw_in_db = $stmt->fetchColumn();
+            //TODO: MUSS GEFIXT WERDEN!
             if (password_verify($input_pw, $pw_in_db)) {
                 //id
                 $id = "select id from user where mail = :mail";
@@ -126,7 +127,6 @@ class SQLiteUserDAO implements UserDAO {
             $plz = $user[plz];
             $stadt = $user[stadt];
             $user = [email1];
-            $mail = "der-tuerklinkenputzer@yahoo.de"; //$user[email]""; Nutzer existiert in der DB! 
             $stmt = $db->prepare($update);
             // Binde die Parameter an die Variablen,
             $stmt->bindParam(':strasse', $strasse);
