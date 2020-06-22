@@ -91,7 +91,8 @@ include('php/calc-job.php');
                         </div>
                     </div>
 
-                    <!--passwort ändern später
+                    <!--passwort ändern später-->
+                    <!--
                     <div class="row form-group">                        
                         <div class="col-sm">
                             <label for="password">Passwort:</label>

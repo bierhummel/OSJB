@@ -61,7 +61,6 @@ class SQLiteUserDAO implements UserDAO {
 
         try{      
             $hashed_password = "select password from user where mail = :mail";
-            var_dump($input_mail);
             $stmt = $db->prepare($hashed_password);
             $stmt->bindParam(':mail', $input_mail);  
             $stmt->execute();
@@ -149,73 +148,86 @@ class SQLiteUserDAO implements UserDAO {
         // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        try{      
-            $update = "update user set strasse = :strasse, hausnr = :hausnr, plz = :plz, stadt = :stadt where mail = :mail";
+        try{
+            //Offen: Passwörter gesondert behandeln? Darf man E-Mail einfach so ändern?
             
-            //Werte aus dem Array holen    
-            $strasse = $user[new_strasse];
-            $hausnr = $user[new_hausnr];
-            $plz = $user[new_plz];
-            $stadt = $user[new_stadt];
-            $new_email = $user[new_email];
+            //Statement entwerfen
+            $update = "update user set uname = :new_uname, vname = :new_vname, nname = :new_nname, mail = :new_mail, strasse = :new_strasse, hausnr = :new_hausnr, plz = :new_plz, stadt = :new_stadt where mail = :mail";
+
+            
+            //Werte aus dem Array holen (eigentlich unnötig?)
+            
+            
+            $strasse = $updated_user["new_strasse"];
+            $hausnr = $updated_user["new_hausnr"];
+            $plz = $updated_user["new_plz"];
+            $stadt = $updated_user["new_stadt"];
             $stmt = $db->prepare($update);
             // Binde die Parameter an die Variablen,
-            $stmt->bindParam(':strasse', $strasse);
-            $stmt->bindParam(':hausnr', $hausnr);
-            $stmt->bindParam(':plz', $plz);       
-            $stmt->bindParam(':stadt', $stadt);   
+            
+            $stmt->bindParam(':new_uname', $updated_user["new_firma"]);
+            $stmt->bindParam(':new_vname', $updated_user["new_vorname"]);
+            $stmt->bindParam(':new_nname', $updated_user["new_nachname"]);
+            $stmt->bindParam(':new_mail', $updated_user["new_email"]);
+            $stmt->bindParam(':new_strasse', $strasse);
+            $stmt->bindParam(':new_hausnr', $hausnr);
+            $stmt->bindParam(':new_plz', $plz);       
+            $stmt->bindParam(':new_stadt', $stadt); 
             $stmt->bindParam(':mail', $input_mail);   
+            
+            var_dump($updated_user);
+            
                        
             // Und führe die Transaktion letzlich aus.
             $stmt->execute();
             
-            //rückgabewerte auslesen
+            //rückgabewerte auslesen (mit ggf. geändertet E-Mail)
             //unternehmensname
             $uname = "select uname from user where mail = :mail";
             $stmt = $db->prepare($uname);
-            $stmt->bindParam(':mail', $input_mail);  
+            $stmt->bindParam(':mail', $updated_user["new_email"]);  
             $stmt->execute();
             $uname = $stmt->fetchColumn();   
             //vorname
             $vname = "select vname from user where mail = :mail";
             $stmt = $db->prepare($vname);
-            $stmt->bindParam(':mail', $input_mail);  
+            $stmt->bindParam(':mail', $updated_user["new_email"]);  
             $stmt->execute();
             $vname = $stmt->fetchColumn();               
             //nachname
             $nname = "select nname from user where mail = :mail";
             $stmt = $db->prepare($nname);
-            $stmt->bindParam(':mail', $input_mail);  
+            $stmt->bindParam(':mail', $updated_user["new_email"]);  
             $stmt->execute();
             $nname = $stmt->fetchColumn();   
             //mail
             $mail = "select mail from user where mail = :mail";
             $stmt = $db->prepare($mail);
-            $stmt->bindParam(':mail', $input_mail);  
+            $stmt->bindParam(':mail', $updated_user["new_email"]);  
             $stmt->execute();
             $mail = $stmt->fetchColumn();   
             //strasse
             $strasse = "select strasse from user where mail = :mail";
             $stmt = $db->prepare($strasse);
-            $stmt->bindParam(':mail', $input_mail);  
+            $stmt->bindParam(':mail', $updated_user["new_email"]);  
             $stmt->execute();
             $strasse = $stmt->fetchColumn();
             //hausnr
             $hausnr = "select hausnr from user where mail = :mail";
             $stmt = $db->prepare($hausnr);
-            $stmt->bindParam(':mail', $input_mail);  
+            $stmt->bindParam(':mail', $updated_user["new_email"]);  
             $stmt->execute();
             $hausnr = $stmt->fetchColumn();
             //plz
             $plz = "select plz from user where mail = :mail";
             $stmt = $db->prepare($plz);
-            $stmt->bindParam(':mail', $input_mail);  
+            $stmt->bindParam(':mail', $updated_user["new_email"]);  
             $stmt->execute();
             $plz = $stmt->fetchColumn();
             //stadt
             $stadt = "select stadt from user where mail = :mail";
             $stmt = $db->prepare($stadt);
-            $stmt->bindParam(':mail', $input_mail);  
+            $stmt->bindParam(':mail', $updated_user["new_email"]);  
             $stmt->execute();
             $stadt = $stmt->fetchColumn();                
 
@@ -286,7 +298,9 @@ class SQLiteUserDAO implements UserDAO {
           
     }
     
-    public function deleteUser(  $user_id, $password ){}
+    public function deleteUser(  $user_id, $password ){
+        
+    }
     
     private function userAlreadyExists($mail){
     try{
