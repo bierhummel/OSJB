@@ -1,6 +1,7 @@
 <?php 
 
-$database = "../database/database.db";
+$database = $_SERVER['DOCUMENT_ROOT'];
+$database .= "/database/database.db";
 $file_existed = false;
 
 
