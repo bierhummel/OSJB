@@ -144,7 +144,7 @@ if (!$file_existed){
     $stmt->bindParam(':titel', $titel);
     $stmt->bindParam(':strasse', $strasse);    
     $stmt->bindParam(':hausnr', $hausnr);
-    $stmt->bindParam(':plz', $strasse);
+    $stmt->bindParam(':plz', $plz);
     $stmt->bindParam(':stadt', $stadt);      
     $stmt->bindParam(':beschreibung', $beschreibung);
     $stmt->bindParam(':art', $art);   
@@ -184,7 +184,7 @@ $job1 = "insert into jobangebot (user_id, status, titel, strasse, hausnr, plz, s
     $stmt->bindParam(':titel', $titel);
     $stmt->bindParam(':strasse', $strasse);    
     $stmt->bindParam(':hausnr', $hausnr);
-    $stmt->bindParam(':plz', $strasse);
+    $stmt->bindParam(':plz', $plz);
     $stmt->bindParam(':stadt', $stadt);      
     $stmt->bindParam(':beschreibung', $beschreibung);
     $stmt->bindParam(':art', $art);   
@@ -204,7 +204,7 @@ $job2 = "insert into jobangebot (user_id, status, titel, strasse, hausnr, plz, s
     $status = 1;
     $titel = "Unschlagbares Team";
     $strasse = "Mühlenweg";
-    $hausnr = 43b;
+    $hausnr = "43b";
     $plz = "06198";
     $stadt = "Salzatal";
     $beschreibung = "Erlebe mit uns Sachen, die ohne uns eventuell langweilig wären.";
@@ -218,12 +218,13 @@ $job2 = "insert into jobangebot (user_id, status, titel, strasse, hausnr, plz, s
     $link = "https://www.ewe-salzatal.de/";
     $beschaeftigungsbeginn = "30.08.2020";
     
-    $stmt = $db->prepare($job2);    
+    $stmt = $db->prepare($job2);   
+    $stmt->bindParam(':uid', $uid);  
     $stmt->bindParam(':status', $status);  
     $stmt->bindParam(':titel', $titel);
     $stmt->bindParam(':strasse', $strasse);    
     $stmt->bindParam(':hausnr', $hausnr);
-    $stmt->bindParam(':plz', $strasse);
+    $stmt->bindParam(':plz', $plz);
     $stmt->bindParam(':stadt', $stadt);      
     $stmt->bindParam(':beschreibung', $beschreibung);
     $stmt->bindParam(':art', $art);   
@@ -246,7 +247,7 @@ $job3 = "insert into jobangebot (user_id, status, titel, strasse, hausnr, plz, s
     $hausnr = 31;
     $plz = "68159";
     $stadt = "Mannheim";
-    $beschreibung = "Wir suchen genau dich, damit uns hilfst erfolgreicher zu werden.";
+    $beschreibung = "Wir suchen genau dich, damit uns hilfst, erfolgreicher zu werden.";
     $art = "Werkstudent";
     $im_bachelor = 1;
     $bachelor = 0;
@@ -257,12 +258,13 @@ $job3 = "insert into jobangebot (user_id, status, titel, strasse, hausnr, plz, s
     $link = "https://www.telekom-in-mannheim.de/";
     $beschaeftigungsbeginn = "12.01.2021";
     
-    $stmt = $db->prepare(§job3);    
+    $stmt = $db->prepare($job3);  
+    $stmt->bindParam(':uid', $uid);  
     $stmt->bindParam(':status', $status);  
     $stmt->bindParam(':titel', $titel);
     $stmt->bindParam(':strasse', $strasse);    
     $stmt->bindParam(':hausnr', $hausnr);
-    $stmt->bindParam(':plz', $strasse);
+    $stmt->bindParam(':plz', $plz);
     $stmt->bindParam(':stadt', $stadt);      
     $stmt->bindParam(':beschreibung', $beschreibung);
     $stmt->bindParam(':art', $art);   

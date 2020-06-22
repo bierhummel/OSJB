@@ -14,6 +14,10 @@ class SQLiteJobDAO implements JobDAO {
 
     //erhält array mit inputwerten von jobangebot-anlegen.php und gibt true/false zurück
     public function createJob($job, $user_email){
+        var_dump($job[teilzeit]);
+        exit(0);
+        
+        
         
     }
     

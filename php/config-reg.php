@@ -27,7 +27,7 @@
     if ( isset( $request_checked['registrieren'] ) ) {
         
         //Prüfen der Passworteingabe
-        if( $request_checked['r_passwort'] == $request_checked["r_passwort2"] ) {
+        if( $request_checked['passwort1'] == $request_checked["passwort2"] ) {
             
             //Aufruf von registerUser() des UserDAO
             $succes = $UserDAO->registerUser($request_checked);
