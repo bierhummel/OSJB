@@ -1,6 +1,6 @@
 <?php
 
-//Datei nach merge umbennen zu controller-job
+//Datei nach merge umbennen zu process-job?
 
 //Überprüfung der Eingabedaten
     include('check-inputs.php'); 
