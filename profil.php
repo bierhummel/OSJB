@@ -44,7 +44,7 @@ include('php/calc-job.php');
  <!--Durch überprüfung von $_SESSION["update"] = "failed"; prüfen ob update fehlgeschlagen ist -> meldung ausgeben und $_SESSION["update"] auf "false" ändern-->
                 
                 <form action="php/config-reg.php" method="post">
-                    <h3 class="center mb-3">Profil von <?php echo($_SESSION["vorname"] . " " . $_SESSION["nachname"]) ?> </h3>
+                    <h3 class="center mb-3">Profil von <?php echo($_SESSION["vorname"] . " " . $_SESSION["nachname"] . " " . $_SESSION["strasse"]) ?> </h3>
                     
                     <div class="row form-group">
                         <div class="col">
@@ -84,10 +84,10 @@ include('php/calc-job.php');
 
                     <div class="row form-group">
                         <div class="col-sm">
-                            <label for="email">Email:</label>
+                            <label for="new_email">E-Mail:</label>
                         </div>
                         <div class="col-sm">
-                            <input type="email" id="email" name="email">
+                            <input type="email" id="new_email" name="new_email">
                         </div>
                     </div>
 

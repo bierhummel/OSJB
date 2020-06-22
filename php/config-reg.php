@@ -1,6 +1,6 @@
 <?php
 
-//Datei umbennen zu controller-user?
+//Datei umbennen zu process-user?
 
 
 //Überprüfung der Eingabedaten
@@ -81,10 +81,10 @@
 
 
     //Userdaten updaten
-    if ( isset( $request_checked['updaten']) && isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true"  ) {
+    if ( isset( $request_checked['updaten']) && isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ) {
         
         //Aufruf von updateUser() des UserDAO
-        $user = $UserDAO->updateUser($request_checked);
+        $user = $UserDAO->updateUser($request_checked, $_SESSION["email"]);
         
         //Update erfolgreich und neue auszugebende Userdaten als Array erhalten
         if( $user != NULL ){            
