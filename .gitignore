@@ -4,5 +4,3 @@ database/aria_log.00000001
 database/aria_log_control
 
 database/mysql_error.log
-
-database/database.db
