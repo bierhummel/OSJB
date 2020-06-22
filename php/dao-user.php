@@ -54,7 +54,6 @@ class SQLiteUserDAO implements UserDAO {
     public function loginUser( $input_mail, $input_pw ){
 
         // Skript durchlaufen lassen, um zu überprüfen ob DB vorhanden ist.
-        include_once('check-connection.php'); 
         $database = "../database/database.db";
         $db = new PDO('sqlite:' . $database);
         // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
@@ -110,7 +109,6 @@ class SQLiteUserDAO implements UserDAO {
     public function updateUser( $user ){
         $user_id = null; //Array mit aktualisierten wichtigen Informationen des Users (z.b. kein PW und Logo) 
         // Skript durchlaufen lassen, um zu überprüfen ob DB vorhanden ist.
-        include_once('check-connection.php');  
         // Erzeugen eines PDO's für die Transaktion    
         $database = "../database/database.db";
         $db = new PDO('sqlite:' . $database);
@@ -150,7 +148,6 @@ class SQLiteUserDAO implements UserDAO {
 
     public function registerUser($user){
         // Skript durchlaufen lassen, um zu überprüfen ob DB vorhanden ist.
-        include_once('check-connection.php');  
         // Erzeugen eines PDO's für die Transaktion    
         $database = "../database/database.db";
         $db = new PDO('sqlite:' . $database);
