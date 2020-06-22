@@ -41,7 +41,7 @@
 
     //Anlegen neuer Jobangebote
      if(isset($request_checked["erstellen"]) && isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ) {
-         $jobs = $JobDAO->createJob($request_checked, $_SESSION["email"]);
+         $jobs = $JobDAO->createJob($request_checked, $_SESSION["mail"]);
          $id_set = true;   
          print("test");
          
