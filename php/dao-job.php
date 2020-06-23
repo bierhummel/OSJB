@@ -246,7 +246,7 @@ class SQLiteJobDAO implements JobDAO {
             $job = $stmt->execute(array($job_id));   
             return $job;
 }
-    } catch(PDOException $e) {
+     catch(PDOException $e) {
                     // Print PDOException message
                     echo $e->getMessage();
                 }    

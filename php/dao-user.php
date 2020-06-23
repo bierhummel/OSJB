@@ -38,65 +38,9 @@ class SQLiteUserDAO implements UserDAO {
             
             //TODO: MUSS GEFIXT WERDEN!
             if (password_verify($input_pw, $pw_in_db)) {
-                /*id
-                $id = "select id from user where mail = :mail";
-                $stmt = $db->prepare($id);
-                $stmt->bindParam(':mail', $input_mail);  
-                $stmt->execute();
-                $id_in_db = $stmt->fetchColumn();
-                $id_in_db = intval($id_in_db);*/
-                //unternehmensname
-                $uname = "select uname from user where mail = :mail";
-                $stmt = $db->prepare($uname);
-                $stmt->bindParam(':mail', $input_mail);  
-                $stmt->execute();
-                $uname = $stmt->fetchColumn();   
-                //vorname
-                $vname = "select vname from user where mail = :mail";
-                $stmt = $db->prepare($vname);
-                $stmt->bindParam(':mail', $input_mail);  
-                $stmt->execute();
-                $vname = $stmt->fetchColumn();               
-                //nachname
-                $nname = "select nname from user where mail = :mail";
-                $stmt = $db->prepare($nname);
-                $stmt->bindParam(':mail', $input_mail);  
-                $stmt->execute();
-                $nname = $stmt->fetchColumn();   
-                //mail
-                $mail = "select mail from user where mail = :mail";
-                $stmt = $db->prepare($mail);
-                $stmt->bindParam(':mail', $input_mail);  
-                $stmt->execute();
-                $mail = $stmt->fetchColumn();   
-                //strasse
-                $strasse = "select strasse from user where mail = :mail";
-                $stmt = $db->prepare($strasse);
-                $stmt->bindParam(':mail', $input_mail);  
-                $stmt->execute();
-                $strasse = $stmt->fetchColumn();
-                //hausnr
-                $hausnr = "select hausnr from user where mail = :mail";
-                $stmt = $db->prepare($hausnr);
-                $stmt->bindParam(':mail', $input_mail);  
-                $stmt->execute();
-                $hausnr = $stmt->fetchColumn();
-                //plz
-                $plz = "select plz from user where mail = :mail";
-                $stmt = $db->prepare($plz);
-                $stmt->bindParam(':mail', $input_mail);  
-                $stmt->execute();
-                $plz = $stmt->fetchColumn();
-                //stadt
-                $stadt = "select stadt from user where mail = :mail";
-                $stmt = $db->prepare($stadt);
-                $stmt->bindParam(':mail', $input_mail);  
-                $stmt->execute();
-                $stadt = $stmt->fetchColumn();                
-                
-                //array bilden
-                $user = array("uname" => $uname, "vorname" => $vname, "nachname" => $nname, "mail" => $mail, "strasse" => $strasse, "hausnr" => $hausnr, "plz" => $plz, "stadt" => $stadt);
-                return $user;
+                $stmt = $db->prepare("select * from user WHERE mail = ?");
+                $user = $stmt->execute(array($input_mail));   
+                return $user;             
             } 
             else {
                 return null;
@@ -148,59 +92,11 @@ class SQLiteUserDAO implements UserDAO {
             
             //rückgabewerte auslesen (mit ggf. geändertet E-Mail)
             //unternehmensname
-            $uname = "select uname from user where mail = :mail";
-            $stmt = $db->prepare($uname);
-            $stmt->bindParam(':mail', $updated_user["new_email"]);  
-            $stmt->execute();
-            $uname = $stmt->fetchColumn();   
-            //vorname
-            $vname = "select vname from user where mail = :mail";
-            $stmt = $db->prepare($vname);
-            $stmt->bindParam(':mail', $updated_user["new_email"]);  
-            $stmt->execute();
-            $vname = $stmt->fetchColumn();               
-            //nachname
-            $nname = "select nname from user where mail = :mail";
-            $stmt = $db->prepare($nname);
-            $stmt->bindParam(':mail', $updated_user["new_email"]);  
-            $stmt->execute();
-            $nname = $stmt->fetchColumn();   
-            //mail
-            $mail = "select mail from user where mail = :mail";
-            $stmt = $db->prepare($mail);
-            $stmt->bindParam(':mail', $updated_user["new_email"]);  
-            $stmt->execute();
-            $mail = $stmt->fetchColumn();   
-            //strasse
-            $strasse = "select strasse from user where mail = :mail";
-            $stmt = $db->prepare($strasse);
-            $stmt->bindParam(':mail', $updated_user["new_email"]);  
-            $stmt->execute();
-            $strasse = $stmt->fetchColumn();
-            //hausnr
-            $hausnr = "select hausnr from user where mail = :mail";
-            $stmt = $db->prepare($hausnr);
-            $stmt->bindParam(':mail', $updated_user["new_email"]);  
-            $stmt->execute();
-            $hausnr = $stmt->fetchColumn();
-            //plz
-            $plz = "select plz from user where mail = :mail";
-            $stmt = $db->prepare($plz);
-            $stmt->bindParam(':mail', $updated_user["new_email"]);  
-            $stmt->execute();
-            $plz = $stmt->fetchColumn();
-            //stadt
-            $stadt = "select stadt from user where mail = :mail";
-            $stmt = $db->prepare($stadt);
-            $stmt->bindParam(':mail', $updated_user["new_email"]);  
-            $stmt->execute();
-            $stadt = $stmt->fetchColumn();                
-
-            //array bilden
-            $user = array("uname" => $uname, "vorname" => $vname, "nachname" => $nname, "mail" => $mail, "strasse" => $strasse, "hausnr" => $hausnr, "plz" => $plz, "stadt" => $stadt);
+            $stmt = $db->prepare("select * from user WHERE mail = ?");
+            $user = $stmt->execute(array($updated_user["new_email"]));   
+            return $user;                        
             
-            $db = NULL;  
-            return $user;
+            
         } 
         catch(PDOException $e) {
             // Print PDOException message
