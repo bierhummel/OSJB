@@ -265,7 +265,7 @@ class SQLiteJobDAO implements JobDAO {
         try{            
             $id = "select id from user where mail = :mail";
             $stmt = $db->prepare($id);
-            $stmt->bindParam(':mail', $user_email);  
+            $stmt->bindParam(':mail', $user_mail);  
             $stmt->execute();
             $id = $stmt->fetchColumn();
 
@@ -273,7 +273,7 @@ class SQLiteJobDAO implements JobDAO {
             $stmt = $db->prepare("select * from jobangebot where user_id = ?");
             $stmt->execute(array($id));
             $jobs = $stmt->fetchAll(); 
-
+            
             return $jobs;
 }
      catch(PDOException $e) {
@@ -291,16 +291,17 @@ class SQLiteJobDAO implements JobDAO {
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
         try{         
             
-            
             $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
             $stmt = $db->prepare("select * from jobangebot where id = ?");
             $stmt->execute(array($job_id));
-            $job = $stmt->fetch();       
+            $job = $stmt->fetch();     
+            
+            return $job;
 }
-     catch(PDOException $e) {
-                    // Print PDOException message
-                    echo $e->getMessage();
-                }    
+        catch(PDOException $e) {
+            // Print PDOException message
+            echo $e->getMessage();
+        }    
     } 
         
         

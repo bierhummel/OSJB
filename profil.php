@@ -191,7 +191,7 @@ include('php/calc-job.php');
                 ?>
 
                 <div class="border">
-                    <a class="mr-3" href="jobangebot-anzeigen.php?id=<?php echo($id)?>"> <?php echo($bez)?></a>
+                    <a class="mr-3" href="jobangebot-anzeigen.php?id=<?php echo($id)?>"> <?php echo($titel)?></a>
                     
                 <!--Inhaltsreduzierung
                     (Datum an dem Jobangebot erstellt wurde)

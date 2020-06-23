@@ -31,13 +31,19 @@
     
     //Liste der Jobs eines Users laden
     if($_SERVER['PHP_SELF'] == "/projekte/osjb/profil.php"){
-        
         $jobs = $JobDAO->loadJobsOfUser($_SESSION["mail"]);  
-        
-        echo $_SERVER['PHP_SELF'];
-        var_dump($jobs);
-        exit;
-        
+    }
+
+    //Einzelnes Jobangebot laden
+    if($_SERVER['PHP_SELF'] == "/projekte/osjb/jobangebot-anlegen.php" || $_SERVER['PHP_SELF'] == "/projekte/osjb/jobangebot-anzeigen.php" ){
+        $jobs = $JobDAO->loadJob($request_checked["id"]); 
+        extract($jobs);
+    }
+
+    //Jobs entsprechend der Suchkriteren der Inputfelder laden
+    if($_SERVER['PHP_SELF'] == "/projekte/osjb/suchergebnisse.php"){
+        $jobs = $JobDAO->loadJobs($request_checked); 
+        extract($jobs);
     }
     
 
@@ -82,14 +88,7 @@
 
 
 //Erzeugung von Ausgabedaten
-    
 
-    //wird nach job id gesucht und existiert dieser job?
-    $job_found = false;
-    if($id_set === true && $jobs != null && isset(array_values($jobs)[0]["id"])){
-        $job_found = true; 
-        extract(array_values($jobs)[0]);
-    }
 
 
 //Unerlaubter oder fehlerhafter Aufruf?
