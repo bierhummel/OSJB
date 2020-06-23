@@ -44,7 +44,18 @@ include('php/calc-job.php');
  <!--Durch überprüfung von $_SESSION["update"] = "failed"; prüfen ob update fehlgeschlagen ist -> meldung ausgeben und $_SESSION["update"] auf "false" ändern-->
                 
                 <form action="php/config-reg.php" method="post">
-                    <h3 class="center mb-3">Profil von <?php echo($_SESSION["vorname"] . " " . $_SESSION["nachname"]) ?> </h3>
+                    <h3 class="center mb-5">Profil von <?php echo($_SESSION["vorname"] . " " . $_SESSION["nachname"]) ?> </h3>
+                    
+                    <!--Rückmeldung zum Update übergangsweise hier anzeigen-->
+                    <p>
+                        <?php if (isset ($_SESSION["update"]) ) {
+                            if($_SESSION["update"] == "fail") { ?>
+                                Fehler beim Update. (Übergangslösung)
+                            <?php } elseif ($_SESSION["update"] == "success") { ?>
+                                Nutzerdaten erfolgreich aktualisiert. (Übergangslösung)
+                            <?php } $_SESSION["update"] = ""; } 
+                        ?>
+                    </p>
                     
                     <div class="row form-group">
                         <div class="col">
@@ -91,7 +102,8 @@ include('php/calc-job.php');
                         </div>
                     </div>
 
-                    <!--passwort ändern später
+                    <!--passwort ändern später-->
+                    <!--
                     <div class="row form-group">                        
                         <div class="col-sm">
                             <label for="password">Passwort:</label>
