@@ -108,27 +108,6 @@ class SQLiteJobDAO implements JobDAO {
             $stmt->bindParam(':zeitintensitaet', $intensitaet); //
             $stmt->execute();
             
-            
-            
-            
-            
-//            $beschaeftigungsart;
-//            $fachrichtung;
-//            $intensitaet;
-//            $jobbezeichnung;
-//            $beginn;
-//            $link;
-//            $bachelor;
-//            $im_bachelor;
-//            $master;
-//            $im_master;
-//            $ausbildung;
-//            $beschreibung;           
-            
-            
-            
-            
-            
         } catch(PDOException $e) {
                     // Print PDOException message
                     echo $e->getMessage();
