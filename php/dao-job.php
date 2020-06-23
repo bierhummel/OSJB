@@ -250,7 +250,7 @@ class SQLiteJobDAO implements JobDAO {
     
     
     public function loadJobsOfUser($user_mail){
-        $database = "../database/database.db";
+        $database = "database/database.db";
         $db = new PDO('sqlite:' . $database);
         // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
@@ -270,7 +270,7 @@ class SQLiteJobDAO implements JobDAO {
     
     
     public function loadJob($job_id){
-        $database = "../database/database.db";
+        $database = "database/database.db";
         $db = new PDO('sqlite:' . $database);
         // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
