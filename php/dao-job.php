@@ -20,25 +20,43 @@ class SQLiteJobDAO implements JobDAO {
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
         $user = null; //Array mit allen wichtigen Informationen des Users (z.b. keine id kein PW)
         try{
-            $intensitaet = '';
+            //Variablen
             
             
             
+            
+            
+            //ID aus der DB holen
             $id= "select id from user where mail = :mail";
             $stmt = $db->prepare($id);
             $stmt->bindParam(':id', $user_email);  
             $id = $stmt->fetchColumn();
-            if($job[teilzeit] == 'Teilzeit'){
-                $intensitaet = $job[teilzeit];
+            
+            //Beschäftigungsart
+            $beschaeftigungsart = $job['art'];
+            //Fachrichtung
+            $fachrichtung = $job['fachrichtung'];
+            //Zeitintesität
+            $intensitaet = '';
+            if($job['teilzeit'] == 'Teilzeit'){
+                $intensitaet = $job['teilzeit'];
             }
-            elseif($job[vollzeit] == 'Vollzeit'){
-                $intensitaet = $job[vollzeit];
+            elseif($job['vollzeit'] == 'Vollzeit'){
+                $intensitaet = $job['vollzeit'];
             }
             else {
                 $intensitaet = $job['20h'];
             }
-            
-            var_dump($intensitaet);
+            //Jobbezeichnung
+            $jobbezeichnung = $job['bez'];
+            //Frühester Beginn (Erstmal String, wird bei Refactoring der DB geändert)
+            $beginn = $job['jdate'];
+            //Link zur direkten Bewerbung 
+            $link = $job['blink'];
+            if($link == ''){
+                $link = NULL;
+            }
+            var_dump($link);
             exit;
             
             
