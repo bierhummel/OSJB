@@ -123,8 +123,108 @@ class SQLiteJobDAO implements JobDAO {
     
     //erhält array mit inputwerten von jobangebot-anlegen.php und gibt true/false zurück
     public function updateJob($job){
-        
-    }
+        //TODO: job_id muss noch mit übergeben werden. Übergangslösung:
+       // $job_id = 4;
+        $database = "../database/database.db";
+        $db = new PDO('sqlite:' . $database);
+        // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
+        $user = null; //Array mit allen wichtigen Informationen des Users (z.b. keine id kein PW)
+
+        try{ 
+            // Default: Anzeige ist aktiv TODO: Das soll vom User noch verändert werden können?
+            $status = 1;
+            //TODO: Titel, Strasse, Hausnummer, PLZ und Stadt werden noch nicht abgefragt
+            $titel = NULL;
+            $strasse = NULL;
+            $hausnr = NULL;
+            $plz = NULL;
+            $stadt = NULL;
+            
+            //Beschäftigungsart
+            $beschaeftigungsart = $job['art'];
+            //Fachrichtung
+            $fachrichtung = $job['fachrichtung'];
+            //Zeitintesität
+            $intensitaet = '';
+            if($job['teilzeit'] == 'Teilzeit'){
+                $intensitaet = $job['teilzeit'];
+            }
+            elseif($job['vollzeit'] == 'Vollzeit'){
+                $intensitaet = $job['vollzeit'];
+            }
+            else {
+                $intensitaet = $job['20h'];
+            }
+            //Jobbezeichnung
+            $jobbezeichnung = $job['bez'];
+            //Frühester Beginn (Erstmal String, wird bei Refactoring der DB geändert)
+            $beginn = $job['jdate'];
+            //Link zur direkten Bewerbung 
+            $link = $job['blink'];
+            //Wenn kein Link vorhanden: Setze leeren String auf NULL für die DB
+            if($link == ''){
+                $link = NULL;
+            }
+            //Qualifikation (funkioniert nicht)
+            $bachelor = 0;
+            $im_bachelor = 0;
+            $master = 0;
+            $im_master = 0;
+            $ausbildung = 0;
+            if($job['abachelor'] == 'bachelor'){
+                $bachelor = 1;
+            }
+            if($job['ibachelor'] == 'ibachelor'){
+                $im_bachelor = 1;
+            }
+            if($job['amaster'] == 'master'){
+                $master = 1;
+            }
+            if($job['imaster'] == 'imaster'){
+                $im_master = 1;
+            }
+            if($job['ausbildung'] == 'ausbildung'){
+                $ausbildung = 1;
+            }
+            //Individuelle Beschreibung
+            $beschreibung = $job['message'];
+            if ($beschreibung == ''){
+                $beschreibung = NULL;
+            }
+            //SQL Update        
+            $updatedJob = "update jobangebot set status = :status, titel = :titel, strasse = :strasse, hausnr = :hausnr, plz = :plz, stadt = :stadt, beschreibung = :beschreibung, art = :art, zeitintensitaet = :zeitintensitaet, im_bachelor = :im_bachelor, bachelor = :bachelor, im_master = :im_master, master = :master, ausbildung = :ausbildung, fachrichtung = :fachrichtung, link = :link, beschaeftigungsbeginn = :beschaeftigungsbeginn";
+            
+            $stmt = $db->prepare($newJob);
+            
+            $stmt->bindParam(':status', $status);  
+            $stmt->bindParam(':titel', $titel); // n.v.   
+            $stmt->bindParam(':strasse', $strasse);  // n.v.      
+            $stmt->bindParam(':hausnr', $hausnr); // n.v.   
+            $stmt->bindParam(':plz', $plz); // n.v.   
+            $stmt->bindParam(':stadt', $stadt); // n.v.     
+            $stmt->bindParam(':beschreibung', $beschreibung); 
+            $stmt->bindParam(':art', $beschaeftigungsart);   
+            $stmt->bindParam(':im_bachelor', $im_bachelor); 
+            $stmt->bindParam(':bachelor', $bachelor);
+            $stmt->bindParam(':im_master', $im_master);    
+            $stmt->bindParam(':master', $master);    
+            $stmt->bindParam(':ausbildung', $ausbildung);
+            $stmt->bindParam(':fachrichtung', $fachrichtung); 
+            $stmt->bindParam(':link', $link);       
+            $stmt->bindParam(':beschaeftigungsbeginn', $beginn);  
+            $stmt->bindParam(':zeitintensitaet', $intensitaet);
+            $stmt->execute();
+            
+            return true;;
+            
+        } catch(PDOException $e) {
+                    // Print PDOException message
+                    echo $e->getMessage();
+                }      
+        return false;
+    }     
+    
     
     //erhält entweder array mit inputwerten von index (oder später von filterbox), die e-mail eines nutzers oder eine jobid und gibt zwei-dimensionales array mit den gefundenen jobangeboten als array zurück 
     public function loadJobs($suchkrit){
