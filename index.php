@@ -37,37 +37,42 @@ session_start();
             <!--später die Breite aller Inputfelder einheitlich gestalten, bei dieser Abgabe zeitlich nicht geschafft-->
             <div class="search">
                 <form action="suchergebnisse.php" method="get">
-                    <p class="center"><label>
-                            <input type="text" name="plz" class="form-control form-control-lg" maxlength="5" value="" placeholder="Deine PLZ" required autofocus>
-                            <!--Später mit pattern Attribut absichern?-->
-                        </label></p>
+                    <h4 class="mb-5">
+                        <label for="plz">PLZ: </label>
+                        <input type="text" id="plz" name="plz" class="form-control form-control-lg" maxlength="5" value="" placeholder="Deine PLZ" required autofocus>
+                        <!--Später mit pattern Attribut absichern?-->
+                    </h4>
 
-                    <p class="center"><label>
-                            <select name="umkreis" class="custom-select custom-select-lg" size="1" required>
-                                <option value="">Umkreis auswählen</option>
-                                <option value="5">5 km</option>
-                                <option value="10">10 km</option>
-                                <option value="15">15 km</option>
-                                <option value="20">20 km</option>
-                                <option value="25">25 km</option>
-                                <option value="30">30 km</option>
-                                <option value="50+">50+ km</option>
-                            </select>
-                        </label></p>
+                    <h4 class="mb-5">
+                        <label for="umkreis">Umkreis: </label>
+                        <select id="umkreis" name="umkreis" class="custom-select custom-select-lg" size="1" required>
+                            <option value="">Umkreis auswählen</option>
+                            <option value="5">5 km</option>
+                            <option value="10">10 km</option>
+                            <option value="15" selected>15 km</option>
+                            <option value="20">20 km</option>
+                            <option value="25">25 km</option>
+                            <option value="30">30 km</option>
+                            <option value="50+">50+ km</option>
+                        </select>
+                    </h4>
 
-                    <p class="center"><label>
-                            <select name="fachrichtung" class="custom-select custom-select-lg" size="1">
-                                <option value="">Fachrichtung auswählen</option>
-                                <option value="fr1">Bildungs- und Sozialwissenschaften</option>
-                                <option value="fr2">Informatik, Wirtschafts- und Rechtswissenschaften</option>
-                                <option value="fr3">Sprach- und Kulturwissenschaften</option>
-                                <option value="fr4">Human- und Gesellschaftswissenschaften</option>
-                                <option value="fr5">Mathematik und Naturwissenschaften</option>
-                                <option value="fr6">Medizin und Gesundheitswissenschaften</option>
-                            </select>
-                        </label></p>
+                    <h4 class="mb-5">
+                        <label for="fachrichtung">Fachrichtung:</label>
+                        <select id="fachrichtung" name="fachrichtung" class="custom-select custom-select-lg" size="1">
+                            <option value="">Fachrichtung auswählen</option>
+                            <option value="fr1">Bildungs- und Sozialwissenschaften</option>
+                            <option value="fr2">Informatik, Wirtschafts- und Rechtswissenschaften</option>
+                            <option value="fr3">Sprach- und Kulturwissenschaften</option>
+                            <option value="fr4">Human- und Gesellschaftswissenschaften</option>
+                            <option value="fr5">Mathematik und Naturwissenschaften</option>
+                            <option value="fr6">Medizin und Gesundheitswissenschaften</option>
+                        </select>
+                    </h4>
 
-                    <p class="center"> <input type="submit" value="Los!" class="btn btn-primary"></p>
+                    <h4 class=""> 
+                        <input type="submit" value="Suche starten!" class="btn btn-primary">
+                    </h4>
                 </form>
             </div>
             <div>
