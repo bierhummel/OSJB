@@ -21,7 +21,7 @@ try{
     //Kreieren der Tables User und Jobangebot    
     $db->exec("create table if not exists user (id integer primary key, uname text NOT NULL, vname text NOT NULL, nname text NOT NULL, password text NOT NULL, mail text NOT NULL, strasse text, hausnr text, plz text, stadt text, verified integer NOT NULL, mail_verified integer NOT NULL)");
     
-    $db->exec("create table if not exists jobangebot (id integer primary key, user_id integer, status integer NOT NULL, titel text, strasse text, hausnr text, plz text, stadt text, beschreibung text, art text, im_bachelor integer NOT NULL, bachelor integer NOT NULL, im_master integer NOT NULL, master integer NOT NULL, ausbildung integer NOT NULL, fachrichtung text, logo blob, link text, beschaeftigungsbeginn text, FOREIGN KEY (user_id) REFERENCES user(id))");
+    $db->exec("create table if not exists jobangebot (id integer primary key, user_id integer, status integer NOT NULL, titel text, strasse text, hausnr text, plz text, stadt text, beschreibung text, art text, zeitintensitaet text, im_bachelor integer NOT NULL, bachelor integer NOT NULL, im_master integer NOT NULL, master integer NOT NULL, ausbildung integer NOT NULL, fachrichtung text, logo blob, link text, beschaeftigungsbeginn text, FOREIGN KEY (user_id) REFERENCES user(id))");
 
     //Wenn es vorher keine DB gab: 
     //Erstellung von 3 Testunternehmen und 4 Testjobangeboten dieser Unternehmen
@@ -125,7 +125,7 @@ try{
 
         //Erstellung der Jobs   
         //Job1
-        $job = "insert into jobangebot (user_id, status, titel, strasse, hausnr, plz, stadt, beschreibung, art, im_bachelor, bachelor, im_master, master, ausbildung, fachrichtung, link, beschaeftigungsbeginn) values (:uid, :status, :titel, :strasse, :hausnr, :plz, :stadt, :beschreibung, :art, :im_bachelor, :bachelor, :im_master, :master, :ausbildung, :fachrichtung, :link, :beschaeftigungsbeginn)";
+        $job = "insert into jobangebot (user_id, status, titel, strasse, hausnr, plz, stadt, beschreibung, art, zeitintensitaet, im_bachelor, bachelor, im_master, master, ausbildung, fachrichtung, link, beschaeftigungsbeginn) values (:uid, :status, :titel, :strasse, :hausnr, :plz, :stadt, :beschreibung, :art, :zeitintensitaet, :im_bachelor, :bachelor, :im_master, :master, :ausbildung, :fachrichtung, :link, :beschaeftigungsbeginn)";
         $uid = 1;
         $status = 0;
         $titel = "Werden Sie Teil des Ganzen";
@@ -134,7 +134,7 @@ try{
         $plz = "21335";
         $stadt = "Lüneburg";
         $beschreibung = "Ein Testangebot nur für Sie!";
-        $art = "Vollzeit";
+        $art = "Praktikum";
         $im_bachelor = 0;
         $bachelor = 0;
         $im_master = 0;
@@ -143,6 +143,7 @@ try{
         $fachrichtung = "Informatik";
         $link = "https://www.osjb.de/";
         $beschaeftigungsbeginn = "20.07.2020";
+        $zeitintensitaet = '20h';
 
         $stmt = $db->prepare($job);
         $stmt->bindParam(':uid', $uid); 
@@ -162,11 +163,12 @@ try{
         $stmt->bindParam(':fachrichtung', $fachrichtung);    
         $stmt->bindParam(':link', $link);       
         $stmt->bindParam(':beschaeftigungsbeginn', $beschaeftigungsbeginn);  
+        $stmt->bindParam(':zeitintensitaet', $zeitintensitaet);  
         $stmt->execute();
 
         
         //Job2
-        $job1 = "insert into jobangebot (user_id, status, titel, strasse, hausnr, plz, stadt, beschreibung, art, im_bachelor, bachelor, im_master, master, ausbildung, fachrichtung, link, beschaeftigungsbeginn) values (:uid, :status, :titel, :strasse, :hausnr, :plz, :stadt, :beschreibung, :art, :im_bachelor, :bachelor, :im_master, :master, :ausbildung, :fachrichtung, :link, :beschaeftigungsbeginn)";
+        $job1 = "insert into jobangebot (user_id, status, titel, strasse, hausnr, plz, stadt, beschreibung, art, zeitintensitaet, im_bachelor, bachelor, im_master, master, ausbildung, fachrichtung, link, beschaeftigungsbeginn) values (:uid, :status, :titel, :strasse, :hausnr, :plz, :stadt, :beschreibung, :art, :zeitintensitaet, :im_bachelor, :bachelor, :im_master, :master, :ausbildung, :fachrichtung, :link, :beschaeftigungsbeginn)";
 
         $uid = 2;
         $status = 1;
@@ -185,6 +187,7 @@ try{
         $fachrichtung = "Controlling";
         $link = "https://www.ewe-sucht-dich.de/";
         $beschaeftigungsbeginn = "30.10.2020";
+        $zeitintensitaet = 'Vollzeit';
 
         $stmt = $db->prepare($job1);  
         $stmt->bindParam(':uid', $uid);  
@@ -204,11 +207,12 @@ try{
         $stmt->bindParam(':fachrichtung', $fachrichtung);    
         $stmt->bindParam(':link', $link);       
         $stmt->bindParam(':beschaeftigungsbeginn', $beschaeftigungsbeginn);  
+        $stmt->bindParam(':zeitintensitaet', $zeitintensitaet); 
         $stmt->execute();
 
         
         //Job3
-        $job2 = "insert into jobangebot (user_id, status, titel, strasse, hausnr, plz, stadt, beschreibung, art, im_bachelor, bachelor, im_master, master, ausbildung, fachrichtung, link, beschaeftigungsbeginn) values (:uid, :status, :titel, :strasse, :hausnr, :plz, :stadt, :beschreibung, :art, :im_bachelor, :bachelor, :im_master, :master, :ausbildung, :fachrichtung, :link, :beschaeftigungsbeginn)";
+        $job2 = "insert into jobangebot (user_id, status, titel, strasse, hausnr, plz, stadt, beschreibung, art, zeitintensitaet, im_bachelor, bachelor, im_master, master, ausbildung, fachrichtung, link, beschaeftigungsbeginn) values (:uid, :status, :titel, :strasse, :hausnr, :plz, :stadt, :beschreibung, :art, :zeitintensitaet, :im_bachelor, :bachelor, :im_master, :master, :ausbildung, :fachrichtung, :link, :beschaeftigungsbeginn)";
 
         $uid = 2;
         $status = 1;
@@ -218,7 +222,7 @@ try{
         $plz = "06198";
         $stadt = "Salzatal";
         $beschreibung = "Erlebe mit uns Sachen, die ohne uns eventuell langweilig wären.";
-        $art = "Vollzeit";
+        $art = "Aushilfe";
         $im_bachelor = 0;
         $bachelor = 1;
         $im_master = 0;
@@ -227,6 +231,8 @@ try{
         $fachrichtung = "Informatik";
         $link = "https://www.ewe-salzatal.de/";
         $beschaeftigungsbeginn = "30.08.2020";
+        $zeitintensitaet = 'Teilzeit';
+        
 
         $stmt = $db->prepare($job2);   
         $stmt->bindParam(':uid', $uid);  
@@ -246,11 +252,12 @@ try{
         $stmt->bindParam(':fachrichtung', $fachrichtung);    
         $stmt->bindParam(':link', $link);       
         $stmt->bindParam(':beschaeftigungsbeginn', $beschaeftigungsbeginn);  
+        $stmt->bindParam(':zeitintensitaet', $zeitintensitaet); 
         $stmt->execute();
 
         
         //Job4
-        $job3 = "insert into jobangebot (user_id, status, titel, strasse, hausnr, plz, stadt, beschreibung, art, im_bachelor, bachelor, im_master, master, ausbildung, fachrichtung, link, beschaeftigungsbeginn) values (:uid, :status, :titel, :strasse, :hausnr, :plz, :stadt, :beschreibung, :art, :im_bachelor, :bachelor, :im_master, :master, :ausbildung, :fachrichtung, :link, :beschaeftigungsbeginn)";
+        $job3 = "insert into jobangebot (user_id, status, titel, strasse, hausnr, plz, stadt, beschreibung, art, zeitintensitaet, im_bachelor, bachelor, im_master, master, ausbildung, fachrichtung, link, beschaeftigungsbeginn) values (:uid, :status, :titel, :strasse, :hausnr, :plz, :stadt, :beschreibung, :art, :zeitintensitaet, :im_bachelor, :bachelor, :im_master, :master, :ausbildung, :fachrichtung, :link, :beschaeftigungsbeginn)";
 
         $uid = 3;
         $status = 1;
@@ -260,7 +267,7 @@ try{
         $plz = "68159";
         $stadt = "Mannheim";
         $beschreibung = "Wir suchen genau dich, damit uns hilfst, erfolgreicher zu werden.";
-        $art = "Werkstudent";
+        $art = "Minijob";
         $im_bachelor = 1;
         $bachelor = 0;
         $im_master = 1;
@@ -269,6 +276,8 @@ try{
         $fachrichtung = "Informatik";
         $link = "https://www.telekom-in-mannheim.de/";
         $beschaeftigungsbeginn = "12.01.2021";
+        $zeitintensitaet = '20h';
+        
 
         $stmt = $db->prepare($job3);  
         $stmt->bindParam(':uid', $uid);  
@@ -287,7 +296,8 @@ try{
         $stmt->bindParam(':ausbildung', $ausbildung);
         $stmt->bindParam(':fachrichtung', $fachrichtung);    
         $stmt->bindParam(':link', $link);       
-        $stmt->bindParam(':beschaeftigungsbeginn', $beschaeftigungsbeginn);  
+        $stmt->bindParam(':beschaeftigungsbeginn', $beschaeftigungsbeginn); 
+        $stmt->bindParam(':zeitintensitaet', $zeitintensitaet); 
         $stmt->execute();    
     }
 }
