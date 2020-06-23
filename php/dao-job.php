@@ -25,7 +25,11 @@ class SQLiteJobDAO implements JobDAO {
             // Default: Anzeige ist aktiv
             $status = 1;
             //TODO: Titel, Strasse, Hausnummer, PLZ und Stadt werden noch nicht abgefragt
-            $default = NULL;
+            $titel = NULL;
+            $strasse = NULL;
+            $hausnr = NULL;
+            $plz = NULL;
+            $stadt = NULL;
             //ID aus der DB holen
             $id = "select id from user where mail = :mail";
             $stmt = $db->prepare($id);
@@ -87,25 +91,29 @@ class SQLiteJobDAO implements JobDAO {
             $newJob = "insert into jobangebot (user_id, status, titel, strasse, hausnr, plz, stadt, beschreibung, art, zeitintensitaet, im_bachelor, bachelor, im_master, master, ausbildung, fachrichtung, link, beschaeftigungsbeginn) values (:uid, :status, :titel, :strasse, :hausnr, :plz, :stadt, :beschreibung, :art, :zeitintensitaet, :im_bachelor, :bachelor, :im_master, :master, :ausbildung, :fachrichtung, :link, :beschaeftigungsbeginn)";
             $stmt = $db->prepare($newJob);
             
-            $stmt->bindParam(':uid', $id);  //
-            $stmt->bindParam(':status', $status);  //
-            $stmt->bindParam(':titel', $default); // n.v.   
-            $stmt->bindParam(':strasse', $default);  // n.v.      
-            $stmt->bindParam(':hausnr', $default); // n.v.   
-            $stmt->bindParam(':plz', $default); // n.v.   
-            $stmt->bindParam(':stadt', $default); // n.v.     
-            $stmt->bindParam(':beschreibung', $beschreibung); //
-            $stmt->bindParam(':art', $beschaeftigungsart);   //
-            $stmt->bindParam(':im_bachelor', $im_bachelor);//  
-            $stmt->bindParam(':bachelor', $bachelor);//
-            $stmt->bindParam(':im_master', $im_master);//    
-            $stmt->bindParam(':master', $master);    //
-            $stmt->bindParam(':ausbildung', $ausbildung);//
-            $stmt->bindParam(':fachrichtung', $fachrichtung);//    
-            $stmt->bindParam(':link', $link);       //
-            $stmt->bindParam(':beschaeftigungsbeginn', $beginn);  //
-            $stmt->bindParam(':zeitintensitaet', $intensitaet); //
+            $stmt->bindParam(':uid', $id);  
+            $stmt->bindParam(':status', $status);  
+            $stmt->bindParam(':titel', $titel); // n.v.   
+            $stmt->bindParam(':strasse', $strasse);  // n.v.      
+            $stmt->bindParam(':hausnr', $hausnr); // n.v.   
+            $stmt->bindParam(':plz', $plz); // n.v.   
+            $stmt->bindParam(':stadt', $stadt); // n.v.     
+            $stmt->bindParam(':beschreibung', $beschreibung); 
+            $stmt->bindParam(':art', $beschaeftigungsart);   
+            $stmt->bindParam(':im_bachelor', $im_bachelor); 
+            $stmt->bindParam(':bachelor', $bachelor);
+            $stmt->bindParam(':im_master', $im_master);    
+            $stmt->bindParam(':master', $master);    
+            $stmt->bindParam(':ausbildung', $ausbildung);
+            $stmt->bindParam(':fachrichtung', $fachrichtung); 
+            $stmt->bindParam(':link', $link);       
+            $stmt->bindParam(':beschaeftigungsbeginn', $beginn);  
+            $stmt->bindParam(':zeitintensitaet', $intensitaet);
             $stmt->execute();
+            
+            $new_job = array("status" => $status, "titel" => $titel, "strasse" => $strasse, "hausnr" => $hausnr, "plz" => $plz, "stadt" => $stadt, "beschreibung" => $beschreibung, "art" => $beschaeftigungsart, "ibachelor" => $im_bachelor, "bachelor" => $bachelor, "imaster" => $im_master, "master" => $master, "ausbildung" => $ausbildung, "fachrichtung" => $fachrichtung, "link" => $link, "beginn" => $beginn, "intensitaet" => $intensitaet);
+            
+            return new_job;
             
         } catch(PDOException $e) {
                     // Print PDOException message
@@ -115,7 +123,7 @@ class SQLiteJobDAO implements JobDAO {
     
     //erhält array mit inputwerten von jobangebot-anlegen.php und gibt true/false zurück
     public function updateJob($job){
-        
+
     }
     
     //erhält entweder array mit inputwerten von index (oder später von filterbox), die e-mail eines nutzers oder eine jobid und gibt zwei-dimensionales array mit den gefundenen jobangeboten als array zurück 
@@ -125,8 +133,23 @@ class SQLiteJobDAO implements JobDAO {
     
     //erhält job_id und gibt true/false zurück
     public function deleteJob($job_id){
-        
-    }
+        $database = "../database/database.db";
+        $db = new PDO('sqlite:' . $database);
+        // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
+
+        try{
+            $delJob = "delete from jobangebot where id = :id";
+            $stmt = $db->prepare($delJob);
+            $stmt->bindParam(':uid', $id);
+            $stmt->execute();
+            return true;
+    } catch(PDOException $e) {
+                    // Print PDOException message
+                    echo $e->getMessage();
+                }    
+        return false;
+    }     
 }
 
 
