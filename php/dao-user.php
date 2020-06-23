@@ -37,7 +37,6 @@ class SQLiteUserDAO implements UserDAO {
      
             $pw_in_db = $stmt->fetchColumn(); //hier brauchen wir laut Roman was anderes glaub ich
             
-            //TODO: MUSS GEFIXT WERDEN!
             if (password_verify($input_pw, $pw_in_db)) {
                 $stmt = $db->prepare("select * from user WHERE mail = ?");
                 $stmt->execute(array($input_mail));

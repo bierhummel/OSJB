@@ -22,6 +22,8 @@ class SQLiteJobDAO implements JobDAO {
         $user = null; //Array mit allen wichtigen Informationen des Users (z.b. keine id kein PW)
 
         try{
+
+            
             // Default: Anzeige ist aktiv
             $status = 1;
             //TODO: Titel, Strasse, Hausnummer, PLZ und Stadt werden noch nicht abgefragt
@@ -241,10 +243,11 @@ class SQLiteJobDAO implements JobDAO {
         $db = new PDO('sqlite:' . $database);
         // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
-        try{
+        try{            
+            $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
             $stmt = $db->prepare("SELECT * FROM jobangebot WHERE id = ?");
-            $job = $stmt->execute(array($job_id));   
-            return $job;
+            $stmt->execute(array($job_id));
+            $job = $stmt->fetch();       
 }
      catch(PDOException $e) {
                     // Print PDOException message
