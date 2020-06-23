@@ -224,7 +224,7 @@ class SQLiteJobDAO implements JobDAO {
                 }      
         return false;
     }     
-    }
+    
     
     //erhält entweder array mit inputwerten von index (oder später von filterbox), die e-mail eines nutzers oder eine jobid und gibt zwei-dimensionales array mit den gefundenen jobangeboten als array zurück 
     public function loadJobs($suchkrit){
