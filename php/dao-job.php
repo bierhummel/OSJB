@@ -112,7 +112,7 @@ class SQLiteJobDAO implements JobDAO {
             $stmt->execute();
             
             $new_job = array("status" => $status, "titel" => $titel, "strasse" => $strasse, "hausnr" => $hausnr, "plz" => $plz, "stadt" => $stadt, "beschreibung" => $beschreibung, "art" => $beschaeftigungsart, "ibachelor" => $im_bachelor, "bachelor" => $bachelor, "imaster" => $im_master, "master" => $master, "ausbildung" => $ausbildung, "fachrichtung" => $fachrichtung, "link" => $link, "beginn" => $beginn, "intensitaet" => $intensitaet);
-            
+   
             return new_job;
             
         } catch(PDOException $e) {
@@ -216,7 +216,7 @@ class SQLiteJobDAO implements JobDAO {
             $stmt->bindParam(':zeitintensitaet', $intensitaet);
             $stmt->execute();
             
-            return true;;
+            return true;
             
         } catch(PDOException $e) {
                     // Print PDOException message
@@ -230,6 +230,30 @@ class SQLiteJobDAO implements JobDAO {
     public function loadJobs($suchkrit){
         
     }
+    
+    public function loadJobsOfUser($user_mail){
+        
+        
+    }
+    
+    public function loadJob($job_id){
+        $database = "../database/database.db";
+        $db = new PDO('sqlite:' . $database);
+        // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
+        try{
+            $stmt = $db->prepare("SELECT * FROM jobangebot WHERE id = ?");
+            $job = $stmt->execute(array($job_id));   
+            return $job;
+}
+    } catch(PDOException $e) {
+                    // Print PDOException message
+                    echo $e->getMessage();
+                }    
+    } 
+        
+        
+    
     
     //erhält job_id und gibt true/false zurück
     public function deleteJob($job_id){
