@@ -316,6 +316,7 @@ class SQLiteJobDAO implements JobDAO {
                 }    
         return false;
     }     
+    
 }
 
 
