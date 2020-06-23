@@ -61,12 +61,12 @@ session_start();
                         <label for="fachrichtung">Fachrichtung:</label>
                         <select id="fachrichtung" name="fachrichtung" class="custom-select custom-select-lg" size="1">
                             <option value="">Fachrichtung auswählen</option>
-                            <option value="fr1">Bildungs- und Sozialwissenschaften</option>
-                            <option value="fr2">Informatik, Wirtschafts- und Rechtswissenschaften</option>
-                            <option value="fr3">Sprach- und Kulturwissenschaften</option>
-                            <option value="fr4">Human- und Gesellschaftswissenschaften</option>
-                            <option value="fr5">Mathematik und Naturwissenschaften</option>
-                            <option value="fr6">Medizin und Gesundheitswissenschaften</option>
+                            <option value="Bildungs- und Sozialwissenschaften">Bildungs- und Sozialwissenschaften</option>
+                            <option value="Informatik, Wirtschafts- und Rechtswissenschaften">Informatik, Wirtschafts- und Rechtswissenschaften</option>
+                            <option value="Sprach- und Kulturwissenschaften">Sprach- und Kulturwissenschaften</option>
+                            <option value="Human- und Gesellschaftswissenschaften">Human- und Gesellschaftswissenschaften</option>
+                            <option value="Mathematik und Naturwissenschaften">Mathematik und Naturwissenschaften</option>
+                            <option value="Medizin und Gesundheitswissenschaften">Medizin und Gesundheitswissenschaften</option>
                         </select>
                     </h4>
 
