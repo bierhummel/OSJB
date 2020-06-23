@@ -14,12 +14,36 @@ class SQLiteJobDAO implements JobDAO {
 
     //erhält array mit inputwerten von jobangebot-anlegen.php und gibt true/false zurück
     public function createJob($job, $user_email){
-        var_dump($job[teilzeit]);
-        exit(0);
-        
-        
-        
+        $database = "../database/database.db";
+        $db = new PDO('sqlite:' . $database);
+        // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
+        $user = null; //Array mit allen wichtigen Informationen des Users (z.b. keine id kein PW)
+        try{
+            
+            $id= "select mail from user where id = :id";
+            $stmt = $db->prepare($id);
+            $stmt->bindParam(':id', $user_email);  
+            asdfasdf();
+                exit;
+            if($job[teilzeit] == 'Teilzeit'){
+            
+            }
+            
+            
+            
+            
+        } catch(PDOException $e) {
+                    // Print PDOException message
+                    echo $e->getMessage();
+                }      
     }
+        
+        
+
+        
+        
+    
     
     //erhält array mit inputwerten von jobangebot-anlegen.php und gibt true/false zurück
     public function updateJob($job){
