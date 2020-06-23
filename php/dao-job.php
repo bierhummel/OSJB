@@ -26,11 +26,11 @@ class SQLiteJobDAO implements JobDAO {
             // Default: Anzeige ist aktiv
             $status = 1;
             //TODO: Titel, Strasse, Hausnummer, PLZ und Stadt werden noch nicht abgefragt
-            $titel = NULL;
-            $strasse = NULL;
-            $hausnr = NULL;
-            $plz = NULL;
-            $stadt = NULL;
+            $titel = $job['titel'];
+            $strasse = $job['job_strasse'];
+            $hausnr = $job['job_hausnr'];
+            $plz = $job['job_plz'];
+            $stadt = $job['job_stadt'];
             //ID aus der DB holen
             $id = "select id from user where mail = :mail";
             $stmt = $db->prepare($id);
@@ -112,14 +112,18 @@ class SQLiteJobDAO implements JobDAO {
             $stmt->bindParam(':zeitintensitaet', $intensitaet);
             $stmt->execute();
             
-            $new_job = array("status" => $status, "titel" => $titel, "strasse" => $strasse, "hausnr" => $hausnr, "plz" => $plz, "stadt" => $stadt, "beschreibung" => $beschreibung, "art" => $beschaeftigungsart, "ibachelor" => $im_bachelor, "bachelor" => $bachelor, "imaster" => $im_master, "master" => $master, "ausbildung" => $ausbildung, "fachrichtung" => $fachrichtung, "link" => $link, "beginn" => $beginn, "intensitaet" => $intensitaet);
+            $stmt = $db->query("select id from jobangebot order by id desc limit 1");
+            $jid = intval($stmt->fetchColumn());
+
+            $new_job = array("id" => $jid, "status" => $status, "titel" => $titel, "strasse" => $strasse, "hausnr" => $hausnr, "plz" => $plz, "stadt" => $stadt, "beschreibung" => $beschreibung, "art" => $beschaeftigungsart, "ibachelor" => $im_bachelor, "bachelor" => $bachelor, "imaster" => $im_master, "master" => $master, "ausbildung" => $ausbildung, "fachrichtung" => $fachrichtung, "link" => $link, "beginn" => $beginn, "intensitaet" => $intensitaet);
    
-            return new_job;
             
-        } catch(PDOException $e) {
-                    // Print PDOException message
-                    echo $e->getMessage();
-                }      
+            return $new_job;
+        } 
+        catch(PDOException $e) {
+            // Print PDOException message
+            echo $e->getMessage();
+        }      
     }     
     
     //erhält array mit inputwerten von jobangebot-anlegen.php und gibt true/false zurück

@@ -34,7 +34,7 @@ session_start();*/
     <!--Alles nur anzeigen wenn eingelogt, sonst Fehlermeldung-->
     <?php if(!isset($_SESSION["eingeloggt"]) || $_SESSION["eingeloggt"] != true){ ?>
     
-    <p class="center">Bitte anmelden!</p>
+        <p class="center">Bitte anmelden!</p>
     
     <?php } else { ?>    
 
@@ -61,7 +61,7 @@ session_start();*/
                         </div>
                         <div class="col-md-5 last_td">
                             <label> Jobbezeichnung:
-                                <input type="text" name="bez" maxlength="50" value="<?php if($job_found === true) echo($bez); ?>" placeholder="Jobbezeichnung" required>
+                                <input type="text" name="titel" maxlength="50" value="<?php if($jobs != null) echo($bez); ?>" placeholder="Jobbezeichnung" required>
                             </label>
                         </div>
                     </div>
@@ -123,39 +123,51 @@ session_start();*/
                         </div>
                     </div>
 
-                <!--Inhaltsreduzierung
+                    <!--
+                    <h4 class="center">Informationen zum Unternehmen "<?= $_SESSION["uname"]?>"</h4>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            Firma: <?= $_SESSION["uname"]?>
+                        </div>
+                        <div class="col-md-12 last_td">
+                            Adresse: <?= $_SESSION["strasse"] . " " . $_SESSION["hausnr"] . " " . $_SESSION["plz"] . " " . $_SESSION["stadt"] ?>
+                        </div>
+                    </div>
+                    -->
                     <div class="row">
                         <div class="col-12">
-                            <h6>Falls Arbeitstelle nicht der Hauptfirmensitz (optional): </h6>
+                            <h6>Arbeitstelle: (Wird noch umformatiert) </h6>
                         </div>
-                        !--später vllt. erstmal ausgeblendet und erst nach klick eingeblendet?--
-                        <div class="col-md-5 last_td">
-                            <label>
-                                Adresse der Arbeitsstelle:
-                                <input type="text" name="aadr" value="">
-                            </label>
+                        
+                         <div class="col-md-12">
+                            <label for="job_uname">Unternehmen:</label>
+                            <input type="text" id="job_uname" name="job_uname" value="<?= $_SESSION["uname"]?>">
+                        </div>
+                        <div class="col-md-5">
+                            <label for="job_strasse">Straße:</label>
+                            <input type="text" id="job_strasse" name="job_strasse" value="<?= $_SESSION["strasse"]?>">
+                        </div>
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-5">
+                            <label for="job_hausnr">Hausnummer:</label>
+                            <input type="text" id="job_hausnr" name="job_hausnr" maxlength="5" value="<?= $_SESSION["hausnr"]?>">
+                        </div>
+                        <div class="col-md-5">
+                            <label for="job_plz">PLZ:</label>
+                            <input type="text" for="job_plz" name="job_plz" value="<?= $_SESSION["plz"]?>">
                         </div>
                         <div class="col-md-2">
                         </div>
                         <div class="col-md-5 last_td">
-                            <label>
-                                PLZ der Arbeitsstelle:
-                                <input type="text" name="aplz" maxlength="5" value="">
-                            </label>
+                            <label for="job_stadt">PLZ der Arbeitsstelle:</label>
+                                <input type="text" id="job_stadt" name="job_stadt" maxlength="5" value="<?= $_SESSION["stadt"]?>">
                         </div>
                     </div>
-                -->
 
-                    <h4 class="center">Informationen zum Unternehmen</h4>
 
-                    <div class="row">
-                        <div class="col-md-12 center">
-                            Firma: ABC GmbH
-                        </div>
-                        <div class="col-md-12 center last_td">
-                            Hauptsitz: ABC Straße 123, 55555 Ort
-                        </div>
-                    </div>
+
 
                 <!--Inhaltsreduzierung
                     <div class="row">
