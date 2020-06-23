@@ -53,12 +53,38 @@ class SQLiteJobDAO implements JobDAO {
             $beginn = $job['jdate'];
             //Link zur direkten Bewerbung 
             $link = $job['blink'];
+            //Wenn kein Link vorhanden: Setze leeren String auf NULL für die DB
             if($link == ''){
                 $link = NULL;
             }
-            var_dump($link);
+            //Qualifikation (funkioniert nicht)
+            $bachelor = 0;
+            $im_bachelor = 0;
+            $master = 0;
+            $im_master = 0;
+            $ausbildung = 0;
+            if($job['abachelor'] == 'bachelor'){
+                $bachelor = 1;
+            }
+            if($job['ibachelor'] == 'ibachelor'){
+                $im_bachelor = 1;
+            }
+            if($job['amaster'] == 'master'){
+                $master = 1;
+            }
+            if($job['imaster'] == 'imaster'){
+                $im_master = 1;
+            }
+            if($job['ausbildung'] == 'ausbildung'){
+                $ausbildung = 1;
+            }
+            //Individuelle Beschreibung
+            $beschreibung = $job['message'];
+            if ($beschreibung == ''){
+                $beschreibung = NULL;
+            }
+            var_dump($beschreibung);
             exit;
-            
             
         } catch(PDOException $e) {
                     // Print PDOException message
