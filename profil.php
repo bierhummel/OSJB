@@ -47,7 +47,7 @@ include('php/calc-job.php');
                     <h3 class="center mb-5">Profil von 
                         
                         <?php 
-                            
+                            echo (__FILE__);
                             echo($_SESSION["vname"] . " " . $_SESSION["nname"]); 
                        
                         ?> </h3>

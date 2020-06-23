@@ -26,7 +26,22 @@
 
 
     //Variable mit allen anzuzeigenden Jobangeboten füllen (nicht optimal, wird überarbeitet)
-    $jobs = $JobDAO->loadJobs($request_checked);   
+    //$jobs = $JobDAO->loadJobs($request_checked);   
+
+    
+    //Liste der Jobs eines Users laden
+    if($_SERVER['PHP_SELF'] == "/projekte/osjb/profil.php"){
+        
+        $jobs = $JobDAO->loadJobsOfUser($_SESSION["mail"]);  
+        
+        echo $_SERVER['PHP_SELF'];
+        var_dump($jobs);
+        exit;
+        
+    }
+    
+
+
 
     //Auswertung der Filteroptionen (fehlt noch)
     
