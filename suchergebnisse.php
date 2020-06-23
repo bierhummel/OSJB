@@ -209,7 +209,7 @@ include('php/calc-job.php');
                             <img class="img-fluid" src="bilder/logo.png" alt="muster_firmenlogo" width="150" height="150">
                         </div>
                         <div class="col-md-7 col-lg-8 col-xl-9">
-                            <h5><?php echo($art); ?> - <?php echo($bez); ?></h5>
+                            <h5><?php echo($art); ?> - <?php echo($beschreibung); ?></h5>
                             <p>20h/Woche</p>
                             <p>Kurze Informationen zur Anzeige</p>
                             <p class="end">
