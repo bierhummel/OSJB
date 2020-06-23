@@ -14,24 +14,30 @@ class SQLiteJobDAO implements JobDAO {
 
     //erhält array mit inputwerten von jobangebot-anlegen.php und gibt true/false zurück
     public function createJob($job, $user_email){
+    
         $database = "../database/database.db";
         $db = new PDO('sqlite:' . $database);
         // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
         $user = null; //Array mit allen wichtigen Informationen des Users (z.b. keine id kein PW)
-        try{
 
+        try{
+            // Default: Anzeige ist aktiv
+            $status = 1;
+            //TODO: Titel, Strasse, Hausnummer, PLZ und Stadt werden noch nicht abgefragt
+            $default = NULL;
             //ID aus der DB holen
-            $id= "select id from ;user where mail = :mail";
+            $id = "select id from user where mail = :mail";
             $stmt = $db->prepare($id);
-            $stmt->bindParam(':id', $user_email);  
+            $stmt->bindParam(':mail', $user_email);  
+            $stmt->execute();
             $id = $stmt->fetchColumn();
-            
             //Beschäftigungsart
             $beschaeftigungsart = $job['art'];
             //Fachrichtung
             $fachrichtung = $job['fachrichtung'];
             //Zeitintesität
+            $intensitaet = '';
             if($job['teilzeit'] == 'Teilzeit'){
                 $intensitaet = $job['teilzeit'];
             }
@@ -81,15 +87,14 @@ class SQLiteJobDAO implements JobDAO {
             
             $newJob = "insert into jobangebot (user_id, status, titel, strasse, hausnr, plz, stadt, beschreibung, art, zeitintensitaet, im_bachelor, bachelor, im_master, master, ausbildung, fachrichtung, link, beschaeftigungsbeginn) values (:uid, :status, :titel, :strasse, :hausnr, :plz, :stadt, :beschreibung, :art, :zeitintensitaet, :im_bachelor, :bachelor, :im_master, :master, :ausbildung, :fachrichtung, :link, :beschaeftigungsbeginn)";
             $stmt = $db->prepare($newJob);
-            $stmt = $db->prepare($register);
             
             $stmt->bindParam(':uid', $id);  //
-            $stmt->bindParam(':status', 1);  //
-            $stmt->bindParam(':titel', NULL); // n.v.   
-            $stmt->bindParam(':strasse', NULL);  // n.v.      
-            $stmt->bindParam(':hausnr', NULL); // n.v.   
-            $stmt->bindParam(':plz', NULL); // n.v.   
-            $stmt->bindParam(':stadt', NULL); // n.v.     
+            $stmt->bindParam(':status', $status);  //
+            $stmt->bindParam(':titel', $default); // n.v.   
+            $stmt->bindParam(':strasse', $default);  // n.v.      
+            $stmt->bindParam(':hausnr', $default); // n.v.   
+            $stmt->bindParam(':plz', $default); // n.v.   
+            $stmt->bindParam(':stadt', $default); // n.v.     
             $stmt->bindParam(':beschreibung', $beschreibung); //
             $stmt->bindParam(':art', $beschaeftigungsart);   //
             $stmt->bindParam(':im_bachelor', $im_bachelor);//  
