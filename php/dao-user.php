@@ -39,8 +39,13 @@ class SQLiteUserDAO implements UserDAO {
             //TODO: MUSS GEFIXT WERDEN!
             if (password_verify($input_pw, $pw_in_db)) {
                 $stmt = $db->prepare("select * from user WHERE mail = ?");
-                $user = $stmt->execute(array($input_mail));   
-                return $user;             
+                $user = $stmt->execute(array($input_mail));
+                $user = $user->fetch();  
+                
+                var_dump($user);
+                var_dump($stmt);
+                exit;
+                return $user;              
             } 
             else {
                 return null;

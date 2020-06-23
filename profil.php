@@ -44,7 +44,13 @@ include('php/calc-job.php');
  <!--Durch überprüfung von $_SESSION["update"] = "failed"; prüfen ob update fehlgeschlagen ist -> meldung ausgeben und $_SESSION["update"] auf "false" ändern-->
                 
                 <form action="php/config-reg.php" method="post">
-                    <h3 class="center mb-5">Profil von <?php echo($_SESSION["vorname"] . " " . $_SESSION["nachname"]) ?> </h3>
+                    <h3 class="center mb-5">Profil von 
+                        
+                        <?php 
+                            var_dump($_SESSION); 
+                            echo($_SESSION["vname"] . " " . $_SESSION["nname"]); 
+                       
+                        ?> </h3>
                     
                     <!--Rückmeldung zum Update übergangsweise hier anzeigen-->
                     <p>
