@@ -180,10 +180,10 @@ session_start();
                                 <?php } elseif ($_SESSION["registrierung"] == "db_fail") { ?>
                                     Achtung: Fehler bei Registrierung, möglicherweise bereits registriert?.. (Übergangslösung)
                                 <?php } elseif ($_SESSION["registrierung"] == "success") { ?>
-                                    Benutzer erfolgreich registiert. Bitte anmelden (Übergangslösung
-                                <?php } $_SESSION["registrierung"] = ""; } ?>
+                                    Benutzer erfolgreich registiert. Bitte anmelden (Übergangslösung)
+                                <?php } $_SESSION["registrierung"] = ""; } 
+                            ?>
             
-                                                        
                             <input type="submit" class="btn btn-primary" name="registrieren" value="Registrieren">
                         </div>
                     </fieldset>
