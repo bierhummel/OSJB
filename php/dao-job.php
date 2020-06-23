@@ -20,14 +20,9 @@ class SQLiteJobDAO implements JobDAO {
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
         $user = null; //Array mit allen wichtigen Informationen des Users (z.b. keine id kein PW)
         try{
-            //Variablen
-            
-            
-            
-            
-            
+
             //ID aus der DB holen
-            $id= "select id from user where mail = :mail";
+            $id= "select id from ;user where mail = :mail";
             $stmt = $db->prepare($id);
             $stmt->bindParam(':id', $user_email);  
             $id = $stmt->fetchColumn();
@@ -37,7 +32,6 @@ class SQLiteJobDAO implements JobDAO {
             //Fachrichtung
             $fachrichtung = $job['fachrichtung'];
             //Zeitintesität
-            $intensitaet = '';
             if($job['teilzeit'] == 'Teilzeit'){
                 $intensitaet = $job['teilzeit'];
             }
@@ -83,8 +77,52 @@ class SQLiteJobDAO implements JobDAO {
             if ($beschreibung == ''){
                 $beschreibung = NULL;
             }
-            var_dump($beschreibung);
-            exit;
+            //SQL Insert
+            
+            $newJob = "insert into jobangebot (user_id, status, titel, strasse, hausnr, plz, stadt, beschreibung, art, zeitintensitaet, im_bachelor, bachelor, im_master, master, ausbildung, fachrichtung, link, beschaeftigungsbeginn) values (:uid, :status, :titel, :strasse, :hausnr, :plz, :stadt, :beschreibung, :art, :zeitintensitaet, :im_bachelor, :bachelor, :im_master, :master, :ausbildung, :fachrichtung, :link, :beschaeftigungsbeginn)";
+            $stmt = $db->prepare($newJob);
+            $stmt = $db->prepare($register);
+            
+            $stmt->bindParam(':uid', $id);  //
+            $stmt->bindParam(':status', 1);  //
+            $stmt->bindParam(':titel', NULL); // n.v.   
+            $stmt->bindParam(':strasse', NULL);  // n.v.      
+            $stmt->bindParam(':hausnr', NULL); // n.v.   
+            $stmt->bindParam(':plz', NULL); // n.v.   
+            $stmt->bindParam(':stadt', NULL); // n.v.     
+            $stmt->bindParam(':beschreibung', $beschreibung); //
+            $stmt->bindParam(':art', $beschaeftigungsart);   //
+            $stmt->bindParam(':im_bachelor', $im_bachelor);//  
+            $stmt->bindParam(':bachelor', $bachelor);//
+            $stmt->bindParam(':im_master', $im_master);//    
+            $stmt->bindParam(':master', $master);    //
+            $stmt->bindParam(':ausbildung', $ausbildung);//
+            $stmt->bindParam(':fachrichtung', $fachrichtung);//    
+            $stmt->bindParam(':link', $link);       //
+            $stmt->bindParam(':beschaeftigungsbeginn', $beginn);  //
+            $stmt->bindParam(':zeitintensitaet', $intensitaet); //
+            $stmt->execute();
+            
+            
+            
+            
+            
+//            $beschaeftigungsart;
+//            $fachrichtung;
+//            $intensitaet;
+//            $jobbezeichnung;
+//            $beginn;
+//            $link;
+//            $bachelor;
+//            $im_bachelor;
+//            $master;
+//            $im_master;
+//            $ausbildung;
+//            $beschreibung;           
+            
+            
+            
+            
             
         } catch(PDOException $e) {
                     // Print PDOException message
