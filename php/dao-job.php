@@ -123,7 +123,7 @@ class SQLiteJobDAO implements JobDAO {
     
     //erhält array mit inputwerten von jobangebot-anlegen.php und gibt true/false zurück
     public function updateJob($job){
-
+        
     }
     
     //erhält entweder array mit inputwerten von index (oder später von filterbox), die e-mail eines nutzers oder eine jobid und gibt zwei-dimensionales array mit den gefundenen jobangeboten als array zurück 
