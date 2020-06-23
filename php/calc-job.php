@@ -40,7 +40,7 @@
         extract($jobs);
     }
 
-        //Einzelnes Jobangebot laden
+    //Jobs entsprechend der Suchkriteren der Inputfelder laden
     if($_SERVER['PHP_SELF'] == "/projekte/osjb/suchergebnisse.php"){
         $jobs = $JobDAO->loadJobs($request_checked); 
         extract($jobs);
