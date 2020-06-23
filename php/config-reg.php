@@ -36,15 +36,11 @@
             $_SESSION["eingeloggt"] = "true";
             
             
-            
             //Alle unkritischen infos des Users in Session zwischenspeichern
             foreach ($user as $index => $value){
                 $_SESSION[$index] = htmlspecialchars($value);                                
             }
             
-            var_dump($user);
-            var_dump($_SESSION);
-                exit;
 
             header( 'location: ../profil.php' );
             exit;

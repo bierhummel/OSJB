@@ -25,7 +25,8 @@ class SQLiteUserDAO implements UserDAO {
         $database = "../database/database.db";
         $db = new PDO('sqlite:' . $database);
         // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  
+        $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
         $user = null; //Array mit allen wichtigen Informationen des Users (z.b. keine id kein PW)
 
         try{      
@@ -39,12 +40,9 @@ class SQLiteUserDAO implements UserDAO {
             //TODO: MUSS GEFIXT WERDEN!
             if (password_verify($input_pw, $pw_in_db)) {
                 $stmt = $db->prepare("select * from user WHERE mail = ?");
-                $user = $stmt->execute(array($input_mail));
-                $user = $user->fetch();  
-                
-                var_dump($user);
-                var_dump($stmt);
-                exit;
+                $stmt->execute(array($input_mail));
+                $user = $stmt->fetch();  
+
                 return $user;              
             } 
             else {

@@ -47,7 +47,7 @@ include('php/calc-job.php');
                     <h3 class="center mb-5">Profil von 
                         
                         <?php 
-                            var_dump($_SESSION); 
+                            
                             echo($_SESSION["vname"] . " " . $_SESSION["nname"]); 
                        
                         ?> </h3>
@@ -86,7 +86,7 @@ include('php/calc-job.php');
                             <label for="vorname">Vorname:</label>
                         </div>
                         <div class="col-sm">
-                            <input type="text" id="vorname" name="new_vorname" value="<?= $_SESSION["vorname"] ?>">
+                            <input type="text" id="vorname" name="new_vorname" value="<?= $_SESSION["vname"] ?>">
                         </div>
                     </div>
                     
@@ -95,7 +95,7 @@ include('php/calc-job.php');
                             <label for="nachname">Nachname:</label>
                         </div>
                         <div class="col-sm">
-                            <input type="text" id="nachname" name="new_nachname" value="<?= $_SESSION["nachname"] ?>">
+                            <input type="text" id="nachname" name="new_nachname" value="<?= $_SESSION["nname"] ?>">
                         </div>
                     </div>
 
