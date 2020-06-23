@@ -20,17 +20,26 @@ class SQLiteJobDAO implements JobDAO {
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
         $user = null; //Array mit allen wichtigen Informationen des Users (z.b. keine id kein PW)
         try{
+            $intensitaet = '';
             
-            $id= "select mail from user where id = :id";
+            
+            
+            $id= "select id from user where mail = :mail";
             $stmt = $db->prepare($id);
             $stmt->bindParam(':id', $user_email);  
-            asdfasdf();
-                exit;
+            $id = $stmt->fetchColumn();
             if($job[teilzeit] == 'Teilzeit'){
-            
+                $intensitaet = $job[teilzeit];
+            }
+            elseif($job[vollzeit] == 'Vollzeit'){
+                $intensitaet = $job[vollzeit];
+            }
+            else {
+                $intensitaet = $job['20h'];
             }
             
-            
+            var_dump($intensitaet);
+            exit;
             
             
         } catch(PDOException $e) {
