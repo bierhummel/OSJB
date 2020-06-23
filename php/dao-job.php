@@ -242,12 +242,10 @@ class SQLiteJobDAO implements JobDAO {
         // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
         try{
-            $statement = $db->prepare("SELECT * FROM jobangebot WHERE id = ?");
-            return $statement->execute(array($job_id));   
+            $stmt = $db->prepare("SELECT * FROM jobangebot WHERE id = ?");
+            $job = $stmt->execute(array($job_id));   
+            return $job;
 }
-
-            
-            
     } catch(PDOException $e) {
                     // Print PDOException message
                     echo $e->getMessage();
