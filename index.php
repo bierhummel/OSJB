@@ -60,7 +60,7 @@ session_start();
                     <h4 class="mb-5">
                         <label for="fachrichtung">Fachrichtung:</label>
                         <select id="fachrichtung" name="fachrichtung" class="custom-select custom-select-lg" size="1">
-                            <option value="">Fachrichtung auswählen</option>
+                            <option value="alle">Fachrichtung auswählen</option>
                             <option value="Bildungs- und Sozialwissenschaften">Bildungs- und Sozialwissenschaften</option>
                             <option value="Informatik, Wirtschafts- und Rechtswissenschaften">Informatik, Wirtschafts- und Rechtswissenschaften</option>
                             <option value="Sprach- und Kulturwissenschaften">Sprach- und Kulturwissenschaften</option>

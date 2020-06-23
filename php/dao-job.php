@@ -238,10 +238,18 @@ class SQLiteJobDAO implements JobDAO {
         $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
         $plz = $suchkrit['plz'];    
         $fachrichtung = $suchkrit['fachrichtung'];
-        $stmt = $db->prepare("select * from jobangebot where plz = ? and fachrichtung = ?");
-        $stmt->execute(array($plz, $fachrichtung));
-        $jobs = $stmt->fetchAll();  
-        return $jobs;
+            if ($fachrichtung == "alle"){
+                $stmt = $db->prepare("select * from jobangebot where plz = ?");
+                $stmt->execute(array($plz));
+                $jobs = $stmt->fetchAll();  
+                return $jobs;   
+            }
+            else {
+                $stmt = $db->prepare("select * from jobangebot where plz = ? and fachrichtung = ?"); 
+                $stmt->execute(array($plz, $fachrichtung));
+                $jobs = $stmt->fetchAll();  
+                return $jobs;   
+            }
         } catch(PDOException $e) {
           // Print PDOException message           
           echo $e->getMessage();
