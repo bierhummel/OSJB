@@ -31,7 +31,7 @@ session_start();*/
     ?>
     
     <!--Alles nur anzeigen wenn ein exitierendes Jobangebot ausgewählt wurde, sonst Fehlermeldung-->
-    <?php if($job_found === false){ ?>
+    <?php if($jobs == null){ ?>
     
     <p class="center">Dieses Jobangebot existiert nicht.</p>
     
@@ -44,7 +44,7 @@ session_start();*/
             </section>
 
             <section class="col-md-8 last_td">
-                <h5><?php echo($art); ?> - <?php echo($bez); ?></h5>
+                <h5><?php echo($art); ?> - <?php echo($titel); ?></h5>
                 <p>Zeitintensität: (Zeitintesität)</p>
                 <p>Beginn: (Beginn)</p>
                 <p>(Firma)</p>
