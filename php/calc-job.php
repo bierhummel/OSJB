@@ -28,6 +28,7 @@
     //Variable mit allen anzuzeigenden Jobangeboten füllen (nicht optimal, wird überarbeitet)
     //$jobs = $JobDAO->loadJobs($request_checked);   
 
+    $jobs = null;
     
     //Liste der Jobs eines Users laden
     if(basename($_SERVER['PHP_SELF']) == "profil.php"){

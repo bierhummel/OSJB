@@ -12,10 +12,12 @@ interface JobDAO {
 /* Klasse für Zugriff auf Jobs in DB*/
 class SQLiteJobDAO implements JobDAO {
 
-    //erhält array mit inputwerten von jobangebot-anlegen.php und gibt true/false zurück
+    //erhält array mit inputwerten von jobangebot-anlegen.php und gibt den neuen job zurück
     public function createJob($job, $user_email){
     
         $database = "../database/database.db";
+        
+        
         $db = new PDO('sqlite:' . $database);
         // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
@@ -88,6 +90,8 @@ class SQLiteJobDAO implements JobDAO {
             if ($beschreibung == ''){
                 $beschreibung = NULL;
             }
+
+            
             //SQL Insert
             $newJob = "insert into jobangebot (user_id, status, titel, strasse, hausnr, plz, stadt, beschreibung, art, zeitintensitaet, im_bachelor, bachelor, im_master, master, ausbildung, fachrichtung, link, beschaeftigungsbeginn) values (:uid, :status, :titel, :strasse, :hausnr, :plz, :stadt, :beschreibung, :art, :zeitintensitaet, :im_bachelor, :bachelor, :im_master, :master, :ausbildung, :fachrichtung, :link, :beschaeftigungsbeginn)";
             $stmt = $db->prepare($newJob);
@@ -291,6 +295,7 @@ class SQLiteJobDAO implements JobDAO {
     public function loadJob($job_id){
         $database = "database/database.db";
         $db = new PDO('sqlite:' . $database);
+        $job = null;
         // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
         try{         
@@ -301,7 +306,7 @@ class SQLiteJobDAO implements JobDAO {
             $job = $stmt->fetch();     
             
             return $job;
-}
+        }
         catch(PDOException $e) {
             // Print PDOException message
             echo $e->getMessage();
