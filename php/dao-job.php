@@ -22,7 +22,6 @@ class SQLiteJobDAO implements JobDAO {
         $user = null; //Array mit allen wichtigen Informationen des Users (z.b. keine id kein PW)
 
         try{
-
             
             // Default: Anzeige ist aktiv
             $status = 1;
@@ -230,13 +229,42 @@ class SQLiteJobDAO implements JobDAO {
     
     //erhält entweder array mit inputwerten von index (oder später von filterbox), die e-mail eines nutzers oder eine jobid und gibt zwei-dimensionales array mit den gefundenen jobangeboten als array zurück 
     public function loadJobs($suchkrit){
-        
-    }
+        $database = "database/database.db";
+        $db = new PDO('sqlite:' . $database);
+        // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
+        try{       
+        $plz = $suchkrit['plz'];
+        $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
+        $stmt = $db->prepare("select * from jobangebot where plz = ?");
+        $stmt->execute(array($plz));
+        $jobs = $stmt->fetchAll();  
+        return $jobs;
+        } catch(PDOException $e) {
+          // Print PDOException message           
+          echo $e->getMessage();
+                }    
+        } 
+    
     
     public function loadJobsOfUser($user_mail){
+        $database = "../database/database.db";
+        $db = new PDO('sqlite:' . $database);
+        // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
+        try{            
+            $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
+            $stmt = $db->prepare("select * from jobangebot where user_id = ?");
+            $stmt->execute(array($user_id));
+            $jobs = $stmt->fetchAll();      
+}
+     catch(PDOException $e) {
+                    // Print PDOException message
+                    echo $e->getMessage();
+                }    
+    } 
         
-        
-    }
+    
     
     public function loadJob($job_id){
         $database = "../database/database.db";
@@ -245,7 +273,7 @@ class SQLiteJobDAO implements JobDAO {
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
         try{            
             $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
-            $stmt = $db->prepare("SELECT * FROM jobangebot WHERE id = ?");
+            $stmt = $db->prepare("select * from jobangebot where id = ?");
             $stmt->execute(array($job_id));
             $job = $stmt->fetch();       
 }
