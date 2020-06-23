@@ -38,8 +38,9 @@
             
             //Alle unkritischen infos des Users in Session zwischenspeichern
             foreach ($user as $index => $value){
-                $_SESSION[$index] = htmlspecialchars($value);
+                $_SESSION[$index] = htmlspecialchars($value);                                
             }
+            
 
             header( 'location: ../profil.php' );
             exit;
