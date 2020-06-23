@@ -30,22 +30,21 @@
 
     
     //Liste der Jobs eines Users laden
-    if($_SERVER['PHP_SELF'] == "/projekte/osjb/profil.php"){
+    if(basename($_SERVER['PHP_SELF']) == "profil.php"){
         $jobs = $JobDAO->loadJobsOfUser($_SESSION["mail"]);  
     }
 
     //Einzelnes Jobangebot laden
-    if($_SERVER['PHP_SELF'] == "/projekte/osjb/jobangebot-anlegen.php" || $_SERVER['PHP_SELF'] == "/projekte/osjb/jobangebot-anzeigen.php" ){
+    if( ( basename($_SERVER['PHP_SELF']) == "jobangebot-anlegen.php" && isset($request_checked["id"]) ) || basename($_SERVER['PHP_SELF']) == "jobangebot-anzeigen.php" ){
         $jobs = $JobDAO->loadJob($request_checked["id"]); 
         extract($jobs);
     }
 
     //Jobs entsprechend der Suchkriteren der Inputfelder laden
-    if($_SERVER['PHP_SELF'] == "/projekte/osjb/suchergebnisse.php"){
+    if( basename($_SERVER['PHP_SELF']) == "suchergebnisse.php"){
         $jobs = $JobDAO->loadJobs($request_checked); 
         extract($jobs);
     }
-    
 
 
 
