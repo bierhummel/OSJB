@@ -221,7 +221,7 @@ include('php/calc-job.php');
                 
             <?php endforeach; } ?>
                 
-                <p class="center">Ende der Liste. Es wurden <?php echo $count ?> Jobangebote gefunden.</p>
+                <p class="center">Ende der Liste. Es wurde(n) <?php echo $count ?> Jobangebot(e) gefunden.</p>
             </div>
         </div>
     </div>
