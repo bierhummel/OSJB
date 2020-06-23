@@ -258,15 +258,22 @@ class SQLiteJobDAO implements JobDAO {
     
     
     public function loadJobsOfUser($user_mail){
-        $database = "../database/database.db";
+        $database = "database/database.db";
         $db = new PDO('sqlite:' . $database);
         // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
         try{            
+            $id = "select id from user where mail = :mail";
+            $stmt = $db->prepare($id);
+            $stmt->bindParam(':mail', $user_mail);  
+            $stmt->execute();
+            $id = $stmt->fetchColumn();
+
             $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
             $stmt = $db->prepare("select * from jobangebot where user_id = ?");
-            $stmt->execute(array($user_id));
+            $stmt->execute(array($id));
             $jobs = $stmt->fetchAll(); 
+            
             return $jobs;
 }
      catch(PDOException $e) {
@@ -278,20 +285,23 @@ class SQLiteJobDAO implements JobDAO {
     
     
     public function loadJob($job_id){
-        $database = "../database/database.db";
+        $database = "database/database.db";
         $db = new PDO('sqlite:' . $database);
         // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
-        try{            
+        try{         
+            
             $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
             $stmt = $db->prepare("select * from jobangebot where id = ?");
             $stmt->execute(array($job_id));
-            $job = $stmt->fetch();       
+            $job = $stmt->fetch();     
+            
+            return $job;
 }
-     catch(PDOException $e) {
-                    // Print PDOException message
-                    echo $e->getMessage();
-                }    
+        catch(PDOException $e) {
+            // Print PDOException message
+            echo $e->getMessage();
+        }    
     } 
         
         

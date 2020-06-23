@@ -47,7 +47,7 @@ include('php/calc-job.php');
                     <h3 class="center mb-5">Profil von 
                         
                         <?php 
-                            
+                            echo (__FILE__);
                             echo($_SESSION["vname"] . " " . $_SESSION["nname"]); 
                        
                         ?> </h3>
@@ -191,7 +191,7 @@ include('php/calc-job.php');
                 ?>
 
                 <div class="border">
-                    <a class="mr-3" href="jobangebot-anzeigen.php?id=<?php echo($id)?>"> <?php echo($bez)?></a>
+                    <a class="mr-3" href="jobangebot-anzeigen.php?id=<?php echo($id)?>"> <?php echo($titel)?></a>
                     
                 <!--Inhaltsreduzierung
                     (Datum an dem Jobangebot erstellt wurde)
