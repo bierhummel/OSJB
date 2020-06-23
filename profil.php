@@ -195,7 +195,7 @@ include('php/calc-job.php');
                     (Jobangeobt aktiv/inaktiv)
                 -->
 
-                    <a href="jobangebot-anlegen.php?new=0" class="btn btn-secondary mr-3">Bearbeiten</a>
+                    <a href="jobangebot-anlegen.php?new=0&id=<?php echo($id)?>" class="btn btn-secondary mr-3">Bearbeiten</a>
 
                     <a href="profil.php?del=1&id=<?php echo($id)?>" class="btn btn-light">Löschen (noch in Bearbeitung)</a>
                 </div>

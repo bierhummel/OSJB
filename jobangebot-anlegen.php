@@ -49,19 +49,19 @@ session_start();*/
                         <div class="col-md-5 last_td">
                             <select class="form-control" name="art" size="1" required>
                                 <option value="">Beschäftigungsart</option>
-                                <option value="Festanstellung">Festanstellung</option>
-                                <option value="Praktikum">Praktikum</option>
-                                <option value="Aushilfe">Aushilfe</option>
-                                <option value="Werkstudent">Werkstudent</option>
-                                <option value="Volontarioat">Volontarioat</option>
-                                <option value="Minijob">Minijob</option>
+                                <option value="Festanstellung" <?php if($art == "Festanstellung"){ ?> selected <?php } ?> >Festanstellung</option>
+                                <option value="Praktikum" <?php if($art == "Praktikum"){ ?> selected <?php } ?> >Praktikum</option>
+                                <option value="Aushilfe" <?php if($art == "Aushilfe"){ ?> selected <?php } ?> >Aushilfe</option>
+                                <option value="Werkstudent" <?php if($art == "Werkstudent"){ ?> selected <?php } ?> >Werkstudent</option>
+                                <option value="Volontarioat" <?php if($art == "Volontarioat"){ ?> selected <?php } ?> >Volontarioat</option>
+                                <option value="Minijob" <?php if($art == "Minijob"){ ?> selected <?php } ?> >Minijob</option>
                             </select>
                         </div>
                         <div class="col-md-2">
                         </div>
                         <div class="col-md-5 last_td">
                             <label> Jobbezeichnung:
-                                <input type="text" name="titel" maxlength="50" value="<?php if($jobs != null) echo($bez); ?>" placeholder="Jobbezeichnung" required>
+                                <input type="text" name="titel" maxlength="50" value="<?php if($jobs != null) echo($titel); ?>" placeholder="Jobbezeichnung" required>
                             </label>
                         </div>
                     </div>
@@ -70,12 +70,12 @@ session_start();*/
                         <div class="col-lg-5 last_td">
                             <select class="form-control" name="fachrichtung" size="1" required>
                                 <option value="">Fachrichtung auswählen</option>
-                                <option value="Bildungs- und Sozialwissenschaften">Bildungs- und Sozialwissenschaften</option>
-                                <option value="Informatik, Wirtschafts- und Rechtswissenschaften">Informatik, Wirtschafts- und Rechtswissenschaften</option>
-                                <option value="Sprach- und Kulturwissenschaften">Sprach- und Kulturwissenschaften</option>
-                                <option value="Human- und Gesellschaftswissenschaften">Human- und Gesellschaftswissenschaften</option>
-                                <option value="Mathematik und Naturwissenschaften">Mathematik und Naturwissenschaften</option>
-                                <option value="Medizin und Gesundheitswissenschaften">Medizin und Gesundheitswissenschaften</option>
+                                <option value="Bildungs- und Sozialwissenschaften" <?php if($fachrichtung == "Bildungs- und Sozialwissenschaften"){ ?> selected <?php } ?> >Bildungs- und Sozialwissenschaften</option>
+                                <option value="Informatik, Wirtschafts- und Rechtswissenschaften" <?php if($fachrichtung == "Informatik, Wirtschafts- und Rechtswissenschaften"){ ?> selected <?php } ?> >Informatik, Wirtschafts- und Rechtswissenschaften</option>
+                                <option value="Sprach- und Kulturwissenschaften" <?php if($fachrichtung == "Sprach- und Kulturwissenschaften"){ ?> selected <?php } ?> >Sprach- und Kulturwissenschaften</option>
+                                <option value="Human- und Gesellschaftswissenschaften" <?php if($fachrichtung == "Human- und Gesellschaftswissenschaften"){ ?> selected <?php } ?> >Human- und Gesellschaftswissenschaften</option>
+                                <option value="Mathematik und Naturwissenschaften" <?php if($fachrichtung == "Mathematik und Naturwissenschaften"){ ?> selected <?php } ?> >Mathematik und Naturwissenschaften</option>
+                                <option value="Medizin und Gesundheitswissenschaften" <?php if($fachrichtung == "Medizin und Gesundheitswissenschaften"){ ?> selected <?php } ?> >Medizin und Gesundheitswissenschaften</option>
                             </select>
                         </div>
                         <div class="col-lg-2">
@@ -84,7 +84,7 @@ session_start();*/
                             <label>
                                 <!--später min=(heute)-->
                                 Frühster Beginn der Beschäftigung:
-                                <input type="date" name="jdate" value="" required>
+                                <input type="date" name="jdate" value="<?php if($jobs != null) echo($beschaeftigungsbeginn); ?>" required>
                             </label>
                         </div>
                     </div>
@@ -98,17 +98,17 @@ session_start();*/
                                 <div class="col-xl-4 col-6">
                                     <!--Später mindestens eine Angabe required festlegen.. js?-->
                                     <label>
-                                        <input type="checkbox" name="teilzeit" value="Teilzeit"> Teilzeit
+                                        <input type="checkbox" name="teilzeit" value="Teilzeit" <?php if($jobs != null && $zeitintensitaet == "Teilzeit"){ ?> checked <?php } ?> > Teilzeit
                                     </label>
                                 </div>
                                 <div class="col-xl-4 col-6">
                                     <label>                                        
-                                        <input type="checkbox" name="vollzeit" value="Vollzeit"> Vollzeit
+                                        <input type="checkbox" name="vollzeit" value="Vollzeit" <?php if($jobs != null && $zeitintensitaet == "Vollzeit"){ ?> checked <?php } ?> > Vollzeit
                                     </label>
                                 </div>
                                 <div class="col-xl-4 col-12">
                                     <label>                                        
-                                        <input type="checkbox" name="20h" value="20h"> &lt;20h/Woche
+                                        <input type="checkbox" name="20h" value="20h" <?php if($jobs != null && $zeitintensitaet == "20h"){ ?> checked <?php } ?> > &lt;20h/Woche
                                     </label>
                                 </div>
                             </div>
@@ -117,9 +117,11 @@ session_start();*/
                         <div class="col-md-2">
                         </div>
                         <div class="col-md-5 last_td">
-                            <label title="Geben Sie hier einen Link zu Ihrem firmeneigenen Bewerbungsportal ein">
-                                Link zur direkten Bewerbung (optional): <input type="text" name="blink" maxlength="50" value="">
-                            </label>
+                            <label title="Geben Sie hier einen Link zu Ihrem firmeneigenen Bewerbungsportal ein" for="blink">
+                                Link zur direkten Bewerbung (optional): 
+                            </label>    
+                            <input type="text" id="blink" name="blink" maxlength="50" placeholder="www.ihre-seite.de" value="<?php if($jobs != null) echo($link); ?>">
+                            
                         </div>
                     </div>
 
@@ -135,34 +137,35 @@ session_start();*/
                         </div>
                     </div>
                     -->
+                    
                     <div class="row">
                         <div class="col-12">
-                            <h6>Arbeitstelle: (Wird noch umformatiert) </h6>
+                            <h6>Arbeitstelle: </h6>
                         </div>
                         
                          <div class="col-md-12">
                             <label for="job_uname">Unternehmen:</label>
-                            <input type="text" id="job_uname" name="job_uname" value="<?= $_SESSION["uname"]?>">
+                            <input type="text" id="job_uname" name="job_uname" value="<?= $_SESSION["uname"]?>" readonly>
                         </div>
                         <div class="col-md-5">
                             <label for="job_strasse">Straße:</label>
-                            <input type="text" id="job_strasse" name="job_strasse" value="<?= $_SESSION["strasse"]?>">
+                            <input type="text" id="job_strasse" name="job_strasse" value="<?php if($jobs != null) {echo($strasse);} else{ echo $_SESSION["strasse"]; } ?>">
                         </div>
                         <div class="col-md-2">
                         </div>
                         <div class="col-md-5">
                             <label for="job_hausnr">Hausnummer:</label>
-                            <input type="text" id="job_hausnr" name="job_hausnr" maxlength="5" value="<?= $_SESSION["hausnr"]?>">
+                            <input type="text" id="job_hausnr" name="job_hausnr" maxlength="5" value="<?php if($jobs != null) {echo($hausnr);} else{ echo $_SESSION["hausnr"]; } ?>">
                         </div>
                         <div class="col-md-5">
                             <label for="job_plz">PLZ:</label>
-                            <input type="text" for="job_plz" name="job_plz" value="<?= $_SESSION["plz"]?>">
+                            <input type="text" for="job_plz" name="job_plz" value="<?php if($jobs != null) {echo($plz);} else{ echo $_SESSION["plz"]; } ?>">
                         </div>
                         <div class="col-md-2">
                         </div>
                         <div class="col-md-5 last_td">
                             <label for="job_stadt">PLZ der Arbeitsstelle:</label>
-                                <input type="text" id="job_stadt" name="job_stadt" maxlength="5" value="<?= $_SESSION["stadt"]?>">
+                                <input type="text" id="job_stadt" name="job_stadt" maxlength="5" value="<?php if($jobs != null) {echo($stadt);} else{ echo $_SESSION["stadt"]; } ?>">
                         </div>
                     </div>
 
@@ -195,28 +198,28 @@ session_start();*/
                     </div>
                     <div class="row">
                         <div class="col-xl-4 col-md-6">
+                            <input type="checkbox" id="abachelor" name="abachelor" value="bachelor" <?php if($jobs != null && $bachelor == 1){ ?> checked <?php } ?> > 
+                            <label for="abachelor">Bachelor</label>
+                            
+                        </div>
+                        <div class="col-xl-4 col-md-6">
                             <label>
-                                <input type="checkbox" name="abachelor" value="bachelor"> Bachelor
+                                <input type="checkbox" name="amaster" value="master" <?php if($jobs != null && $master == 1){ ?> checked <?php } ?> > Master
                             </label>
                         </div>
                         <div class="col-xl-4 col-md-6">
                             <label>
-                                <input type="checkbox" name="amaster" value="master"> Master
+                                <input type="checkbox" name="ibachelor" value="ibachelor" <?php if($jobs != null && $im_bachelor == 1){ ?> checked <?php } ?> > Im Bachelor immatrikuliert
                             </label>
                         </div>
                         <div class="col-xl-4 col-md-6">
                             <label>
-                                <input type="checkbox" name="ibachelor" value="ibachelor"> Im Bachelor immatrikuliert
-                            </label>
-                        </div>
-                        <div class="col-xl-4 col-md-6">
-                            <label>
-                                <input type="checkbox" name="imaster" value="ibachelor"> Im Master immatrikuliert
+                                <input type="checkbox" name="imaster" value="ibachelor" <?php if($jobs != null && $im_master == 1){ ?> checked <?php } ?> > Im Master immatrikuliert
                             </label>
                         </div>
                         <div class="col-xl-4 col-md-6 last_td">
                             <label>
-                                <input type="checkbox" name="ausbildung" value="ausbildung"> Zus. berufliche Ausbildung
+                                <input type="checkbox" name="ausbildung" value="ausbildung" <?php if($jobs != null && $ausbildung == 1){ ?> checked <?php } ?> > Zus. berufliche Ausbildung
                             </label>
                         </div>
                     </div>
@@ -290,7 +293,7 @@ session_start();*/
                                     
                     <div class="row">
                         <div class="col-lg-12 last_td">
-                             <textarea class="form-control" name="message" rows="10" cols="100"></textarea>                        
+                             <textarea class="form-control" name="message" rows="10" cols="100"><?php if($jobs != null) echo($beschreibung); ?></textarea>                        
                         </div>                                                       
                     </div>
                 <!--Ende Übergangslösung-->
