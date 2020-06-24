@@ -19,6 +19,8 @@ include('php/calc-job.php');
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    
+    <script src="javascript/check-userinputs.js" async></script>
 
     <title>OSJB - Profil</title>
 </head>
@@ -125,10 +127,10 @@ include('php/calc-job.php');
 
                     <div class="row form-group">
                         <div class="col-sm">
-                            <label for="straße">Straße:</label>
+                            <label for="strasse">Straße:</label>
                         </div>
                         <div class="col-sm">
-                            <input type="text" id="straße" name="new_strasse" value="<?= $_SESSION["strasse"] ?>">
+                            <input type="text" id="strasse" name="new_strasse" value="<?= $_SESSION["strasse"] ?>">
                         </div>
                     </div>
                     
@@ -137,7 +139,7 @@ include('php/calc-job.php');
                             <label for="straße">Hausnummer:</label>
                         </div>
                         <div class="col-sm">
-                            <input type="text" id="straße" name="new_hausnr" value="<?= $_SESSION["hausnr"] ?>">
+                            <input type="text" id="hausnr" name="new_hausnr" value="<?= $_SESSION["hausnr"] ?>">
                         </div>
                     </div>
 
@@ -146,7 +148,7 @@ include('php/calc-job.php');
                             <label for="plz">PLZ:</label>
                         </div>
                         <div class="col-sm">
-                            <input type="number" id="plz" name="new_plz" value="<?= $_SESSION["plz"] ?>">
+                            <input type="text" id="plz" name="new_plz" value="<?= $_SESSION["plz"] ?>" maxlength="5">
                         </div>
                     </div>
 
