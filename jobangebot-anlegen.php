@@ -201,13 +201,13 @@ session_start();*/
                     </div>
                     <div class="row">
                         <div class="col-xl-4 col-md-6">
-                            <input type="checkbox" id="abachelor" name="abachelor" value="bachelor" <?php if($jobs != null && $bachelor == 1){ ?> checked <?php } ?> > 
+                            <input type="checkbox" id="abachelor" name="abachelor" value="abachelor" <?php if($jobs != null && $bachelor == 1){ ?> checked <?php } ?> > 
                             <label for="abachelor">Bachelor</label>
                             
                         </div>
                         <div class="col-xl-4 col-md-6">
                             <label>
-                                <input type="checkbox" name="amaster" value="master" <?php if($jobs != null && $master == 1){ ?> checked <?php } ?> > Master
+                                <input type="checkbox" name="amaster" value="amaster" <?php if($jobs != null && $master == 1){ ?> checked <?php } ?> > Master
                             </label>
                         </div>
                         <div class="col-xl-4 col-md-6">
@@ -217,7 +217,7 @@ session_start();*/
                         </div>
                         <div class="col-xl-4 col-md-6">
                             <label>
-                                <input type="checkbox" name="imaster" value="ibachelor" <?php if($jobs != null && $im_master == 1){ ?> checked <?php } ?> > Im Master immatrikuliert
+                                <input type="checkbox" name="imaster" value="imaster" <?php if($jobs != null && $im_master == 1){ ?> checked <?php } ?> > Im Master immatrikuliert
                             </label>
                         </div>
                         <div class="col-xl-4 col-md-6 last_td">

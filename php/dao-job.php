@@ -64,19 +64,20 @@ class SQLiteJobDAO implements JobDAO {
             if($link == ''){
                 $link = NULL;
             }
+            
             //Qualifikation (funkioniert nicht)
             $bachelor = 0;
             $im_bachelor = 0;
             $master = 0;
             $im_master = 0;
             $ausbildung = 0;
-            if($job['abachelor'] == 'bachelor'){
+            if($job['abachelor'] == 'abachelor'){
                 $bachelor = 1;
             }
             if($job['ibachelor'] == 'ibachelor'){
                 $im_bachelor = 1;
             }
-            if($job['amaster'] == 'master'){
+            if($job['amaster'] == 'amaster'){
                 $master = 1;
             }
             if($job['imaster'] == 'imaster'){
@@ -175,19 +176,20 @@ class SQLiteJobDAO implements JobDAO {
             if($link == ''){
                 $link = NULL;
             }
+            
             //Qualifikation (funkioniert nicht)
             $bachelor = 0;
             $im_bachelor = 0;
             $master = 0;
             $im_master = 0;
             $ausbildung = 0;
-            if($job['abachelor'] == 'bachelor'){
+            if($job['abachelor'] == 'abachelor'){
                 $bachelor = 1;
             }
             if($job['ibachelor'] == 'ibachelor'){
                 $im_bachelor = 1;
             }
-            if($job['amaster'] == 'master'){
+            if($job['amaster'] == 'amaster'){
                 $master = 1;
             }
             if($job['imaster'] == 'imaster'){
