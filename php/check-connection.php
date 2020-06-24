@@ -128,9 +128,9 @@ try{
         $job = "insert into jobangebot (user_id, status, titel, strasse, hausnr, plz, stadt, beschreibung, art, zeitintensitaet, im_bachelor, bachelor, im_master, master, ausbildung, fachrichtung, link, beschaeftigungsbeginn) values (:uid, :status, :titel, :strasse, :hausnr, :plz, :stadt, :beschreibung, :art, :zeitintensitaet, :im_bachelor, :bachelor, :im_master, :master, :ausbildung, :fachrichtung, :link, :beschaeftigungsbeginn)";
         $uid = 1;
         $status = 0;
-        $titel = "Werden Sie Teil des Ganzen";
+        $titel = "Praktikum Webprogrammierung";
         $strasse = "Carl-von-Ossietzky-Straße";
-        $hausnr = 32;
+        $hausnr = "32";
         $plz = "21335";
         $stadt = "Lüneburg";
         $beschreibung = "Ein Testangebot nur für Sie!";
@@ -140,9 +140,9 @@ try{
         $im_master = 0;
         $master = 1;
         $ausbildung = 0;
-        $fachrichtung = "Informatik";
-        $link = "https://www.osjb.de/";
-        $beschaeftigungsbeginn = "20.07.2020";
+        $fachrichtung = "Informatik, Wirtschafts- und Rechtswissenschaften";
+        $link = "www.osjb.de";
+        $beschaeftigungsbeginn = "2020-06-10";
         $zeitintensitaet = '20h';
 
         $stmt = $db->prepare($job);
@@ -172,9 +172,9 @@ try{
 
         $uid = 2;
         $status = 1;
-        $titel = "Neue Wege gehen";
+        $titel = "Studentische Hilfskraft Controlling";
         $strasse = "Theodorstraße";
-        $hausnr = 17;
+        $hausnr = "17";
         $plz = "53426";
         $stadt = "Schalkenbach";
         $beschreibung = "Wir suchen dich.";
@@ -184,9 +184,9 @@ try{
         $im_master = 1;
         $master = 0;
         $ausbildung = 0;
-        $fachrichtung = "Controlling";
-        $link = "https://www.ewe-sucht-dich.de/";
-        $beschaeftigungsbeginn = "30.10.2020";
+        $fachrichtung = "Informatik, Wirtschafts- und Rechtswissenschaften";
+        $link = "www.ewe.com/de/karriere/studenten-und-absolventen/werkstudententaetigkeit";
+        $beschaeftigungsbeginn = "2020-06-10";
         $zeitintensitaet = 'Vollzeit';
 
         $stmt = $db->prepare($job1);  
@@ -216,7 +216,7 @@ try{
 
         $uid = 2;
         $status = 1;
-        $titel = "Unschlagbares Team";
+        $titel = "Aushilfe im Bereich Telekommunikation";
         $strasse = "Mühlenweg";
         $hausnr = "43b";
         $plz = "06198";
@@ -228,9 +228,9 @@ try{
         $im_master = 0;
         $master = 1;
         $ausbildung = 1;
-        $fachrichtung = "Informatik";
-        $link = "https://www.ewe-salzatal.de/";
-        $beschaeftigungsbeginn = "30.08.2020";
+        $fachrichtung = "Informatik, Wirtschafts- und Rechtswissenschaften";
+        $link = "www.ewe-salzatal.de";
+        $beschaeftigungsbeginn = "2020-06-10";
         $zeitintensitaet = 'Teilzeit';
         
 
@@ -261,7 +261,7 @@ try{
 
         $uid = 3;
         $status = 1;
-        $titel = "Wer brauch schon schnelles Internet beim skripten?";
+        $titel = "Minijob für einfache Programmiertätigkeiten";
         $strasse = "Fliederallee";
         $hausnr = 31;
         $plz = "68159";
@@ -273,9 +273,9 @@ try{
         $im_master = 1;
         $master = 0;
         $ausbildung = 0;
-        $fachrichtung = "Informatik";
-        $link = "https://www.telekom-in-mannheim.de/";
-        $beschaeftigungsbeginn = "12.01.2021";
+        $fachrichtung = "Informatik, Wirtschafts- und Rechtswissenschaften";
+        $link = "www.telekom-in-mannheim.de";
+        $beschaeftigungsbeginn = "2020-06-10";
         $zeitintensitaet = '20h';
         
 
