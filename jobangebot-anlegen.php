@@ -158,17 +158,17 @@ session_start();*/
                         </div>
                         <div class="col-md-5">
                             <label for="job_hausnr">Hausnummer:</label>
-                            <input type="text" id="job_hausnr" name="job_hausnr" maxlength="5" value="<?php if($jobs != null) {echo($hausnr);} else{ echo $_SESSION["hausnr"]; } ?>">
+                            <input type="text" id="job_hausnr" name="job_hausnr" value="<?php if($jobs != null) {echo($hausnr);} else{ echo $_SESSION["hausnr"]; } ?>" >
                         </div>
                         <div class="col-md-5">
                             <label for="job_plz">PLZ:</label>
-                            <input type="text" for="job_plz" name="job_plz" value="<?php if($jobs != null) {echo($plz);} else{ echo $_SESSION["plz"]; } ?>">
+                            <input type="text" for="job_plz" name="job_plz" value="<?php if($jobs != null) {echo($plz);} else{ echo $_SESSION["plz"]; } ?>" maxlength="5">
                         </div>
                         <div class="col-md-2">
                         </div>
                         <div class="col-md-5 last_td">
-                            <label for="job_stadt">PLZ der Arbeitsstelle:</label>
-                                <input type="text" id="job_stadt" name="job_stadt" maxlength="5" value="<?php if($jobs != null) {echo($stadt);} else{ echo $_SESSION["stadt"]; } ?>">
+                            <label for="job_stadt">Stadt:</label>
+                                <input type="text" id="job_stadt" name="job_stadt" value="<?php if($jobs != null) {echo($stadt);} else{ echo $_SESSION["stadt"]; } ?>">
                         </div>
                     </div>
 

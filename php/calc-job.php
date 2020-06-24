@@ -70,10 +70,6 @@
         
         //Übergangslösung, wird geändert wenn aufruf von Bearbeiten über Post statt get
         $job_id = $JobDAO->updateJob($request_checked, $request_checked["update_id"]);
-        
-        var_dump( $job_id);
-
-        
          
         header( 'location: ../jobangebot-anzeigen.php?id=' . $job_id);
         exit;

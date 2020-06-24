@@ -46,7 +46,7 @@ session_start();*/
             <section class="col-md-8 last_td">
                 <h5><?php echo($art); ?> - <?php echo($titel); ?></h5>
                 <p>Zeitintensität: <?= $zeitintensitaet ?> </p>
-                <p>Beschäftigungsbeginn: <?= $beschaeftigungsbeginn ?> </p>
+                <p>Beschäftigungsbeginn: <?= date_format(date_create($beschaeftigungsbeginn), 'd.m.yy') ?> </p>
                 
                 <!--<p>Firma: (fehlt noch in der DB)</p>-->
                 

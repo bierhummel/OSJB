@@ -86,6 +86,7 @@ class SQLiteJobDAO implements JobDAO {
             if($job['ausbildung'] == 'ausbildung'){
                 $ausbildung = 1;
             }
+            
             //Individuelle Beschreibung
             $beschreibung = $job['message'];
             if ($beschreibung == ''){
@@ -288,11 +289,11 @@ class SQLiteJobDAO implements JobDAO {
             $jobs = $stmt->fetchAll(); 
             
             return $jobs;
-}
-     catch(PDOException $e) {
-                    // Print PDOException message
-                    echo $e->getMessage();
-                }    
+        } 
+        catch(PDOException $e) {
+            // Print PDOException message
+            echo $e->getMessage();
+        }    
     } 
         
     
