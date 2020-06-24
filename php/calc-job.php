@@ -41,7 +41,6 @@
         if($jobs != null){
             extract($jobs);
         }
-        
     }
 
     //Jobs entsprechend der Suchkriteren der Inputfelder laden
@@ -68,9 +67,15 @@
     
     //Bearbeiten von Jobangeboten
     if(isset($request_checked["bearbeiten"]) && isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ) {
-        $jobs = $JobDAO->updateJob($request_checked);
+        
+        //Übergangslösung, wird geändert wenn aufruf von Bearbeiten über Post statt get
+        $job_id = $JobDAO->updateJob($request_checked, $request_checked["update_id"]);
+        
+        var_dump( $job_id);
+
+        
          
-        header( 'location: ../jobangebot-anzeigen?id=.php' . $jobs["id"]);
+        header( 'location: ../jobangebot-anzeigen.php?id=' . $job_id);
         exit;
      }
 
