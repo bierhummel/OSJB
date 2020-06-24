@@ -45,10 +45,12 @@ session_start();*/
 
             <section class="col-md-8 last_td">
                 <h5><?php echo($art); ?> - <?php echo($titel); ?></h5>
-                <p>Zeitintensität: (Zeitintesität)</p>
-                <p>Beginn: (Beginn)</p>
-                <p>(Firma)</p>
-                <p>(Hauptsitz oder Alternativer Standort)</p> <!--später alternativer Standort ggf. möglich?-->
+                <p>Zeitintensität: <?= $zeitintensitaet ?> </p>
+                <p>Beschäftigungsbeginn: <?= date_format(date_create($beschaeftigungsbeginn), 'd.m.yy') ?> </p>
+                
+                <!--<p>Firma: (fehlt noch in der DB)</p>-->
+                
+                <p>Adresse des Arbeitsplatz: <?= $strasse . " " . $hausnr . " " . $plz . " " . $stadt ?> </p> <!--später alternativer Standort ggf. möglich?-->
                 
             <!--später hinzufügen?
                 <p>(Optional): Kontaktperson: Max Mustermann</p>
@@ -60,14 +62,16 @@ session_start();*/
 
         <section>
             <h4 class="center">Gesuchte Qualifikationen:</h4>
-            <!--Es wird ggf. nur das angezeigt, was auch vorhanden ist?-->
+            <!--Es wird ggf. nur das angezeigt, was auch vorhanden ist? lieber als sub-array zurückgeben?-->
             <div class="row">
                 <div class="col-md-4">
-                    <p>Liste der angegebenen Abschlüsse</p>
+                    <p>Liste der angegebenen Abschlüsse: </p>
                     <ul>
-                        <li>Merkmal1</li>
-                        <li>Merkmal2</li>
-                        <li>Merkmal3</li>
+                        <?php if( $im_bachelor == 1){ ?> <li> Aktuell im Bachelorstudium </li> <?php } ?>
+                        <?php if( $bachelor == 1){ ?> <li> Abschlossener Bachelor </li> <?php } ?>
+                        <?php if( $im_master == 1){ ?> <li> Aktuell im Masterstudium </li> <?php } ?>
+                        <?php if( $master == 1){ ?> <li> Abschlossener Master </li> <?php } ?>
+                        <?php if( $ausbildung == 1){ ?> <li> Abgeschlossene Ausbildung </li> <?php } ?>
                     </ul>
                 </div>
                 
@@ -95,13 +99,15 @@ session_start();*/
 
         <section>
             <h5>Weitere Beschreibung des Jobangebots: </h5> <!--(Falls vorhanden: Inhalt des Textfelds mit individueller Beschreibung)-->
-            <p>(Text aus dem Textfeld)</p>
+            <p> <?= $beschreibung ?> </p>
             <!--<p><img src="dummy" alt="Bild mit individueller Beschreibung des Jobangebots" width="10" height="10"> (Nur angezeigt falls vorhanden?)-->
         </section>
 
         <section class="end">
-            <a href="http://www.google.com" class="btn btn-primary" role="button">Direkt beim Unternehmen bewerben</a>
             <!--(Link zur Seite des Unternehmens (Falls Link angegeben wurde)-->
+            <?php if( $link != ""){ ?>
+                <a href="https://<?= $link ?>" class="btn btn-primary" role="button">Direkt beim Unternehmen bewerben</a>
+            <?php } ?>
         </section>
     </div>
 

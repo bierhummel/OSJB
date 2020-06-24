@@ -71,7 +71,7 @@ include('php/calc-job.php');
                     
                     <div class="row form-group">
                         <div class="col">
-                            <label for="logo">Firmenlogo:</label>
+                            <label for="logo">Firmenlogo: (noch in Bearbeitung)</label>
                         </div>
                         <div class="col-sm">
                             <input class="btn btn-secondary" type="file" name="new_logo" id="logo">  <!--Sicherstellen, dass nur Bilder hochgeladen werden?-->
@@ -118,7 +118,7 @@ include('php/calc-job.php');
                     -->
 
                     <div class="form-group">
-                        <h4>Adresse:
+                        <h6>Adresse:
                             <!-- <input type="button" value="Bearbeiten" class="btn btn-secondary"-->
                         </h4>
                     </div>
@@ -194,10 +194,10 @@ include('php/calc-job.php');
                     (Datum an dem Jobangebot erstellt wurde)
                     (Jobangeobt aktiv/inaktiv)
                 -->
+                    <!--aufruf von bearbeiten und löschen übergangsweise quasi über get, später über post-->
+                    <a href="jobangebot-anlegen.php?new=0&id=<?php echo($id)?>" class="btn btn-secondary mr-3">Bearbeiten</a>
 
-                    <a href="jobangebot-anlegen.php?new=0" class="btn btn-secondary mr-3">Bearbeiten</a>
-
-                    <a href="profil.php?del=1&id=<?php echo($id)?>" class="btn btn-light">Löschen (noch in Bearbeitung)</a>
+                    <a href="profil.php?del=1&id=<?php echo($id)?>" class="btn btn-light">Löschen</a>
                 </div>
 
                 <?php endforeach; } ?>
