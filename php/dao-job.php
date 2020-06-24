@@ -318,7 +318,7 @@ class SQLiteJobDAO implements JobDAO {
     
     //erhält job_id und gibt true/false zurück
     public function deleteJob($job_id){
-        $database = "./database/database.db";
+        $database = "database/database.db";
         $db = new PDO('sqlite:' . $database);
         // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    

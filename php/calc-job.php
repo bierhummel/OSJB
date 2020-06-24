@@ -75,9 +75,11 @@
      }
 
 
-    //Löschen
-    if(isset($request_checked["del"]) && is_string($request_checked["del"]) && $request_checked["del"] === "1" && isset($request_checked["id"]) && is_string($request_checked["id"]) && isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ){
-        $jobs = $JobDAO->deleteJob($request_checked["id"]);
+    //Löschen (aktuell noch über get.. wird noch geändert)
+    if( isset( $request_checked["del"] ) && $request_checked["del"] === "1" && isset( $request_checked["id"] ) && isset( $_SESSION["eingeloggt"] ) && $_SESSION["eingeloggt"] == "true" )
+    {
+        $JobDAO->deleteJob($request_checked["id"]);
+        $jobs = $JobDAO->loadJobsOfUser($_SESSION["mail"]); 
     }
 
 

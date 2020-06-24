@@ -194,10 +194,10 @@ include('php/calc-job.php');
                     (Datum an dem Jobangebot erstellt wurde)
                     (Jobangeobt aktiv/inaktiv)
                 -->
-
+                    <!--aufruf von bearbeiten und löschen übergangsweise quasi über get, später über post-->
                     <a href="jobangebot-anlegen.php?new=0&id=<?php echo($id)?>" class="btn btn-secondary mr-3">Bearbeiten</a>
 
-                    <a href="profil.php?del=1&id=<?php echo($id)?>" class="btn btn-light">Löschen (noch in Bearbeitung)</a>
+                    <a href="profil.php?del=1&id=<?php echo($id)?>" class="btn btn-light">Löschen</a>
                 </div>
 
                 <?php endforeach; } ?>
