@@ -17,6 +17,8 @@ session_start();
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    
+    <script src="javascript/check-userinputs.js" async></script>
 
     <title>OSJB - Login</title>
 </head>
@@ -49,18 +51,18 @@ session_start();
                         
                         <div class="row form-group">
                             <div class="col-sm">
-                                <label for="email">Email:</label>                    
+                                <label for="email">E-Mail:</label>                    
                             </div>
                             
                             <div class="col-sm">
 
-                                <input type="email" id="email" placeholder="Email" name="email" required>
+                                <input type="email" id="email" placeholder="E-Mail" name="email" required>
                             </div>
                         </div>
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Bitte ausfüllen </div>
 
-
+                        
                         <div class="row form-group">
 
                             <div class="col-sm">
@@ -89,7 +91,7 @@ session_start();
                         <div class="form-check  d-flex align-items-end flex-column ">
                             <input type="submit" class="btn btn-primary m-2 " name="login" value="Login">
                         </div>
-                        
+                         
                     <!--Inhaltreduzierung
                         <div class="form-check d-flex align-items-end flex-column">
                             <input type="button" class="btn btn-light  " value="Passwort vergessen">
@@ -110,7 +112,6 @@ session_start();
         
         <div class="container col-xl-4 border">
             <section id="registrierung">
- <!--Durch überprüfung von $_SESSION["registriert"] = "failed"; prüfen ob registrierung fehlgeschlagen ist -> meldung ausgeben und $_SESSION["registriert"] auf "false" ändern-->
                 <form action="php/config-reg.php" method="post" class="was-validated">
                     <fieldset>
                         <legend>Registrierung:</legend>
@@ -120,7 +121,7 @@ session_start();
                                 <label for="firma">Firma:</label>
                             </div>
                             <div class="col-sm">
-                                <input type="text" id="name" placeholder="" name="firma" required>
+                                <input type="text" id="firma" placeholder="" name="firma" required>
                             </div>
                         </div>
                         
@@ -129,7 +130,7 @@ session_start();
                                 <label for="vorname">Vorname:</label>
                             </div>
                             <div class="col-sm">
-                                <input type="text" id="name" placeholder="" name="vorname" required>
+                                <input type="text" id="vorname" placeholder="" name="vorname" required>
                             </div>
                         </div>
                         
@@ -138,13 +139,13 @@ session_start();
                                 <label for="nachname">Nachname:</label>
                             </div>
                             <div class="col-sm">
-                                <input type="text" id="name" placeholder="" name="nachname" required>
+                                <input type="text" id="nachname" placeholder="" name="nachname" required>
                             </div>
                         </div>
                         
                         <div class="row form-group">
                             <div class="col">
-                                <label for="r_email">Email:</label>
+                                <label for="r_email">E-Mail:</label>
                             </div>
                             <div class="col-sm">
 
@@ -172,6 +173,7 @@ session_start();
 
                         <div class="form-group d-flex align-items-end flex-column">
                             
+                        <!--Durch überprüfung von $_SESSION["registriert"] = "failed"; prüfen ob registrierung fehlgeschlagen ist -> meldung ausgeben und $_SESSION["registriert"] auf "false" ändern-->                            
                             <!--Rückmeldung zur Registrierung übergangsweise anzeigen-->
                             <?php if (isset ($_SESSION["registrierung"]) ) {
                                 if($_SESSION["registrierung"] == "pw_fail") { ?>
@@ -183,7 +185,7 @@ session_start();
                                 <?php } $_SESSION["registrierung"] = ""; } 
                             ?>
             
-                            <input type="submit" class="btn btn-primary" name="registrieren" value="Registrieren">
+                            <input type="submit" class="btn btn-primary" id="registrieren" name="registrieren" value="Registrieren">
                         </div>
                     </fieldset>
                 </form>
