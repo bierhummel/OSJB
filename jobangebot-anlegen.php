@@ -49,12 +49,12 @@ session_start();*/
                         <div class="col-md-5 last_td">
                             <select class="form-control" name="art" size="1" required>
                                 <option value="">Beschäftigungsart</option>
-                                <option value="Festanstellung" <?php if($art == "Festanstellung"){ ?> selected <?php } ?> >Festanstellung</option>
-                                <option value="Praktikum" <?php if($art == "Praktikum"){ ?> selected <?php } ?> >Praktikum</option>
-                                <option value="Aushilfe" <?php if($art == "Aushilfe"){ ?> selected <?php } ?> >Aushilfe</option>
-                                <option value="Werkstudent" <?php if($art == "Werkstudent"){ ?> selected <?php } ?> >Werkstudent</option>
-                                <option value="Volontarioat" <?php if($art == "Volontarioat"){ ?> selected <?php } ?> >Volontarioat</option>
-                                <option value="Minijob" <?php if($art == "Minijob"){ ?> selected <?php } ?> >Minijob</option>
+                                <option value="Festanstellung" <?php if($jobs != null && $art == "Festanstellung"){ ?> selected <?php } ?> >Festanstellung</option>
+                                <option value="Praktikum" <?php if($jobs != null && $art == "Praktikum"){ ?> selected <?php } ?> >Praktikum</option>
+                                <option value="Aushilfe" <?php if($jobs != null && $art == "Aushilfe"){ ?> selected <?php } ?> >Aushilfe</option>
+                                <option value="Werkstudent" <?php if($jobs != null && $art == "Werkstudent"){ ?> selected <?php } ?> >Werkstudent</option>
+                                <option value="Volontarioat" <?php if($jobs != null && $art == "Volontarioat"){ ?> selected <?php } ?> >Volontarioat</option>
+                                <option value="Minijob" <?php if($jobs != null && $art == "Minijob"){ ?> selected <?php } ?> >Minijob</option>
                             </select>
                         </div>
                         <div class="col-md-2">
@@ -70,12 +70,12 @@ session_start();*/
                         <div class="col-lg-5 last_td">
                             <select class="form-control" name="fachrichtung" size="1" required>
                                 <option value="">Fachrichtung auswählen</option>
-                                <option value="Bildungs- und Sozialwissenschaften" <?php if($fachrichtung == "Bildungs- und Sozialwissenschaften"){ ?> selected <?php } ?> >Bildungs- und Sozialwissenschaften</option>
-                                <option value="Informatik, Wirtschafts- und Rechtswissenschaften" <?php if($fachrichtung == "Informatik, Wirtschafts- und Rechtswissenschaften"){ ?> selected <?php } ?> >Informatik, Wirtschafts- und Rechtswissenschaften</option>
-                                <option value="Sprach- und Kulturwissenschaften" <?php if($fachrichtung == "Sprach- und Kulturwissenschaften"){ ?> selected <?php } ?> >Sprach- und Kulturwissenschaften</option>
-                                <option value="Human- und Gesellschaftswissenschaften" <?php if($fachrichtung == "Human- und Gesellschaftswissenschaften"){ ?> selected <?php } ?> >Human- und Gesellschaftswissenschaften</option>
-                                <option value="Mathematik und Naturwissenschaften" <?php if($fachrichtung == "Mathematik und Naturwissenschaften"){ ?> selected <?php } ?> >Mathematik und Naturwissenschaften</option>
-                                <option value="Medizin und Gesundheitswissenschaften" <?php if($fachrichtung == "Medizin und Gesundheitswissenschaften"){ ?> selected <?php } ?> >Medizin und Gesundheitswissenschaften</option>
+                                <option value="Bildungs- und Sozialwissenschaften" <?php if($jobs != null && $fachrichtung == "Bildungs- und Sozialwissenschaften"){ ?> selected <?php } ?> >Bildungs- und Sozialwissenschaften</option>
+                                <option value="Informatik, Wirtschafts- und Rechtswissenschaften" <?php if($jobs != null && $fachrichtung == "Informatik, Wirtschafts- und Rechtswissenschaften"){ ?> selected <?php } ?> >Informatik, Wirtschafts- und Rechtswissenschaften</option>
+                                <option value="Sprach- und Kulturwissenschaften" <?php if($jobs != null && $fachrichtung == "Sprach- und Kulturwissenschaften"){ ?> selected <?php } ?> >Sprach- und Kulturwissenschaften</option>
+                                <option value="Human- und Gesellschaftswissenschaften" <?php if($jobs != null && $fachrichtung == "Human- und Gesellschaftswissenschaften"){ ?> selected <?php } ?> >Human- und Gesellschaftswissenschaften</option>
+                                <option value="Mathematik und Naturwissenschaften" <?php if($jobs != null && $fachrichtung == "Mathematik und Naturwissenschaften"){ ?> selected <?php } ?> >Mathematik und Naturwissenschaften</option>
+                                <option value="Medizin und Gesundheitswissenschaften" <?php if($jobs != null && $fachrichtung == "Medizin und Gesundheitswissenschaften"){ ?> selected <?php } ?> >Medizin und Gesundheitswissenschaften</option>
                             </select>
                         </div>
                         <div class="col-lg-2">
