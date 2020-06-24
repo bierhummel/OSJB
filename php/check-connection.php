@@ -37,8 +37,8 @@ try{
         $mail = "stefan-schroeder@osjb.de";    
         $strasse = "An der großen Eiche";
         $hausnr = "41a-d";
-        $plz = "33602";
-        $stadt = "Bielefeld";    
+        $plz = "26129";
+        $stadt = "Oldenburg";    
         $verified = 1;
         $mail_verified = 1;
 
@@ -131,8 +131,8 @@ try{
         $titel = "Praktikum Webprogrammierung";
         $strasse = "Carl-von-Ossietzky-Straße";
         $hausnr = "32";
-        $plz = "21335";
-        $stadt = "Lüneburg";
+        $plz = "26129";
+        $stadt = "Oldenburg";
         $beschreibung = "Ein Testangebot nur für Sie!";
         $art = "Praktikum";
         $im_bachelor = 0;
