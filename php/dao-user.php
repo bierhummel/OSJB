@@ -27,7 +27,7 @@ class SQLiteUserDAO implements UserDAO {
         // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  
         $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
-        $user = null; //Array mit allen wichtigen Informationen des Users (z.b. keine id kein PW)
+        $user = null; //Array mit allen Informationen des Users
 
         try{      
             $hashed_password = "select password from user where mail = :mail";
@@ -35,7 +35,7 @@ class SQLiteUserDAO implements UserDAO {
             $stmt->bindParam(':mail', $input_mail);  
             $stmt->execute();
      
-            $pw_in_db = $stmt->fetchColumn(); //hier brauchen wir laut Roman was anderes glaub ich
+            $pw_in_db = $stmt->fetchColumn();
             
             if (password_verify($input_pw, $pw_in_db)) {
                 $stmt = $db->prepare("select * from user WHERE mail = ?");
@@ -56,13 +56,14 @@ class SQLiteUserDAO implements UserDAO {
     
 
     public function updateUser( $updated_user, $input_mail ){
-        $user = null; //Array mit allen wichtigen Informationen des Users (z.b. keine id kein PW)
+        $user = null; //Array mit allen Informationen des Users
         
         // Erzeugen eines PDO's für die Transaktion    
         $database = "../database/database.db";
         $db = new PDO('sqlite:' . $database);
         // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  
+        $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
 
         try{
             //Offen: Passwörter gesondert behandeln? Darf man E-Mail einfach so ändern?
@@ -95,8 +96,10 @@ class SQLiteUserDAO implements UserDAO {
             //rückgabewerte auslesen (mit ggf. geändertet E-Mail)
             //unternehmensname
             $stmt = $db->prepare("select * from user WHERE mail = ?");
-            $user = $stmt->execute(array($updated_user["new_email"]));   
-            return $user;                        
+            $stmt->execute(array($updated_user["new_email"]));   
+            $user = $stmt->fetch();    
+
+            return $user;   
             
             
         } 
