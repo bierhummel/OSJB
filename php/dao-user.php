@@ -93,6 +93,7 @@ class SQLiteUserDAO implements UserDAO {
             // Und führe die Transaktion letzlich aus.
             $stmt->execute();
             
+            
             //rückgabewerte auslesen (mit ggf. geändertet E-Mail)
             //unternehmensname
             $stmt = $db->prepare("select * from user WHERE mail = ?");
@@ -100,7 +101,6 @@ class SQLiteUserDAO implements UserDAO {
             $user = $stmt->fetch();    
 
             return $user;   
-            
             
         } 
         catch(PDOException $e) {
