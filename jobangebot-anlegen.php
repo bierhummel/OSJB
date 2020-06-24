@@ -41,6 +41,9 @@ session_start();*/
     <div class="container border">
         <section>
             <form action="php/calc-job.php" method="post">
+                <!--Übergangslösung, wird geändert sobald Aufruf von bearbeiten geändert-->
+                <input type="hidden" name="update_id" value="<?= $id ?>" >
+                
                 <section>
                     <h3 class="center">Allgemeine Informationen</h3>
                     <h4 class="center mb-4">Informationen zum Job</h4>

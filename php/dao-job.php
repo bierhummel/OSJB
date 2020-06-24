@@ -4,7 +4,7 @@
 
 interface JobDAO {
     public function createJob($job, $user_email);
-    public function updateJob($job);
+    public function updateJob($job, $job_id);
     public function loadJobs($suchkrit);
     public function deleteJob($job_id);
 }
@@ -130,8 +130,8 @@ class SQLiteJobDAO implements JobDAO {
         }      
     }     
     
-    //erhält array mit inputwerten von jobangebot-anlegen.php und gibt true/false zurück
-    public function updateJob($job){
+    //erhält array mit inputwerten von jobangebot-anlegen.php und gibt id des jobs zurück
+    public function updateJob($job, $job_id){
         //TODO: job_id muss noch mit übergeben werden. Übergangslösung:
        // $job_id = 4;
         $database = "../database/database.db";
@@ -144,11 +144,11 @@ class SQLiteJobDAO implements JobDAO {
             // Default: Anzeige ist aktiv TODO: Das soll vom User noch verändert werden können?
             $status = 1;
             //TODO: Titel, Strasse, Hausnummer, PLZ und Stadt werden noch nicht abgefragt
-            $titel = NULL;
-            $strasse = NULL;
-            $hausnr = NULL;
-            $plz = NULL;
-            $stadt = NULL;
+            $titel = $job['titel'];
+            $strasse = $job['job_strasse'];
+            $hausnr = $job['job_hausnr'];
+            $plz = $job['job_plz'];
+            $stadt = $job['job_stadt'];
             
             //Beschäftigungsart
             $beschaeftigungsart = $job['art'];
@@ -196,15 +196,17 @@ class SQLiteJobDAO implements JobDAO {
             if($job['ausbildung'] == 'ausbildung'){
                 $ausbildung = 1;
             }
+            
             //Individuelle Beschreibung
             $beschreibung = $job['message'];
             if ($beschreibung == ''){
                 $beschreibung = NULL;
             }
+
             //SQL Update        
-            $updatedJob = "update jobangebot set status = :status, titel = :titel, strasse = :strasse, hausnr = :hausnr, plz = :plz, stadt = :stadt, beschreibung = :beschreibung, art = :art, zeitintensitaet = :zeitintensitaet, im_bachelor = :im_bachelor, bachelor = :bachelor, im_master = :im_master, master = :master, ausbildung = :ausbildung, fachrichtung = :fachrichtung, link = :link, beschaeftigungsbeginn = :beschaeftigungsbeginn";
+            $updatedJob = "update jobangebot set status = :status, titel = :titel, strasse = :strasse, hausnr = :hausnr, plz = :plz, stadt = :stadt, beschreibung = :beschreibung, art = :art, zeitintensitaet = :zeitintensitaet, im_bachelor = :im_bachelor, bachelor = :bachelor, im_master = :im_master, master = :master, ausbildung = :ausbildung, fachrichtung = :fachrichtung, link = :link, beschaeftigungsbeginn = :beschaeftigungsbeginn where id = :id";
             
-            $stmt = $db->prepare($newJob);
+            $stmt = $db->prepare($updatedJob);
             
             $stmt->bindParam(':status', $status);  
             $stmt->bindParam(':titel', $titel); // n.v.   
@@ -223,15 +225,16 @@ class SQLiteJobDAO implements JobDAO {
             $stmt->bindParam(':link', $link);       
             $stmt->bindParam(':beschaeftigungsbeginn', $beginn);  
             $stmt->bindParam(':zeitintensitaet', $intensitaet);
+            $stmt->bindParam(':id', $job_id);
             $stmt->execute();
             
-            return true;
+            return $job_id;
             
         } catch(PDOException $e) {
-                    // Print PDOException message
-                    echo $e->getMessage();
-                }      
-        return false;
+            // Print PDOException message
+            echo $e->getMessage();
+        }      
+        return null;
     }     
     
     
