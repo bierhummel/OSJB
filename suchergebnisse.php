@@ -203,15 +203,20 @@ include('php/calc-job.php');
                         $count++;
             ?>
                                 
-                <section class="border mb-4">
+                <section class="border mb-4 mt-3">
                     <div class="row">
                         <div class="col-md-5 col-lg-4 col-xl-3 center align-self-center mb-3">
                             <img class="img-fluid" src="bilder/logo.png" alt="muster_firmenlogo" width="150" height="150">
                         </div>
                         <div class="col-md-7 col-lg-8 col-xl-9">
-                            <h5><?php echo($art); ?> - <?php echo($bez); ?></h5>
-                            <p>20h/Woche</p>
-                            <p>Kurze Informationen zur Anzeige</p>
+                            <h5> <?php echo($art); ?> - <?php echo($titel); ?> </h5>
+                            <p> <?=$zeitintensitaet?> </p>
+                            <p> 
+                                <?php 
+                                    echo substr($beschreibung, 0, 150); 
+                                    if (strlen($beschreibung) > 150){echo " (...)";} 
+                                ?> 
+                            </p>
                             <p class="end">
                                 <a class="btn btn-primary" href="jobangebot-anzeigen.php?id=<?php echo($id)?>">Weitere Informationen</a>
                             </p>
@@ -221,7 +226,7 @@ include('php/calc-job.php');
                 
             <?php endforeach; } ?>
                 
-                <p class="center">Ende der Liste. Es wurden <?php echo $count ?> Jobangebote gefunden.</p>
+                <p class="center">Ende der Liste. Es wurde(n) <?php echo $count ?> Jobangebot(e) gefunden.</p>
             </div>
         </div>
     </div>

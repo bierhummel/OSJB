@@ -1,9 +1,10 @@
 <?php
 
+include_once("php/check-connection.php");
+
 ini_set("session.use_cookies", 1); 
 ini_set("session.use_only_cookies", 0);
 ini_set("session.use_trans_sid", 1);
-
 session_start();
 ?>
 
@@ -18,6 +19,8 @@ session_start();
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    
+    <script src="javascript/check-userinputs.js" async></script>
     
     <title>OSJB - Startseite</title>
 </head>
@@ -37,37 +40,42 @@ session_start();
             <!--später die Breite aller Inputfelder einheitlich gestalten, bei dieser Abgabe zeitlich nicht geschafft-->
             <div class="search">
                 <form action="suchergebnisse.php" method="get">
-                    <p class="center"><label>
-                            <input type="text" name="plz" class="form-control form-control-lg" maxlength="5" value="" placeholder="Deine PLZ" required autofocus>
-                            <!--Später mit pattern Attribut absichern?-->
-                        </label></p>
+                    <h4 class="mb-5">
+                        <label for="plz">PLZ: </label>
+                        <input type="text" id="plz" name="plz" class="form-control form-control-lg" maxlength="5" value="" placeholder="Deine PLZ" required autofocus>
+                        <!--Später mit pattern Attribut absichern?-->
+                    </h4>
 
-                    <p class="center"><label>
-                            <select name="umkreis" class="custom-select custom-select-lg" size="1" required>
-                                <option value="">Umkreis auswählen</option>
-                                <option value="5">5 km</option>
-                                <option value="10">10 km</option>
-                                <option value="15">15 km</option>
-                                <option value="20">20 km</option>
-                                <option value="25">25 km</option>
-                                <option value="30">30 km</option>
-                                <option value="50+">50+ km</option>
-                            </select>
-                        </label></p>
+                    <h4 class="mb-5">
+                        <label for="umkreis">Umkreis: </label>
+                        <select id="umkreis" name="umkreis" class="custom-select custom-select-lg" size="1" required>
+                            <option value="">Umkreis auswählen</option>
+                            <option value="5">5 km</option>
+                            <option value="10">10 km</option>
+                            <option value="15" selected>15 km</option>
+                            <option value="20">20 km</option>
+                            <option value="25">25 km</option>
+                            <option value="30">30 km</option>
+                            <option value="50+">50+ km</option>
+                        </select>
+                    </h4>
 
-                    <p class="center"><label>
-                            <select name="fachrichtung" class="custom-select custom-select-lg" size="1">
-                                <option value="">Fachrichtung auswählen</option>
-                                <option value="fr1">Bildungs- und Sozialwissenschaften</option>
-                                <option value="fr2">Informatik, Wirtschafts- und Rechtswissenschaften</option>
-                                <option value="fr3">Sprach- und Kulturwissenschaften</option>
-                                <option value="fr4">Human- und Gesellschaftswissenschaften</option>
-                                <option value="fr5">Mathematik und Naturwissenschaften</option>
-                                <option value="fr6">Medizin und Gesundheitswissenschaften</option>
-                            </select>
-                        </label></p>
+                    <h4 class="mb-5">
+                        <label for="fachrichtung">Fachrichtung:</label>
+                        <select id="fachrichtung" name="fachrichtung" class="custom-select custom-select-lg" size="1">
+                            <option value="alle">Fachrichtung auswählen</option>
+                            <option value="Bildungs- und Sozialwissenschaften">Bildungs- und Sozialwissenschaften</option>
+                            <option value="Informatik, Wirtschafts- und Rechtswissenschaften">Informatik, Wirtschafts- und Rechtswissenschaften</option>
+                            <option value="Sprach- und Kulturwissenschaften">Sprach- und Kulturwissenschaften</option>
+                            <option value="Human- und Gesellschaftswissenschaften">Human- und Gesellschaftswissenschaften</option>
+                            <option value="Mathematik und Naturwissenschaften">Mathematik und Naturwissenschaften</option>
+                            <option value="Medizin und Gesundheitswissenschaften">Medizin und Gesundheitswissenschaften</option>
+                        </select>
+                    </h4>
 
-                    <p class="center"> <input type="submit" value="Los!" class="btn btn-primary"></p>
+                    <h4 class=""> 
+                        <input type="submit" id="suchen" value="Suche starten!" class="btn btn-primary">
+                    </h4>
                 </form>
             </div>
             <div>

@@ -19,6 +19,8 @@ include('php/calc-job.php');
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    
+    <script src="javascript/check-userinputs.js" async></script>
 
     <title>OSJB - Profil</title>
 </head>
@@ -44,23 +46,37 @@ include('php/calc-job.php');
  <!--Durch überprüfung von $_SESSION["update"] = "failed"; prüfen ob update fehlgeschlagen ist -> meldung ausgeben und $_SESSION["update"] auf "false" ändern-->
                 
                 <form action="php/config-reg.php" method="post">
-                    <h3 class="center mb-3">Profil von <?php echo($_SESSION["vorname"] . " " . $_SESSION["nachname"]) ?> </h3>
+                    <h3 class="center mb-5">
+                        Profil von 
+                        <?= $_SESSION["vname"] . " " . $_SESSION["nname"];?> 
+                    </h3>
+                    
+                    <!--Rückmeldung zum Update übergangsweise hier anzeigen-->
+                    <p>
+                        <?php if (isset ($_SESSION["update"]) ) {
+                            if($_SESSION["update"] == "fail") { ?>
+                                Fehler beim Update. (Übergangslösung)
+                            <?php } elseif ($_SESSION["update"] == "success") { ?>
+                                Nutzerdaten erfolgreich aktualisiert. (Übergangslösung)
+                            <?php } $_SESSION["update"] = ""; } 
+                        ?>
+                    </p>
                     
                     <div class="row form-group">
                         <div class="col">
-                            <label for="firma">Firma:</label>
+                            <label for="firma">Firma: </label>
                         </div>
                         <div class="col-sm">
-                            <input type="text" id="firma" name="firma" readonly>
+                            <input type="text" id="firma" name="new_firma" value="<?= $_SESSION["uname"] ?>">
                         </div>
                     </div>
                     
                     <div class="row form-group">
                         <div class="col">
-                            <label for="logo">Firmenlogo:</label>
+                            <label for="logo">Firmenlogo: (noch in Bearbeitung)</label>
                         </div>
                         <div class="col-sm">
-                            <input class="btn btn-secondary" type="file" name="logo" id="logo">  <!--Sicherstellen, dass nur Bilder hochgeladen werden?-->
+                            <input class="btn btn-secondary" type="file" name="new_logo" id="logo">  <!--Sicherstellen, dass nur Bilder hochgeladen werden?-->
                         </div>
                     </div>    
                     
@@ -69,7 +85,7 @@ include('php/calc-job.php');
                             <label for="vorname">Vorname:</label>
                         </div>
                         <div class="col-sm">
-                            <input type="text" id="vorname" name="vorname" readonly>
+                            <input type="text" id="vorname" name="new_vorname" value="<?= $_SESSION["vname"] ?>">
                         </div>
                     </div>
                     
@@ -78,20 +94,22 @@ include('php/calc-job.php');
                             <label for="nachname">Nachname:</label>
                         </div>
                         <div class="col-sm">
-                            <input type="text" id="nachname" name="nachname" readonly>
+                            <input type="text" id="nachname" name="new_nachname" value="<?= $_SESSION["nname"] ?>">
                         </div>
                     </div>
 
                     <div class="row form-group">
                         <div class="col-sm">
-                            <label for="email">Email:</label>
+                            <label for="new_email">E-Mail:</label>
                         </div>
                         <div class="col-sm">
-                            <input type="email" id="email" name="email">
+                            <input type="email" id="new_email" name="new_email" value="<?= $_SESSION["mail"] ?>">
                         </div>
                     </div>
 
-                    <div class="row form-group">
+                    <!--passwort ändern später-->
+                    <!--
+                    <div class="row form-group">                        
                         <div class="col-sm">
                             <label for="password">Passwort:</label>
                         </div>
@@ -99,19 +117,20 @@ include('php/calc-job.php');
                             <input type="password" id="password" name="passwort">
                         </div>
                     </div>
+                    -->
 
                     <div class="form-group">
-                        <h4>Adresse:
+                        <h6>Adresse:
                             <!-- <input type="button" value="Bearbeiten" class="btn btn-secondary"-->
                         </h4>
                     </div>
 
                     <div class="row form-group">
                         <div class="col-sm">
-                            <label for="straße">Straße:</label>
+                            <label for="strasse">Straße:</label>
                         </div>
                         <div class="col-sm">
-                            <input type="text" id="straße" name="strasse">
+                            <input type="text" id="strasse" name="new_strasse" value="<?= $_SESSION["strasse"] ?>">
                         </div>
                     </div>
                     
@@ -120,7 +139,7 @@ include('php/calc-job.php');
                             <label for="straße">Hausnummer:</label>
                         </div>
                         <div class="col-sm">
-                            <input type="text" id="straße" name="hausnr">
+                            <input type="text" id="hausnr" name="new_hausnr" value="<?= $_SESSION["hausnr"] ?>">
                         </div>
                     </div>
 
@@ -129,7 +148,7 @@ include('php/calc-job.php');
                             <label for="plz">PLZ:</label>
                         </div>
                         <div class="col-sm">
-                            <input type="number" id="plz" name="plz">
+                            <input type="text" id="plz" name="new_plz" value="<?= $_SESSION["plz"] ?>" maxlength="5">
                         </div>
                     </div>
 
@@ -138,7 +157,7 @@ include('php/calc-job.php');
                             <label for="stadt">Stadt:</label>
                         </div>
                         <div class="col-sm">
-                            <input type="text" id="stadt" name="stadt">
+                            <input type="text" id="stadt" name="new_stadt" value="<?= $_SESSION["stadt"] ?>">
                         </div>
                     </div>
 
@@ -171,16 +190,16 @@ include('php/calc-job.php');
                 ?>
 
                 <div class="border">
-                    <a class="mr-3" href="jobangebot-anzeigen.php?id=<?php echo($id)?>"> <?php echo($bez)?></a>
+                    <a class="mr-3" href="jobangebot-anzeigen.php?id=<?php echo($id)?>"> <?php echo($titel)?></a>
                     
                 <!--Inhaltsreduzierung
                     (Datum an dem Jobangebot erstellt wurde)
                     (Jobangeobt aktiv/inaktiv)
                 -->
+                    <!--aufruf von bearbeiten und löschen übergangsweise quasi über get, später über post-->
+                    <a href="jobangebot-anlegen.php?new=0&id=<?php echo($id)?>" class="btn btn-secondary mr-3">Bearbeiten</a>
 
-                    <a href="jobangebot-anlegen.php?new=0" class="btn btn-secondary mr-3">Bearbeiten</a>
-
-                    <a href="profil.php?del=1&id=<?php echo($id)?>" class="btn btn-light">Löschen (noch in Bearbeitung)</a>
+                    <a href="profil.php?del=1&id=<?php echo($id)?>" class="btn btn-light">Löschen</a>
                 </div>
 
                 <?php endforeach; } ?>
