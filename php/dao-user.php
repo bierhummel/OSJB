@@ -1,6 +1,5 @@
 <?php
 
-//TODO: Die Prepared Statements auslagern und einen Connector erstellen, damit es übersichtlicher wird
 
 interface UserDAO {
     public function loginUser( $email, $password );
@@ -10,10 +9,14 @@ interface UserDAO {
     public function registerUser( $user );
     
     public function deleteUser(  $user_id, $password );
-    
-    //public function activateUser(); Übergangsweise(?) neuer Benutzer direkt aktiv
+
 }
 
+/****************************************************************************
+/* Klasse für Zugriff auf User in DB                                        *
+*  TODO: Die Prepared Statements auslagern und einen Connector erstellen,   *
+*  damit es übersichtlicher wird                                            *
+****************************************************************************/
 
 class SQLiteUserDAO implements UserDAO {
     //ruhig auch benutzen anstatt immer wieder neu angeben?
@@ -66,17 +69,12 @@ class SQLiteUserDAO implements UserDAO {
         $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
 
         try{
-            //Offen: Passwörter gesondert behandeln? Darf man E-Mail einfach so ändern?
             
             //Statement entwerfen
             $update = "update user set uname = :new_uname, vname = :new_vname, nname = :new_nname, mail = :new_mail, strasse = :new_strasse, hausnr = :new_hausnr, plz = :new_plz, stadt = :new_stadt where mail = :mail";
 
             
-            //Werte aus dem Array holen (eigentlich unnötig?)
-            $strasse = $updated_user["new_strasse"];
-            $hausnr = $updated_user["new_hausnr"];
-            $plz = $updated_user["new_plz"];
-            $stadt = $updated_user["new_stadt"];
+            //Statement preparen
             $stmt = $db->prepare($update);
             
             // Binde die Parameter an die Variablen,
@@ -84,10 +82,10 @@ class SQLiteUserDAO implements UserDAO {
             $stmt->bindParam(':new_vname', $updated_user["new_vorname"]);
             $stmt->bindParam(':new_nname', $updated_user["new_nachname"]);
             $stmt->bindParam(':new_mail', $updated_user["new_email"]);
-            $stmt->bindParam(':new_strasse', $strasse);
-            $stmt->bindParam(':new_hausnr', $hausnr);
-            $stmt->bindParam(':new_plz', $plz);       
-            $stmt->bindParam(':new_stadt', $stadt); 
+            $stmt->bindParam(':new_strasse', $updated_user["new_strasse"]);
+            $stmt->bindParam(':new_hausnr', $updated_user["new_hausnr"]);
+            $stmt->bindParam(':new_plz', $updated_user["new_plz"]);       
+            $stmt->bindParam(':new_stadt', $updated_user["new_stadt"]); 
             $stmt->bindParam(':mail', $input_mail);   
             
             // Und führe die Transaktion letzlich aus.
@@ -209,39 +207,6 @@ class SQLiteUserDAO implements UserDAO {
         }
     }
 }
-
-
-
-/* Altes DummyDAO von Wael, würde nicht mehr funktionieren. Löschen?
-class DummyUserDAO implements UserDAO {
-
-    public function load( $email, $password ) {
-        $u = new Benutzer();
-        $email = $u->getEmail();
-        $password = $u->getPassword();
-    }
-
-    public function save( $name, $email, $password ) {
-
-        $x = new Benutzer();
-
-        $x->setEmail( $email );
-        $x->setName( $name );
-        $x->setEmail( $password );
-
-    }
-
-    public function update( $name, $email, $password ) {
-        $y = new Benutzer();
-        $y-> getEmail( $email );
-        $y-> getName( $name );
-        $y-> getPassword( $password );
-    }
-}
-*/
-
-
-//Unerlaubter oder fehlerhafter Aufruf?
 
 
 ?>

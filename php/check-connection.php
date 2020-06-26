@@ -1,6 +1,11 @@
 <?php 
 
-//Besser: Check-Datenbank.php?
+/************************************************
+/* Klasse fürs Überprüfen der Datenbank         *
+*  Ist keine DB vorhanden, wird eine erstellt   *
+*  Es werden Testdaten in die DB eingetragen    *
+************************************************/
+
 
 $database = "database/database.db";
 $file_existed = false;
