@@ -137,7 +137,7 @@ class SQLiteJobDAO implements JobDAO {
     }     
     
     //erhält array mit inputwerten von jobangebot-anlegen.php und gibt id des jobs zurück
-    public function updateJob($job, $job_id)
+    public function updateJob($job, $job_id){
         //Pfad zur DB
         $database = "../database/database.db";
         // Verbindung wird durch das Erstellen von Instanzen der PDO-Basisklasse erzeugt: 
