@@ -2,15 +2,16 @@
 
 //Datei nach merge umbennen zu process-job?
 
-//Überprüfung der Eingabedaten
+
+//Überprüfung der übergebenen Eingabedaten zum Schutz vor XSS, egal ob GET oder POST
     include('check-inputs.php'); 
-    /*$get_checked = check_get($_GET);
-    $post_checked = check_get($_POST);*/
     $request_checked = check_inputs($_REQUEST);
 
-    
 
-//Geschäftslogik der Verwaltung von Jobangeboten
+
+//Geschäftslogik der Verarbeitung von Jobangeboten
+    
+    //Wenn noch keine Session gestartet, Session starten (Wichtig da teilweise von Formularen direkt aufgerufen, teilweise als include in View enthalten)
     if(session_status() != 2){
         //session starten
         ini_set( 'session.use_cookies', 1 );
@@ -19,15 +20,11 @@
         session_start();  
     }
 
-
     //Einbindung des DAO
     include('dao-job.php'); 
     $JobDAO = new SQLiteJobDAO();
 
-
-    //Variable mit allen anzuzeigenden Jobangeboten füllen (nicht optimal, wird überarbeitet)
-    //$jobs = $JobDAO->loadJobs($request_checked);   
-
+    //Variable für (ggf. zweidimensionales) Array mit gefundenen Jobangeboten vorbereiten
     $jobs = null;
     
     //Liste der Jobs eines Users laden

@@ -1,9 +1,9 @@
 <?php 
-/*ini_set("session.use_cookies", 1); 
+ini_set("session.use_cookies", 1); 
 ini_set("session.use_only_cookies", 0);
 ini_set("session.use_trans_sid", 1);
 
-session_start();*/
+session_start();
 
 include('php/calc-job.php'); 
 
@@ -22,6 +22,8 @@ include('php/calc-job.php');
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/hamburger.css">
+    
+    <script src="javascript/check-userinputs.js" async></script>
 
     <title>OSJB - Suchergebnisse</title>
 </head>
