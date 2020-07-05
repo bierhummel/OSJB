@@ -58,6 +58,7 @@ class SQLiteUserDAO implements UserDAO {
     }
     
 
+    //Offen: Passwörter ändern. Sinnvoll das E-Mail einfach so geändert werden darf?
     public function updateUser( $updated_user, $input_mail ){
         $user = null; //Array mit allen Informationen des Users
         
@@ -207,6 +208,8 @@ class SQLiteUserDAO implements UserDAO {
         }
     }
 }
+
+//Unerlaubter oder fehlerhafter Aufruf abfangen?
 
 
 ?>
