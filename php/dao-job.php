@@ -245,46 +245,236 @@ class SQLiteJobDAO implements JobDAO {
     }     
     
     
-    //erhält entweder array mit inputwerten von index (oder später von filterbox), die e-mail eines nutzers oder eine jobid und gibt zwei-dimensionales array mit den gefundenen jobangeboten als array zurück 
+    //Erhält Array mit Inputwerten von Index.php (oder später von Filterbox aus Suchergebnisse.php) und gibt zwei-dimensionales Array mit den gefundenen Jobangeboten zurück 
     public function loadJobs($suchkrit){
-        //Pfad zur DB
-        $database = "database/database.db";
-        // Verbindung wird durch das Erstellen von Instanzen der PDO-Basisklasse erzeugt: 
-        $db = new PDO('sqlite:' . $database);
-        // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
-        try{       
-        // Fetch-Mode ändern, da sonst doppelte Einträge ins Array eingetragen werden
-        $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
-        // PLZ und Fachrichtung aus den Suchkriterien-Array holen
-        $plz = $suchkrit['plz'];    
-        $fachrichtung = $suchkrit['fachrichtung'];
-        // Wenn keine Fachrichtung angegeben wurde:    
-            if ($fachrichtung == "alle"){
-                // Hole alle Jobangebote, wo die PLZ gleich ist mit der eingegebenen PLZ
-                $stmt = $db->prepare("select * from jobangebot where plz = ?");
-                // Query ausführen und den Parameter binden
-                $stmt->execute(array($plz));
-                // Das Array wird gespeichert...
-                $jobs = $stmt->fetchAll();  
-                // und returned
-                return $jobs;   
+        try{  
+            //Pfad zur DB
+            $database = "database/database.db";
+            // Verbindung wird durch das Erstellen von Instanzen der PDO-Basisklasse erzeugt: 
+            $db = new PDO('sqlite:' . $database);
+            // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
+            // Fetch-Mode ändern, da sonst doppelte Einträge ins Array eingetragen werden
+            $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
+            
+            //Beginn der Erstellung der sql-Abfrage
+            $sql = "select * from jobangebot where 1=1";
+            
+            //Überprüfung der Filteroptionen und entsprechende Erweiterung der sql-Abfrage
+            //Fachrichtung
+            if ( isset($suchkrit["fachrichtung"]) && $suchkrit["fachrichtung"] != ""){
+                $sql .= " and fachrichtung = :fachrichtung";
             }
-            else {
-                // Hole alle Jobangebote, wo die Fachrichtung und PLZ der eingegebenen Fachrichtung / PLZ entspricht und preparen
-                $stmt = $db->prepare("select * from jobangebot where plz = ? and fachrichtung = ?"); 
-                // Query ausführen und die Parameter binden
-                $stmt->execute(array($plz, $fachrichtung));
-                // Das Array wird gespeichert...
-                $jobs = $stmt->fetchAll();  
-                // und returned
-                return $jobs;   
+            //Beginn
+            if ( isset($suchkrit["Datum"]) && $suchkrit["Datum"] != ""){
+                $sql .= " and beschaeftigungsbeginn >= :Datum";
             }
-        } catch(PDOException $e) {
-          // Print PDOException message           
-          echo $e->getMessage();
-                }    
-        } 
+            //Beschäftigungsart
+            $art_filter_used = false; //Variable um zu prüfen ob nach mehreren Arten gesucht wird
+            if ( isset($suchkrit["Werkstudent"]) && $suchkrit["Werkstudent"] == "on"){
+                $sql .= " and (art = :Werkstudent";
+                $art_filter_used = true;
+            }
+            if ( isset($suchkrit["Minijob"]) && $suchkrit["Minijob"] == "on"){
+                if ($art_filter_used) {
+                    $sql .= " or art = :Minijob";
+                }
+                else {
+                    $sql .= " and (art = :Minijob";
+                    $art_filter_used = true;
+                }
+            }
+            if ( isset($suchkrit["Praktikum"]) && $suchkrit["Praktikum"] == "on"){
+                if ($art_filter_used) {
+                    $sql .= " or art = :Praktikum";
+                }
+                else {
+                    $sql .= " and (art = :Praktikum";
+                    $art_filter_used = true;
+                }
+            }
+            if ( isset($suchkrit["Festanstellung"]) && $suchkrit["Festanstellung"] == "on"){
+                if ($art_filter_used) {
+                    $sql .= " or art = :Festanstellung";
+                }
+                else {
+                    $sql .= " and (art = :Festanstellung";
+                    $art_filter_used = true;
+                }
+            }
+            if ( isset($suchkrit["Aushilfe"]) && $suchkrit["Aushilfe"] == "on"){
+                if ($art_filter_used) {
+                    $sql .= " or art = :Aushilfe";
+                }
+                else {
+                    $sql .= " and (art = :Aushilfe";
+                    $art_filter_used = true;
+                }
+            }
+            if ( isset($suchkrit["Volontariat"]) && $suchkrit["Volontariat"] == "on"){
+                if ($art_filter_used) {
+                    $sql .= " or art = :Volontariat";
+                }
+                else {
+                    $sql .= " and (art = :Volontariat";
+                    $art_filter_used = true;
+                }
+            }
+            if ($art_filter_used) {
+                $sql .= ")"; //Klammer schließen, falls eine aufgemacht wurde
+            }
+            
+            //Zeitintesität
+             $zeit_filter_used = false; //Variable um zu prüfen ob nach mehreren Zeitintensitäten gesucht wird
+            if ( isset($suchkrit["Vollzeit"]) && $suchkrit["Vollzeit"] == "on"){
+                $sql .= " and (zeitintensitaet = :Vollzeit";
+                $zeit_filter_used = true;
+            }
+            if ( isset($suchkrit["Teilzeit"]) && $suchkrit["Teilzeit"] == "on"){
+                if ($zeit_filter_used) {
+                    $sql .= " or zeitintensitaet = :Teilzeit";
+                }
+                else {
+                    $sql .= " and (zeitintensitaet = :Teilzeit";
+                    $zeit_filter_used = true;
+                }
+            }
+            if ( isset($suchkrit["20h"]) && $suchkrit["20h"] == "on"){
+                if ($zeit_filter_used) {
+                    $sql .= " or zeitintensitaet = :20h";
+                }
+                else {
+                    $sql .= " and (zeitintensitaet = :20h";
+                    $zeit_filter_used = true;
+                }
+            }
+            if ($zeit_filter_used) {
+                $sql .= ")"; //Klammer schließen, falls eine aufgemacht wurde
+            }
+            
+            //Qualifikationen
+            $qualifikationen_filter_used = false; //Variable um zu prüfen ob nach mehreren Qualifikationen gesucht wird
+            if ( isset($suchkrit["aB"]) && $suchkrit["aB"] == "on"){
+                $sql .= " and (bachelor = :aB";
+                $qualifikationen_filter_used = true;
+            }
+            if ( isset($suchkrit["aM"]) && $suchkrit["aM"] == "on"){
+                if ($qualifikationen_filter_used) {
+                    $sql .= " or master = :aM";
+                }
+                else {
+                    $sql .= " and (master = :aM";
+                    $qualifikationen_filter_used = true;
+                }
+            }
+            if ( isset($suchkrit["iB"]) && $suchkrit["iB"] == "on"){
+                if ($qualifikationen_filter_used) {
+                    $sql .= " or im_bachelor = :iB";
+                }
+                else {
+                    $sql .= " and (im_bachelor = :iB";
+                    $qualifikationen_filter_used = true;
+                }
+            }
+            if ( isset($suchkrit["iM"]) && $suchkrit["iM"] == "on"){
+                if ($qualifikationen_filter_used) {
+                    $sql .= " or im_master = :iM";
+                }
+                else {
+                    $sql .= " and (im_master = :iM";
+                    $qualifikationen_filter_used = true;
+                }
+            }
+            if ( isset($suchkrit["Ausbildung"]) && $suchkrit["Ausbildung"] == "on"){
+                if ($qualifikationen_filter_used) {
+                    $sql .= " or ausbildung = :Ausbildung";
+                }
+                else {
+                    $sql .= " and (ausbildung = :Ausbildung";
+                    $qualifikationen_filter_used = true;
+                }
+            }
+            if ($qualifikationen_filter_used) {
+                $sql .= ")"; //Klammer schließen, falls eine aufgemacht wurde
+            }
+            
+            //Abfrage vorbereiten zum Schutz vor SQL-Injection
+            $stmt = $db->prepare($sql);
+            
+            
+            //Variablen im SQL-Statement an Parameterwerte binden
+            //Fachrichtung
+            if ( isset($suchkrit["fachrichtung"]) && $suchkrit["fachrichtung"] != ""){
+                 $stmt->bindValue(":fachrichtung", $suchkrit["fachrichtung"]);
+            }
+            //Beginn
+            if ( isset($suchkrit["Datum"]) && $suchkrit["Datum"] != ""){
+                $stmt->bindValue(":Datum", $suchkrit["Datum"]);
+            }
+            //Beschäftigungsart
+            if ( isset($suchkrit["Werkstudent"]) && $suchkrit["Werkstudent"] == "on"){
+                $stmt->bindValue(":Werkstudent", "Werkstudent");
+            }
+            if ( isset($suchkrit["Minijob"]) && $suchkrit["Minijob"] == "on"){
+                $stmt->bindValue(":Minijob", "Minijob");
+            }
+            if ( isset($suchkrit["Praktikum"]) && $suchkrit["Praktikum"] == "on"){
+                $stmt->bindValue(":Praktikum", "Praktikum");
+            }
+            if ( isset($suchkrit["Festanstellung"]) && $suchkrit["Festanstellung"] == "on"){
+                $stmt->bindValue(":Festanstellung", "Festanstellung");
+            }
+            if ( isset($suchkrit["Aushilfe"]) && $suchkrit["Aushilfe"] == "on"){
+                $stmt->bindValue(":Aushilfe", "Aushilfe");
+            }
+            if ( isset($suchkrit["Volontariat"]) && $suchkrit["Volontariat"] == "on"){
+                $stmt->bindValue(":Volontariat", "Volontariat");
+            }
+            
+            
+            //Zeitintesität
+            if ( isset($suchkrit["Vollzeit"]) && $suchkrit["Vollzeit"] == "on"){
+                $stmt->bindValue(":Vollzeit", "Vollzeit");
+            }
+            if ( isset($suchkrit["Teilzeit"]) && $suchkrit["Teilzeit"] == "on"){
+                $stmt->bindValue(":Teilzeit", "Teilzeit");
+            }
+            if ( isset($suchkrit["20h"]) && $suchkrit["20h"] == "on"){
+                $stmt->bindValue(":20h", "20h");
+            }
+            
+            //Qualifikationen
+            if ( isset($suchkrit["aB"]) && $suchkrit["aB"] == "on"){
+                $stmt->bindValue(":aB", 1);
+            }
+            if ( isset($suchkrit["aM"]) && $suchkrit["aM"] == "on"){
+                $stmt->bindValue(":aM", 1);
+            }
+            if ( isset($suchkrit["iB"]) && $suchkrit["iB"] == "on"){
+                $stmt->bindValue(":iB", 1);
+            }
+            if ( isset($suchkrit["iM"]) && $suchkrit["iM"] == "on"){
+                $stmt->bindValue(":iM", 1);
+            }
+            if ( isset($suchkrit["Ausbildung"]) && $suchkrit["Ausbildung"] == "on"){
+                $stmt->bindValue(":Ausbildung", 1);
+            }
+            
+            
+            // Query ausführen
+            $stmt->execute();
+            
+            // Das Array wird gespeichert...
+            $jobs = $stmt->fetchAll();  
+            
+            // und returned
+            return $jobs;   
+        }
+        catch(PDOException $e) {
+            // Print PDOException message           
+            echo $e->getMessage();
+        }
+    }
     
     
     public function loadJobsOfUser($user_mail){
