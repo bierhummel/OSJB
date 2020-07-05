@@ -1,5 +1,7 @@
 <?php 
 
+//Besser: Check-Datenbank.php?
+
 /************************************************
 /* Klasse fürs Überprüfen der Datenbank         *
 *  Ist keine DB vorhanden, wird eine erstellt   *
