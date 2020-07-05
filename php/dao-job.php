@@ -356,6 +356,8 @@ class SQLiteJobDAO implements JobDAO {
     
     //erhält job_id und gibt true/false zurück
     public function deleteJob($job_id){
+        $this->getJobsNearby(0 , 0);
+        
         $database = "database/database.db";
         $db = new PDO('sqlite:' . $database);
         // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
@@ -383,14 +385,20 @@ class SQLiteJobDAO implements JobDAO {
         
         // Spuckt zur Zeit nur Koordinaten aus, diese können nach kurzem Test mittels googles GLatLng::distanceFrom(other:GLatLng, radius?:Number) 
         // genutzt werden, um alle jobs daraufhin zu überprüfen, ob sie sich in dem Radius befinden
-	    require_once('/class.googleHelper.php'); 
+	    require_once('class.googleHelper.php'); 
 	    $apiKey = 'AIzaSyDficCmlbyTz7vOzAA5uWgPR8uqg2vB_gc';
         $obj = new googleHelper($apiKey);
+        
         $land = 'Deutschland';
-	    $strasse = $job['job_strasse'];
-        $hausnr = $job['job_hausnr'];
-        $plz = $job['job_plz'];
-        $stadt = $job['job_stadt'];
+        //Testdaten:
+        $strasse = 'Hamelmannstraße';
+        $hausnr = '27';
+        $plz = '26129';
+        $stadt = 'Oldenburg';
+	    //$strasse = $job['job_strasse'];
+        //$hausnr = $job['job_hausnr'];
+        //$plz = $job['job_plz'];
+        //$stadt = $job['job_stadt'];
 
 	   $address = $land . ' ' . $strasse . ' ' . $hausnr . ' ' . $plz . ' ' . $stadt . '';
 	   print 'Für "' . $address . '" gibt es folgene Koordinaten : ';

@@ -3,7 +3,7 @@
 
 	class googleHelper {
 	 	
-	 	private $mapApiKey;
+	 	private $mapApiKey = 'AIzaSyDficCmlbyTz7vOzAA5uWgPR8uqg2vB_gc';
 	 
 
 		public function __construct($mapApiKey = '') {
@@ -31,13 +31,13 @@
 
 		public function getCoordinates($address){
 			$address = str_replace(' ','+',$address);
-		 	$url = 'http://maps.google.com/maps/geo?q=' . $address . '&output=xml&key=' . $this->mapApiKey;
-		 	$data = $this->getURL($url);
+            $url = 'https://maps.googleapis.com/maps/api/geocode/xml?address='.$address.'+CA&key='.$this->mapApiKey;
+		 	//$url = 'maps.googleapis.com/geo?q=' . $address . '&output=xml&key=' . $this->mapApiKey;
+		 	$data = simplexml_load_file($this->getURL($url));
 			if ($data){
 				$xml = new SimpleXMLElement($data);
 				$requestCode = $xml->Response->Status->code;
 				if ($requestCode == 200){
-				 	//all is ok
 				 	$coords = $xml->Response->Placemark->Point->coordinates;
 				 	$coords = explode(',',$coords);
 				 	if (count($coords) > 1){
@@ -49,7 +49,7 @@
 					}
 				}
 			}
-			//return default data
+			
 			return array('lat' => 0, 'long' => 0, 'alt' => 0);
 		}
 		
