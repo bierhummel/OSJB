@@ -46,14 +46,21 @@
         extract($jobs);
     }
 
-
-
     //AJAX Suche nach Jobbezeichnungen 
     if( isset($request_checked["suche"]) ){
-        print_r($request_checked);
+        //Rückgabearray abspeichern
+        $vorschläge = ($JobDAO->searchJobbez($request_checked["input"]));
+        if($vorschläge == null){ 
+            echo "Keine Jobangebote gefunden.";
+        }
+        else{
+            foreach($vorschläge as $vorschlag){
+                //print_r($vorschlag);
+                //<a class="btn btn-link">Anmelden</a>
+                echo ('<a class="btn btn-secondary vorschlag">' . $vorschlag["titel"] . '</a>'); 
+            } 
+        }
     }
-
-
 
     //Anlegen neuer Jobangebote
      if(isset($request_checked["erstellen"]) && isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ) {
