@@ -58,10 +58,19 @@ include('php/calc-job.php');
 
                         <section>
                             <form action="" method="get">
+                                
+                                <!--Jobbezeichnung-->
+                                <div class="mb-2">
+                                    <h5><label class="mb-0" for="bez">Jobbezeichnung</label></h5>
+                                    <input type="text" id="bez" name="bez" class="form-control" placeholder="Jobbezeichnung" value="<?php if( isset($request_checked["bez"]) ) echo $request_checked["bez"] ?>">
+                                    <p>Vorschläge: <span id="tipps"></span></p>
+                                </div>
+                                
                                 <!--PLZ-->
+                                <!--Änderbar oder nicht?-->
                                 <div class="mb-2">
                                     <h5><label class="mb-0" for="plz">PLZ</label></h5>
-                                    <input type="text" id="plz" name="plz" class="form-control" maxlength="5" placeholder="Deine PLZ" required value="<?php if( isset($request_checked["plz"]) ) echo $request_checked["plz"] ?>">
+                                    <input type="text" id="plz" name="plz" class="form-control" maxlength="5" placeholder="Deine PLZ" disabled required value="<?php if( isset($request_checked["plz"]) ) echo $request_checked["plz"] ?>">
                                 </div>
 
                                 <!--Umkreis-->
