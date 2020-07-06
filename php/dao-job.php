@@ -561,9 +561,9 @@ class SQLiteJobDAO implements JobDAO {
             $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
             // Alle Jobangebot des Users aus der DB holen
             $stmt = $db->prepare("select * from jobangebot where id = ?");
-             // Query ausführen und den Parameter binden
+            // Query ausführen und den Parameter binden
             $stmt->execute(array($job_id));
-             // Das Array wird gespeichert...
+            // Das Array wird gespeichert...
             $job = $stmt->fetch();     
             // und returned
             return $job;
@@ -574,8 +574,6 @@ class SQLiteJobDAO implements JobDAO {
         }    
     } 
         
-        
-    
     
     //erhält job_id und gibt true/false zurück
     public function deleteJob($job_id){
@@ -600,6 +598,9 @@ class SQLiteJobDAO implements JobDAO {
         return false;
     }     
 }
+
+
+
 
 
 //DummyJobDAO funktioniert wahrscheinlich nicht mehr vollständig

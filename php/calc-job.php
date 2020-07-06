@@ -69,7 +69,6 @@
          header( 'location: ../jobangebot-anzeigen.php?id=' . $jobs["id"]);
          exit;
      }
-
     
     //Bearbeiten von Jobangeboten
     if(isset($request_checked["bearbeiten"]) && isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ) {

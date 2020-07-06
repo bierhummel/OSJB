@@ -53,12 +53,11 @@ include('php/calc-job.php');
                 <aside class="border adiv mb-4">
                     <fieldset>
                         <header>
-                            <h3 class="center">Filteroptionen</h3>
-                            <p class="center">(Noch in Bearbeitung)</p>
+                            <h3 class="center mb-3">Filteroptionen</h3>
                         </header>
 
                         <section>
-                            <form action="" method="get">
+                            <form name="filter" action="" method="get">
                                 
                                 <!--Jobbezeichnung-->
                                 <div class="mb-2">
