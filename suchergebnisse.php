@@ -60,6 +60,7 @@ include('php/calc-job.php');
                             <form name="filter" action="" method="get">
                                 
                                 <!--Jobbezeichnung-->
+                                <!--Problem: Bei Enter wird automatisch erster Suchvorschlag ausgewählt und nicht das was im Eingabefeld steht...-->
                                 <div class="mb-2">
                                     <h5><label class="mb-0" for="bez">Jobbezeichnung</label></h5>
                                     <input type="text" id="bez" name="bez" class="form-control" placeholder="Jobbezeichnung" value="<?php if( isset($request_checked["bez"]) ) echo $request_checked["bez"] ?>">
