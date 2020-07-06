@@ -4,13 +4,13 @@
 //Funktion für onclick-Event für die Suchvorschläge
 function nutze_vorschlag(vorschlag){
     document.getElementById("bez").value = vorschlag;   //Setze Wert des Textfelds auf den Vorschlag
-    document.filter.submit();                           //Submit
+    document.filter.submit();                           //automatischer Submit
 }
 
 
 //Funktion zum Abfragen von Suchergebnissen beim Eingeben in Textfeld mit AJAX
 function suche_jobbez(input){
-if(input == ""){                                        //Wenn Textfeld leer: Zeige keine Vorschläge
+    if(input == ""){                                    //Wenn Textfeld leer: Zeige keine Vorschläge
         document.getElementById("tipps").innerHTML = "";
         return;                                         //Und beende Funktion
     }
@@ -23,8 +23,9 @@ if(input == ""){                                        //Wenn Textfeld leer: Ze
             document.getElementById("tipps").innerHTML = this.responseText;
             
             //Eventlistener an jeden Vorschlag anhängen
+            //zeigt Fehler, funktioniert aber.. nach Vorlage von https://stackoverflow.com/questions/42080365/using-addeventlistener-and-getelementsbyclassname-to-pass-an-element-id
             var vorschläge = document.getElementsByClassName("vorschlag"); //Vorschläge selectieren
-            for(let i = 0; i < vorschläge.length; i++) {       //zeigt Fehler, funktioniert aber..
+            for(let i = 0; i < vorschläge.length; i++) {       
               vorschläge[i].addEventListener("click", function(){ 
                   nutze_vorschlag(vorschläge[i].innerHTML);
               })
@@ -38,6 +39,14 @@ if(input == ""){                                        //Wenn Textfeld leer: Ze
 }
 
 //keyup-Eventlistener an Textfeld anhängen
-document.getElementById("bez").addEventListener("keyup", function(){ suche_jobbez(document.getElementById("bez").value); } );
+document.getElementById("bez").addEventListener("keyup", function()
+    {
+        suche_jobbez(document.getElementById("bez").value); 
+    } 
+);
 //click-Eventlistener an Textfeld anhängen
-document.getElementById("bez").addEventListener("click", function(){ suche_jobbez(document.getElementById("bez").value); } );
+document.getElementById("bez").addEventListener("click", function()
+    { 
+        suche_jobbez(document.getElementById("bez").value); 
+    } 
+);
