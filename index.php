@@ -52,8 +52,8 @@ session_start();
                             <option value="">Umkreis auswählen</option>
                             <option value="5">5 km</option>
                             <option value="10">10 km</option>
-                            <option value="15" selected>15 km</option>
-                            <option value="20">20 km</option>
+                            <option value="15">15 km</option>
+                            <option value="20" selected>20 km</option>
                             <option value="25">25 km</option>
                             <option value="30">30 km</option>
                             <option value="50+">50+ km</option>
@@ -63,7 +63,7 @@ session_start();
                     <h4 class="mb-5">
                         <label for="fachrichtung">Fachrichtung:</label>
                         <select id="fachrichtung" name="fachrichtung" class="custom-select custom-select-lg" size="1">
-                            <option value="alle">Fachrichtung auswählen</option>
+                            <option value="">Fachrichtung auswählen</option>
                             <option value="Bildungs- und Sozialwissenschaften">Bildungs- und Sozialwissenschaften</option>
                             <option value="Informatik, Wirtschafts- und Rechtswissenschaften">Informatik, Wirtschafts- und Rechtswissenschaften</option>
                             <option value="Sprach- und Kulturwissenschaften">Sprach- und Kulturwissenschaften</option>
