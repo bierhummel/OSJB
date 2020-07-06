@@ -253,7 +253,7 @@ include('php/calc-job.php');
                                 <!--Submit nur anzeigen wenn JS deaktiviert-->
                                 <!--<noscript>-->
                                     <div class="mt-2 mb-3">
-                                         <input type="submit" id="filter" value="Filter anwenden" class="btn btn-primary">
+                                         <input type="submit" id="submit_filter" value="Filter anwenden" class="btn btn-primary">
                                     </div>
                                 <!--</noscript>-->
                                 
