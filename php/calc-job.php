@@ -55,9 +55,7 @@
         }
         else{
             foreach($vorschläge as $vorschlag){
-                //print_r($vorschlag);
-                //<a class="btn btn-link">Anmelden</a>
-                echo ('<a class="btn btn-secondary vorschlag">' . $vorschlag["titel"] . '</a>'); 
+                echo ('<button class="btn btn-primary mb-1 vorschlag">' . $vorschlag["titel"] . '</button >'); 
             } 
         }
     }
