@@ -294,6 +294,10 @@ class SQLiteJobDAO implements JobDAO {
             $sql = "select * from jobangebot where 1=1";
             
             //Überprüfung der Filteroptionen und entsprechende Erweiterung der sql-Abfrage
+            //Jobbezeichnung
+            if ( isset($suchkrit["bez"]) && $suchkrit["bez"] != ""){
+                $sql .= " and titel like :bez";
+            }
             //Fachrichtung
             if ( isset($suchkrit["fachrichtung"]) && $suchkrit["fachrichtung"] != ""){
                 $sql .= " and fachrichtung = :fachrichtung";
@@ -436,6 +440,10 @@ class SQLiteJobDAO implements JobDAO {
             
             
             //Variablen im SQL-Statement an Parameterwerte binden
+            //Jobbezeichnung
+            if ( isset($suchkrit["bez"]) && $suchkrit["bez"] != ""){
+                 $stmt->bindValue(":bez", "%".$suchkrit["bez"]."%");
+            }
             //Fachrichtung
             if ( isset($suchkrit["fachrichtung"]) && $suchkrit["fachrichtung"] != ""){
                  $stmt->bindValue(":fachrichtung", $suchkrit["fachrichtung"]);
@@ -463,7 +471,6 @@ class SQLiteJobDAO implements JobDAO {
             if ( isset($suchkrit["Volontariat"]) && $suchkrit["Volontariat"] == "on"){
                 $stmt->bindValue(":Volontariat", "Volontariat");
             }
-            
             
             //Zeitintesität
             if ( isset($suchkrit["Vollzeit"]) && $suchkrit["Vollzeit"] == "on"){
