@@ -5,7 +5,10 @@
 interface JobDAO {
     public function createJob($job, $user_email);
     public function updateJob($job, $job_id);
+    public function searchJobbez($part_Jobbez);
     public function loadJobs($suchkrit);
+    public function loadJobsOfUser($user_mail);
+    public function loadJob($job_id);
     public function deleteJob($job_id);
 }
 /************************************************
@@ -243,6 +246,36 @@ class SQLiteJobDAO implements JobDAO {
         }      
         return null;
     }     
+    
+    //Erhält String mit unvollständiger Eingabe einer Jobbezeichnung und gibt mögliche Treffer zurück
+    public function searchJobbez($part_Jobbez){
+        try{
+            //Pfad zur DB
+            $database = "../database/database.db";
+            // Verbindung wird durch das Erstellen von Instanzen der PDO-Basisklasse erzeugt: 
+            $db = new PDO('sqlite:' . $database);
+            // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
+            // Fetch-Mode ändern, da sonst doppelte Einträge ins Array eingetragen werden
+            $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
+            
+            //Beginn der Erstellung der sql-Abfrage
+            $sql = "select titel from jobangebot where titel like ?";
+            //Statment vorbereiten
+            $stmt = $db->prepare($sql);
+            // Query ausführen und den Parameter binden
+            $stmt->execute(array("%".$part_Jobbez."%"));
+            // Das Array wird gespeichert...
+            $job = $stmt->fetchAll();
+            // und returned
+            return $job;
+            
+        }
+        catch(PDOException $e) {
+            // Print PDOException message           
+            echo $e->getMessage();
+        }
+    }
     
     
     //Erhält Array mit Inputwerten von Index.php (oder später von Filterbox aus Suchergebnisse.php) und gibt zwei-dimensionales Array mit den gefundenen Jobangeboten zurück 
