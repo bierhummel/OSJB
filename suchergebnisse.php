@@ -24,6 +24,7 @@ include('php/calc-job.php');
     <link rel="stylesheet" type="text/css" href="css/hamburger.css">
     
     <script src="javascript/check-userinputs.js" async></script>
+    <script src="javascript/dynamische-suchfilter.js" async></script>
 
     <title>OSJB - Suchergebnisse</title>
 </head>

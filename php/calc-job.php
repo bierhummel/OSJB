@@ -48,8 +48,10 @@
 
 
 
-    //Auswertung der Filteroptionen (fehlt noch)
-    
+    //AJAX Suche nach Jobbezeichnungen 
+    if( isset($request_checked["suche"]) ){
+        print_r($request_checked);
+    }
 
 
 
