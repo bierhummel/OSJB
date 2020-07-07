@@ -18,7 +18,7 @@ interface JobDAO {
 ************************************************/
 
 class SQLiteJobDAO implements JobDAO {
-
+    private $mapApiKey = 'AIzaSyCf0GyggZoCCwCRehIR0DLoPcZz5BDtR1c';
     //erhält array mit inputwerten von jobangebot-anlegen.php und gibt den neuen job zurück
     public function createJob($job, $user_email){
         //Pfad zur DB
