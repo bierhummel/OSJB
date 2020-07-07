@@ -2,8 +2,8 @@
 
 
 	class googleHelper {
-	 	
-	 	private $mapApiKey = 'AIzaSyDficCmlbyTz7vOzAA5uWgPR8uqg2vB_gc';
+	
+	 	private $mapApiKey = 'AIzaSyCf0GyggZoCCwCRehIR0DLoPcZz5BDtR1c';
 	 
 
 		public function __construct($mapApiKey = '') {
@@ -32,7 +32,7 @@
 		public function getCoordinates($address){
 			$address = str_replace(' ','+',$address);
             $url = 'https://maps.googleapis.com/maps/api/geocode/xml?address='.$address.'+CA&key='.$this->mapApiKey;
-		 	//$url = 'maps.googleapis.com/geo?q=' . $address . '&output=xml&key=' . $this->mapApiKey;
+		 	//$url = 'maps.googleapis.com/geo?q=' . $address . '&output=xml&key=' . $this->mapApiKey; alte url... 
 		 	$data = simplexml_load_file($this->getURL($url));
 			if ($data){
 				$xml = new SimpleXMLElement($data);

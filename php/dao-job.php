@@ -385,8 +385,9 @@ class SQLiteJobDAO implements JobDAO {
         
         // Spuckt zur Zeit nur Koordinaten aus, diese können nach kurzem Test mittels googles GLatLng::distanceFrom(other:GLatLng, radius?:Number) 
         // genutzt werden, um alle jobs daraufhin zu überprüfen, ob sie sich in dem Radius befinden
+        ini_set('allow_url_fopen ','ON');
 	    require_once('class.googleHelper.php'); 
-	    $apiKey = 'AIzaSyDficCmlbyTz7vOzAA5uWgPR8uqg2vB_gc';
+	    $apiKey = 'AIzaSyCf0GyggZoCCwCRehIR0DLoPcZz5BDtR1c';
         $obj = new googleHelper($apiKey);
         
         $land = 'Deutschland';
@@ -400,10 +401,10 @@ class SQLiteJobDAO implements JobDAO {
         //$plz = $job['job_plz'];
         //$stadt = $job['job_stadt'];
 
-	   $address = $land . ' ' . $strasse . ' ' . $hausnr . ' ' . $plz . ' ' . $stadt . '';
+	   $address = $land . '+' . $strasse . '+' . $hausnr . '+' . $plz . '+' . $stadt;
 	   print 'Für "' . $address . '" gibt es folgene Koordinaten : ';
 	   print '<pre>';
-	   print_r($obj->getCoordinates($address ));
+	   print_r($obj->getCoordinates($address));
        exit;
     }
 
