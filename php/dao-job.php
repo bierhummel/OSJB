@@ -610,9 +610,20 @@ class SQLiteJobDAO implements JobDAO {
         }   
         return false;
     }   
+    
+    public function getJobsNearby($radius, $plz){
+        
+        return NULL;
+        
+        
+        
+    }
+    
+    
+    
   
   // Gibt Koordinaten einer PLZ zurück, funktioniert, ist jedoch noch in Bearbeitung 
-  public function getCoordinates($job, $radius){
+  private function getCoordinates($job, $radius){
       //Wenn Radius = NULL: Es wird eine Adresse übergeben
       if(is_null($radius)) {
         $strasse = $job['job_strasse'];
@@ -629,13 +640,7 @@ class SQLiteJobDAO implements JobDAO {
             $coordinates = array("lat" => $lat, "lon" => $lon);
             return $coordinates;  
 
-  }
-
-        
-        
-    
-        
-        
+  }  
         
     } 
     //Wenn Radius übergeben wurde ist die PLZ = $job  
@@ -662,6 +667,11 @@ class SQLiteJobDAO implements JobDAO {
   }
 
     }
+    
+
+    
+    
+    
     
     private function calculateDistance ($geo_data1, $geo_data2){
  
