@@ -28,9 +28,6 @@ class SQLiteJobDAO implements JobDAO {
         // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
         $user = null; //Array mit allen wichtigen Informationen des Users (z.b. keine id kein PW)
-        //TEST:
-        $this->getJobsNearby(100, 68163);
-        //TESTENDE
         try{
             // Default: Anzeige ist aktiv.
             $status = 1;
@@ -637,21 +634,16 @@ class SQLiteJobDAO implements JobDAO {
 
                 if ($distance <= $radius){
                   array_push($jobs, $row['id'], $row['status'], $row['titel'], $row['strasse'], $row['hausnr'], $row['plz'], $row['stadt'], $row['beschreibung'], $row['art'], $row['zeitintensitaet'], $row['im_bachelor'], $row['bachelor'], $row['im_master'],$row['master'], $row['ausbildung'], $row['fachrichtung'], $row['link'], $row['beschaeftigungsbeginn']);                 
-                }
-                
-}
-
-          
+                }             
+}   
             
         }
         catch(PDOException $e) {
             // Print PDOException message
             echo $e->getMessage();
         }    
-        
-        
-        return $jobs;
-        
+            
+        return $jobs;      
     }
     
     
@@ -668,7 +660,6 @@ class SQLiteJobDAO implements JobDAO {
         $request_url = "https://maps.googleapis.com/maps/api/geocode/xml?address=Deutschland+".$strasse. '+'.$hausnr.'+'.$plz.'+'.$stadt.'+CA&key='.$this->mapApiKey;
         $xml =  simplexml_load_file($request_url) or die ("url not loading");
         $status = $xml->status;
- 
         if ($status=="OK") {
             $lat = $xml->result->geometry->location->lat;
             $lon = $xml->result->geometry->location->lng;  
@@ -678,18 +669,12 @@ class SQLiteJobDAO implements JobDAO {
   }  
         
     } 
-    //Wenn Radius übergeben wurde ist die PLZ = $job  
-    //Noch nicht eingebunden.
-    //Test-Daten:     
-    $plz = $job;
-    // $plz = $job;     
-    $geo_address = urlencode($plz);
 
+    $plz = $job;  
+    $geo_address = urlencode($plz);
     $request_url = "https://maps.googleapis.com/maps/api/geocode/xml?address=Deutschland+".$plz.'+CA&key='.$this->mapApiKey;
-    var_dump($request_url);
     $xml =  simplexml_load_file($request_url) or die ("url not loading");
     $status = $xml->status;
-    var_dump($status);
 
   if ($status=="OK") {
     $lat = $xml->result->geometry->location->lat;
@@ -699,12 +684,7 @@ class SQLiteJobDAO implements JobDAO {
 
   }
 
-    }
-    
-
-    
-    
-    
+    }   
     
     private function calculateDistance ($geo_data1, $geo_data2){
 
