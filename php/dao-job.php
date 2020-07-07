@@ -18,7 +18,7 @@ interface JobDAO {
 ************************************************/
 
 class SQLiteJobDAO implements JobDAO {
-
+    private $mapApiKey = 'AIzaSyCf0GyggZoCCwCRehIR0DLoPcZz5BDtR1c';
     //erhält array mit inputwerten von jobangebot-anlegen.php und gibt den neuen job zurück
     public function createJob($job, $user_email){
         //Pfad zur DB
@@ -38,6 +38,11 @@ class SQLiteJobDAO implements JobDAO {
             $hausnr = $job['job_hausnr'];
             $plz = $job['job_plz'];
             $stadt = $job['job_stadt'];
+            $coordinates = $this->getCoordinates($job, NULL);
+            $geo_lat = floatval($coordinates['lat']);
+            $geo_lon = floatval($coordinates['lon']);
+
+            
             //ID aus der DB holen
             $id = "select id from user where mail = :mail";
             // Statement preparen
@@ -100,7 +105,7 @@ class SQLiteJobDAO implements JobDAO {
             }
 
             // Erstellung der Query für das Eintragen des Jobangebots
-            $newJob = "insert into jobangebot (user_id, status, titel, strasse, hausnr, plz, stadt, beschreibung, art, zeitintensitaet, im_bachelor, bachelor, im_master, master, ausbildung, fachrichtung, link, beschaeftigungsbeginn, erstellt_am) values (:uid, :status, :titel, :strasse, :hausnr, :plz, :stadt, :beschreibung, :art, :zeitintensitaet, :im_bachelor, :bachelor, :im_master, :master, :ausbildung, :fachrichtung, :link, :beschaeftigungsbeginn, datetime('now'))";
+            $newJob = "insert into jobangebot (user_id, status, titel, strasse, hausnr, plz, stadt, geo_lat, geo_lon, beschreibung, art, zeitintensitaet, im_bachelor, bachelor, im_master, master, ausbildung, fachrichtung, link, beschaeftigungsbeginn, erstellt_am) values (:uid, :status, :titel, :strasse, :hausnr, :plz, :stadt, :geo_lat, :geo_lon, :beschreibung, :art, :zeitintensitaet, :im_bachelor, :bachelor, :im_master, :master, :ausbildung, :fachrichtung, :link, :beschaeftigungsbeginn, datetime('now'))";
             // Statement preparen
             $stmt = $db->prepare($newJob);
             //Binde die Parameter an die Variablen
@@ -110,7 +115,9 @@ class SQLiteJobDAO implements JobDAO {
             $stmt->bindParam(':strasse', $strasse);       
             $stmt->bindParam(':hausnr', $hausnr);   
             $stmt->bindParam(':plz', $plz);   
-            $stmt->bindParam(':stadt', $stadt);   
+            $stmt->bindParam(':stadt', $stadt);  
+            $stmt->bindParam(':geo_lat', $geo_lat);   
+            $stmt->bindParam(':geo_lon', $geo_lon);                   
             $stmt->bindParam(':beschreibung', $beschreibung); 
             $stmt->bindParam(':art', $beschaeftigungsart);   
             $stmt->bindParam(':im_bachelor', $im_bachelor); 
@@ -603,10 +610,63 @@ class SQLiteJobDAO implements JobDAO {
             echo $e->getMessage();
         }   
         return false;
-    }     
+    }   
+  
+  // Gibt Koordinaten einer PLZ zurück, funktioniert, ist jedoch noch in Bearbeitung 
+  public function getCoordinates($job, $radius){
+      //Wenn Radius = NULL: Es wird eine Adresse übergeben
+      if(is_null($radius)) {
+        $strasse = $job['job_strasse'];
+        $hausnr = $job['job_hausnr'];
+        $plz = $job['job_plz'];
+        $stadt = $job['job_stadt'];
+        $request_url = "https://maps.googleapis.com/maps/api/geocode/xml?address=Deutschland+".$strasse. '+'.$hausnr.'+'.$plz.'+'.$stadt.'+CA&key='.$this->mapApiKey;
+        $xml =  simplexml_load_file($request_url) or die ("url not loading");
+        $status = $xml->status;
+ 
+        if ($status=="OK") {
+            $lat = $xml->result->geometry->location->lat;
+            $lon = $xml->result->geometry->location->lng;  
+            $coordinates = array("lat" => $lat, "lon" => $lon);
+            return $coordinates;  
+
+  }
+
+        
+        
+    
+        
+        
+        
+    } 
+    //Wenn Radius übergeben wurde ist die PLZ = $job  
+    //Noch nicht eingebunden.
+    //Test-Daten:     
+    $plz = '26129';
+    // $plz = $job;     
+    $geo_address = urlencode($plz);
+
+    $request_url = "https://maps.googleapis.com/maps/api/geocode/xml?address=Deutschland+".$plz.'+CA&key='.$this->mapApiKey;
+    var_dump($request_url);
+    $xml =  simplexml_load_file($request_url) or die ("url not loading");
+    $status = $xml->status;
+    var_dump($status);
+
+  if ($status=="OK") {
+    $lat = $xml->result->geometry->location->lat;
+    $lon = $xml->result->geometry->location->lng;
+    var_dump($lat);
+    var_dump($lon);  
+    $coordinates = array("lat" => $lat, "lon" => $lon);
+    return $coordinates;  
+
+  }
+
+    }
+    
 }
 
-
+         
 
 
 
