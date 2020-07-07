@@ -380,10 +380,10 @@ class SQLiteJobDAO implements JobDAO {
     }     
     
     public function getJobsNearby($plz, $radius){
-    $plz = '26129';
-$geo_address = urlencode($plz);
+  $plz = '26129';
+  $geo_address = urlencode($plz);
 
-$request_url = "https://maps.googleapis.com/maps/api/geocode/xml?address=Deutschland+".$plz.'+CA&key='.$this->mapApiKey;
+  $request_url = "https://maps.googleapis.com/maps/api/geocode/xml?address=Deutschland+".$plz.'+CA&key='.$this->mapApiKey;
   var_dump($request_url);
   $xml =  simplexml_load_file($request_url) or die ("url not loading");
   $status = $xml->status;
@@ -394,7 +394,13 @@ $request_url = "https://maps.googleapis.com/maps/api/geocode/xml?address=Deutsch
     $lon = $xml->result->geometry->location->lng;
     var_dump($lat);
     var_dump($lon);
-    exit;
+
+      
+      
+      
+      
+      
+      
   }
 
     }
