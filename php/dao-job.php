@@ -15,7 +15,7 @@ interface JobDAO {
 ************************************************/
 
 class SQLiteJobDAO implements JobDAO {
-
+    private $mapApiKey = 'AIzaSyCf0GyggZoCCwCRehIR0DLoPcZz5BDtR1c';
     //erhält array mit inputwerten von jobangebot-anlegen.php und gibt den neuen job zurück
     public function createJob($job, $user_email){
         //Pfad zur DB
@@ -379,35 +379,25 @@ class SQLiteJobDAO implements JobDAO {
         return false;
     }     
     
-    public function getJobsNearby($adresses, $radius){
-        // $adresses: Array mit Adressen allter Jobs 
-        // $radius: Suchradius (z.B. 50 km)
-        
-        // Spuckt zur Zeit nur Koordinaten aus, diese können nach kurzem Test mittels googles GLatLng::distanceFrom(other:GLatLng, radius?:Number) 
-        // genutzt werden, um alle jobs daraufhin zu überprüfen, ob sie sich in dem Radius befinden
-        ini_set('allow_url_fopen ','ON');
-	    require_once('class.googleHelper.php'); 
-	    $apiKey = 'AIzaSyCf0GyggZoCCwCRehIR0DLoPcZz5BDtR1c';
-        $obj = new googleHelper($apiKey);
-        
-        $land = 'Deutschland';
-        //Testdaten:
-        $strasse = 'Hamelmannstraße';
-        $hausnr = '27';
-        $plz = '26129';
-        $stadt = 'Oldenburg';
-	    //$strasse = $job['job_strasse'];
-        //$hausnr = $job['job_hausnr'];
-        //$plz = $job['job_plz'];
-        //$stadt = $job['job_stadt'];
+    public function getJobsNearby($plz, $radius){
+    $plz = '26129';
+$geo_address = urlencode($plz);
 
-	   $address = $land . '+' . $strasse . '+' . $hausnr . '+' . $plz . '+' . $stadt;
-	   print 'Für "' . $address . '" gibt es folgene Koordinaten : ';
-	   print '<pre>';
-	   print_r($obj->getCoordinates($address));
-       exit;
+$request_url = "https://maps.googleapis.com/maps/api/geocode/xml?address=Deutschland+".$plz.'+CA&key='.$this->mapApiKey;
+  var_dump($request_url);
+  $xml =  simplexml_load_file($request_url) or die ("url not loading");
+  $status = $xml->status;
+  var_dump($status);
+
+  if ($status=="OK") {
+    $lat = $xml->result->geometry->location->lat;
+    $lon = $xml->result->geometry->location->lng;
+    var_dump($lat);
+    var_dump($lon);
+    exit;
+  }
+
     }
-
     
 
 }
