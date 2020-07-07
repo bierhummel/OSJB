@@ -603,7 +603,35 @@ class SQLiteJobDAO implements JobDAO {
             echo $e->getMessage();
         }   
         return false;
-    }     
+    }   
+  
+  // Gibt Koordinaten einer PLZ zurück, funktioniert, ist jedoch noch in Bearbeitung 
+  public function getJobsNearby($plz, $radius){
+  $plz = '26129';
+  $geo_address = urlencode($plz);
+
+  $request_url = "https://maps.googleapis.com/maps/api/geocode/xml?address=Deutschland+".$plz.'+CA&key='.$this->mapApiKey;
+  var_dump($request_url);
+  $xml =  simplexml_load_file($request_url) or die ("url not loading");
+  $status = $xml->status;
+  var_dump($status);
+
+  if ($status=="OK") {
+    $lat = $xml->result->geometry->location->lat;
+    $lon = $xml->result->geometry->location->lng;
+    var_dump($lat);
+    var_dump($lon);
+
+      
+      
+      
+      
+      
+      
+  }
+
+    }
+    
 }
 
 
