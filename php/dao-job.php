@@ -633,7 +633,6 @@ class SQLiteJobDAO implements JobDAO {
             $data = $stmt->fetchAll();   
             foreach($data as $row) {
                 $coordinates1 = array("lat" => $row['geo_lat'], "lon" => $row['geo_lon']);
-  
                 $distance = $this->calculateDistance($coordinates, $coordinates1);
 
                 if ($distance <= $radius){
@@ -651,7 +650,7 @@ class SQLiteJobDAO implements JobDAO {
         }    
         
         
-        return NULL;
+        return $jobs;
         
     }
     
