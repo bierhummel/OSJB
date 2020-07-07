@@ -610,7 +610,7 @@ class SQLiteJobDAO implements JobDAO {
         return false;
     }   
     
-    public function getJobsNearby($radius, $plz){
+    public function getJobsNearby($radius, $plz, $fachrichtung){
         $coordinates = $this->getCoordinates ($plz, $radius);
         $database = "../database/database.db";
         // Verbindung wird durch das Erstellen von Instanzen der PDO-Basisklasse erzeugt: 
@@ -632,7 +632,7 @@ class SQLiteJobDAO implements JobDAO {
                 $coordinates1 = array("lat" => $row['geo_lat'], "lon" => $row['geo_lon']);
                 $distance = $this->calculateDistance($coordinates, $coordinates1);
 
-                if ($distance <= $radius){
+                if ($distance <= $radius && ($fachrichtung == $row ['fachrichtung'] || $fachrichtung == '')){
                   array_push($jobs, $row['id'], $row['status'], $row['titel'], $row['strasse'], $row['hausnr'], $row['plz'], $row['stadt'], $row['beschreibung'], $row['art'], $row['zeitintensitaet'], $row['im_bachelor'], $row['bachelor'], $row['im_master'],$row['master'], $row['ausbildung'], $row['fachrichtung'], $row['link'], $row['beschaeftigungsbeginn']);                 
                 }             
 }   
@@ -645,7 +645,6 @@ class SQLiteJobDAO implements JobDAO {
             
         return $jobs;      
     }
-    
     
     
   
