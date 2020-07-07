@@ -13,8 +13,8 @@ interface JobDAO {
 }
 /************************************************
 /* Klasse für Zugriff auf Jobs in DB            *
-*  Es muss viel ausgelagert werden              *
-*  Muss, wenn DB erneuert wird angepasst werden *
+*  Zugriff auf die Google-Maps-API              *
+*  Ermöglicht Anzeigen von Jobs                 *
 ************************************************/
 
 class SQLiteJobDAO implements JobDAO {
