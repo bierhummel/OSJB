@@ -648,7 +648,7 @@ class SQLiteJobDAO implements JobDAO {
     
     
   
-  // Gibt Koordinaten einer PLZ zurück, funktioniert, ist jedoch noch in Bearbeitung 
+  // Gibt Koordinaten einer PLZ zurück
   private function getCoordinates($job, $radius){
       //Wenn Radius = NULL: Es wird eine Adresse übergeben
       if(is_null($radius)) {
