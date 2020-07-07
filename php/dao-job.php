@@ -28,7 +28,9 @@ class SQLiteJobDAO implements JobDAO {
         // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
         $user = null; //Array mit allen wichtigen Informationen des Users (z.b. keine id kein PW)
-
+        //TEST:
+        $this->getJobsNearby(100, 68163);
+        //TESTENDE
         try{
             // Default: Anzeige ist aktiv.
             $status = 1;
@@ -612,10 +614,44 @@ class SQLiteJobDAO implements JobDAO {
     }   
     
     public function getJobsNearby($radius, $plz){
+        $coordinates = $this->getCoordinates ($plz, $radius);
+        $database = "../database/database.db";
+        // Verbindung wird durch das Erstellen von Instanzen der PDO-Basisklasse erzeugt: 
+        $db = new PDO('sqlite:' . $database);
+        // Leeres Array erzeugen, das später returned werden sol
+        $jobs = [];
+        // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
+        try{         
+            // Fetch-Mode ändern, da sonst doppelte Einträge ins Array eingetragen werden
+            $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
+            // Alle Jobangebot des Users aus der DB holen
+            $stmt = $db->prepare("select * from jobangebot");
+            // Query ausführen und den Parameter binden
+            $stmt->execute();
+            // Das Array wird gespeichert...
+            $data = $stmt->fetchAll();   
+            foreach($data as $row) {
+                $coordinates1 = array("lat" => $row['geo_lat'], "lon" => $row['geo_lon']);
+  
+                $distance = $this->calculateDistance($coordinates, $coordinates1);
+
+                if ($distance <= $radius){
+                  array_push($jobs, $row['id'], $row['status'], $row['titel'], $row['strasse'], $row['hausnr'], $row['plz'], $row['stadt'], $row['beschreibung'], $row['art'], $row['zeitintensitaet'], $row['im_bachelor'], $row['bachelor'], $row['im_master'],$row['master'], $row['ausbildung'], $row['fachrichtung'], $row['link'], $row['beschaeftigungsbeginn']);                 
+                }
+                
+}
+
+          
+            
+        }
+        catch(PDOException $e) {
+            // Print PDOException message
+            echo $e->getMessage();
+        }    
+        
         
         return NULL;
-        
-        
         
     }
     
@@ -646,7 +682,7 @@ class SQLiteJobDAO implements JobDAO {
     //Wenn Radius übergeben wurde ist die PLZ = $job  
     //Noch nicht eingebunden.
     //Test-Daten:     
-    $plz = '26129';
+    $plz = $job;
     // $plz = $job;     
     $geo_address = urlencode($plz);
 
@@ -658,9 +694,7 @@ class SQLiteJobDAO implements JobDAO {
 
   if ($status=="OK") {
     $lat = $xml->result->geometry->location->lat;
-    $lon = $xml->result->geometry->location->lng;
-    var_dump($lat);
-    var_dump($lon);  
+    $lon = $xml->result->geometry->location->lng; 
     $coordinates = array("lat" => $lat, "lon" => $lon);
     return $coordinates;  
 
@@ -674,12 +708,12 @@ class SQLiteJobDAO implements JobDAO {
     
     
     private function calculateDistance ($geo_data1, $geo_data2){
- 
-        $lat1 = $geo_data1['lat'];
-        $lon1 = $geo_data1['lon'];
+
+        $lat1 =  floatval($geo_data1['lat']);
+        $lon1 =  floatval($geo_data1['lon']);
         
-        $lat2 = $geo_data2['lat'];
-        $lon2 = $geo_data2['lon'];
+        $lat2 =  floatval($geo_data2['lat']);
+        $lon2 =  floatval($geo_data2['lon']);
 
         
         // Es wird die Haversine Formel genutzt, um die Distanz zu berechnen:
