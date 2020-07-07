@@ -41,7 +41,6 @@ class SQLiteJobDAO implements JobDAO {
             $coordinates = $this->getCoordinates($job, NULL);
             $geo_lat = floatval($coordinates['lat']);
             $geo_lon = floatval($coordinates['lon']);
-
             
             //ID aus der DB holen
             $id = "select id from user where mail = :mail";
@@ -663,6 +662,28 @@ class SQLiteJobDAO implements JobDAO {
   }
 
     }
+    
+    private function calculateDistance ($geo_data1, $geo_data2){
+ 
+        $lat1 = $geo_data1['lat'];
+        $lon1 = $geo_data1['lon'];
+        
+        $lat2 = $geo_data2['lat'];
+        $lon2 = $geo_data2['lon'];
+
+        
+        // Es wird die Haversine Formel genutzt, um die Distanz zu berechnen:
+        $theta = $lon1 - $lon2;
+        $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+        $dist = acos($dist);
+        $dist = rad2deg($dist);
+        $miles = $dist * 60 * 1.1515;
+        // Die Formel gibt Meilen zurück, daher wird es in km umgewandelt: 
+        $distance = ($miles * 1.609344);
+        return $distance;
+    } 
+
+    
     
 }
 
