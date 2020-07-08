@@ -31,10 +31,9 @@
         $user = $UserDAO->loginUser($request_checked['email'], $request_checked['passwort']);
         
         //Login erfolgreich und auszugebende Userdaten als Array erhalten
-        if( $user != NULL ){            
+        if( $user != NULL && $user["mail_verified"] == 1){            
             $_SESSION["login"] = "success";
             $_SESSION["eingeloggt"] = "true";
-            
             
             //Alle unkritischen infos des Users in Session zwischenspeichern
             foreach ($user as $index => $value){
@@ -42,8 +41,6 @@
                     $_SESSION[$index] = htmlspecialchars($value);
                 }
             }
-            
-
             header( 'location: ../profil.php' );
             exit;
         }
@@ -82,7 +79,6 @@
             header( 'location: ../login.php' );
            exit;
         } 
-        
     }
 
 
@@ -93,15 +89,35 @@
         if( $request_checked['passwort1'] == $request_checked["passwort2"] ) {
             
             //Aufruf von registerUser() des UserDAO
-            $succes = $UserDAO->registerUser($request_checked);
+            $token = $UserDAO->registerUser($request_checked);
+            
+            $_SESSION["tokenpfad"] = "php/verification/tmp/".$token.".txt"; 
 
             /* Dibo: Entweder ihr implementiert die Registrierung durch versenden von E-Mails oder um das immer wieder aufkommende Problem mit Mails und Mail-Servern zu umgehen, simuliert ihr es wie folgt: Nach dem Registrieren wird keine echte E-Mail verschickt, sondern es kommt der Hinweis: „Es wurde eine E-Mail an die angegebene Adresse verschickt mit weiteren Infos.“ + Link zu einer (temporären) txt-Datei, wo der E-Mail-Text drin steht. -> umsetzung fehlt noch */        
 
-            if( $succes == true ){            
-                $_SESSION["registrierung"] = "success"; 
+            if( $token == 'existiert'){
+                $_SESSION["registrierung"] = "verifizierung"; 
+                $text = "Sie sind bereits registriert. Sollten Sie Ihr Passwort vergessen haben klicken Sie hier (folgt noch). Falls Sie nicht selbst versucht haben sich mit dieser Mailadresse zu registrieren, ignorieren Sie diese Mail bitte einfach.";
+                
+                $data = "verification/tmp/".$token.".txt"; 
+                $handler = fopen($data , "a+");
+                fwrite($handler , $text);
+                fclose($handler);
+                
+                
             }
+            elseif ($token != '' ){            
+                $_SESSION["registrierung"] = "verifizierung"; 
+                $text = "Herzlich Willkommen bei OSJB. Klicken Sie bitte auf folgenen Link, um ihr Konto zu verifizieren: http://localhost/".$_SERVER['PHP_SELF']."?token=".$token . ". Falls Sie nicht selbst versucht haben sich mit dieser Mailadresse zu registrieren, ignorieren Sie diese Mail bitte einfach."; 
+                
+                $data = "verification/tmp/".$token.".txt"; 
+                $handler = fopen($data , "a+");
+                fwrite($handler , $text);
+                fclose($handler);
+            }
+            
             else{
-                $_SESSION["registrierung"] = "db_fail"; //später genauere unterscheidungen
+                $_SESSION["registrierung"] = "db_fail"; //später genauere Unterscheidungen
 
             }
         }
@@ -112,9 +128,33 @@
         header( 'location: ../login.php' );
         exit;        
     }
+    
+    //Registrierung abschließen
+    if ( isset($request_checked['token']) && $request_checked['token'] != "" && file_exists('verification/tmp/'.$request_checked['token'].'.txt' ) ) {
+        
+        $verifiziert = $UserDAO->verifyUser($request_checked['token']);
+        
+        if($verifiziert) {
+             $_SESSION["registrierung"] = "success"; 
+            echo "Übergangslösung: Die Mail wurde erfolgreich bestätigt.";
+            unlink('verification/tmp/'.$request_checked['token'].'.txt');
+        }
+        else{
+            echo "Fehler.";
+        }
+        
+        echo "<br> <a href=../login.php>Zurück zum Login</a>";
+        exit;
+    }
+    elseif( isset($request_checked['token']) ) {
+        echo "Übergangslösung: Kein entsprechender Token vorhanden.";
+        echo "<br> <a href=../login.php>Zurück zum Login</a>";
+        exit;
+    }
+
 
     
-    //User löschen
+    //User löschen (fehlt noch)
 
 
 //Erzeugung von Ausgabedaten?
