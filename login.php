@@ -167,7 +167,20 @@ session_start();
                             </div>
                             
                             <div class="col-sm">
-                                <input type="password" id="r_passwort2" placeholder="" name="passwort2" minlength="8" required>
+                                <input type="password" id="r_passwort2" placeholder="" name="passwort2" minlength="8" class="form-control" required>
+                            </div>
+                        </div>
+                        
+                        <!--Nutzungsbedingungen-->
+                        <div class="row form-group">
+                            <div class="col-sm-8">
+                                <label for="nutzbed">
+                                    <a href="nutzungsbedingungen.php" target="_blank">Nutzungsbedingunen </a> aktzeptieren.
+                                </label>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <input type="checkbox" id="nutzbed" name="nutzbed" class="form-control" required>
                             </div>
                         </div>
 
