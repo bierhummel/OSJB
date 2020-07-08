@@ -24,8 +24,14 @@
     include('dao-job.php'); 
     $JobDAO = new SQLiteJobDAO();
 
+    
+    //Einbindung von Funktionen zum Umgang mit der GoogleMapsAPI
+    include('helper-mapsAPI.php');
+
     //Variable für (ggf. zweidimensionales) Array mit gefundenen Jobangeboten vorbereiten
     $jobs = null;
+
+
     
     //Liste der Jobs eines Users laden
     if(basename($_SERVER['PHP_SELF']) == "profil.php"){
@@ -40,9 +46,16 @@
         }
     }
 
-    //Jobs entsprechend der Suchkriteren der Inputfelder laden
-    if( basename($_SERVER['PHP_SELF']) == "suchergebnisse.php"){
+    //Jobs entsprechend der Suchkriterien der Inputfelder laden
+    if( basename($_SERVER['PHP_SELF']) == "suchergebnisse.php" && isset ($request_checked["plz"]) ){
+        //Jobangebote entsprechend der Suchkriterien von DAO auslesen lassen
         $jobs = $JobDAO->loadJobs($request_checked); 
+        
+        //Wenn der Umkreis eingeschränkt wurde
+        if( isset ($request_checked["umkreis"]) && $request_checked["umkreis"] != "50+") {
+            //Entfernung zur angegeben PLZ ermitteln und alles außerhalb des Umkreises aussortieren
+            $jobs = getJobsNearby($request_checked["umkreis"], $request_checked["plz"], $jobs);
+        }
         extract($jobs);
     }
 
@@ -61,18 +74,31 @@
     }
 
     //Anlegen neuer Jobangebote
-     if(isset($request_checked["erstellen"]) && isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ) {
-         $jobs = $JobDAO->createJob($request_checked, $_SESSION["mail"]);
+    if(isset($request_checked["erstellen"]) && isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ) {
          
-         header( 'location: ../jobangebot-anzeigen.php?id=' . $jobs["id"]);
-         exit;
-     }
+        //Koordinaten des Jobangebotes ermitteln
+        $coordinates = getCoordinates($request_checked, 1);
+        $job_data = $request_checked;
+        $job_data["coordinates"] = $coordinates;
+
+        //Daten den zu erstellenden Jobangebots zusammen mit der Mail des Nutzers an DAO übergeben
+        $jobs = $JobDAO->createJob($job_data, $_SESSION["mail"]);
+
+        //Erstelltes Jobangebot anzeigen
+        header( 'location: ../jobangebot-anzeigen.php?id=' . $jobs["id"]);
+        exit;
+    }   
     
     //Bearbeiten von Jobangeboten
     if(isset($request_checked["bearbeiten"]) && isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ) {
         
+        //Koordinaten des Jobangebotes ermitteln
+        $coordinates = getCoordinates($request_checked, 1);
+        $job_data = $request_checked;
+        $job_data["coordinates"] = $coordinates;
+
         //Übergangslösung, wird geändert wenn aufruf von Bearbeiten über Post statt get
-        $job_id = $JobDAO->updateJob($request_checked, $request_checked["update_id"]);
+        $job_id = $JobDAO->updateJob($job_data, $request_checked["update_id"]);
          
         header( 'location: ../jobangebot-anzeigen.php?id=' . $job_id);
         exit;

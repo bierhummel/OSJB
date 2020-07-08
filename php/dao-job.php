@@ -13,12 +13,12 @@ interface JobDAO {
 }
 /************************************************
 /* Klasse für Zugriff auf Jobs in DB            *
-*  Es muss viel ausgelagert werden              *
-*  Muss, wenn DB erneuert wird angepasst werden *
+*  Zugriff auf die Google-Maps-API              *
+*  Ermöglicht Anzeigen von Jobs                 *
 ************************************************/
 
 class SQLiteJobDAO implements JobDAO {
-    private $mapApiKey = 'AIzaSyCf0GyggZoCCwCRehIR0DLoPcZz5BDtR1c';
+    
     //erhält array mit inputwerten von jobangebot-anlegen.php und gibt den neuen job zurück
     public function createJob($job, $user_email){
         //Pfad zur DB
@@ -28,7 +28,6 @@ class SQLiteJobDAO implements JobDAO {
         // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
         $user = null; //Array mit allen wichtigen Informationen des Users (z.b. keine id kein PW)
-
         try{
             // Default: Anzeige ist aktiv.
             $status = 1;
@@ -38,10 +37,11 @@ class SQLiteJobDAO implements JobDAO {
             $hausnr = $job['job_hausnr'];
             $plz = $job['job_plz'];
             $stadt = $job['job_stadt'];
-            $coordinates = $this->getCoordinates($job, NULL);
+            
+            //Koordinaten aus Array holen
+            $coordinates = $job['coordinates'];
             $geo_lat = floatval($coordinates['lat']);
             $geo_lon = floatval($coordinates['lon']);
-
             
             //ID aus der DB holen
             $id = "select id from user where mail = :mail";
@@ -166,6 +166,11 @@ class SQLiteJobDAO implements JobDAO {
             $plz = $job['job_plz'];
             $stadt = $job['job_stadt'];
             
+            //Koordinaten aus Array holen
+            $coordinates = $job['coordinates'];
+            $geo_lat = floatval($coordinates['lat']);
+            $geo_lon = floatval($coordinates['lon']);
+            
             //Beschäftigungsart
             $beschaeftigungsart = $job['art'];
             //Fachrichtung
@@ -221,7 +226,7 @@ class SQLiteJobDAO implements JobDAO {
             }
 
             //SQL Update        
-            $updatedJob = "update jobangebot set status = :status, titel = :titel, strasse = :strasse, hausnr = :hausnr, plz = :plz, stadt = :stadt, beschreibung = :beschreibung, art = :art, zeitintensitaet = :zeitintensitaet, im_bachelor = :im_bachelor, bachelor = :bachelor, im_master = :im_master, master = :master, ausbildung = :ausbildung, fachrichtung = :fachrichtung, link = :link, beschaeftigungsbeginn = :beschaeftigungsbeginn where id = :id";
+            $updatedJob = "update jobangebot set status = :status, titel = :titel, strasse = :strasse, hausnr = :hausnr, plz = :plz, stadt = :stadt, geo_lat = :geo_lat, geo_lon = :geo_lon, beschreibung = :beschreibung, art = :art, zeitintensitaet = :zeitintensitaet, im_bachelor = :im_bachelor, bachelor = :bachelor, im_master = :im_master, master = :master, ausbildung = :ausbildung, fachrichtung = :fachrichtung, link = :link, beschaeftigungsbeginn = :beschaeftigungsbeginn where id = :id";
             
             $stmt = $db->prepare($updatedJob);
             
@@ -230,7 +235,9 @@ class SQLiteJobDAO implements JobDAO {
             $stmt->bindParam(':strasse', $strasse);  // n.v.      
             $stmt->bindParam(':hausnr', $hausnr); // n.v.   
             $stmt->bindParam(':plz', $plz); // n.v.   
-            $stmt->bindParam(':stadt', $stadt); // n.v.     
+            $stmt->bindParam(':stadt', $stadt); // n.v
+            $stmt->bindParam(':geo_lat', $geo_lat);   
+            $stmt->bindParam(':geo_lon', $geo_lon);
             $stmt->bindParam(':beschreibung', $beschreibung); 
             $stmt->bindParam(':art', $beschaeftigungsart);   
             $stmt->bindParam(':im_bachelor', $im_bachelor); 
@@ -611,62 +618,8 @@ class SQLiteJobDAO implements JobDAO {
         }   
         return false;
     }   
-  
-  // Gibt Koordinaten einer PLZ zurück, funktioniert, ist jedoch noch in Bearbeitung 
-  public function getCoordinates($job, $radius){
-      //Wenn Radius = NULL: Es wird eine Adresse übergeben
-      if(is_null($radius)) {
-        $strasse = $job['job_strasse'];
-        $hausnr = $job['job_hausnr'];
-        $plz = $job['job_plz'];
-        $stadt = $job['job_stadt'];
-        $request_url = "https://maps.googleapis.com/maps/api/geocode/xml?address=Deutschland+".$strasse. '+'.$hausnr.'+'.$plz.'+'.$stadt.'+CA&key='.$this->mapApiKey;
-        $xml =  simplexml_load_file($request_url) or die ("url not loading");
-        $status = $xml->status;
- 
-        if ($status=="OK") {
-            $lat = $xml->result->geometry->location->lat;
-            $lon = $xml->result->geometry->location->lng;  
-            $coordinates = array("lat" => $lat, "lon" => $lon);
-            return $coordinates;  
-
-  }
-
-        
-        
-    
-        
-        
-        
-    } 
-    //Wenn Radius übergeben wurde ist die PLZ = $job  
-    //Noch nicht eingebunden.
-    //Test-Daten:     
-    $plz = '26129';
-    // $plz = $job;     
-    $geo_address = urlencode($plz);
-
-    $request_url = "https://maps.googleapis.com/maps/api/geocode/xml?address=Deutschland+".$plz.'+CA&key='.$this->mapApiKey;
-    var_dump($request_url);
-    $xml =  simplexml_load_file($request_url) or die ("url not loading");
-    $status = $xml->status;
-    var_dump($status);
-
-  if ($status=="OK") {
-    $lat = $xml->result->geometry->location->lat;
-    $lon = $xml->result->geometry->location->lng;
-    var_dump($lat);
-    var_dump($lon);  
-    $coordinates = array("lat" => $lat, "lon" => $lon);
-    return $coordinates;  
-
-  }
-
-    }
-    
 }
 
-         
 
 
 
