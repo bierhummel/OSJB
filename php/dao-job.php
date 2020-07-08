@@ -18,7 +18,7 @@ interface JobDAO {
 ************************************************/
 
 class SQLiteJobDAO implements JobDAO {
-    private $mapApiKey = 'AIzaSyCf0GyggZoCCwCRehIR0DLoPcZz5BDtR1c';
+    
     //erhält array mit inputwerten von jobangebot-anlegen.php und gibt den neuen job zurück
     public function createJob($job, $user_email){
         //Pfad zur DB
@@ -618,107 +618,8 @@ class SQLiteJobDAO implements JobDAO {
         }   
         return false;
     }   
-    
-    public function getJobsNearby($radius, $plz, $fachrichtung){
-        $coordinates = $this->getCoordinates ($plz, $radius);
-        $database = "../database/database.db";
-        // Verbindung wird durch das Erstellen von Instanzen der PDO-Basisklasse erzeugt: 
-        $db = new PDO('sqlite:' . $database);
-        // Leeres Array erzeugen, das später returned werden sol
-        $jobs = [];
-        // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
-        try{         
-            // Fetch-Mode ändern, da sonst doppelte Einträge ins Array eingetragen werden
-            $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
-            // Alle Jobangebot des Users aus der DB holen
-            $stmt = $db->prepare("select * from jobangebot");
-            // Query ausführen und den Parameter binden
-            $stmt->execute();
-            // Das Array wird gespeichert...
-            $data = $stmt->fetchAll();   
-            foreach($data as $row) {
-                $coordinates1 = array("lat" => $row['geo_lat'], "lon" => $row['geo_lon']);
-                $distance = $this->calculateDistance($coordinates, $coordinates1);
-
-                if ($distance <= $radius && ($fachrichtung == $row ['fachrichtung'] || $fachrichtung == '')){
-                  array_push($jobs, $row['id'], $row['status'], $row['titel'], $row['strasse'], $row['hausnr'], $row['plz'], $row['stadt'], $row['beschreibung'], $row['art'], $row['zeitintensitaet'], $row['im_bachelor'], $row['bachelor'], $row['im_master'],$row['master'], $row['ausbildung'], $row['fachrichtung'], $row['link'], $row['beschaeftigungsbeginn']);                 
-                }             
-}   
-            
-        }
-        catch(PDOException $e) {
-            // Print PDOException message
-            echo $e->getMessage();
-        }    
-            
-        return $jobs;      
-    }
-    
-    
-  
-  // Gibt Koordinaten einer PLZ zurück
-  private function getCoordinates($job, $radius){
-      //Wenn Radius = NULL: Es wird eine Adresse übergeben
-      if(is_null($radius)) {
-        $strasse = $job['job_strasse'];
-        $hausnr = $job['job_hausnr'];
-        $plz = $job['job_plz'];
-        $stadt = $job['job_stadt'];
-        $request_url = "https://maps.googleapis.com/maps/api/geocode/xml?address=Deutschland+".$strasse. '+'.$hausnr.'+'.$plz.'+'.$stadt.'+CA&key='.$this->mapApiKey;
-        $xml =  simplexml_load_file($request_url) or die ("url not loading");
-        $status = $xml->status;
-        if ($status=="OK") {
-            $lat = $xml->result->geometry->location->lat;
-            $lon = $xml->result->geometry->location->lng;  
-            $coordinates = array("lat" => $lat, "lon" => $lon);
-            return $coordinates;  
-
-  }  
-        
-    } 
-
-    $plz = $job;  
-    $geo_address = urlencode($plz);
-    $request_url = "https://maps.googleapis.com/maps/api/geocode/xml?address=Deutschland+".$plz.'+CA&key='.$this->mapApiKey;
-    $xml =  simplexml_load_file($request_url) or die ("url not loading");
-    $status = $xml->status;
-
-  if ($status=="OK") {
-    $lat = $xml->result->geometry->location->lat;
-    $lon = $xml->result->geometry->location->lng; 
-    $coordinates = array("lat" => $lat, "lon" => $lon);
-    return $coordinates;  
-
-  }
-
-    }   
-    
-    private function calculateDistance ($geo_data1, $geo_data2){
-
-        $lat1 =  floatval($geo_data1['lat']);
-        $lon1 =  floatval($geo_data1['lon']);
-        
-        $lat2 =  floatval($geo_data2['lat']);
-        $lon2 =  floatval($geo_data2['lon']);
-
-        
-        // Es wird die Haversine Formel genutzt, um die Distanz zu berechnen:
-        $theta = $lon1 - $lon2;
-        $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
-        $dist = acos($dist);
-        $dist = rad2deg($dist);
-        $miles = $dist * 60 * 1.1515;
-        // Die Formel gibt Meilen zurück, daher wird es in km umgewandelt: 
-        $distance = ($miles * 1.609344);
-        return $distance;
-    } 
-
-    
-    
 }
 
-         
 
 
 
