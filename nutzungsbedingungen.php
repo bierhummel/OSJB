@@ -33,6 +33,7 @@ session_start();
 
         <section>
             <h1 class="center">Nutzungsbedingungen</h1>
+            <p class="center">(In Bearbeitung)</p>
 
             <p><strong>§ 1 Geltungsbereich</strong></p>
             <p>Für die Nutzung der Website OSJB von OSJB e.V. (nachfolgend "Anbieter" genannt) gelten nachfolgende Bedingungen. </p>
