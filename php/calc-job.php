@@ -30,6 +30,8 @@
 
     //Variable für (ggf. zweidimensionales) Array mit gefundenen Jobangeboten vorbereiten
     $jobs = null;
+
+
     
     //Liste der Jobs eines Users laden
     if(basename($_SERVER['PHP_SELF']) == "profil.php"){
@@ -44,8 +46,8 @@
         }
     }
 
-    //Jobs entsprechend der Suchkriteren der Inputfelder laden
-    if( basename($_SERVER['PHP_SELF']) == "suchergebnisse.php"){
+    //Jobs entsprechend der Suchkriterien der Inputfelder laden
+    if( basename($_SERVER['PHP_SELF']) == "suchergebnisse.php" && isset ($request_checked["plz"]) ){
         //Jobangebote entsprechend der Suchkriterien von DAO auslesen lassen
         $jobs = $JobDAO->loadJobs($request_checked); 
         
