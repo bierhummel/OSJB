@@ -56,7 +56,7 @@ session_start();
                             
                             <div class="col-sm">
 
-                                <input type="email" id="email" placeholder="E-Mail" name="email" required>
+                                <input type="email" id="email" placeholder="E-Mail" name="email" class="form-control" required>
                             </div>
                         </div>
                         <div class="valid-feedback">Valid.</div>
@@ -72,7 +72,7 @@ session_start();
 
                             <div class="col-sm">
 
-                                <input type="password" id="passwort" placeholder="Passwort" name="passwort" value="" required>
+                                <input type="password" id="passwort" placeholder="Passwort" name="passwort" value="" class="form-control" required>
 
                             </div>
                         </div>
@@ -121,7 +121,7 @@ session_start();
                                 <label for="firma">Firma:</label>
                             </div>
                             <div class="col-sm">
-                                <input type="text" id="firma" placeholder="" name="firma" required>
+                                <input type="text" id="firma" placeholder="" name="firma" class="form-control" required>
                             </div>
                         </div>
                         
@@ -130,7 +130,7 @@ session_start();
                                 <label for="vorname">Vorname:</label>
                             </div>
                             <div class="col-sm">
-                                <input type="text" id="vorname" placeholder="" name="vorname" required>
+                                <input type="text" id="vorname" placeholder="" name="vorname" class="form-control" required>
                             </div>
                         </div>
                         
@@ -139,7 +139,7 @@ session_start();
                                 <label for="nachname">Nachname:</label>
                             </div>
                             <div class="col-sm">
-                                <input type="text" id="nachname" placeholder="" name="nachname" required>
+                                <input type="text" id="nachname" placeholder="" name="nachname" class="form-control" required>
                             </div>
                         </div>
                         
@@ -148,8 +148,7 @@ session_start();
                                 <label for="r_email">E-Mail:</label>
                             </div>
                             <div class="col-sm">
-
-                                <input type="email" id="r_email" placeholder="" name="email1" required>
+                                <input type="email" id="r_email" placeholder="" name="email1" class="form-control" required>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -157,7 +156,7 @@ session_start();
                                 <label for="r_passwort">Passwort:</label>
                             </div>
                             <div class="col-sm">
-                                <input type="password" id="r_passwort" placeholder="" name="passwort1" minlength="8" required>
+                                <input type="password" id="r_passwort" placeholder="" name="passwort1" minlength="8" class="form-control" required>
                             </div>
                         </div>
 
@@ -167,7 +166,20 @@ session_start();
                             </div>
                             
                             <div class="col-sm">
-                                <input type="password" id="r_passwort2" placeholder="" name="passwort2" minlength="8" required>
+                                <input type="password" id="r_passwort2" placeholder="" name="passwort2" minlength="8" class="form-control" required>
+                            </div>
+                        </div>
+                        
+                        <!--Nutzungsbedingungen-->
+                        <div class="row form-group">
+                            <div class="col-sm-8">
+                                <label for="nutzbed">
+                                    <a href="nutzungsbedingungen.php" target="_blank">Nutzungsbedingunen </a> aktzeptieren.
+                                </label>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <input type="checkbox" id="nutzbed" name="nutzbed" class="form-control" required>
                             </div>
                         </div>
 

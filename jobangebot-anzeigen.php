@@ -106,7 +106,7 @@ session_start();*/
         <section class="end">
             <!--(Link zur Seite des Unternehmens (Falls Link angegeben wurde)-->
             <?php if( $link != ""){ ?>
-                <a href="https://<?= $link ?>" class="btn btn-primary" role="button">Direkt beim Unternehmen bewerben</a>
+                <a href="https://<?= $link ?>" target="_blank" class="btn btn-primary" role="button" >Direkt beim Unternehmen bewerben</a>
             <?php } ?>
         </section>
     </div>
