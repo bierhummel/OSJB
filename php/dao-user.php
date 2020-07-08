@@ -123,6 +123,7 @@ class SQLiteUserDAO implements UserDAO {
         $nname = $user[nachname];
         $password = $user[passwort1];
         $mail = $user[email1];
+        $hash = md5(rand());
         //Verified und mail_verified sind standardmäßig false (bzw. 0)
         $verified = 0;
         $mail_verified = 0;
@@ -134,13 +135,14 @@ class SQLiteUserDAO implements UserDAO {
             // Wenn die Mail des Uers noch nicht in der DB ist:
             try{
                 // Bereite die Transaktion vor,
-                $register = "insert into user (uname, vname, nname, password, mail, verified, mail_verified) values (:uname, :vname, :nname, :password, :mail, :verified, :mail_verified)";
+                $register = "insert into user (uname, vname, nname, password, mail, hash, verified, mail_verified) values (:uname, :vname, :nname, :password, :mail, :hash, :verified, :mail_verified)";
                 $stmt = $db->prepare($register);
                 // Binde die Parameter an die Variablen,
                 $stmt->bindParam(':uname', $uname);  
                 $stmt->bindParam(':vname', $vname);
                 $stmt->bindParam(':nname', $nname);    
                 $stmt->bindParam(':mail', $mail);
+                $stmt->bindParam(':hash', $hash);
                 $stmt->bindParam(':password', $hashed_password);
                 $stmt->bindParam(':verified', $verified);
                 $stmt->bindParam(':mail_verified', $mail_verified);
