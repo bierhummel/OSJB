@@ -24,6 +24,10 @@
     include('dao-job.php'); 
     $JobDAO = new SQLiteJobDAO();
 
+    
+    //Einbindung von Funktionen zum Umgang mit der GoogleMapsAPI
+    include('helper-mapsAPI.php');
+
     //Variable für (ggf. zweidimensionales) Array mit gefundenen Jobangeboten vorbereiten
     $jobs = null;
     
@@ -42,7 +46,14 @@
 
     //Jobs entsprechend der Suchkriteren der Inputfelder laden
     if( basename($_SERVER['PHP_SELF']) == "suchergebnisse.php"){
+        //Jobangebote entsprechend der Suchkriterien von DAO auslesen lassen
         $jobs = $JobDAO->loadJobs($request_checked); 
+        
+        //Wenn der Umkreis eingeschränkt wurde
+        if( isset ($request_checked["umkreis"]) && $request_checked["umkreis"] != "50+") {
+            //Entfernung zur angegeben PLZ ermitteln und alles außerhalb des Umkreises aussortieren
+            $jobs = getJobsNearby($request_checked["umkreis"], $request_checked["plz"], $jobs);
+        }
         extract($jobs);
     }
 
