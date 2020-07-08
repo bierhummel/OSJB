@@ -180,6 +180,8 @@ session_start();
                                     Achtung: Passwörter sind nicht gleich!
                                 <?php } elseif ($_SESSION["registrierung"] == "db_fail") { ?>
                                     Achtung: Fehler bei Registrierung, möglicherweise bereits registriert?.. (Übergangslösung)
+                                <?php } elseif ($_SESSION["registrierung"] == "verifizierung") { ?>
+                                   <a href="<?= $_SESSION["tokenpfad"]?>">Klicken Sie hier um die Registrierung abzuschließen. (Übergangslösung)             
                                 <?php } elseif ($_SESSION["registrierung"] == "success") { ?>
                                     Benutzer erfolgreich registiert. Bitte anmelden (Übergangslösung)
                                 <?php } $_SESSION["registrierung"] = ""; } 
