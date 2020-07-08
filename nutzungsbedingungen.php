@@ -35,7 +35,7 @@ session_start();
             <h1 class="center">Nutzungsbedingungen</h1>
             <h6><strong>Einleitung</strong></h6>
 
-<p>Die OSJB ist ein Portal, das die OSJB Personalvermittlung e.V. Privatpersonen und Unternehmen zur Verfügung stellt.</p>
+<p>Die OSJB ist ein Portal, das die OSJB e.V. Privatpersonen und Unternehmen zur Verfügung stellt.</p>
 
 <p>Die Nutzung der OSJB-Jobbörse erfolgt auf eigene Verantwortung und mit eigenem Risiko. Die Nutzung unserer Website steht Personen über 18 Jahren zur Verfügung. Personen unter 18 Jahren bedürfen der Einwilligung einer erziehungsberechtigten Person, die die rechtlich maßgeblichen Erklärungen abzugeben hat.</p>
 
@@ -71,7 +71,7 @@ session_start();
 
 <p>Hinweis: OSJB wird in keinem Fall per E-Mail oder auf fremden Internetseiten Benutzernamen und/oder Kennwörter abfragen.</p>
 
-<p>(2) Erfährt oder vermutet der Nutzer, dass das von ihm gewählte Kennwort Dritten bekannt geworden ist, besteht die Verpflichtung zu einer unverzüglichen änderung des Kennwortes.</p>
+<p>(2) Erfährt oder vermutet der Nutzer, dass das von ihm gewählte Kennwort Dritten bekannt geworden ist, besteht die Verpflichtung zu einer unverzüglichen Änderung des Kennwortes.</p>
 
 <p><strong>§4. Urheberrechte, Nutzungsrechte, Konkurrenzschutz</strong></p>
 
@@ -97,7 +97,7 @@ session_start();
 
 <p><strong>§6. Haftung</strong></p>
 
-<p>(1) Bei der Angabe der persönlichen Daten des Nutzers trägt dieser die Verantwortung für die Richtigkeit seiner Angaben über seine Person sowie beabsichtigte Erweiterungen oder änderungen oder dessen fachliche und funktionale Aspekte. Diese Voraussetzungen gelten als Grundlagen des Nutzungsverhältnisses. Für die in das Portal eingestellten Angebote und Veranstaltungen trägt derjenige Nutzer die ausschließliche Verantwortung, der sie eingestellt hat bzw. in dessen Auftrag sie eingestellt wurden. Bei minderjährigen Nutzern liegt die Verantwortung bei den Eltern oder sonstigen Erziehungsberechtigten. Der Nutzer sichert zu, dass die von ihm im Antrag gemachten Angaben über seine Person und sonstige nutzungsverhältnisrelevante Umstände vollständig und richtig sind. Der Nutzer verpflichtet sich, die OSJB Jobbörse jeweils unverzüglich über Änderungen der Daten zu unterrichten; auf entsprechende Anfrage von der OSJB Jobbörse hat der Nutzer die Daten zu bestätigen, ggf. nachzuweisen.</p>
+<p>(1) Bei der Angabe der persönlichen Daten des Nutzers trägt dieser die Verantwortung für die Richtigkeit seiner Angaben über seine Person sowie beabsichtigte Erweiterungen oder Änderungen oder dessen fachliche und funktionale Aspekte. Diese Voraussetzungen gelten als Grundlagen des Nutzungsverhältnisses. Für die in das Portal eingestellten Angebote und Veranstaltungen trägt derjenige Nutzer die ausschließliche Verantwortung, der sie eingestellt hat bzw. in dessen Auftrag sie eingestellt wurden. Bei minderjährigen Nutzern liegt die Verantwortung bei den Eltern oder sonstigen Erziehungsberechtigten. Der Nutzer sichert zu, dass die von ihm im Antrag gemachten Angaben über seine Person und sonstige nutzungsverhältnisrelevante Umstände vollständig und richtig sind. Der Nutzer verpflichtet sich, die OSJB Jobbörse jeweils unverzüglich über Änderungen der Daten zu unterrichten; auf entsprechende Anfrage von der OSJB Jobbörse hat der Nutzer die Daten zu bestätigen, ggf. nachzuweisen.</p>
 
 <p>(2) Die OSJB Jobbörse überprüft die von den Nutzern eingestellten Angebote und Veranstaltungen grundsätzlich nicht. Dementsprechend haftet die OSJB Jobbörse nicht für die Richtigkeit, Vollständigkeit und rechtliche Zulässigkeit von Angaben, die in das Portal eingestellt werden.</p>
 
@@ -109,7 +109,7 @@ session_start();
 
 <p><strong>§7. Einzelheiten der Nutzung</strong></p>
 
-<p>(1) Die OSJB Jobbörse ist ein Portal, das die OSJB Jobbörse Personalvermittlung GmbH Arbeitgebern und Arbeitsuchenden, ggf. Ausbildungssuchenden zur Verfügung stellt, um Stellenangebote sowie Angebote zur Aufnahme einer Ausbildung sowie Bewerberangebote einzusehen oder eigene Angebote einzustellen. Sofern sich inhaltliche änderungen ergeben, sind diese im bestehenden Angebot zu aktualisieren.</p>
+<p>(1) Die OSJB Jobbörse ist ein Portal, das die OSJB Jobbörse Arbeitgebern und Arbeitsuchenden, ggf. Ausbildungssuchenden zur Verfügung stellt, um Stellenangebote sowie Angebote zur Aufnahme einer Ausbildung sowie Bewerberangebote einzusehen oder eigene Angebote einzustellen. Sofern sich inhaltliche Änderungen ergeben, sind diese im bestehenden Angebot zu aktualisieren.</p>
 
 <p>(2) Jegliche Zweckentfremdung des Portals der OSJB Jobbörse, und sei es auch nur teilweise, ist zu unterlassen.</p>
 
@@ -145,7 +145,7 @@ session_start();
 
 <p>(2) Die unwirksame Bestimmung ist durch eine Bestimmung zu ersetzen, die dem Willen der Beteiligten möglichst nahe kommt und zur Erreichung des gewünschten Ziels am besten geeignet ist.</p>
 
-<p>Die Nutzungsbedingungen wurden von RADAS Jobbörse & Personalvermittlung GmbH frei übernommen: <a href="https://radas.de/de/content/svp/1/index.html">https://radas.de/de/content/svp/1/index.html</a></p>
+<p>Die Nutzungsbedingungen wurden von RADAS Jobbörse & Personalvermittlung GmbH frei übernommen: <a href="https://radas.de/de/content/svp/1/index.html" target="_blank">https://radas.de/de/content/svp/1/index.html</a></p>
 
 <p>Stand: 08.07.2020</p>
         </section>
