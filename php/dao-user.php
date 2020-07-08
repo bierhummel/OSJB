@@ -156,15 +156,15 @@ class SQLiteUserDAO implements UserDAO {
             catch(PDOException $e) {
                 // Print PDOException message
                 echo $e->getMessage();
-                $success = false;
+                $hash = '';
             }
 
         } 
         else {
-            $success = false;
+            $hash = '';
         }
         
-        return $succes;  
+        return $hash;  
           
     }
     

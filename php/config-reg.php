@@ -93,12 +93,18 @@
         if( $request_checked['passwort1'] == $request_checked["passwort2"] ) {
             
             //Aufruf von registerUser() des UserDAO
-            $succes = $UserDAO->registerUser($request_checked);
+            $token = $UserDAO->registerUser($request_checked);
 
             /* Dibo: Entweder ihr implementiert die Registrierung durch versenden von E-Mails oder um das immer wieder aufkommende Problem mit Mails und Mail-Servern zu umgehen, simuliert ihr es wie folgt: Nach dem Registrieren wird keine echte E-Mail verschickt, sondern es kommt der Hinweis: „Es wurde eine E-Mail an die angegebene Adresse verschickt mit weiteren Infos.“ + Link zu einer (temporären) txt-Datei, wo der E-Mail-Text drin steht. -> umsetzung fehlt noch */        
 
-            if( $succes == true ){            
+            if( $token != '' ){            
                 $_SESSION["registrierung"] = "success"; 
+                $text = "Herzlich Willkommen bei OSJB. Klicken Sie auf folgenen Link, um ihre Mail zu bestätigen: http://localhost/php/verification/verify-mail.php=?".$token; 
+                $data = "verification/tmp/".$token.".txt"; 
+                $handler = fopen($data , "a+");
+                fwrite($handler , $text);
+                fclose($handler);
+                
             }
             else{
                 $_SESSION["registrierung"] = "db_fail"; //später genauere unterscheidungen
