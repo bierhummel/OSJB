@@ -91,20 +91,34 @@
             
             //Aufruf von registerUser() des UserDAO
             $token = $UserDAO->registerUser($request_checked);
+            
+            $_SESSION["tokenpfad"] = "php/verification/tmp/".$token.".txt"; 
 
             /* Dibo: Entweder ihr implementiert die Registrierung durch versenden von E-Mails oder um das immer wieder aufkommende Problem mit Mails und Mail-Servern zu umgehen, simuliert ihr es wie folgt: Nach dem Registrieren wird keine echte E-Mail verschickt, sondern es kommt der Hinweis: „Es wurde eine E-Mail an die angegebene Adresse verschickt mit weiteren Infos.“ + Link zu einer (temporären) txt-Datei, wo der E-Mail-Text drin steht. -> umsetzung fehlt noch */        
 
-            if( $token != '' ){            
-                $_SESSION["registrierung"] = "success"; 
-                $text = "Herzlich Willkommen bei OSJB. Klicken Sie auf folgenen Link, um ihre Mail zu bestätigen: http://localhost/php/verification/verify-mail.php?token=".$token; 
+            if( $token == 'existiert'){
+                $_SESSION["registrierung"] = "verifizierung"; 
+                $text = "Sie sind bereits registriert. Sollten Sie Ihr Passwort vergessen haben klicken Sie hier (folgt noch). Falls Sie nicht selbst versucht haben sich mit dieser Mailadresse zu registrieren, ignorieren Sie diese Mail bitte einfach.";
+                
                 $data = "verification/tmp/".$token.".txt"; 
                 $handler = fopen($data , "a+");
                 fwrite($handler , $text);
                 fclose($handler);
                 
+                
             }
+            elseif ($token != '' ){            
+                $_SESSION["registrierung"] = "verifizierung"; 
+                $text = "Herzlich Willkommen bei OSJB. Klicken Sie bitte auf folgenen Link, um ihr Konto zu verifizieren: http://localhost/".$_SERVER['PHP_SELF']."?token=".$token . ". Falls Sie nicht selbst versucht haben sich mit dieser Mailadresse zu registrieren, ignorieren Sie diese Mail bitte einfach."; 
+                
+                $data = "verification/tmp/".$token.".txt"; 
+                $handler = fopen($data , "a+");
+                fwrite($handler , $text);
+                fclose($handler);
+            }
+            
             else{
-                $_SESSION["registrierung"] = "db_fail"; //später genauere unterscheidungen
+                $_SESSION["registrierung"] = "db_fail"; //später genauere Unterscheidungen
 
             }
         }
