@@ -8,8 +8,9 @@ interface UserDAO {
 
     public function registerUser( $user );
     
+    public function verifyUser(  $token );
+    
     public function deleteUser(  $user_id, $password );
-
 }
 
 /****************************************************************************
@@ -156,17 +157,41 @@ class SQLiteUserDAO implements UserDAO {
             catch(PDOException $e) {
                 // Print PDOException message
                 echo $e->getMessage();
-                $success = false;
+                $hash = '';
             }
 
         } 
         else {
-            $success = false;
+            $hash = 'existiert';
         }
         
-        return $succes;  
-          
+        return $hash;  
     }
+    
+    public function verifyUser( $token ){
+        try{
+            $database = "../database/database.db";
+            $db = new PDO('sqlite:' . $database);
+            // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
+            $verify = "update user set mail_verified = 1 WHERE hash= :hash";
+            $stmt = $db->prepare($verify);
+            // Binde die Parameter an die Variablen,
+            $stmt->bindParam(':hash', $token);
+            // Und führe die Transaktion letzlich aus.
+            $stmt->execute();
+            
+            return true;
+        }
+        catch(PDOException $e) {
+            // Print PDOException message
+            echo $e->getMessage();
+        }
+        
+        return false;
+    }
+    
     
     public function deleteUser(  $user_id, $password ){
         
