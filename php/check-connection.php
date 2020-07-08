@@ -26,7 +26,7 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
  
 try{
     //Kreieren der Tables User und Jobangebot    
-    $db->exec("create table if not exists user (id integer primary key, uname text NOT NULL, vname text NOT NULL, nname text NOT NULL, password text NOT NULL, mail text NOT NULL, strasse text, hausnr text, plz text, stadt text, verified integer NOT NULL, mail_verified integer NOT NULL)");
+    $db->exec("create table if not exists user (id integer primary key, uname text NOT NULL, vname text NOT NULL, nname text NOT NULL, password text NOT NULL, mail text NOT NULL,  hash text NOT NULL, strasse text, hausnr text, plz text, stadt text, verified integer NOT NULL, mail_verified integer NOT NULL)");
     
     $db->exec("create table if not exists jobangebot (id integer primary key, user_id integer, status integer NOT NULL, titel text, strasse text NOT NULL, hausnr text NOT NULL, plz text NOT NULL, stadt text NOT NULL, geo_lat real, geo_lon real, beschreibung text, art text, zeitintensitaet text, im_bachelor integer NOT NULL, bachelor integer NOT NULL, im_master integer NOT NULL, master integer NOT NULL, ausbildung integer NOT NULL, fachrichtung text, logo blob, link text, beschaeftigungsbeginn text, erstellt_am integer, FOREIGN KEY (user_id) REFERENCES user(id))");
 
@@ -35,13 +35,14 @@ try{
     if (!$file_existed){ 
         
         //Firma1
-        $unternehmen = "insert into user (uname, vname, nname, password, mail, strasse, hausnr, plz, stadt, verified, mail_verified) values (:uname, :vname, :nname, :password, :mail, :strasse, :hausnr, :plz, :stadt, :verified, :mail_verified)";    
+        $unternehmen = "insert into user (uname, vname, nname, password, mail, hash, strasse, hausnr, plz, stadt, verified, mail_verified) values (:uname, :vname, :nname, :password, :mail, :hash, :strasse, :hausnr, :plz, :stadt, :verified, :mail_verified)";    
 
         $uname = "OSJB AG";
         $vname = "Stefan";    
         $nname = "Schröder"; 
         $password = password_hash("12345678asdf", PASSWORD_DEFAULT);
-        $mail = "stefan-schroeder@osjb.de";    
+        $mail = "stefan-schroeder@osjb.de";  
+        $hash = md5(rand());
         $strasse = "An der großen Eiche";
         $hausnr = "41a-d";
         $plz = "26129";
@@ -55,6 +56,7 @@ try{
         $stmt->bindParam(':vname', $vname);
         $stmt->bindParam(':nname', $nname);    
         $stmt->bindParam(':mail', $mail);
+        $stmt->bindParam(':hash', $hash);
         $stmt->bindParam(':password', $password);
         $stmt->bindParam(':strasse', $strasse);
         $stmt->bindParam(':hausnr', $hausnr);
@@ -67,13 +69,14 @@ try{
 
         
         //Firma2
-        $unternehmen1 = "insert into user (uname, vname, nname, password, mail, strasse, hausnr, plz, stadt, verified, mail_verified) values (:uname, :vname, :nname, :password, :mail, :strasse, :hausnr, :plz, :stadt, :verified, :mail_verified)";    
+        $unternehmen1 = "insert into user (uname, vname, nname, password, mail, hash, strasse, hausnr, plz, stadt, verified, mail_verified) values (:uname, :vname, :nname, :password, :mail, :hash, :strasse, :hausnr, :plz, :stadt, :verified, :mail_verified)";    
 
         $uname = "EWE AG";
         $vname = "Max";    
         $nname = "Mustermann"; 
         $password = password_hash("asdfghjkl", PASSWORD_DEFAULT);
-        $mail = "max-mustermann@ewe.de";    
+        $mail = "max-mustermann@ewe.de"; 
+        $hash = md5(rand());
         $strasse = "Tirpitzstraße";
         $hausnr = "39";
         $plz = "26122";
@@ -87,6 +90,7 @@ try{
         $stmt->bindParam(':vname', $vname);
         $stmt->bindParam(':nname', $nname);    
         $stmt->bindParam(':mail', $mail);
+        $stmt->bindParam(':hash', $hash);
         $stmt->bindParam(':password', $password);
         $stmt->bindParam(':strasse', $strasse);
         $stmt->bindParam(':hausnr', $hausnr);
@@ -99,13 +103,14 @@ try{
 
         
         //Firma3
-        $unternehmen2 = "insert into user (uname, vname, nname, password, mail, strasse, hausnr, plz, stadt, verified, mail_verified) values (:uname, :vname, :nname, :password, :mail, :strasse, :hausnr, :plz, :stadt, :verified, :mail_verified)";    
+        $unternehmen2 = "insert into user (uname, vname, nname, password, mail, hash, strasse, hausnr, plz, stadt, verified, mail_verified) values (:uname, :vname, :nname, :password, :mail, :hash, :strasse, :hausnr, :plz, :stadt, :verified, :mail_verified)";       
 
         $uname = "Telekom Deutschland GmbH";
         $vname = "Judith";    
         $nname = "Möller"; 
         $password = password_hash("qwertz12345", PASSWORD_DEFAULT);
-        $mail = "judith-moeller@t-online.de";    
+        $mail = "judith-moeller@t-online.de";   
+        $hash = md5(rand());
         $strasse = "Landgrabenweg";
         $hausnr = "141";
         $plz = "53227";
@@ -119,6 +124,7 @@ try{
         $stmt->bindParam(':vname', $vname);
         $stmt->bindParam(':nname', $nname);    
         $stmt->bindParam(':mail', $mail);
+        $stmt->bindParam(':hash', $hash);
         $stmt->bindParam(':password', $password);
         $stmt->bindParam(':strasse', $strasse);
         $stmt->bindParam(':hausnr', $hausnr);
