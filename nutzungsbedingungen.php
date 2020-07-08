@@ -145,7 +145,7 @@ session_start();
 
 <p>(2) Die unwirksame Bestimmung ist durch eine Bestimmung zu ersetzen, die dem Willen der Beteiligten möglichst nahe kommt und zur Erreichung des gewünschten Ziels am besten geeignet ist.</p>
 
-<p>&nbsp;</p>
+<p>Die Nutzungsbedingungen wurden von RADAS Jobbörse & Personalvermittlung GmbH frei übernommen: <a href="https://radas.de/de/content/svp/1/index.html"></a></p>
 
 <p>Stand: 08.07.2020</p>
         </section>
