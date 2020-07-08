@@ -72,18 +72,31 @@
     }
 
     //Anlegen neuer Jobangebote
-     if(isset($request_checked["erstellen"]) && isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ) {
-         $jobs = $JobDAO->createJob($request_checked, $_SESSION["mail"]);
+    if(isset($request_checked["erstellen"]) && isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ) {
          
-         header( 'location: ../jobangebot-anzeigen.php?id=' . $jobs["id"]);
-         exit;
-     }
+        //Koordinaten des Jobangebotes ermitteln
+        $coordinates = getCoordinates($request_checked, 1);
+        $job_data = $request_checked;
+        $job_data["coordinates"] = $coordinates;
+
+        //Daten den zu erstellenden Jobangebots zusammen mit der Mail des Nutzers an DAO übergeben
+        $jobs = $JobDAO->createJob($job_data, $_SESSION["mail"]);
+
+        //Erstelltes Jobangebot anzeigen
+        header( 'location: ../jobangebot-anzeigen.php?id=' . $jobs["id"]);
+        exit;
+    }   
     
     //Bearbeiten von Jobangeboten
     if(isset($request_checked["bearbeiten"]) && isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ) {
         
+        //Koordinaten des Jobangebotes ermitteln
+        $coordinates = getCoordinates($request_checked, 1);
+        $job_data = $request_checked;
+        $job_data["coordinates"] = $coordinates;
+
         //Übergangslösung, wird geändert wenn aufruf von Bearbeiten über Post statt get
-        $job_id = $JobDAO->updateJob($request_checked, $request_checked["update_id"]);
+        $job_id = $JobDAO->updateJob($job_data, $request_checked["update_id"]);
          
         header( 'location: ../jobangebot-anzeigen.php?id=' . $job_id);
         exit;
