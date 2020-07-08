@@ -163,7 +163,9 @@ class SQLiteJobDAO implements JobDAO {
             $hausnr = $job['job_hausnr'];
             $plz = $job['job_plz'];
             $stadt = $job['job_stadt'];
-            
+            $coordinates = $this->getCoordinates($job, NULL);
+            $geo_lat = floatval($coordinates['lat']);
+            $geo_lon = floatval($coordinates['lon']);
             //Beschäftigungsart
             $beschaeftigungsart = $job['art'];
             //Fachrichtung
@@ -219,7 +221,7 @@ class SQLiteJobDAO implements JobDAO {
             }
 
             //SQL Update        
-            $updatedJob = "update jobangebot set status = :status, titel = :titel, strasse = :strasse, hausnr = :hausnr, plz = :plz, stadt = :stadt, beschreibung = :beschreibung, art = :art, zeitintensitaet = :zeitintensitaet, im_bachelor = :im_bachelor, bachelor = :bachelor, im_master = :im_master, master = :master, ausbildung = :ausbildung, fachrichtung = :fachrichtung, link = :link, beschaeftigungsbeginn = :beschaeftigungsbeginn where id = :id";
+            $updatedJob = "update jobangebot set status = :status, titel = :titel, strasse = :strasse, hausnr = :hausnr, plz = :plz, stadt = :stadt, geo_lat = :geo_lat, geo_lon = :geo_lon beschreibung = :beschreibung, art = :art, zeitintensitaet = :zeitintensitaet, im_bachelor = :im_bachelor, bachelor = :bachelor, im_master = :im_master, master = :master, ausbildung = :ausbildung, fachrichtung = :fachrichtung, link = :link, beschaeftigungsbeginn = :beschaeftigungsbeginn where id = :id";
             
             $stmt = $db->prepare($updatedJob);
             
@@ -228,7 +230,9 @@ class SQLiteJobDAO implements JobDAO {
             $stmt->bindParam(':strasse', $strasse);  // n.v.      
             $stmt->bindParam(':hausnr', $hausnr); // n.v.   
             $stmt->bindParam(':plz', $plz); // n.v.   
-            $stmt->bindParam(':stadt', $stadt); // n.v.     
+            $stmt->bindParam(':stadt', $stadt); // n.v
+            $stmt->bindParam(':geo_lat', $geo_lat);   
+            $stmt->bindParam(':geo_lon', $geo_lon);  .     
             $stmt->bindParam(':beschreibung', $beschreibung); 
             $stmt->bindParam(':art', $beschaeftigungsart);   
             $stmt->bindParam(':im_bachelor', $im_bachelor); 
