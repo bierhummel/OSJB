@@ -33,51 +33,121 @@ session_start();
 
         <section>
             <h1 class="center">Nutzungsbedingungen</h1>
-            <p class="center">(In Bearbeitung)</p>
+            <h6><strong>Einleitung</strong></h6>
 
-            <p><strong>§ 1 Geltungsbereich</strong></p>
-            <p>Für die Nutzung der Website OSJB von OSJB e.V. (nachfolgend "Anbieter" genannt) gelten nachfolgende Bedingungen. </p>
-            <p>Die Nutzung der Website ist nur zulässig, wenn Sie als Nutzer diese Nutzungsbedingungen akzeptieren. </p>
-            <p><strong>§ 2 Registrierung, Vertragsschluss und -gegenstand</strong></p>
-            <p>1. Voraussetzung für die Nutzung der Website ist die Registrierung über das entsprechende Online-Formular. Nach der Registrierung über das Online-Formular im Forum bekommen Sie eine Bestätigungsemail zur Verifizierung Ihrer Daten zugeschickt, mit der Sie Ihre Registrierung per Mouseclick bestätigen können. Mit der Aktivierung Ihres Accounts durch den Anbieter, kommt der unentgeltliche Foren-Nutzungsvertrag zustande (Vertragsschluss). </p>
-            <p>2. Vertragsgegenstand ist die kostenlose Nutzung der Funktionen der Website als Online-Kommunikationsplattform. Hierzu wird Ihnen als Nutzer ein „Account“ bereitgestellt, mit dem Sie Beiträge und Themen im Forum einstellen können.</p>
-            <p>3. Es gibt grundsätzlich keinen Rechtsanspruch auf Freischaltung oder Teilnahme am Forum. Es gilt das uneingeschränkte Hausrecht des Betreibers.</p>
-            <p>4. Ihr Foren-Account darf nur von Ihnen selbst genutzt werden. Ebenso sind Sie als Inhaber des Accounts für den Schutz vor dessen Missbrauch verantwortlich. Ihre Zugangsdaten sind daher vor dem Zugriff Dritter zu schützen. Die Verwendung von markenrechtlich geschützten Worten und Internetadressen als Benutzername (Nickname) sind nicht erlaubt.</p>
-            <p>5. Der Anbieter wird sich bemühen, den Dienst möglichst unterbrechungsfrei zum Abruf anzubieten. Auch bei aller Sorgfalt können Ausfallzeiten nicht ausgeschlossen werden, in denen die Webserver auf Grund von technischen oder sonstigen Problemen, die nicht im Einflussbereich vom Anbieter liegen (Verschulden Dritter, höhere Gewalt, Angriffe gegen die Infrastruktur durch Hacker etc.), über das Internet nicht abrufbar ist. Der Nutzer erkennt an, dass eine 100%ige Verfügbarkeit der Website technisch nicht zu realisieren ist.</p>
-            <p>6. Der Anbieter behält sich das Recht vor, Inhalt und Struktur der Plattform sowie die dazugehörigen Benutzeroberflächen zu ändern und zu erweitern, wenn hierdurch die Zweckerfüllung des mit dem Nutzer geschlossenen Vertrags nicht oder nur unerheblich beeinträchtigt wird. Der Anbieter wird die Nutzer entsprechend über die Änderungen informieren.</p>
-            <p>7. Sinn und Zweck der Website ist ein an die Öffentlichkeit gerichteter "Markt der Meinungen". Es soll daher unter den Nutzern ein friedlicher und respektvoller Umgang ohne beleidigende Anfeindungen gepflegt werden.</p>
-            <p><strong>§ 3 Pflichten als Foren-Nutzer</strong></p>
-            <p>1. Als Nutzer verpflichten Sie sich, dass Sie keine Beiträge veröffentlichen werden, die gegen diese Regeln, die guten Sitten oder sonst gegen geltendes deutsches Recht verstoßen. Es ist Ihnen insbesondere untersagt,</p>
-            <ul>
-                <li>beleidigende oder unwahre Inhalte zu veröffentlichen;</li>
-                <li>Spam über das System an andere Nutzer zu versenden;</li>
-                <li>gesetzlich, insbesondere durch das Urheber- und Markenrecht, geschützte Inhalte ohne Berechtigung zu verwenden;</li>
-                <li>wettbewerbswidrige Handlungen vorzunehmen; </li>
-                <li>Ihr Thema mehrfach im Forum einzustellen (Verbot von Doppelpostings);</li>
-                <li>Presseartikel Dritter ohne Zustimmung des Urhebers im Forum zu veröffentlichen;</li>
-                <li>Werbung im Forum ohne ausdrückliche schriftliche Genehmigung durch den Anbieter zu betreiben. Dies gilt auch für sog. Schleichwerbung wie insbesondere das Verlinken der eigenen Homepage mit oder ohne Beitext in der Signatur oder innerhalb von Beiträgen. Homepage-URLs und Adress- bzw. Kontaktdaten dürfen nur im Benutzer-Profil der Website veröffentlicht werden.</li>
-            </ul>
-            <p>2. Als Nutzer verpflichten Sie sich, vor der Veröffentlichung Ihrer Beiträge und Themen diese daraufhin zu überprüfen, ob diese Angaben enthalten, die Sie nicht veröffentlichen möchten. Ihre Beiträge und Themen können in Suchmaschinen erfasst und damit weltweit zugreifbar werden. Ein Anspruch auf Löschung oder Korrektur solcher Suchmaschineneinträge gegenüber dem Anbieter ist ausgeschlossen.</p>
-            <p>3. Beim Verstoß, insbesondere gegen die zuvor genannten Regeln § 3 Abs. 1 und 2, kann der Anbieter unabhängig von einer Kündigung, auch die folgenden Sanktionen gegen den Nutzer verhängen:</p>
-            <ul>
-                <li>Löschung oder Abänderung von Inhalten, die der Nutzer eingestellt hat,</li>
-                <li>Ausspruch einer Abmahnung oder</li>
-                <li>Sperrung des Zugangs zum Forum.</li>
-            </ul>
-            <p>4. Sollten Dritte oder andere Nutzer den Anbieter wegen möglicher Rechtsverstöße in Anspruch nehmen, die a) aus den von Ihnen als Nutzer eingestellten Inhalten resultieren und/oder b) aus der Nutzung der Dienste des Anbieters durch Sie als Nutzer entstehen, verpflichten Sie sich als Nutzer, den Anbieter von jeglichen Ansprüchen, einschließlich Schadensersatzansprüchen, freizustellen und dem Anbieter die Kosten zu ersetzen, die diesem wegen der möglichen Rechtsverletzung entstehen. Der Anbieter wird insbesondere von den Kosten der notwendigen Rechtsverteidigung freigestellt. Der Anbieter ist berechtigt, hierfür von Ihnen als Nutzer einen angemessenen Vorschuss zu fordern. Als Nutzer sind Sie verpflichtet, den Anbieter nach Treu und Glauben mit Informationen und Unterlagen bei der Rechtsverteidigung gegenüber Dritten zu unterstützen. Alle weitergehenden Rechte sowie Schadensersatzansprüche des Anbieters bleiben unberührt. Wenn Sie als Nutzer die mögliche Rechtsverletzung nicht zu vertreten haben, bestehen die zuvor genannten Pflichten nicht. </p>
-            <p><strong>§ 4 Übertragung von Nutzungsrechten</strong></p>
-            <p>1. Das Urheberrecht für Ihre Themen und Beiträge, soweit diese urheberrechtsschutzfähig sind, verbleibt grundsätzlich bei Ihnen als Nutzer. Sie räumen dem Anbieter jedoch mit Einstellung eines Themas oder Beitrags das Recht ein, das Thema oder den Beitrag dauerhaft auf seinen Webseiten vorzuhalten. Zudem hat der Anbieter das Recht, Ihre Themen und Beiträge zu löschen, zu bearbeiten, zu verschieben oder zu schließen.</p>
-            <p>2. Die zuvor genannten Nutzungsrechte bleiben auch im Falle einer Kündigung des Foren-Accounts bestehen. </p>
-            <p><strong>§ 5 Haftungsbeschränkung</strong></p>
-            <p>1. Der Anbieter der Website übernimmt keinerlei Gewähr für die im Forum eingestellten Inhalte, insbesondere nicht für deren Richtigkeit, Vollständigkeit und Aktualität. </p>
-            <p>2. Der Anbieter haftet für Vorsatz und grobe Fahrlässigkeit sowie bei Verletzung einer wesentlichen Vertragspflicht. Wesentliche Vertragspflichten sind solche, deren Erfüllung die ordnungsgemäße Durchführung des Vertrags überhaupt erst ermöglicht und auf deren Einhaltung der Vertragspartner regelmäßig vertrauen darf. Der Anbieter haftet unter Begrenzung auf Ersatz des bei Vertragsschluss vorhersehbaren vertragstypischen Schadens für solche Schäden, die auf einer leicht fahrlässigen Verletzung von wesentlichen Vertragspflichten durch ihn oder eines seiner gesetzlichen Vertreter oder Erfüllungsgehilfen beruhen. Bei leicht fahrlässiger Verletzung von Nebenpflichten, die keine wesentlichen Vertragspflichten sind, haftet der Anbieter nicht. Die Haftung für Schäden, die in den Schutzbereich einer vom Anbieter gegebenen Garantie oder Zusicherung fallen sowie die Haftung für Ansprüche aufgrund des Produkthaftungsgesetzes und Schäden aus der Verletzung des Lebens, des Körpers oder der Gesundheit bleibt hiervon unberührt.</p>
-            <p><strong>§ 6</strong><strong> Laufzeit / Beendigung des Vertrags</strong></p>
-            <p>1. Diese Vereinbarung wird auf unbestimmte Zeit geschlossen.</p>
-            <p>2. Beide Parteien können diese Vereinbarung ohne Einhaltung einer Frist kündigen.</p>
-            <p>3. Wenn der Nutzer seinen Account löscht bzw. löschen lässt (Kündigung des Vertrags), bleiben seine öffentlichen Äußerungen, insbesondere Beiträge im Forum, weiterhin für alle Leser sichtbar, der Account ist jedoch nicht mehr abrufbar und im Forum mit „Gast“ gekennzeichnet. Alle anderen Daten werden gelöscht. Wenn der Nutzer wünscht, dass auch seine öffentlichen Beiträge gelöscht werden, möge er dies beim Löschwunsch dem Anbieter mitteilen.</p>
-            <p><strong>Quelle: <a href="https://www.juraforum.de/muster-nutzungsbedingungen-forum/" target="_blank" title="Forenregeln">Forenregeln Muster</a> von <a href="https://www.juraforum.de/" target="_blank" title="Juraforum">Juraforum.de</a></strong></p>
+<p>Die OSJB ist ein Portal, das die OSJB Personalvermittlung e.V. Privatpersonen und Unternehmen zur Verfügung stellt.</p>
 
+<p>Die Nutzung der OSJB-Jobbörse erfolgt auf eigene Verantwortung und mit eigenem Risiko. Die Nutzung unserer Website steht Personen über 18 Jahren zur Verfügung. Personen unter 18 Jahren bedürfen der Einwilligung einer erziehungsberechtigten Person, die die rechtlich maßgeblichen Erklärungen abzugeben hat.</p>
 
+<p>Soweit Nutzer mit Staatsangehörigkeit anderer Staaten als Deutschland das Portal nutzen, gelten die Volljährigkeitsbestimmungen dieses Staates.</p>
+
+<p>Aus Gründen der Vereinfachung und besseren Verständlichkeit, nicht aber aus Gründen der Diskriminierung, werden Personenbezeichnungen nachfolgend nur in der männlichen Form verwendet.</p>
+
+<p>Für die Inanspruchnahme des Portals gelten die folgenden Nutzungsbedingungen:</p>
+
+<p><strong>§1. Nutzung des Portals unter www.osjb.de</strong></p>
+
+<p>(1) Zur Nutzung des Portals ist jede natürliche oder juristische Person berechtigt. Natürliche Personen müssen volljährig und geschäftsfähig sein; Minderjährige bedürfen der Einwilligung ihrer Eltern oder sonstigen Erziehungsberechtigten.</p>
+
+<p>(2) Die OSJB behält sich vor, diese Nutzungsbedingungen zu ergänzen oder zu ändern.</p>
+
+<p><strong>§2. Registrierung als Nutzer</strong></p>
+
+<p>(1) Die Nutzung der Dienste des Portals, verbunden mit einem Account der OSJB Jobbörse erfordert eine vorherige Registrierung als Nutzer.</p>
+
+<p>(2) Eine Registrierung kann erst erfolgen und ist nur dann zulässig, wenn der Nutzer die Nutzungsbedingungen der OSJB Jobbörse vollständig zur Kenntnis genommen und sein Einverständnis erklärt hat. Auf der Registrierungsseite müssen bestimmte persönliche Daten hinterlegt sowie ein Benutzername und ein selbst gewähltes Kennwort eingegeben werden.</p>
+
+<p>(3) Das Benutzerkonto kann nach 12 Monaten komplett gelöscht werden, wenn sich der Nutzer nicht mehr am Portal anmeldet.</p>
+
+<p><strong>§3. Eingabe und Schutz des Kennwortes</strong></p>
+
+<p>(1) Zum eigenen Schutz vor unbefugter Nutzung des eigenen Benutzerkontos sollte jeder Nutzer</p>
+
+<ul>
+	<li>ein sicheres, schwer zu erratendes Kennwort wählen,</li>
+	<li>sein gewähltes Kennwort vor anderen Personen geheim halten und</li>
+	<li>seine Anmeldedaten (Benutzername und Kennwort) nicht auf anderen Portalen eingeben.</li>
+</ul>
+
+<p>Hinweis: OSJB wird in keinem Fall per E-Mail oder auf fremden Internetseiten Benutzernamen und/oder Kennwörter abfragen.</p>
+
+<p>(2) Erfährt oder vermutet der Nutzer, dass das von ihm gewählte Kennwort Dritten bekannt geworden ist, besteht die Verpflichtung zu einer unverzüglichen änderung des Kennwortes.</p>
+
+<p><strong>§4. Urheberrechte, Nutzungsrechte, Konkurrenzschutz</strong></p>
+
+<p>(1) Die Nutzer räumen die OSJB sowie allen anderen Nutzern des Portals und Kooperationspartnern der OSJB Jobbörse das einfache, räumlich und zeitlich unbeschränkte Nutzungsrecht an den eingestellten Angeboten zum Zweck der Arbeits-/ Personal- und Ausbildungsvermittlung ein.</p>
+
+<p>(2) Das Urheberrecht an der Datenbank und Inhalt des Portals sowie an der verwendeten Software liegt bei der OSJB Jobbörse. Der Nutzer ist dafür verantwortlich, dass jegliche Programmnutzung durch ihn oder durch Dritte im Rahmen der Nutzungsvereinbarung stattfindet. Dem Nutzer ist untersagt, die Datenbank und Inhalt des Portals teilweise oder vollständig zu verwerten oder zu vervielfältigen. Ebenfalls untersagt ist ihm die Nutzung der in die Datenbank eingestellten Angebote zu anderen Zwecken als unmittelbar zur Anbahnung und Aufnahme von Ausbildungs- oder Beschäftigungsverhältnissen sowie selbständigen Tätigkeiten, die Nutzung und Vervielfältigung der in die Datenbank eingestellten Angebote sowie deren Inhalte durch Dritte für eigene Vermittlungs- oder Werbezwecke, ohne dass hierfür eine Zustimmung des Nutzers vorliegt, eine Vervielfältigung, Verbreitung, Ausstellung, Aufführung, Vorführung oder Sendung sowie eine Wiedergabe durch Bild- oder Tonträger oder von Funksendungen aus dem Portal der OSJB Jobbörse.</p>
+
+<p>(3) Insbesondere ist es dem Nutzer nicht gestattet, auf jegliche technische Weise Inhalte des Portals der OSJB Jobbörse zu kopieren, auszulesen, zu welchem Zweck auch immer auszuwerten oder eigene Daten auf technischem Wege in der Portal einzuspielen. Es ist untersagt, eigene oder Inhalte Dritter zu bewerben, die mit den Dienstleistungen der OSJB Jobbörse im Wettbewerb stehen oder den Zielen der OSJB Jobbörse oder den gesetzlichen Vorschriften zuwiderlaufen.</p>
+
+<p>(4) OSJB behält sich die Geltendmachung sämtlicher Rechte bei Verletzung der vorgenannten Bestimmungen vor, seien es zivil- oder strafrechtliche Maßnahmen.</p>
+
+<p><strong>§5. Missbräuchliche Nutzung und Verstoß gegen Nutzungsbedingungen/ Schadensersatz</strong></p>
+
+<p>(1) OSJB Jobbörse stellt das Portal als Service zur Verfügung. Bei einer missbräuchlichen Nutzung und Verstößen gegen die Nutzungsbedingungen ist OSJB Jobbörse berechtigt, Inhalte zu entfernen, das Benutzerkonto ohne Benachrichtigung des Nutzers sofort zu löschen, den Zugang zum Portal vorübergehend oder dauerhaft zu sperren und die aktive Sitzung zu unterbrechen.</p>
+
+<p>(2) Durch das Einverständnis mit den hiesigen Nutzungsbedingungen erklärt der Nutzer, dass die von ihm eingestellten Angebote und Veranstaltungen nicht gegen diese Nutzungsbedingungen oder gegen geltendes Recht verstoßen.</p>
+
+<p>(3) Der Nutzer darf durch Form, Inhalt oder Zweck seiner eingestellten Angebote nicht gegen gesetzliche Verbote, die guten Sitten sowie Rechte Dritter, insbesondere Immaterialgüterrechte (Urheberrechte, Recht am eigenen Bild etc.) verstoßen. Insbesondere darf der Nutzer im Rahmen seiner Präsenz keine pornographischen, erotische, volksverhetzenden oder gewaltverherrlichenden Inhalte darstellen, nicht zu Straftaten aufrufen oder Anleitungen hierfür darstellen und keine Leistungen anbieten oder anbieten lassen, die o.g. Inhalte zum Gegenstand haben.</p>
+
+<p>(4) Der Nutzer trägt die Verantwortung für seine laufende Datensicherung selbst.</p>
+
+<p>(5) OSJB Jobbörse ist berechtigt, gegenüber Nutzern, die gegen die Nutzungsbedingungen verstoßen, im Hinblick auf den dadurch entstehenden Aufwand Schadensersatzansprüche geltend zu machen. Der Nutzer stellt der OSJB von Rechten Dritter frei, die unter Verstoß gegen diese Nutzungsbedingungen verletzt wurden.</p>
+
+<p><strong>§6. Haftung</strong></p>
+
+<p>(1) Bei der Angabe der persönlichen Daten des Nutzers trägt dieser die Verantwortung für die Richtigkeit seiner Angaben über seine Person sowie beabsichtigte Erweiterungen oder änderungen oder dessen fachliche und funktionale Aspekte. Diese Voraussetzungen gelten als Grundlagen des Nutzungsverhältnisses. Für die in das Portal eingestellten Angebote und Veranstaltungen trägt derjenige Nutzer die ausschließliche Verantwortung, der sie eingestellt hat bzw. in dessen Auftrag sie eingestellt wurden. Bei minderjährigen Nutzern liegt die Verantwortung bei den Eltern oder sonstigen Erziehungsberechtigten. Der Nutzer sichert zu, dass die von ihm im Antrag gemachten Angaben über seine Person und sonstige nutzungsverhältnisrelevante Umstände vollständig und richtig sind. Der Nutzer verpflichtet sich, die OSJB Jobbörse jeweils unverzüglich über Änderungen der Daten zu unterrichten; auf entsprechende Anfrage von der OSJB Jobbörse hat der Nutzer die Daten zu bestätigen, ggf. nachzuweisen.</p>
+
+<p>(2) Die OSJB Jobbörse überprüft die von den Nutzern eingestellten Angebote und Veranstaltungen grundsätzlich nicht. Dementsprechend haftet die OSJB Jobbörse nicht für die Richtigkeit, Vollständigkeit und rechtliche Zulässigkeit von Angaben, die in das Portal eingestellt werden.</p>
+
+<p>(3) Die OSJB Jobbörse haftet nicht für die Inhalte anderer Websites, die mit OSJB verlinkt sind, behält sich aber vor, die Links nach Kenntniserlangung rechtswidriger Inhalte zu entfernen.</p>
+
+<p>(4) OSJB Jobbörse haftet nicht für Schäden im Zusammenhang mit Computerviren bzw. ähnlichen schädigenden Mechanismen, die durch das Einstellen von Angeboten durch Dritte oder Verlinkung mit Websites Dritter entstehen.</p>
+
+<p>(5) Die Haftung der OSJB Jobbörse oder ihrer Erfüllungsgehilfen bzw. ihrer gesetzlichen Vertreter beschränkt sich auf fahrlässige Verletzungen wesentlicher Nutzungsverhältnisvorschriften, soweit die Schäden typisch und vorhersehbar sind und sich auf Privatnutzer beziehen, im übrigen auf grob fahrlässig oder vorsätzlich verursachte Schäden. Ein Mitverschulden des Nutzers mindert die Schadensersatzpflicht gemäß der Mitverschuldensquote.</p>
+
+<p><strong>§7. Einzelheiten der Nutzung</strong></p>
+
+<p>(1) Die OSJB Jobbörse ist ein Portal, das die OSJB Jobbörse Personalvermittlung GmbH Arbeitgebern und Arbeitsuchenden, ggf. Ausbildungssuchenden zur Verfügung stellt, um Stellenangebote sowie Angebote zur Aufnahme einer Ausbildung sowie Bewerberangebote einzusehen oder eigene Angebote einzustellen. Sofern sich inhaltliche änderungen ergeben, sind diese im bestehenden Angebot zu aktualisieren.</p>
+
+<p>(2) Jegliche Zweckentfremdung des Portals der OSJB Jobbörse, und sei es auch nur teilweise, ist zu unterlassen.</p>
+
+<p>(3) Die OSJB Jobbörse behandelt sämtliche eingegebenen Nutzerdaten vertraulich und beschränkt sich auf die Weitergabe lediglich zur Erfüllung des Zwecks dieser Nutzungsbedingungen. Sämtliche Nutzer des Portals sind ihrerseits gehalten, die Daten von Bewerbern (oder kontaktierter Betriebe) vertraulich zu behandeln.</p>
+
+<p>(4) Stellenanbieter haben darauf zu achten, ihre Stellenausschreibungen geschlechtsneutral zu formulieren und sämtliche erforderlichen Angaben kenntlich zu machen, die für eine Bewerbungsentscheidung relevant sind.</p>
+
+<p>(5) Stellenanbieter haben ferner darauf zu achten, dass die von ihnen eingestellten Angebote nicht gegen gesetzliche Vorschriften, insbesondere Arbeitnehmerrechte, verstoßen oder irreführend sind. Ihre Angebote dürfen grundsätzlich nicht kostenpflichtig über das übliche Maß hinaus sein, außer die Kostenpflicht ist gesetzlich vorgeschrieben oder in sonstiger Weise geregelt.</p>
+
+<p><strong>§8. Datenschutz</strong></p>
+
+<p>(1) Personenbezogene Daten des Nutzers werden von der OSJB Jobbörse während des Nutzungsverhältnisses ausschließlich zu Zwecken der Nutzungsverhältnisabwicklung elektronisch erhoben, verarbeitet und genutzt. Ergänzend gelten die gesonderten Datenschutzbestimmungen.</p>
+
+<p>(2) Dem Nutzer ist bekannt, dass die OSJB Jobbörse zur Erkennung, Eingrenzung und Beseitigung von Störungen und Fehlern an den Telekommunikationsanlagen sowie zur Aufdeckung oder zum Unterbinden von Leistungserschleichungen und sonstigen gesetzwidrigen Nutzungen der Telekommunikationsnetze berechtigt ist, die Bestands- und Verbindungsdaten des Nutzern zu erheben, verarbeiten und zu nutzen. Auskünfte an Gerichte und Behörden zum Zwecke der Strafverfolgung dürfen erteilt werden.</p>
+
+<p><strong>§9. OSJB Jobbörse Rechte</strong></p>
+
+<p>(1) Die OSJB Jobbörse gewährleistet nicht, dass die auf seinen Webseiten angebotenen Leistungen zu bestimmten Zeiten zur Verfügung stehen. Störungen, Unterbrechungen oder einen etwaigen Ausfall des Online-Angebots kann die OSJB Jobbörse nicht ausschließen.</p>
+
+<p>(2) Die Server der OSJB Jobbörse werden regelmäßig sorgfältig gesichert. Soweit Daten an OSJB Jobbörse - gleich in welcher Form - übermittelt werden, empfehlen wir Ihnen, Sicherheitskopien zu fertigen.</p>
+
+<p>(3) Die OSJB Jobbörse behält sich vor, diesen Service jederzeit zu ändern, zu erweitern, zu beschränken oder ganz einzustellen oder Daten jederzeit und ohne weitere Mitteilung zu löschen. Sie haben keinen Anspruch auf Veröffentlichung.</p>
+
+<p><strong>§10. Gerichtsstand</strong></p>
+
+<p>(1) Gerichtsstand für alle Streitigkeiten aus diesem Nutzungsverhältnis ist Oldenburg. Für Nichtkaufleute gelten die gesetzlichen Bestimmungen der Zivilprozessordnung (§§ 12 ff. ZPO).</p>
+
+<p>(2) Für die von der OSJB Jobbörse auf der Grundlage dieser Nutzungsbedingungen abgeschlossenen Verträge und für aus ihnen folgende Ansprüche gleich welcher Art gilt ausschließlich das Recht der Bundesrepublik Deutschland.</p>
+
+<p><strong>§11. Salvatorische Klausel</strong></p>
+
+<p>(1) Sollten Bestimmungen dieser Nutzungsbedingungen unwirksam sein oder werden, so berührt dies die Wirksamkeit der übrigen Bestimmungen nicht.</p>
+
+<p>(2) Die unwirksame Bestimmung ist durch eine Bestimmung zu ersetzen, die dem Willen der Beteiligten möglichst nahe kommt und zur Erreichung des gewünschten Ziels am besten geeignet ist.</p>
+
+<p>&nbsp;</p>
+
+<p>Stand: 08.07.2020</p>
         </section>
 
     </div>
