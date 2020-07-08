@@ -37,7 +37,9 @@ class SQLiteJobDAO implements JobDAO {
             $hausnr = $job['job_hausnr'];
             $plz = $job['job_plz'];
             $stadt = $job['job_stadt'];
-            $coordinates = $this->getCoordinates($job, NULL);
+            
+            //Koordinaten aus Array holen
+            $coordinates = $job['coordinates'];
             $geo_lat = floatval($coordinates['lat']);
             $geo_lon = floatval($coordinates['lon']);
             
@@ -163,9 +165,12 @@ class SQLiteJobDAO implements JobDAO {
             $hausnr = $job['job_hausnr'];
             $plz = $job['job_plz'];
             $stadt = $job['job_stadt'];
-            $coordinates = $this->getCoordinates($job, NULL);
+            
+            //Koordinaten aus Array holen
+            $coordinates = $job['coordinates'];
             $geo_lat = floatval($coordinates['lat']);
             $geo_lon = floatval($coordinates['lon']);
+            
             //Beschäftigungsart
             $beschaeftigungsart = $job['art'];
             //Fachrichtung
