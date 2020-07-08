@@ -232,7 +232,7 @@ class SQLiteJobDAO implements JobDAO {
             $stmt->bindParam(':plz', $plz); // n.v.   
             $stmt->bindParam(':stadt', $stadt); // n.v
             $stmt->bindParam(':geo_lat', $geo_lat);   
-            $stmt->bindParam(':geo_lon', $geo_lon);  .     
+            $stmt->bindParam(':geo_lon', $geo_lon);
             $stmt->bindParam(':beschreibung', $beschreibung); 
             $stmt->bindParam(':art', $beschaeftigungsart);   
             $stmt->bindParam(':im_bachelor', $im_bachelor); 
