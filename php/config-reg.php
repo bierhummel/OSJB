@@ -31,10 +31,9 @@
         $user = $UserDAO->loginUser($request_checked['email'], $request_checked['passwort']);
         
         //Login erfolgreich und auszugebende Userdaten als Array erhalten
-        if( $user != NULL ){            
+        if( $user != NULL && $user["mail_verified"] == 1){            
             $_SESSION["login"] = "success";
             $_SESSION["eingeloggt"] = "true";
-            
             
             //Alle unkritischen infos des Users in Session zwischenspeichern
             foreach ($user as $index => $value){
@@ -42,8 +41,6 @@
                     $_SESSION[$index] = htmlspecialchars($value);
                 }
             }
-            
-
             header( 'location: ../profil.php' );
             exit;
         }
