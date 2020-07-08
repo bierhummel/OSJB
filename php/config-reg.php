@@ -99,7 +99,7 @@
 
             if( $token != '' ){            
                 $_SESSION["registrierung"] = "success"; 
-                $text = "Herzlich Willkommen bei OSJB. Klicken Sie auf folgenen Link, um ihre Mail zu bestätigen: http://localhost/php/verification/verify-mail.php=?".$token; 
+                $text = "Herzlich Willkommen bei OSJB. Klicken Sie auf folgenen Link, um ihre Mail zu bestätigen: http://localhost/php/verification/verify-mail.php?token=".$token; 
                 $data = "verification/tmp/".$token.".txt"; 
                 $handler = fopen($data , "a+");
                 fwrite($handler , $text);

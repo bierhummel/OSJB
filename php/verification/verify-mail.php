@@ -8,7 +8,6 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 if (isset($_GET['token'])) {
     $token = $_GET['token'];
-    var_dump($token);
     $verify = "update user set mail_verified = 1 WHERE hash= :hash";
     $stmt = $db->prepare($verify);
     // Binde die Parameter an die Variablen,
