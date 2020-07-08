@@ -129,9 +129,33 @@
         header( 'location: ../login.php' );
         exit;        
     }
+    
+    //Registrierung abschließen
+    if ( isset($request_checked['token']) && $request_checked['token'] != "" && file_exists('verification/tmp/'.$request_checked['token'].'.txt' ) ) {
+        
+        $verifiziert = $UserDAO->verifyUser($request_checked['token']);
+        
+        if($verifiziert) {
+             $_SESSION["registrierung"] = "success"; 
+            echo "Übergangslösung: Die Mail wurde erfolgreich bestätigt.";
+            unlink('verification/tmp/'.$request_checked['token'].'.txt');
+        }
+        else{
+            echo "Fehler.";
+        }
+        
+        echo "<br> <a href=../login.php>Zurück zum Login</a>";
+        exit;
+    }
+    elseif( isset($request_checked['token']) ) {
+        echo "Übergangslösung: Kein entsprechender Token vorhanden.";
+        echo "<br> <a href=../login.php>Zurück zum Login</a>";
+        exit;
+    }
+
 
     
-    //User löschen
+    //User löschen (fehlt noch)
 
 
 //Erzeugung von Ausgabedaten?
