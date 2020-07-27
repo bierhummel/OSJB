@@ -1,12 +1,11 @@
 <?php
 
-include('php/calc-job.php'); 
-
-/*ini_set("session.use_cookies", 1); 
+ini_set("session.use_cookies", 1); 
 ini_set("session.use_only_cookies", 0);
 ini_set("session.use_trans_sid", 1);
+session_start();
 
-session_start();*/
+include('php/calc-job.php'); 
 ?>
 
 <!DOCTYPE html>
@@ -321,10 +320,10 @@ session_start();*/
                     </div>
 
                     <div class="col-6 col-md-4 col-lg-3">
-                        <?php if($_GET["new"]==1){ ?>                    
-                            <input type="submit" class="btn btn-primary" name="erstellen" value="Jobanzeige erstellen"> <!---(Danach Jobangebot anzeigen)-->
+                        <?php if(isset($_GET["new"]) && $_GET["new"]==1){ ?>
+                            <input type="submit" class="btn btn-primary" name="erstellen" value="Jobangebot erstellen"> <!---(Danach Jobangebot anzeigen)-->
                         <?php } else { ?>
-                            <input type="submit" class="btn btn-primary" name="bearbeiten" value="Jobanzeige bearbeiten"> <!---(Danach Jobangebot anzeigen)-->
+                            <input type="submit" class="btn btn-primary" name="bearbeiten" value="Jobangebot bearbeiten"> <!---(Danach Jobangebot anzeigen)-->
                         <?php } ?>
                     </div>
                 </div>
@@ -333,9 +332,9 @@ session_start();*/
         </section>
     </div>
     
-    <?php } //End of else ?>    
+    <?php 
+        } //End of else
     
-    <?php
         include "php/footer.php";
     ?>
 
