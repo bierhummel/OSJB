@@ -196,3 +196,6 @@ section {
     padding: inherit;
     margin: auto;
 }
+.mini-form {
+    display: inline;
+}
