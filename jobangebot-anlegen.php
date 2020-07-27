@@ -29,19 +29,29 @@ session_start();*/
     <?php
         $title = "OSJB";
         include "php/header.php";
+
+        //Alles nur anzeigen wenn eingelogt, sonst Fehlermeldung
+        if(!isset($_SESSION["eingeloggt"]) || $_SESSION["eingeloggt"] != true){ 
     ?>
-    
-    <!--Alles nur anzeigen wenn eingelogt, sonst Fehlermeldung-->
-    <?php if(!isset($_SESSION["eingeloggt"]) || $_SESSION["eingeloggt"] != true){ ?>
-    
         <p class="center">Bitte anmelden!</p>
     
-    <?php } else { ?>    
+    <?php 
+        } 
+        //Wurde eine ID übergeben, aber trotzdem kein Job gefunden -> Fehlermeldung
+        elseif( isset($request_checked["id"]) && $jobs == null ) { 
+    ?>
+        <p class="center">Dieses Jobangebot existiert nicht oder es liegen keine Rechte zum Bearbeiten vor.</p>
+    
+    <?php 
+        } 
+        //Sonst: Seite anzeigen
+        else { 
+    ?>
 
     <div class="container border">
         <section>
             <form action="php/calc-job.php" method="post">
-                <!--Übergangslösung, wird geändert sobald Aufruf von bearbeiten geändert-->
+                <!--Todo: Überprüfung ob id geändert wurde / wirklich zum User gehört-->
                 <input type="hidden" name="update_id" value="<?= $id ?>" >
                 
                 <section>
