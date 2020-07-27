@@ -1,5 +1,7 @@
 <?php
 
+//Ausgelagerte Funktion zur Überprüfung von Usereingaben aller Art im Hinblick auf XSS
+
 function check_inputs($input = array()){
     $checked = array();
     
