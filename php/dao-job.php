@@ -4,13 +4,14 @@
 
 interface JobDAO {
     public function createJob($job, $user_email);
-    public function updateJob($job, $job_id);
+    public function updateJob($job, $job_id, $user_email);
     public function searchJobbez($part_Jobbez);
     public function loadJobs($suchkrit);
     public function loadJobsOfUser($user_mail);
     public function loadJob($job_id);
-    public function deleteJob($job_id);
+    public function deleteJob($job_id, $user_email);
 }
+
 /************************************************
 /* Klasse für Zugriff auf Jobs in DB            *
 *  Zugriff auf die Google-Maps-API              *
