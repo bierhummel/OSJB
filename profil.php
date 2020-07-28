@@ -62,51 +62,19 @@ include('php/calc-job.php');
                         ?>
                     </p>
                     
-                    <div class="row form-group">
-                        <div class="col">
-                            <label for="firma">Firma: </label>
-                        </div>
-                        <div class="col-sm">
-                            <input type="text" id="firma" name="new_firma" value="<?= $_SESSION["uname"] ?>">
-                        </div>
-                    </div>
-                    
-                    <div class="row form-group">
-                        <div class="col">
-                            <label for="logo">Firmenlogo: (noch in Bearbeitung)</label>
-                        </div>
-                        <div class="col-sm">
-                            <input class="btn btn-secondary" type="file" name="new_logo" id="logo">  <!--Sicherstellen, dass nur Bilder hochgeladen werden?-->
-                        </div>
-                    </div>    
-                    
-                    <div class="row form-group">
-                        <div class="col">
-                            <label for="vorname">Vorname:</label>
-                        </div>
-                        <div class="col-sm">
-                            <input type="text" id="vorname" name="new_vorname" value="<?= $_SESSION["vname"] ?>">
-                        </div>
-                    </div>
-                    
-                    <div class="row form-group">
-                        <div class="col">
-                            <label for="nachname">Nachname:</label>
-                        </div>
-                        <div class="col-sm">
-                            <input type="text" id="nachname" name="new_nachname" value="<?= $_SESSION["nname"] ?>">
-                        </div>
-                    </div>
-
+                    <!--email-->
                     <div class="row form-group">
                         <div class="col-sm">
                             <label for="new_email">E-Mail:</label>
                         </div>
                         <div class="col-sm">
-                            <input type="email" id="new_email" name="new_email" value="<?= $_SESSION["mail"] ?>">
+                            <?= $_SESSION["mail"] ?>
+                            
+                            <!--Mail lieber nicht änderbar machen?
+                            <input type="email" id="new_email" name="new_email" value="<?= $_SESSION["mail"] ?>">-->
                         </div>
                     </div>
-
+                    
                     <!--passwort ändern später-->
                     <!--
                     <div class="row form-group">                        
@@ -118,11 +86,52 @@ include('php/calc-job.php');
                         </div>
                     </div>
                     -->
+                    
+                    <!--Firma-->
+                    <div class="row form-group">
+                        <div class="col">
+                            <label for="firma">Firma: </label>
+                        </div>
+                        <div class="col-sm">
+                            <input type="text" id="firma" name="new_firma" value="<?= $_SESSION["uname"] ?>">
+                        </div>
+                    </div>
+                    
+                    <!--Logo-->
+                    <div class="row form-group">
+                        <div class="col">
+                            <label for="logo">Firmenlogo: (noch in Bearbeitung)</label>
+                        </div>
+                        <div class="col-sm">
+                            <input class="btn btn-secondary" type="file" name="new_logo" id="logo">  <!--Sicherstellen, dass nur Bilder hochgeladen werden?-->
+                        </div>
+                    </div>    
+                    
+                    <!--Vorname-->
+                    <div class="row form-group">
+                        <div class="col">
+                            <label for="vorname">Vorname:</label>
+                        </div>
+                        <div class="col-sm">
+                            <input type="text" id="vorname" name="new_vorname" value="<?= $_SESSION["vname"] ?>">
+                        </div>
+                    </div>
+                    
+                    <!--Nachname-->
+                    <div class="row form-group">
+                        <div class="col">
+                            <label for="nachname">Nachname:</label>
+                        </div>
+                        <div class="col-sm">
+                            <input type="text" id="nachname" name="new_nachname" value="<?= $_SESSION["nname"] ?>">
+                        </div>
+                    </div>
 
+                    <!--Adresse-->
                     <div class="form-group">
                         <h6>Adresse:
                             <!-- <input type="button" value="Bearbeiten" class="btn btn-secondary"-->
-                        </h4>
+                        </h6>
                     </div>
 
                     <div class="row form-group">
