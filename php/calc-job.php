@@ -52,20 +52,35 @@
         $job_data = $request_checked;
         $job_data["coordinates"] = $coordinates;
 
-        //Überprüfung, ob Job zum User gehört fehlt noch im DAO
         //Daten des zu erstellenden Jobangebots zusammen mit der Mail des aktiven Nutzers und der Job-ID an DAO übergeben
-        $job_id = $JobDAO->updateJob($job_data, $request_checked["update_id"]);
-         
-        //Bearbeitetes Jobangebot anzeigen
-        header( 'location: ../jobangebot-anzeigen.php?id=' . $job_id);
-        exit;
+        $result = $JobDAO->updateJob($job_data, $request_checked["id"], $_SESSION["mail"]);
+
+        //Update erfolgreich: Zeige das überarbeitete Jobangebot.
+        if( $result === true) {
+            //Bearbeitetes Jobangebot anzeigen
+            header( 'location: ../jobangebot-anzeigen.php?id=' . $request_checked["id"]);
+            exit;
+        }
+        //Sonst speichere die Fehlermeldung und rufe Profil auf, wo Fehlermeldung angezeigt wird.
+        else{
+            $_SESSION["UpdateError"] = $result;
+            header( 'location: ../profil.php');
+            exit;
+        }
+        
      }
 
     //Löschen von Jobangeboten
     if( isset($request_checked["del"]) && isset($_SESSION["eingeloggt"]) && isset($request_checked["id"]) )
     {
         //ID des zu löschenden Jobs und die Mail des aktiven Nutzers übergeben
-        $JobDAO->deleteJob($request_checked["id"]);
+        $result = $JobDAO->deleteJob($request_checked["id"], $_SESSION["mail"]);
+        
+     if( ! ($result === true) ) {
+         $_SESSION["DeleteError"] = $result;
+     }
+        header( 'location: ../profil.php');
+        exit;
     }
 
 
