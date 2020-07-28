@@ -3,16 +3,13 @@
 //Datei umbennen zu process-user?
 
 
-//Überprüfung der Eingabedaten
+//Überprüfung der übergebenen Eingabedaten zum Schutz vor XSS, egal ob GET oder POST
     include('check-inputs.php'); 
-    /*$get_checked = check_get($_GET);
-    $post_checked = check_get($_POST);*/
     $request_checked = check_inputs($_REQUEST);
 
 
-//Geschäftslogik der Verwaltung von Usern
-    
-    //Wenn noch keine Session gestartet, Session starten (Wichtig da teilweise von Formularen direkt aufgerufen, teilweise als include in View enthalten)
+//Initialisierungen und Includes
+    //Wenn noch keine Session gestartet, Session starten (Wichtig da teilweise von Formularen direkt aufgerufen, teilweise als include in View enthalten -> nicht mehr aktuell?)
     if(session_status() != 2){
         //session starten
         ini_set( 'session.use_cookies', 1 );
@@ -21,12 +18,11 @@
         session_start();  
     } 
 
-
     //Einbindung des DAO
     include('dao-user.php'); 
     $UserDAO = new SQLiteUserDAO();
 
-    
+//Aufgaben, für die diese Datei direkt aufgerufen wird: 
     //Login
     if ( isset( $request_checked['login'] ) ) {
         
@@ -38,12 +34,16 @@
             $_SESSION["login"] = "success";
             $_SESSION["eingeloggt"] = "true";
             
-            //Alle unkritischen infos des Users in Session zwischenspeichern
+            //Alle unkritischen Infos des Users in Session zwischenspeichern
             foreach ($user as $index => $value){
-                if( $index != "id" && $index != "password" ){
+                if( $index != "id" && $index != "password" && $index != "verified" && $index != "mail_verified"){
                     $_SESSION[$index] = htmlspecialchars($value);
                 }
             }
+            //Zusätzlich ein Token in der Session speichern zum Schutz vor CSRF-Angriffen
+            $_SESSION["csrf_token"] = uniqid();
+            
+            //Profil aufrufen
             header( 'location: ../profil.php' );
             exit;
         }
@@ -57,11 +57,11 @@
 
 
     //Userdaten updaten
-    if ( isset( $request_checked['updaten']) && isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ) {
+    if ( isset( $request_checked['updaten']) && isset($_SESSION["eingeloggt"]) && isset($request_checked["csrf_token"]) && $request_checked['csrf_token'] == $_SESSION["csrf_token"] ) {
         
         //Aufruf von updateUser() des UserDAO
         $user = $UserDAO->updateUser($request_checked, $_SESSION["mail"]);
-        
+
         //Update erfolgreich und neue auszugebende Userdaten als Array erhalten
         if( $user != NULL ){            
             $_SESSION["update"] = "success";

@@ -29,7 +29,7 @@
 
 //Aufgaben, für die diese Datei direkt aufgerufen wird:
     //Anlegen neuer Jobangebote
-    if( isset($request_checked["erstellen"]) && isset($_SESSION["eingeloggt"]) ) {
+    if( isset($request_checked["erstellen"]) && isset($_SESSION["eingeloggt"]) && isset($request_checked["csrf_token"]) && $request_checked['csrf_token'] == $_SESSION["csrf_token"] ) {
          
         //Koordinaten des Standord des Jobangebotes ermitteln
         $coordinates = getCoordinates($request_checked, 1);
@@ -45,7 +45,7 @@
     }   
     
     //Bearbeiten von Jobangeboten
-    if( isset($request_checked["bearbeiten"]) && isset($_SESSION["eingeloggt"]) && isset($request_checked["id"]) ) {
+    if( isset($request_checked["bearbeiten"]) && isset($_SESSION["eingeloggt"]) && isset($request_checked["csrf_token"]) && $request_checked['csrf_token'] == $_SESSION["csrf_token"] && isset($request_checked["id"]) ) {
         
         //Koordinaten des Jobangebotes ermitteln
         $coordinates = getCoordinates($request_checked, 1);
@@ -71,7 +71,7 @@
      }
 
     //Löschen von Jobangeboten
-    if( isset($request_checked["del"]) && isset($_SESSION["eingeloggt"]) && isset($request_checked["id"]) )
+    if( isset($request_checked["del"]) && isset($_SESSION["eingeloggt"]) && isset($request_checked["csrf_token"]) && $request_checked['csrf_token'] == $_SESSION["csrf_token"] && isset($request_checked["id"]) )
     {
         //ID des zu löschenden Jobs und die Mail des aktiven Nutzers übergeben
         $result = $JobDAO->deleteJob($request_checked["id"], $_SESSION["mail"]);

@@ -71,10 +71,10 @@ class SQLiteUserDAO implements UserDAO {
         $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
 
         try{
-            
             //Statement entwerfen
-            $update = "update user set uname = :new_uname, vname = :new_vname, nname = :new_nname, mail = :new_mail, strasse = :new_strasse, hausnr = :new_hausnr, plz = :new_plz, stadt = :new_stadt where mail = :mail";
-
+            $update = "update user set uname = :new_uname, vname = :new_vname, nname = :new_nname, strasse = :new_strasse, hausnr = :new_hausnr, plz = :new_plz, stadt = :new_stadt where mail = :mail";
+            
+            //mail = :new_mail, rausgenommen
             
             //Statement preparen
             $stmt = $db->prepare($update);
@@ -83,7 +83,7 @@ class SQLiteUserDAO implements UserDAO {
             $stmt->bindParam(':new_uname', $updated_user["new_firma"]);
             $stmt->bindParam(':new_vname', $updated_user["new_vorname"]);
             $stmt->bindParam(':new_nname', $updated_user["new_nachname"]);
-            $stmt->bindParam(':new_mail', $updated_user["new_email"]);
+            //$stmt->bindParam(':new_mail', $updated_user["new_email"]);
             $stmt->bindParam(':new_strasse', $updated_user["new_strasse"]);
             $stmt->bindParam(':new_hausnr', $updated_user["new_hausnr"]);
             $stmt->bindParam(':new_plz', $updated_user["new_plz"]);       
@@ -93,15 +93,13 @@ class SQLiteUserDAO implements UserDAO {
             // Und führe die Transaktion letzlich aus.
             $stmt->execute();
             
-            
             //rückgabewerte auslesen (mit ggf. geändertet E-Mail)
             //unternehmensname
             $stmt = $db->prepare("select * from user WHERE mail = ?");
-            $stmt->execute(array($updated_user["new_email"]));   
+            $stmt->execute(array($input_mail));   
             $user = $stmt->fetch();    
 
             return $user;   
-            
         } 
         catch(PDOException $e) {
             // Print PDOException message

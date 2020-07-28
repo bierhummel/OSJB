@@ -6,7 +6,6 @@ session_start();
 
 include('php/calc-job.php'); 
 
-
 ?>
 
 <!DOCTYPE HTML>
