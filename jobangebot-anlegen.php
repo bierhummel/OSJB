@@ -50,8 +50,8 @@ include('php/calc-job.php');
     <div class="container border">
         <section>
             <form action="php/calc-job.php" method="post">
-                <!--Todo: Überprüfung ob id geändert wurde / wirklich zum User gehört-->
-                <input type="hidden" name="update_id" value="<?= $id ?>" >
+                <!--ID des Jobs wird über Hidden-Feld mitgegeben-->
+                <input type="hidden" name="id" value="<?php if($jobs != null) echo $id ?>" >
                 
                 <section>
                     <h3 class="center">Allgemeine Informationen</h3>
@@ -129,7 +129,6 @@ include('php/calc-job.php');
                                 Link zur direkten Bewerbung (optional): 
                             </label>    
                             <input type="text" id="blink" name="blink" maxlength="50" placeholder="www.ihre-seite.de" value="<?php if($jobs != null) echo($link); ?>">
-                            
                         </div>
                     </div>
 
@@ -173,7 +172,7 @@ include('php/calc-job.php');
                         </div>
                         <div class="col-md-5 last_td">
                             <label for="job_stadt">Stadt:</label>
-                                <input type="text" id="job_stadt" name="job_stadt" required value="<?php if($jobs != null) {echo($stadt);} else{ echo $_SESSION["stadt"]; } ?>">
+                            <input type="text" id="job_stadt" name="job_stadt" required value="<?php if($jobs != null) {echo($stadt);} else{ echo $_SESSION["stadt"]; } ?>">
                         </div>
                     </div>
 

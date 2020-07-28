@@ -592,7 +592,6 @@ class SQLiteJobDAO implements JobDAO {
     } 
         
     
-    
     public function loadJob($job_id){
         //Pfad zur DB
         $database = "database/database.db";
