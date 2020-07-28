@@ -597,30 +597,51 @@ class SQLiteJobDAO implements JobDAO {
     } 
         
     
-    //erhält job_id und gibt true/false zurück
-    public function deleteJob($job_id){
-        $database = "database/database.db";
+    //erhält job_id + usermail und gibt true oder eine Fehlermeldung zurück
+    public function deleteJob($job_id, $user_email){
+        $database = "../database/database.db";
         $db = new PDO('sqlite:' . $database);
         // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
 
         try{
-            // Job der Job-id soll aus der DB entfernt werden:
+            //Transaktion beginnen da mehrere DB-Zugriffe nötig
+            $db->beginTransaction();
+            
+            //Prüfen ob Job (Job-ID) zum User (Mailadresse) gehört:
+            $stmt = $db->prepare("select * from jobangebot, user where jobangebot.id = :job_id and jobangebot.user_id = user.id and user.mail = :user_mail");
+            // Parameter binden
+            $stmt->bindParam(':job_id', $job_id); 
+            $stmt->bindParam(':user_mail', $user_email); 
+             // Query ausführen
+            $stmt->execute();
+             // Das Ergebnis wird gespeichert
+            $job = $stmt->fetchAll(); 
+            //Wenn kein Jobangebot gefunden wurde: Exception
+            if ( $job == null) {
+                throw new Exception("Kein entsprechendes Jobangebot gefunden oder keine Rechte zum Löschen vorhanden.");
+            }
+            
+            // Job (Job-id) soll aus der DB entfernt werden:
             $delJob = "delete from jobangebot where id = :id";
             // Statement preparen und Parameter an Variable job_id binden
             $stmt = $db->prepare($delJob);
             $stmt->bindParam(':id', $job_id);
             // Query ausführen
             $stmt->execute();
+            
+            //Transaktion mit commit beenden
+            $db->commit();
+            
             return true;
-        } catch(PDOException $e) {
-            // Print PDOException message
-            echo $e->getMessage();
+        } catch(Exception $e) {
+            //Transaktion mit rollback beenden
+            $db->rollBack();
+            // Return Exception message
+            return $e->getMessage();
         }   
-        return false;
-    }   
-}
-
+    }
+}//Ende SQLiteJobDAO
 
 
 
