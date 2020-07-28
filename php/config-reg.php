@@ -38,12 +38,16 @@
             $_SESSION["login"] = "success";
             $_SESSION["eingeloggt"] = "true";
             
-            //Alle unkritischen infos des Users in Session zwischenspeichern
+            //Alle unkritischen Infos des Users in Session zwischenspeichern
             foreach ($user as $index => $value){
-                if( $index != "id" && $index != "password" ){
+                if( $index != "id" && $index != "password" && $index != "verified" && $index != "mail_verified"){
                     $_SESSION[$index] = htmlspecialchars($value);
                 }
             }
+            //Zusätzlich ein Token in der Session speichern zum Schutz vor CSRF-Angriffen
+            $_SESSION["csrf_token"] = uniqid();
+            
+            //Profil aufrufen
             header( 'location: ../profil.php' );
             exit;
         }
