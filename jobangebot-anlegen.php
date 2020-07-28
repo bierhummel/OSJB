@@ -313,7 +313,10 @@ include('php/calc-job.php');
                     <div class="col-6 col-md-4 col-lg-3">
                        <!-- <button class="btn btn-secondary" type="button">Vorschau</button> (Soll eine Vorschau anzeigen)-->                            
                     </div>
-
+                    
+                    <!--csrf-token-->
+                     <input type="hidden" name="csrf_token" value="<?= $_SESSION["csrf_token"] ?>">
+                    
                     <div class="col-6 col-md-4 col-lg-3">
                         <?php if($jobs != null) { ?>
                             <input type="submit" class="btn btn-primary" name="bearbeiten" value="Jobangebot bearbeiten">
