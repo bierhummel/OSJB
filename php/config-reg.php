@@ -61,11 +61,11 @@
 
 
     //Userdaten updaten
-    if ( isset( $request_checked['updaten']) && isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ) {
+    if ( isset( $request_checked['updaten']) && isset($_SESSION["eingeloggt"]) && isset($request_checked["csrf_token"]) && $request_checked['csrf_token'] == $_SESSION["csrf_token"] ) {
         
         //Aufruf von updateUser() des UserDAO
         $user = $UserDAO->updateUser($request_checked, $_SESSION["mail"]);
-        
+
         //Update erfolgreich und neue auszugebende Userdaten als Array erhalten
         if( $user != NULL ){            
             $_SESSION["update"] = "success";
