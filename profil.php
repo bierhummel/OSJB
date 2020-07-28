@@ -176,13 +176,26 @@ include('php/calc-job.php');
 
         <div class="container border">
             <section>
-                <h4 class="center">Meine Anzeigen</h4>
+                <h4 class="center">Meine Jobangebote</h4>
+                <p class="center"> 
+                    <?php 
+                        if( isset($_SESSION["UpdateError"]) && $_SESSION["UpdateError"] != ""){
+                            echo $_SESSION["UpdateError"];
+                            $_SESSION["UpdateError"] = "";
+                        }
+                        if( isset($_SESSION["DeleteError"]) && $_SESSION["DeleteError"] != ""){
+                            echo $_SESSION["DeleteError"];
+                            $_SESSION["DeleteError"] = "";
+                        }
+                    ?>
+                </p>
+                
                 <p>
-                    <a href="jobangebot-anlegen.php?new=1" class="btn btn-primary">Anzeige erstellen</a>
+                    <a href="jobangebot-anlegen.php" target="_blank" class="btn btn-primary">Neues Jobangebot erstellen</a>
                 </p>
 
                 <?php 
-                     $count = 0;
+                    $count = 0;
                     if($jobs != null){ 
                         foreach($jobs as $job): 
                             extract($job);
@@ -190,21 +203,32 @@ include('php/calc-job.php');
                 ?>
 
                 <div class="border">
-                    <a class="mr-3" href="jobangebot-anzeigen.php?id=<?php echo($id)?>"> <?php echo($titel)?></a>
+                    <!--Jobangebot anzeigen-->
+                    <a class="mr-3" target="_blank" href="jobangebot-anzeigen.php?id=<?php echo($id)?>"> <?php echo($titel)?></a>
                     
                 <!--Inhaltsreduzierung
                     (Datum an dem Jobangebot erstellt wurde)
                     (Jobangeobt aktiv/inaktiv)
                 -->
-                    <!--aufruf von bearbeiten und löschen übergangsweise quasi über get, später über post-->
-                    <a href="jobangebot-anlegen.php?new=0&id=<?php echo($id)?>" class="btn btn-secondary mr-3">Bearbeiten</a>
-
-                    <a href="profil.php?del=1&id=<?php echo($id)?>" class="btn btn-light">Löschen</a>
+                    
+                    <!--Bearbeiten eines Jobangebotes-->
+                    <form action="jobangebot-anlegen.php" method="post" target="_blank" class="mini-form">
+                        <input type="hidden" name="id" value="<?= $id ?>">
+                        <input type="submit" name="aufruf_job-bearbeiten" value="Bearbeiten" class="btn btn-secondary mr-3">
+                    </form>
+                    
+                    <!--Löschen eines Jobangebotes-->
+                    <form action="php/calc-job.php" method="post" class="mini-form">
+                        <input type="hidden" name="id" value="<?= $id ?>">
+                        <input type="hidden" name="del" value="1">
+                        <input type="checkbox" name="check_del" required>
+                        <input type="submit" name="aufruf_job-bearbeiten" value="Löschen" class="btn btn-light">
+                    </form>
                 </div>
 
                 <?php endforeach; } ?>
 
-                <p class="center">Ende der Liste. Es wurden <?php echo $count ?> Jobangebote gefunden.</p>
+                <p class="center">Ende der Liste. Es wurde(n) <?php echo $count ?> Jobangebot(e) gefunden.</p>
 
             </section>
         </div>

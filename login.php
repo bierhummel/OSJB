@@ -174,7 +174,10 @@ session_start();
                         <div class="row form-group">
                             <div class="col-sm-8">
                                 <label for="nutzbed">
-                                    <a href="nutzungsbedingungen.php" target="_blank">Nutzungsbedingunen </a> aktzeptieren.
+                                    <a href="nutzungsbedingungen.php" target="_blank">Nutzungsbedingunen </a> 
+                                    und
+                                    <a href="datenschutz.php" target="_blank">Datenschutzerklärung </a> 
+                                    akzeptieren.
                                 </label>
                             </div>
                             

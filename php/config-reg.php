@@ -12,11 +12,14 @@
 
 //Geschäftslogik der Verwaltung von Usern
     
-    //session starten
-    ini_set( 'session.use_cookies', 1 );
-    ini_set( 'session.use_only_cookies', 0 );
-    ini_set( 'session.use_trans_sid', 1 );
-    session_start();  
+    //Wenn noch keine Session gestartet, Session starten (Wichtig da teilweise von Formularen direkt aufgerufen, teilweise als include in View enthalten)
+    if(session_status() != 2){
+        //session starten
+        ini_set( 'session.use_cookies', 1 );
+        ini_set( 'session.use_only_cookies', 0 );
+        ini_set( 'session.use_trans_sid', 1 );
+        session_start();  
+    } 
 
 
     //Einbindung des DAO
