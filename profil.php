@@ -177,8 +177,21 @@ include('php/calc-job.php');
         <div class="container border">
             <section>
                 <h4 class="center">Meine Jobangebote</h4>
+                <p class="center"> 
+                    <?php 
+                        if( isset($_SESSION["UpdateError"]) && $_SESSION["UpdateError"] != ""){
+                            echo $_SESSION["UpdateError"];
+                            $_SESSION["UpdateError"] = "";
+                        }
+                        if( isset($_SESSION["DeleteError"]) && $_SESSION["DeleteError"] != ""){
+                            echo $_SESSION["DeleteError"];
+                            $_SESSION["DeleteError"] = "";
+                        }
+                    ?>
+                </p>
+                
                 <p>
-                    <a href="jobangebot-anlegen.php?new=1" class="btn btn-primary">Jobangebot erstellen</a>
+                    <a href="jobangebot-anlegen.php" target="_blank" class="btn btn-primary">Neues Jobangebot erstellen</a>
                 </p>
 
                 <?php 
