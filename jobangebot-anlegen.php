@@ -316,10 +316,10 @@ include('php/calc-job.php');
                     </div>
 
                     <div class="col-6 col-md-4 col-lg-3">
-                        <?php if(isset($_GET["new"]) && $_GET["new"]==1){ ?>
-                            <input type="submit" class="btn btn-primary" name="erstellen" value="Jobangebot erstellen"> <!---(Danach Jobangebot anzeigen)-->
+                        <?php if($jobs != null) { ?>
+                            <input type="submit" class="btn btn-primary" name="bearbeiten" value="Jobangebot bearbeiten">
                         <?php } else { ?>
-                            <input type="submit" class="btn btn-primary" name="bearbeiten" value="Jobangebot bearbeiten"> <!---(Danach Jobangebot anzeigen)-->
+                            <input type="submit" class="btn btn-primary" name="erstellen" value="Jobangebot erstellen">
                         <?php } ?>
                     </div>
                 </div>

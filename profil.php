@@ -214,12 +214,11 @@ include('php/calc-job.php');
                     <!--Bearbeiten eines Jobangebotes-->
                     <form action="jobangebot-anlegen.php" method="post" target="_blank" class="mini-form">
                         <input type="hidden" name="id" value="<?= $id ?>">
-                        <input type="hidden" name="new" value="0">
                         <input type="submit" name="aufruf_job-bearbeiten" value="Bearbeiten" class="btn btn-secondary mr-3">
                     </form>
                     
                     <!--Löschen eines Jobangebotes-->
-                    <form action="profil.php" method="post" class="mini-form">
+                    <form action="php/calc-job.php" method="post" class="mini-form">
                         <input type="hidden" name="id" value="<?= $id ?>">
                         <input type="hidden" name="del" value="1">
                         <input type="checkbox" name="check_del" required>
