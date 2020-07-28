@@ -105,23 +105,19 @@ include('php/calc-job.php');
                         <div class="col-md-5 last_td">
                             <div class="row">
                                 <div class="col-12">
-                                    Zeitintesität:
+                                    Zeitintensität:
                                 </div>
                                 <div class="col-xl-4 col-6">
-                                    <!--Später mindestens eine Angabe required festlegen.. js?-->
-                                    <label>
-                                        <input type="checkbox" name="teilzeit" value="Teilzeit" <?php if($jobs != null && $zeitintensitaet == "Teilzeit"){ ?> checked <?php } ?> > Teilzeit
-                                    </label>
+                                    <input type="radio" name="zeitintensitaet" id="Teilzeit" value="Teilzeit" <?php if($jobs != null && $zeitintensitaet == "Teilzeit"){ ?> checked <?php } ?> >
+                                    <label for="Teilzeit">Teilzeit</label>
                                 </div>
                                 <div class="col-xl-4 col-6">
-                                    <label>                                        
-                                        <input type="checkbox" name="vollzeit" value="Vollzeit" <?php if($jobs != null && $zeitintensitaet == "Vollzeit"){ ?> checked <?php } ?> > Vollzeit
-                                    </label>
+                                    <input type="radio" name="zeitintensitaet" id="Vollzeit" value="Vollzeit" <?php if($jobs != null && $zeitintensitaet == "Vollzeit"){ ?> checked <?php } ?> >
+                                    <label for="Vollzeit">Vollzeit</label>
                                 </div>
-                                <div class="col-xl-4 col-12">
-                                    <label>                                        
-                                        <input type="checkbox" name="20h" value="20h" <?php if($jobs != null && $zeitintensitaet == "20h"){ ?> checked <?php } ?> > &lt;20h/Woche
-                                    </label>
+                                <div class="col-xl-4 col-6">
+                                    <input type="radio" name="zeitintensitaet" id="20h" value="20h" <?php if($jobs != null && $zeitintensitaet == "20h"){ ?> checked <?php } ?> >
+                                    <label for="20h">20h</label>
                                 </div>
                             </div>
                         </div>
