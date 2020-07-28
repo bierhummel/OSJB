@@ -619,7 +619,7 @@ class SQLiteJobDAO implements JobDAO {
             $job = $stmt->fetchAll(); 
             //Wenn kein Jobangebot gefunden wurde: Exception
             if ( $job == null) {
-                throw new Exception("Kein entsprechendes Jobangebot gefunden oder keine Rechte zum Löschen vorhanden.");
+                throw new Exception("Löschen fehlgeschlagen. Kein entsprechendes Jobangebot gefunden oder keine Rechte zum Löschen vorhanden.");
             }
             
             // Job (Job-id) soll aus der DB entfernt werden:
