@@ -3,16 +3,13 @@
 //Datei umbennen zu process-user?
 
 
-//Überprüfung der Eingabedaten
+//Überprüfung der übergebenen Eingabedaten zum Schutz vor XSS, egal ob GET oder POST
     include('check-inputs.php'); 
-    /*$get_checked = check_get($_GET);
-    $post_checked = check_get($_POST);*/
     $request_checked = check_inputs($_REQUEST);
 
 
-//Geschäftslogik der Verwaltung von Usern
-    
-    //Wenn noch keine Session gestartet, Session starten (Wichtig da teilweise von Formularen direkt aufgerufen, teilweise als include in View enthalten)
+//Initialisierungen und Includes
+    //Wenn noch keine Session gestartet, Session starten (Wichtig da teilweise von Formularen direkt aufgerufen, teilweise als include in View enthalten -> nicht mehr aktuell?)
     if(session_status() != 2){
         //session starten
         ini_set( 'session.use_cookies', 1 );
@@ -21,12 +18,11 @@
         session_start();  
     } 
 
-
     //Einbindung des DAO
     include('dao-user.php'); 
     $UserDAO = new SQLiteUserDAO();
 
-    
+//Aufgaben, für die diese Datei direkt aufgerufen wird: 
     //Login
     if ( isset( $request_checked['login'] ) ) {
         
