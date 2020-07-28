@@ -166,8 +166,12 @@ include('php/calc-job.php');
                         <input type="button" value="Bearbeiten" class="btn btn-secondary">
                     </div>
                 -->
-
+                    
+                    
+                    <!--Submit des Update der Userdaten und Hidden-Input für CSRF-Token-->
                     <div class="form-group ">
+                        <input type="hidden" name="csrf_token" value="<?= $_SESSION["csrf_token"] ?>">
+                        
                         <input type="submit" value="Daten aktualisieren" name="updaten" class="btn btn-primary">
                     </div>
                 </form>
@@ -221,6 +225,7 @@ include('php/calc-job.php');
                     <form action="php/calc-job.php" method="post" class="mini-form">
                         <input type="hidden" name="id" value="<?= $id ?>">
                         <input type="hidden" name="del" value="1">
+                        <input type="hidden" name="csrf_token" value="<?= $_SESSION["csrf_token"] ?>">
                         <input type="checkbox" name="check_del" required>
                         <input type="submit" name="aufruf_job-bearbeiten" value="Löschen" class="btn btn-light">
                     </form>
