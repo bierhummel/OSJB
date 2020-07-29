@@ -45,7 +45,7 @@ session_start();
             
             <section id="login">
     <!--Durch überprüfung von $_SESSION["eingeloggt"] = "failed"; prüfen ob anmeldung fehlgeschlagen ist -> meldung ausgeben und $_SESSION["eingeloggt"] auf "false" ändern-->
-                <form action="php/config-reg.php" method="post" class="was-validated">
+                <form action="php/process-userDAO.php" method="post" class="was-validated">
                     <fieldset>
                         <legend>Log in:</legend>
                         
@@ -112,7 +112,7 @@ session_start();
         
         <div class="container col-xl-4 border">
             <section id="registrierung">
-                <form action="php/config-reg.php" method="post" class="was-validated">
+                <form action="php/process-userDAO.php" method="post" class="was-validated">
                     <fieldset>
                         <legend>Registrierung:</legend>
                         
