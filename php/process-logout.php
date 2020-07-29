@@ -1,6 +1,5 @@
 <?php
-
-//umbenennen process-logout?
+//Datei, die Logout-Prozess verarbeitet
 
 //session starten
 ini_set( 'session.use_cookies', 1 );
@@ -14,14 +13,10 @@ if ( isset ($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ) {
     session_unset();
     session_destroy();
     setcookie ( session_name(), "", 1, "/");
-
-    header( 'location: ../index.php' );
-    exit;
 }
 
-
-//Unerlaubter oder fehlerhafter Aufruf -> Weiterleitung zum Index
-header( 'location: ../index.php' );
-exit;
+//Nach Logout oder bei unerlaubtem oder fehlerhaften Aufruf -> Weiterleitung zum Index
+    header( 'location: ../index.php' );
+    exit;
 
 ?>

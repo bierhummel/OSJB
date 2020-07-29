@@ -15,7 +15,7 @@
                 <?php if( isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ) { ?>
                     <a href="profil.php" class="btn btn-primary login-links mr-2">Profil</a>
                     
-                    <a href="php/controller-logout.php" class="btn btn-secondary login-links">Abmelden</a>
+                    <a href="php/process-logout.php" class="btn btn-secondary login-links">Abmelden</a>
                 <?php } else { ?>
                     <a href="login.php" class="btn btn-primary login-links">Anmeldung/Registrierung für Arbeitgeber</a>
                 <?php } ?>

@@ -234,7 +234,4 @@ class SQLiteUserDAO implements UserDAO {
     }
 }
 
-//Unerlaubter oder fehlerhafter Aufruf abfangen?
-
-
 ?>

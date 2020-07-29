@@ -5,7 +5,7 @@ ini_set("session.use_trans_sid", 1);
 
 session_start();
 
-include('php/calc-job.php');
+include('php/process-jobDAO.php');
 ?>
 
 <!doctype html>
@@ -45,7 +45,7 @@ include('php/calc-job.php');
                 
  <!--Durch überprüfung von $_SESSION["update"] = "failed"; prüfen ob update fehlgeschlagen ist -> meldung ausgeben und $_SESSION["update"] auf "false" ändern-->
                 
-                <form action="php/config-reg.php" method="post">
+                <form action="php/process-userDAO.php" method="post">
                     <h3 class="center mb-5">
                         Profil von 
                         <?= $_SESSION["vname"] . " " . $_SESSION["nname"];?> 
@@ -231,7 +231,7 @@ include('php/calc-job.php');
                     </form>
                     
                     <!--Löschen eines Jobangebotes-->
-                    <form action="php/calc-job.php" method="post" class="mini-form">
+                    <form action="php/process-jobDAO.php" method="post" class="mini-form">
                         <input type="hidden" name="id" value="<?= $id ?>">
                         <input type="hidden" name="del" value="1">
                         <input type="hidden" name="csrf_token" value="<?= $_SESSION["csrf_token"] ?>">

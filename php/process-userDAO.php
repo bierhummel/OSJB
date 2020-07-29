@@ -1,10 +1,8 @@
 <?php
-
-//Datei umbennen zu process-user?
-
+//Datei, die alle wichtigen Prozesse verarbeitet, für die auf das User-DAO zugeriffen wird
 
 //Überprüfung der übergebenen Eingabedaten zum Schutz vor XSS, egal ob GET oder POST
-    include('check-inputs.php'); 
+    include('helper-checkInputs.php'); 
     $request_checked = check_inputs($_REQUEST);
 
 
@@ -160,13 +158,11 @@
     //User löschen (fehlt noch)
 
 
-//Erzeugung von Ausgabedaten?
 
 
 
 //Unerlaubter oder fehlerhafter Aufruf -> Weiterleitung zum Index
-header( 'location: ../index.php' );
-exit;
-
+    header( 'location: ../index.php' );
+    exit;
 
 ?>

@@ -5,7 +5,7 @@ ini_set("session.use_only_cookies", 0);
 ini_set("session.use_trans_sid", 1);
 session_start();
 
-include('php/calc-job.php'); 
+include('php/process-jobDAO.php'); 
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +49,7 @@ include('php/calc-job.php');
 
     <div class="container border">
         <section>
-            <form action="php/calc-job.php" method="post">
+            <form action="php/process-jobDAO.php" method="post">
                 <!--ID des Jobs wird über Hidden-Feld mitgegeben-->
                 <input type="hidden" name="id" value="<?php if($jobs != null) echo $id ?>" >
                 

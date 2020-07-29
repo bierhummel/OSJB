@@ -34,7 +34,7 @@ function suche_jobbez(input){
     };
     
     //GET-Request vorbereiten und senden
-    xmlhttp.open("GET", "php/calc-job.php?suche=jobbez&input=" + encodeURIComponent(input), true);
+    xmlhttp.open("GET", "php/process-jobDAO.php?suche=jobbez&input=" + encodeURIComponent(input), true);
     xmlhttp.send();
 }
 

@@ -1,10 +1,9 @@
 <?php
-
-//Datei umbennen zu process-job?
+//Datei, die alle wichtigen Prozesse verarbeitet, für die auf das Job-DAO zugeriffen wird
 
 
 //Überprüfung der übergebenen Eingabedaten zum Schutz vor XSS, egal ob GET oder POST
-    include('check-inputs.php'); 
+    include('helper-checkInputs.php'); 
     $request_checked = check_inputs($_REQUEST);
 
 //Initialisierungen und Includes
@@ -142,14 +141,10 @@
     }
 
 
-
-
-
-//Erzeugung von Ausgabedaten?
-
-
-
-//Unerlaubter oder fehlerhafter Aufruf?
-
+//Direkter unerlaubter oder fehlerhafter Aufruf -> Weiterleitung zum Index
+    if( basename($_SERVER['PHP_SELF']) == "process-jobDAO.php" ) {
+        header( 'location: ../index.php' );
+        exit;
+     }
 
 ?>
