@@ -23,5 +23,3 @@
         </div>
     </div>
 </header>
-
-<!--Behandlung von unerwünschten Aufrufen?-->
