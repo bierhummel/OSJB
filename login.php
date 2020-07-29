@@ -173,16 +173,15 @@ session_start();
                         <!--Nutzungsbedingungen-->
                         <div class="row form-group">
                             <div class="col-sm-8">
-                                <label for="nutzbed">
+                                <label for="NB_DS_check">
                                     <a href="nutzungsbedingungen.php" target="_blank">Nutzungsbedingunen </a> 
                                     und
                                     <a href="datenschutz.php" target="_blank">Datenschutzerklärung </a> 
                                     akzeptieren.
                                 </label>
                             </div>
-                            
                             <div class="col-sm-4">
-                                <input type="checkbox" id="nutzbed" name="nutzbed" class="form-control" required>
+                                <input type="checkbox" id="NB_DS_check" name="NB_DS_check" class="form-control" required>
                             </div>
                         </div>
 

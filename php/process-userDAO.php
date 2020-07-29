@@ -82,9 +82,8 @@
         } 
     }
 
-
     //Registrierung
-    if ( isset( $request_checked['registrieren'] ) ) {
+    if ( isset($request_checked['registrieren']) && isset($request_checked['NB_DS_check']) ) {
         
         //Prüfen der Passworteingabe
         if( $request_checked['passwort1'] == $request_checked["passwort2"] ) {
