@@ -141,14 +141,10 @@
     }
 
 
-
-
-
-//Erzeugung von Ausgabedaten?
-
-
-
-//Unerlaubter oder fehlerhafter Aufruf?
-
+//Direkter unerlaubter oder fehlerhafter Aufruf -> Weiterleitung zum Index
+    if( basename($_SERVER['PHP_SELF']) == "process-jobDAO.php" ) {
+        header( 'location: ../index.php' );
+        exit;
+     }
 
 ?>

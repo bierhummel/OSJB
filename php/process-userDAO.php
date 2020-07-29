@@ -158,13 +158,11 @@
     //User löschen (fehlt noch)
 
 
-//Erzeugung von Ausgabedaten?
 
 
 
 //Unerlaubter oder fehlerhafter Aufruf -> Weiterleitung zum Index
     header( 'location: ../index.php' );
     exit;
-
 
 ?>

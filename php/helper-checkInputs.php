@@ -19,9 +19,5 @@ function check_inputs($input = array()){
     }
     return $checked;
 }
-    
-
-//Unerlaubter oder fehlerhafter Aufruf?
-
 
 ?>

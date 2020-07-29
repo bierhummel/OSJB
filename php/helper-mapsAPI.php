@@ -90,9 +90,4 @@ function calculateDistance ( $geo_data1, $geo_data2 ) {
     return $distance;
 }
 
-//Unerlaubter oder fehlerhafter Aufruf?
-    
-    //header( 'location: ../index.php' );
-    //exit;
-
 ?>
