@@ -38,13 +38,11 @@ include_once("php/check-connection.php");
             <h3 class="center">Finde jetzt den passenden Job in Oldenburg &amp; Umgebung!</h3>
             <h3 class="center">Für Studenten und Absolventen</h3>
 
-            <!--später die Breite aller Inputfelder einheitlich gestalten, bei dieser Abgabe zeitlich nicht geschafft-->
             <div class="search">
                 <form action="suchergebnisse.php" method="get">
                     <h4 class="mb-5">
                         <label for="plz">PLZ: </label>
                         <input type="text" id="plz" name="plz" class="form-control form-control-lg" maxlength="5" value="" placeholder="Deine PLZ" required autofocus>
-                        <!--Später mit pattern Attribut absichern?-->
                     </h4>
 
                     <h4 class="mb-5">
@@ -78,17 +76,6 @@ include_once("php/check-connection.php");
                         <input type="submit" id="suchen" value="Suche starten!" class="btn btn-primary">
                     </h4>
                 </form>
-            </div>
-            <div>
-                <?php if ( isset ($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ) { ?>                                    
-                    <h3 class="center"><a href="profil.php" class="btn btn-primary">Zum Profil</a></h3>
-                
-                <?php } else { ?>
-                
-                    <h3 class="center"><a href="login.php" class="btn btn-primary">Anmeldung/Registrierung für Arbeitgeber</a></h3>
-                
-                <?php } ?>
-
             </div>
         </section>
     </div>
