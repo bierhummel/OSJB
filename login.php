@@ -29,7 +29,7 @@ session_start();
         $title = "OSJB";
         include "php/header.php";
     ?>
-     <div id = "content-login">
+     <div id = "font-login">
     <!--Alles nur anzeigen wenn nicht eingelogt, sonst Weiterleitung ins Profil-->
     <?php 
         if(isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == true){ 
