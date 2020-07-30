@@ -176,10 +176,26 @@ class SQLiteUserDAO implements UserDAO {
             } 
             //Wenn die Mail des Uers schon in der DB und verifiziert ist:
             elseif( $exists == "verified") {
+                //Setze festen Hash
                 $hash = 'existiert';
             }
             //Wenn die Mail des Uers schon in der DB, aber noch nicht verifiziert ist:
             else {
+                
+                // Bereite die Update vor, um vorhandenen Datensatz mit den aktuellen Daten zu aktualisieren (Hash, mail, id, etc. bleibt gleich)
+                $registerUpdate = "update user set uname = :new_uname, vname = :new_vname, nname = :new_nname, password = :password where mail = :mail";
+                $stmt = $db->prepare($registerUpdate);
+
+                // Binde die Parameter an die Variablen,
+                $stmt->bindParam(':new_uname', $uname);  
+                $stmt->bindParam(':new_vname', $vname);
+                $stmt->bindParam(':new_nname', $nname);    
+                $stmt->bindParam(':password', $hashed_password);
+                $stmt->bindParam(':mail', $mail);
+                // Und führe die Aktion letzlich aus.
+                $stmt->execute();
+                
+                //Übernehme existierenden Hash
                 $hash = $exists;
             }
             
@@ -195,7 +211,8 @@ class SQLiteUserDAO implements UserDAO {
             $db->rollBack();
         }
         //Neuen Hash, alten noch nicht verifizierten Hash, "exisitert" oder null zurückgeben
-        return $hash; 
+        return $hash;
+        
     } //Ende registerUser
     
     
