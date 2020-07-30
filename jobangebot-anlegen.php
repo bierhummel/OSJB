@@ -1,12 +1,11 @@
 <?php
 
-include('php/calc-job.php'); 
-
-/*ini_set("session.use_cookies", 1); 
+ini_set("session.use_cookies", 1); 
 ini_set("session.use_only_cookies", 0);
 ini_set("session.use_trans_sid", 1);
+session_start();
 
-session_start();*/
+include('php/process-jobDAO.php'); 
 ?>
 
 <!DOCTYPE html>
@@ -29,20 +28,31 @@ session_start();*/
     <?php
         $title = "OSJB";
         include "php/header.php";
+
+        //Alles nur anzeigen wenn eingelogt, sonst Fehlermeldung
+        if(!isset($_SESSION["eingeloggt"]) || $_SESSION["eingeloggt"] != true){ 
     ?>
-    
-    <!--Alles nur anzeigen wenn eingelogt, sonst Fehlermeldung-->
-    <?php if(!isset($_SESSION["eingeloggt"]) || $_SESSION["eingeloggt"] != true){ ?>
-    
+    <div id = "content">
         <p class="center">Bitte anmelden!</p>
     
-    <?php } else { ?>    
+    <?php 
+        } 
+        //Wurde eine ID übergeben, aber trotzdem kein Job gefunden -> Fehlermeldung
+        elseif( isset($request_checked["id"]) && $jobs == null ) { 
+    ?>
+        <p class="center">Dieses Jobangebot existiert nicht oder es liegen keine Rechte zum Bearbeiten vor.</p>
+    
+    <?php 
+        } 
+        //Sonst: Seite anzeigen
+        else { 
+    ?>
 
     <div class="container border">
         <section>
-            <form action="php/calc-job.php" method="post">
-                <!--Übergangslösung, wird geändert sobald Aufruf von bearbeiten geändert-->
-                <input type="hidden" name="update_id" value="<?= $id ?>" >
+            <form action="php/process-jobDAO.php" method="post">
+                <!--ID des Jobs wird über Hidden-Feld mitgegeben-->
+                <input type="hidden" name="id" value="<?php if($jobs != null) echo $id ?>" >
                 
                 <section>
                     <h3 class="center">Allgemeine Informationen</h3>
@@ -96,23 +106,19 @@ session_start();*/
                         <div class="col-md-5 last_td">
                             <div class="row">
                                 <div class="col-12">
-                                    Zeitintesität:
+                                    Zeitintensität:
                                 </div>
                                 <div class="col-xl-4 col-6">
-                                    <!--Später mindestens eine Angabe required festlegen.. js?-->
-                                    <label>
-                                        <input type="checkbox" name="teilzeit" value="Teilzeit" <?php if($jobs != null && $zeitintensitaet == "Teilzeit"){ ?> checked <?php } ?> > Teilzeit
-                                    </label>
+                                    <input type="radio" name="zeitintensitaet" id="Teilzeit" value="Teilzeit" <?php if($jobs != null && $zeitintensitaet == "Teilzeit"){ ?> checked <?php } ?> >
+                                    <label for="Teilzeit">Teilzeit</label>
                                 </div>
                                 <div class="col-xl-4 col-6">
-                                    <label>                                        
-                                        <input type="checkbox" name="vollzeit" value="Vollzeit" <?php if($jobs != null && $zeitintensitaet == "Vollzeit"){ ?> checked <?php } ?> > Vollzeit
-                                    </label>
+                                    <input type="radio" name="zeitintensitaet" id="Vollzeit" value="Vollzeit" <?php if($jobs != null && $zeitintensitaet == "Vollzeit"){ ?> checked <?php } ?> >
+                                    <label for="Vollzeit">Vollzeit</label>
                                 </div>
-                                <div class="col-xl-4 col-12">
-                                    <label>                                        
-                                        <input type="checkbox" name="20h" value="20h" <?php if($jobs != null && $zeitintensitaet == "20h"){ ?> checked <?php } ?> > &lt;20h/Woche
-                                    </label>
+                                <div class="col-xl-4 col-6">
+                                    <input type="radio" name="zeitintensitaet" id="20h" value="20h" <?php if($jobs != null && $zeitintensitaet == "20h"){ ?> checked <?php } ?> >
+                                    <label for="20h">20h</label>
                                 </div>
                             </div>
                         </div>
@@ -124,7 +130,6 @@ session_start();*/
                                 Link zur direkten Bewerbung (optional): 
                             </label>    
                             <input type="text" id="blink" name="blink" maxlength="50" placeholder="www.ihre-seite.de" value="<?php if($jobs != null) echo($link); ?>">
-                            
                         </div>
                     </div>
 
@@ -168,7 +173,7 @@ session_start();*/
                         </div>
                         <div class="col-md-5 last_td">
                             <label for="job_stadt">Stadt:</label>
-                                <input type="text" id="job_stadt" name="job_stadt" required value="<?php if($jobs != null) {echo($stadt);} else{ echo $_SESSION["stadt"]; } ?>">
+                            <input type="text" id="job_stadt" name="job_stadt" required value="<?php if($jobs != null) {echo($stadt);} else{ echo $_SESSION["stadt"]; } ?>">
                         </div>
                     </div>
 
@@ -309,12 +314,15 @@ session_start();*/
                     <div class="col-6 col-md-4 col-lg-3">
                        <!-- <button class="btn btn-secondary" type="button">Vorschau</button> (Soll eine Vorschau anzeigen)-->                            
                     </div>
-
+                    
+                    <!--csrf-token-->
+                     <input type="hidden" name="csrf_token" value="<?= $_SESSION["csrf_token"] ?>">
+                    
                     <div class="col-6 col-md-4 col-lg-3">
-                        <?php if($_GET["new"]==1){ ?>                    
-                            <input type="submit" class="btn btn-primary" name="erstellen" value="Jobanzeige erstellen"> <!---(Danach Jobangebot anzeigen)-->
+                        <?php if($jobs != null) { ?>
+                            <input type="submit" class="btn btn-primary" name="bearbeiten" value="Jobangebot bearbeiten">
                         <?php } else { ?>
-                            <input type="submit" class="btn btn-primary" name="bearbeiten" value="Jobanzeige bearbeiten"> <!---(Danach Jobangebot anzeigen)-->
+                            <input type="submit" class="btn btn-primary" name="erstellen" value="Jobangebot erstellen">
                         <?php } ?>
                     </div>
                 </div>
@@ -322,10 +330,10 @@ session_start();*/
             </form>
         </section>
     </div>
+    </div>   
+    <?php 
+        } //End of else
     
-    <?php } //End of else ?>    
-    
-    <?php
         include "php/footer.php";
     ?>
 

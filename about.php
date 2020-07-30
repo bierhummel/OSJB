@@ -3,7 +3,6 @@
 ini_set("session.use_cookies", 1); 
 ini_set("session.use_only_cookies", 0);
 ini_set("session.use_trans_sid", 1);
-
 session_start();
 ?>
 
@@ -31,7 +30,7 @@ session_start();
     ?>
     
     <div class="row">
-        <div class="container col-md-3">
+        <div class="container col-lg-3 col-md-12">
             <section>
                 <h2>
                     Unser Ziel
@@ -50,7 +49,7 @@ session_start();
             </section>
         </div>
 
-        <div class="container col-md-3">
+        <div class="container col-lg-3 col-md-12">
             <section>
                 <h2>
                     Wie funktioniert's?
@@ -68,7 +67,7 @@ session_start();
             </section>
         </div>
 
-        <div class="container col-md-3">
+        <div class="container col-lg-3 col-md-12">
             <section>
 
                 <h2>

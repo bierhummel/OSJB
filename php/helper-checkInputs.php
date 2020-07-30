@@ -1,4 +1,5 @@
 <?php
+//Datei mit ausgelagerter Funktion zur Überprüfung von Usereingaben aller Art im Hinblick auf XSS
 
 function check_inputs($input = array()){
     $checked = array();
@@ -18,9 +19,5 @@ function check_inputs($input = array()){
     }
     return $checked;
 }
-    
-
-//Unerlaubter oder fehlerhafter Aufruf?
-
 
 ?>

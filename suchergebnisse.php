@@ -2,11 +2,9 @@
 ini_set("session.use_cookies", 1); 
 ini_set("session.use_only_cookies", 0);
 ini_set("session.use_trans_sid", 1);
-
 session_start();
 
-include('php/calc-job.php'); 
-
+include('php/process-jobDAO.php'); 
 
 ?>
 
@@ -34,7 +32,7 @@ include('php/calc-job.php');
         $title = "OSJB";
         include "php/header.php";
     ?>
-    
+  <div id = "content">   
 
     <div class="container suchergebnisse">
         <div class="row">
@@ -303,7 +301,7 @@ include('php/calc-job.php');
             </div>
         </div>
     </div>
-
+    </div>
     <?php
         include "php/footer.php";
     ?>

@@ -1,12 +1,12 @@
 <?php
 
-include('php/calc-job.php'); 
-
-/*ini_set("session.use_cookies", 1); 
+ini_set("session.use_cookies", 1); 
 ini_set("session.use_only_cookies", 0);
 ini_set("session.use_trans_sid", 1);
+session_start();
 
-session_start();*/
+include('php/process-jobDAO.php'); 
+
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +29,7 @@ session_start();*/
         $title = "OSJB";
         include "php/header.php";
     ?>
-    
+    <div id = "content">
     <!--Alles nur anzeigen wenn ein exitierendes Jobangebot ausgewählt wurde, sonst Fehlermeldung-->
     <?php if($jobs == null){ ?>
     
@@ -112,7 +112,7 @@ session_start();*/
     </div>
 
     <?php } //End of else ?>
-    
+    </div>
     <?php
         include "php/footer.php";
     ?>

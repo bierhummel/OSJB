@@ -3,7 +3,6 @@
 ini_set("session.use_cookies", 1); 
 ini_set("session.use_only_cookies", 0);
 ini_set("session.use_trans_sid", 1);
-
 session_start();
 ?>
 
@@ -28,7 +27,7 @@ session_start();
         $title = "OSJB";
         include "php/header.php";
     ?>
-
+     <div id = "content">
     <div class="container border">
 
         <section>
@@ -151,7 +150,7 @@ session_start();
         </section>
 
     </div>
-
+    </div>
     <?php
         include "php/footer.php";
     ?>

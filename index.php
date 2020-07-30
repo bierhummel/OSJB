@@ -1,11 +1,12 @@
 <?php
 
-include_once("php/check-connection.php");
-
 ini_set("session.use_cookies", 1); 
 ini_set("session.use_only_cookies", 0);
 ini_set("session.use_trans_sid", 1);
 session_start();
+
+include_once("php/create-SQLiteDB.php");
+
 ?>
 
 <!DOCTYPE html>
@@ -25,25 +26,23 @@ session_start();
     <title>OSJB - Startseite</title>
 </head>
 
-<body class="background_index">
-    
+<body>
+
     <?php
         $title = "OSJB";
         include "php/header.php";
     ?>
-
+    <div id = "content">
     <div class="container border">
         <section>
             <h3 class="center">Finde jetzt den passenden Job in Oldenburg &amp; Umgebung!</h3>
             <h3 class="center">Für Studenten und Absolventen</h3>
 
-            <!--später die Breite aller Inputfelder einheitlich gestalten, bei dieser Abgabe zeitlich nicht geschafft-->
             <div class="search">
                 <form action="suchergebnisse.php" method="get">
                     <h4 class="mb-5">
                         <label for="plz">PLZ: </label>
                         <input type="text" id="plz" name="plz" class="form-control form-control-lg" maxlength="5" value="" placeholder="Deine PLZ" required autofocus>
-                        <!--Später mit pattern Attribut absichern?-->
                     </h4>
 
                     <h4 class="mb-5">
@@ -78,22 +77,12 @@ session_start();
                     </h4>
                 </form>
             </div>
-            <div>
-                <?php if ( isset ($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == "true" ) { ?>                                    
-                    <h3 class="center"><a href="profil.php" class="btn btn-primary">Zum Profil</a></h3>
-                
-                <?php } else { ?>
-                
-                    <h3 class="center"><a href="login.php" class="btn btn-primary">Anmeldung/Registrierung für Arbeitgeber</a></h3>
-                
-                <?php } ?>
-
-            </div>
         </section>
     </div>
-
-    <?php
+</div>
+            <?php
         include "php/footer.php";
     ?>
 </body>
+
 </html>

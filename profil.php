@@ -1,11 +1,11 @@
 <?php
-/*ini_set("session.use_cookies", 1); 
+ini_set("session.use_cookies", 1); 
 ini_set("session.use_only_cookies", 0);
 ini_set("session.use_trans_sid", 1);
 
-session_start();*/
+session_start();
 
-include('php/calc-job.php');
+include('php/process-jobDAO.php');
 ?>
 
 <!doctype html>
@@ -30,7 +30,7 @@ include('php/calc-job.php');
         $title = "OSJB";
         include "php/header.php";
     ?>
-    
+     <div id = "content">
     <!--Alles nur anzeigen wenn eingelogt, sonst Fehlermeldung-->
     <?php if(!isset($_SESSION["eingeloggt"]) || $_SESSION["eingeloggt"] != true){ ?>
     
@@ -45,7 +45,7 @@ include('php/calc-job.php');
                 
  <!--Durch überprüfung von $_SESSION["update"] = "failed"; prüfen ob update fehlgeschlagen ist -> meldung ausgeben und $_SESSION["update"] auf "false" ändern-->
                 
-                <form action="php/config-reg.php" method="post">
+                <form action="php/process-userDAO.php" method="post">
                     <h3 class="center mb-5">
                         Profil von 
                         <?= $_SESSION["vname"] . " " . $_SESSION["nname"];?> 
@@ -62,51 +62,19 @@ include('php/calc-job.php');
                         ?>
                     </p>
                     
-                    <div class="row form-group">
-                        <div class="col">
-                            <label for="firma">Firma: </label>
-                        </div>
-                        <div class="col-sm">
-                            <input type="text" id="firma" name="new_firma" value="<?= $_SESSION["uname"] ?>">
-                        </div>
-                    </div>
-                    
-                    <div class="row form-group">
-                        <div class="col">
-                            <label for="logo">Firmenlogo: (noch in Bearbeitung)</label>
-                        </div>
-                        <div class="col-sm">
-                            <input class="btn btn-secondary" type="file" name="new_logo" id="logo">  <!--Sicherstellen, dass nur Bilder hochgeladen werden?-->
-                        </div>
-                    </div>    
-                    
-                    <div class="row form-group">
-                        <div class="col">
-                            <label for="vorname">Vorname:</label>
-                        </div>
-                        <div class="col-sm">
-                            <input type="text" id="vorname" name="new_vorname" value="<?= $_SESSION["vname"] ?>">
-                        </div>
-                    </div>
-                    
-                    <div class="row form-group">
-                        <div class="col">
-                            <label for="nachname">Nachname:</label>
-                        </div>
-                        <div class="col-sm">
-                            <input type="text" id="nachname" name="new_nachname" value="<?= $_SESSION["nname"] ?>">
-                        </div>
-                    </div>
-
+                    <!--email-->
                     <div class="row form-group">
                         <div class="col-sm">
                             <label for="new_email">E-Mail:</label>
                         </div>
                         <div class="col-sm">
-                            <input type="email" id="new_email" name="new_email" value="<?= $_SESSION["mail"] ?>">
+                            <?= $_SESSION["mail"] ?>
+                            
+                            <!--Mail lieber nicht änderbar machen?
+                            <input type="email" id="new_email" name="new_email" value="<?= $_SESSION["mail"] ?>">-->
                         </div>
                     </div>
-
+                    
                     <!--passwort ändern später-->
                     <!--
                     <div class="row form-group">                        
@@ -118,11 +86,52 @@ include('php/calc-job.php');
                         </div>
                     </div>
                     -->
+                    
+                    <!--Firma-->
+                    <div class="row form-group">
+                        <div class="col">
+                            <label for="firma">Firma: </label>
+                        </div>
+                        <div class="col-sm">
+                            <input type="text" id="firma" name="new_firma" value="<?= $_SESSION["uname"] ?>">
+                        </div>
+                    </div>
+                    
+                    <!--Logo-->
+                    <div class="row form-group">
+                        <div class="col">
+                            <label for="logo">Firmenlogo: (noch in Bearbeitung)</label>
+                        </div>
+                        <div class="col-sm">
+                            <input class="btn btn-secondary" type="file" name="new_logo" id="logo">  <!--Sicherstellen, dass nur Bilder hochgeladen werden?-->
+                        </div>
+                    </div>    
+                    
+                    <!--Vorname-->
+                    <div class="row form-group">
+                        <div class="col">
+                            <label for="vorname">Vorname:</label>
+                        </div>
+                        <div class="col-sm">
+                            <input type="text" id="vorname" name="new_vorname" value="<?= $_SESSION["vname"] ?>">
+                        </div>
+                    </div>
+                    
+                    <!--Nachname-->
+                    <div class="row form-group">
+                        <div class="col">
+                            <label for="nachname">Nachname:</label>
+                        </div>
+                        <div class="col-sm">
+                            <input type="text" id="nachname" name="new_nachname" value="<?= $_SESSION["nname"] ?>">
+                        </div>
+                    </div>
 
+                    <!--Adresse-->
                     <div class="form-group">
                         <h6>Adresse:
                             <!-- <input type="button" value="Bearbeiten" class="btn btn-secondary"-->
-                        </h4>
+                        </h6>
                     </div>
 
                     <div class="row form-group">
@@ -166,8 +175,12 @@ include('php/calc-job.php');
                         <input type="button" value="Bearbeiten" class="btn btn-secondary">
                     </div>
                 -->
-
+                    
+                    
+                    <!--Submit des Update der Userdaten und Hidden-Input für CSRF-Token-->
                     <div class="form-group ">
+                        <input type="hidden" name="csrf_token" value="<?= $_SESSION["csrf_token"] ?>">
+                        
                         <input type="submit" value="Daten aktualisieren" name="updaten" class="btn btn-primary">
                     </div>
                 </form>
@@ -176,13 +189,30 @@ include('php/calc-job.php');
 
         <div class="container border">
             <section>
-                <h4 class="center">Meine Anzeigen</h4>
+                <h4 class="center">Meine Jobangebote</h4>
+                <p class="center"> 
+                    <?php 
+                        if( isset($_SESSION["CreateError"]) && $_SESSION["CreateError"] != ""){
+                            echo $_SESSION["CreateError"];
+                            $_SESSION["CreateError"] = "";
+                        }
+                        if( isset($_SESSION["UpdateError"]) && $_SESSION["UpdateError"] != ""){
+                            echo $_SESSION["UpdateError"];
+                            $_SESSION["UpdateError"] = "";
+                        }
+                        if( isset($_SESSION["DeleteError"]) && $_SESSION["DeleteError"] != ""){
+                            echo $_SESSION["DeleteError"];
+                            $_SESSION["DeleteError"] = "";
+                        }
+                    ?>
+                </p>
+                
                 <p>
-                    <a href="jobangebot-anlegen.php?new=1" class="btn btn-primary">Anzeige erstellen</a>
+                    <a href="jobangebot-anlegen.php" target="_blank" class="btn btn-primary">Neues Jobangebot erstellen</a>
                 </p>
 
                 <?php 
-                     $count = 0;
+                    $count = 0;
                     if($jobs != null){ 
                         foreach($jobs as $job): 
                             extract($job);
@@ -190,28 +220,40 @@ include('php/calc-job.php');
                 ?>
 
                 <div class="border">
-                    <a class="mr-3" href="jobangebot-anzeigen.php?id=<?php echo($id)?>"> <?php echo($titel)?></a>
+                    <!--Jobangebot anzeigen-->
+                    <a class="mr-3" target="_blank" href="jobangebot-anzeigen.php?id=<?php echo($id)?>"> <?php echo($titel)?></a>
                     
                 <!--Inhaltsreduzierung
                     (Datum an dem Jobangebot erstellt wurde)
                     (Jobangeobt aktiv/inaktiv)
                 -->
-                    <!--aufruf von bearbeiten und löschen übergangsweise quasi über get, später über post-->
-                    <a href="jobangebot-anlegen.php?new=0&id=<?php echo($id)?>" class="btn btn-secondary mr-3">Bearbeiten</a>
-
-                    <a href="profil.php?del=1&id=<?php echo($id)?>" class="btn btn-light">Löschen</a>
+                    
+                    <!--Bearbeiten eines Jobangebotes-->
+                    <form action="jobangebot-anlegen.php" method="post" target="_blank" class="mini-form">
+                        <input type="hidden" name="id" value="<?= $id ?>">
+                        <input type="submit" name="aufruf_job-bearbeiten" value="Bearbeiten" class="btn btn-secondary mr-3">
+                    </form>
+                    
+                    <!--Löschen eines Jobangebotes-->
+                    <form action="php/process-jobDAO.php" method="post" class="mini-form">
+                        <input type="hidden" name="id" value="<?= $id ?>">
+                        <input type="hidden" name="del" value="1">
+                        <input type="hidden" name="csrf_token" value="<?= $_SESSION["csrf_token"] ?>">
+                        <input type="checkbox" name="check_del" required>
+                        <input type="submit" name="aufruf_job-bearbeiten" value="Löschen" class="btn btn-light">
+                    </form>
                 </div>
 
                 <?php endforeach; } ?>
 
-                <p class="center">Ende der Liste. Es wurden <?php echo $count ?> Jobangebote gefunden.</p>
+                <p class="center">Ende der Liste. Es wurde(n) <?php echo $count ?> Jobangebot(e) gefunden.</p>
 
             </section>
         </div>
     </div>
 
     <?php } //End of else ?>
-    
+    </div>
     <?php
         include "php/footer.php";
     ?>

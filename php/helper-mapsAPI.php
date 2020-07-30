@@ -1,4 +1,6 @@
 <?php
+//Datei, die Funktionen für include bereitstellt zum den Zugriff auf die Google-Maps-API
+
 
 //MapsAPIKey setzen
 const MAPS_API_KEY = 'AIzaSyCf0GyggZoCCwCRehIR0DLoPcZz5BDtR1c';
@@ -87,7 +89,5 @@ function calculateDistance ( $geo_data1, $geo_data2 ) {
     $distance = ( $miles * 1.609344 );
     return $distance;
 }
-
-//Unerlaubter oder fehlerhafter Aufruf?
 
 ?>
