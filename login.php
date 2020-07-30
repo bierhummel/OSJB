@@ -28,10 +28,8 @@ session_start();
     <?php
         $title = "OSJB";
         include "php/header.php";
-    ?>
-    
-    <!--Alles nur anzeigen wenn nicht eingelogt, sonst Weiterleitung ins Profil-->
-    <?php 
+
+        //Alles nur anzeigen wenn nicht eingelogt, sonst Weiterleitung ins Profil
         if(isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == true){ 
             header( 'location: profil.php' );
             exit;
@@ -39,12 +37,11 @@ session_start();
         else { ?>
     
 
-    <!--Später über Javascript vllt nur eins von beiden anzeigen lassen und über knopf Ansicht wechseln-->
     <div class="row">
+        
+        <!--Login-->
         <div class="container col-xl-4 border ">
-            
             <section id="login">
-    <!--Durch überprüfung von $_SESSION["eingeloggt"] = "failed"; prüfen ob anmeldung fehlgeschlagen ist -> meldung ausgeben und $_SESSION["eingeloggt"] auf "false" ändern-->
                 <form action="php/process-userDAO.php" method="post" class="was-validated">
                     <fieldset>
                         <legend>Log in:</legend>
@@ -53,63 +50,55 @@ session_start();
                             <div class="col-sm">
                                 <label for="email">E-Mail:</label>                    
                             </div>
-                            
                             <div class="col-sm">
-
                                 <input type="email" id="email" placeholder="E-Mail" name="email" class="form-control" required>
                             </div>
                         </div>
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Bitte ausfüllen </div>
 
-                        
                         <div class="row form-group">
-
                             <div class="col-sm">
-
                                 <label for="passwort">Passwort:</label>
                             </div>
-
                             <div class="col-sm">
-
                                 <input type="password" id="passwort" placeholder="Passwort" name="passwort" value="" class="form-control" required>
-
                             </div>
                         </div>
 
-                    <!--Inhaltreduzierung
-                        <div class="valid-feedback">Valid.</div>
-                        <div class="invalid-feedback">Bitte ausfüllen.</div>
-                        <div class="form-check d-flex align-items-end flex-column">
-
-                            
-                            <input type="checkbox" class="custom-control-input" id="customCheck" name="ckbox">
-                            <label class="custom-control-label" for="customCheck">Angemeldet bleiben</label>
-                        </div>
-                    -->
+                        <!--Inhaltreduzierung
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Bitte ausfüllen.</div>
+                            <div class="form-check d-flex align-items-end flex-column">
+                                <input type="checkbox" class="custom-control-input" id="customCheck" name="ckbox">
+                                <label class="custom-control-label" for="customCheck">Angemeldet bleiben</label>
+                            </div>
+                        -->
                         
-                        <div class="form-check  d-flex align-items-end flex-column ">
+                        <div class="form-check d-flex align-items-end flex-column ">
                             <input type="submit" class="btn btn-primary m-2 " name="login" value="Login">
                         </div>
                          
-                    <!--Inhaltreduzierung
-                        <div class="form-check d-flex align-items-end flex-column">
-                            <input type="button" class="btn btn-light  " value="Passwort vergessen">
-                        </div>
-                    -->
-                        
-                    <!--Rückmeldung zur Anmeldung übergangsweise anzeigen-->
-                    <?php if (isset ($_SESSION["login"]) ) {
-                        if($_SESSION["login"] == "fail") { ?>
-                            Anmedlung fehlgeschlagen.
-                        <?php } $_SESSION["login"] = ""; } ?>                        
-                        
+                        <!--Inhaltreduzierung
+                            <div class="form-check d-flex align-items-end flex-column">
+                                <input type="button" class="btn btn-light  " value="Passwort vergessen">
+                            </div>
+                        -->
+                    
+                        <?php 
+                            //Rückmeldung zur Anmeldung übergangsweise anzeigen
+                            if (isset ($_SESSION["login"]) ) {
+                                if($_SESSION["login"] == "fail") { ?>
+                                    Anmedlung fehlgeschlagen.
+                                <?php } $_SESSION["login"] = ""; 
+                            } 
+                        ?>                        
                     </fieldset>
                 </form>
             </section>
         </div>
         
-        
+        <!--Registrierung-->
         <div class="container col-xl-4 border">
             <section id="registrierung">
                 <form action="php/process-userDAO.php" method="post" class="was-validated">
@@ -170,7 +159,7 @@ session_start();
                             </div>
                         </div>
                         
-                        <!--Nutzungsbedingungen-->
+                        <!--Nutzungsbedingungen und Datenschutz-->
                         <div class="row form-group">
                             <div class="col-sm-8">
                                 <label for="NB_DS_check">
@@ -187,28 +176,29 @@ session_start();
 
                         <div class="form-group d-flex align-items-end flex-column">
                             
-                        <!--Durch überprüfung von $_SESSION["registriert"] = "failed"; prüfen ob registrierung fehlgeschlagen ist -> meldung ausgeben und $_SESSION["registriert"] auf "false" ändern-->                            
-                            <!--Rückmeldung zur Registrierung übergangsweise anzeigen-->
-                            <?php if (isset ($_SESSION["registrierung"]) ) {
-                                if($_SESSION["registrierung"] == "pw_fail") { ?>
-                                    Achtung: Passwörter sind nicht gleich!
-                                <?php } elseif ($_SESSION["registrierung"] == "db_fail") { ?>
-                                    Achtung: Fehler bei Registrierung, möglicherweise bereits registriert?.. (Übergangslösung)
-                                <?php } elseif ($_SESSION["registrierung"] == "verifizierung") { ?>
-                                   <a href="<?= $_SESSION["tokenpfad"]?>">Klicken Sie hier um die Registrierung abzuschließen. (Übergangslösung)             
-                                <?php } elseif ($_SESSION["registrierung"] == "success") { ?>
-                                    Benutzer erfolgreich registiert. Bitte anmelden (Übergangslösung)
-                                <?php } $_SESSION["registrierung"] = ""; } 
+                            <?php 
+                                //Rückmeldung zur Registrierung übergangsweise anzeigen
+                                if( isset($_SESSION["registrierung"]) ) {
+
+                                    //Durch überprüfung von $_SESSION["registriert"] prüfen ob und warum Registrierung fehlgeschlagen ist -> entsprechende Meldung ausgeben und $_SESSION["registriert"] auf "false" ändern
+                                    if($_SESSION["registrierung"] == "pw_fail") { ?>
+                                        Achtung: Passwörter sind nicht gleich!
+                                    <?php } elseif ($_SESSION["registrierung"] == "db_fail") { ?>
+                                        Achtung: Fehler bei Registrierung, möglicherweise bereits registriert?.. (Übergangslösung)
+                                    <?php } elseif ($_SESSION["registrierung"] == "verifizierung") { ?>
+                                       <a href="<?= $_SESSION["tokenpfad"]?>">Klicken Sie hier um die Registrierung abzuschließen. (Übergangslösung) </a>
+                                    <?php } elseif ($_SESSION["registrierung"] == "success") { ?>
+                                        Benutzer erfolgreich registiert. Bitte anmelden (Übergangslösung)
+                                    <?php } $_SESSION["registrierung"] = ""; 
+                                } 
                             ?>
             
                             <input type="submit" class="btn btn-primary" id="registrieren" name="registrieren" value="Registrieren">
                         </div>
                     </fieldset>
                 </form>
-
             </section>
         </div>
-
     </div>
     
     <?php } //End of else ?>    
