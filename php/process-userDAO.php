@@ -179,7 +179,7 @@
     
     //Registrierung abschließen
     //Wenn ein existierender Token aufgerufen wird
-    if ( isset($request_checked['token']) && $request_checked['token'] != "" && file_exists('verification/tmp/'.$request_checked['token'].'.txt') ) {
+    if ( isset($request_checked['token']) && $request_checked['token'] != "" && file_exists('verification/'.$request_checked['token'].'.txt') ) {
         
         //Verifiziere den Nutzer
         $verifiziert = $UserDAO->verifyUser($request_checked['token']);
@@ -190,7 +190,7 @@
             $_SESSION["registrierung"] = "success"; 
             
             //.txt-Datei löschen
-            unlink('verification/tmp/'.$request_checked['token'].'.txt');
+            unlink('verification/'.$request_checked['token'].'.txt');
         }
         //Bei Fehlschlag
         else{
