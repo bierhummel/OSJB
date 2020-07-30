@@ -36,11 +36,20 @@
         $job_data["coordinates"] = $coordinates;
 
         //Daten des zu erstellenden Jobangebots zusammen mit der Mail des Nutzers an DAO übergeben
-        $jobs = $JobDAO->createJob($job_data, $_SESSION["mail"]);
-
-        //Erstelltes Jobangebot anzeigen
-        header( 'location: ../jobangebot-anzeigen.php?id=' . $jobs["id"]);
-        exit;
+        $result = $JobDAO->createJob($job_data, $_SESSION["mail"]);
+        
+        //Wenn eine Job-ID zurückgegeben wird
+        if( is_numeric($result) ) {
+            //Erstelltes Jobangebot anzeigen
+            header( 'location: ../jobangebot-anzeigen.php?id=' . $jobs);
+            exit;
+        }
+        //Sonst speichere die Fehlermeldung und rufe Profil auf, wo Fehlermeldung angezeigt wird.
+        else{
+            $_SESSION["CreateError"] = $result;
+            header( 'location: ../profil.php');
+            exit;
+        }
     }   
     
     //Bearbeiten von Jobangeboten
