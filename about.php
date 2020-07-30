@@ -24,11 +24,12 @@ session_start();
 </head>
 
 <body>
+        <div id = "content">
     <?php
         $title = "OSJB";
         include "php/header.php";
     ?>
-    
+
     <div class="row">
         <div class="container col-md-3">
             <section>
@@ -82,6 +83,7 @@ session_start();
 
         </div>
     </div>
+ </div>
     <?php
         include "php/footer.php";
     ?>
