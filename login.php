@@ -72,7 +72,7 @@ session_start();
 
                             <div class="col-sm">
 
-                                <input type="password" id="passwort" placeholder="Passwort" name="passwort" value="" class="form-control" required>
+                                <input type="password" id="passwort" placeholder="Passwort" name="passwort" value="" minlength="8" class="form-control" required>
 
                             </div>
                         </div>
