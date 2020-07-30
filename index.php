@@ -27,12 +27,12 @@ include_once("php/create-SQLiteDB.php");
 </head>
 
 <body>
-    
+    <div class = "content">
     <?php
         $title = "OSJB";
         include "php/header.php";
     ?>
-
+    
     <div class="container border">
         <section>
             <h3 class="center">Finde jetzt den passenden Job in Oldenburg &amp; Umgebung!</h3>
@@ -79,7 +79,7 @@ include_once("php/create-SQLiteDB.php");
             </div>
         </section>
 
-
+</div>
 
 </div>
             <?php
