@@ -5,22 +5,22 @@
 interface JobDAO {
     public function createJob($job, $user_email);
     public function updateJob($job, $job_id, $user_email);
+    public function deleteJob($job_id, $user_email);
     public function searchJobbez($part_Jobbez);
     public function loadJobs($suchkrit);
     public function loadJobsOfUser($user_mail);
     public function loadJob($job_id);
-    public function deleteJob($job_id, $user_email);
 }
 
 /************************************************
 /* Klasse für Zugriff auf Jobs in DB            *
-*  Zugriff auf die Google-Maps-API              *
-*  Ermöglicht Anzeigen von Jobs                 *
+*  Ermöglicht Anlegen, Bearbeiten, Löschen      *
+*  und Anzeigen von Jobs                        *
 ************************************************/
 
 class SQLiteJobDAO implements JobDAO {
     
-    //erhält array mit inputwerten von jobangebot-anlegen.php und gibt den neuen job zurück
+    //erhält array mit inputwerten von jobangebot-anlegen.php und gibt ID des neuen Jobs oder Fehlermeldung zurück
     public function createJob($job, $user_email){
         //Pfad zur DB
         $database = "../database/database.db";
@@ -28,12 +28,37 @@ class SQLiteJobDAO implements JobDAO {
         $db = new PDO('sqlite:' . $database);
         // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
-        $user = null; //Array mit allen wichtigen Informationen des Users (z.b. keine id kein PW)
+        
         try{
+            //Transaktion beginnen
+            $db->beginTransaction();
+            
+            //User-ID aus der DB holen
+            $id = "select id from user where mail = :mail";
+            // Statement preparen
+            $stmt = $db->prepare($id);
+            // Parameter binden
+            $stmt->bindParam(':mail', $user_email);  
+            // Query ausführen
+            $stmt->execute();
+            // Hole die einzige Zeile, die verfügbar ist (id des users)
+            $id = $stmt->fetchColumn();
+            
             // Default: Anzeige ist aktiv.
             $status = 1;
-            //Titel, Strasse, Hausnummer, PLZ und Stadt werden aus den übergebenden Array rausgeholt
-            $titel = $job['titel'];
+            
+            //Prüfe ob alle Pflichtangaben getätigt wurden. Falls nicht: Exception.
+            if (! ( isset($job['titel']) && isset($job['job_strasse']) && isset($job['job_hausnr']) && isset($job['job_plz']) && isset($job['job_stadt']) && isset($job['coordinates']) && isset($job['art']) && isset($job['fachrichtung']) && isset($job['jdate']) ) ) {
+                throw new PDOException("Erstellen fehlgeschlagen. Nicht alle Pflichtfelder ausgefüllt.");
+            }
+            
+            //Titel, Beschäftigungsart, Fachrichtung, Frühester Beginn aus Array holen
+            $titel = $job['titel'];            
+            $beschaeftigungsart = $job['art'];
+            $fachrichtung = $job['fachrichtung'];
+            $beginn = $job['jdate'];
+            
+            //Strasse, Hausnummer, PLZ und Stadt aus Array holen
             $strasse = $job['job_strasse'];
             $hausnr = $job['job_hausnr'];
             $plz = $job['job_plz'];
@@ -44,37 +69,18 @@ class SQLiteJobDAO implements JobDAO {
             $geo_lat = floatval($coordinates['lat']);
             $geo_lon = floatval($coordinates['lon']);
             
-            //ID aus der DB holen
-            $id = "select id from user where mail = :mail";
-            // Statement preparen
-            $stmt = $db->prepare($id);
-            // Parameter binden
-            $stmt->bindParam(':mail', $user_email);  
-            // Query ausführen
-            $stmt->execute();
-            // Da id auo-incement ist: Hole die einzige Zeile die verfügbar ist (id des users)
-            $id = $stmt->fetchColumn();
-            //Beschäftigungsart und Fachrichtung aus den Array holen
-            $beschaeftigungsart = $job['art'];
-            $fachrichtung = $job['fachrichtung'];
-            //Intensität aus den Array holen (jeweils Teilzeit, Vollzeit oder 20h)
-            $intensitaet = '';
-            if($job['teilzeit'] == 'Teilzeit'){
-                $intensitaet = $job['teilzeit'];
+            
+            //Optionale Angaben prüfen und ggf. aus Array holen:
+            //Zeitintesität aus den Array holen (jeweils Teilzeit, Vollzeit oder 20h)
+            $intensitaet = null;
+            if( isset($job['zeitintensitaet']) ){
+                $intensitaet = $job['zeitintensitaet'];
             }
-            elseif($job['vollzeit'] == 'Vollzeit'){
-                $intensitaet = $job['vollzeit'];
-            }
-            else {
-                $intensitaet = $job['20h'];
-            }
-            //Jobbezeichnung, Beginn und Link aus den Array holen
-            $jobbezeichnung = $job['bez'];
-            $beginn = $job['jdate'];
-            $link = $job['blink'];
-            //Wenn kein Link vorhanden: Setze leeren String auf NULL für die DB
-            if($link == ''){
-                $link = NULL;
+            
+            //Link zur direkten Bewerbung 
+            $link = '';
+            if( isset($job['blink']) ){
+                $link = $job['blink'];
             }
             
             //Qualifikation ermitteln. Diese sind als Boolean (integer 0 oder 1) in der DB realisiert 
@@ -83,30 +89,31 @@ class SQLiteJobDAO implements JobDAO {
             $master = 0;
             $im_master = 0;
             $ausbildung = 0;
-            if($job['abachelor'] == 'abachelor'){
+            if( isset($job['abachelor']) ){
                 $bachelor = 1;
             }
-            if($job['ibachelor'] == 'ibachelor'){
+            if( isset($job['ibachelor']) ){
                 $im_bachelor = 1;
             }
-            if($job['amaster'] == 'amaster'){
+            if( isset($job['amaster']) ){
                 $master = 1;
             }
-            if($job['imaster'] == 'imaster'){
+            if( isset($job['imaster']) ){
                 $im_master = 1;
             }
-            if($job['ausbildung'] == 'ausbildung'){
+            if( isset($job['ausbildung']) ){
                 $ausbildung = 1;
             }
             
             //Individuelle Beschreibung aus den Array holen. Wenn keine Beschreibung vorhanden setze Beschreibung auf NULL für die DB.
-            $beschreibung = $job['message'];
-            if ($beschreibung == ''){
-                $beschreibung = NULL;
+            $beschreibung = '';
+            if ( isset($job['message']) ){
+                $beschreibung = $job['message'];
             }
 
             // Erstellung der Query für das Eintragen des Jobangebots
             $newJob = "insert into jobangebot (user_id, status, titel, strasse, hausnr, plz, stadt, geo_lat, geo_lon, beschreibung, art, zeitintensitaet, im_bachelor, bachelor, im_master, master, ausbildung, fachrichtung, link, beschaeftigungsbeginn, erstellt_am) values (:uid, :status, :titel, :strasse, :hausnr, :plz, :stadt, :geo_lat, :geo_lon, :beschreibung, :art, :zeitintensitaet, :im_bachelor, :bachelor, :im_master, :master, :ausbildung, :fachrichtung, :link, :beschaeftigungsbeginn, datetime('now'))";
+            
             // Statement preparen
             $stmt = $db->prepare($newJob);
             //Binde die Parameter an die Variablen
@@ -132,22 +139,29 @@ class SQLiteJobDAO implements JobDAO {
             $stmt->bindParam(':zeitintensitaet', $intensitaet);
             // Statement ausführen
             $stmt->execute();
+            
+            
             // ID des neuerstellten Jobs aus die DB holen:
             $stmt = $db->query("select id from jobangebot order by id desc limit 1");
             // zurückgegeben String (ein Wert ->FetchColumn) in einen int umwandeln:
             $jid = intval($stmt->fetchColumn());
-            //Erzeugung des Rückgabearrays:
-            $new_job = array("id" => $jid, "status" => $status, "titel" => $titel, "strasse" => $strasse, "hausnr" => $hausnr, "plz" => $plz, "stadt" => $stadt, "beschreibung" => $beschreibung, "art" => $beschaeftigungsart, "ibachelor" => $im_bachelor, "bachelor" => $bachelor, "imaster" => $im_master, "master" => $master, "ausbildung" => $ausbildung, "fachrichtung" => $fachrichtung, "link" => $link, "beginn" => $beginn, "intensitaet" => $intensitaet);
-            //Array returnen:
-            return $new_job;
+            
+            //Transaktion mit commit beenden
+            $db->commit();
+            
+            //ID des neuen Jobs returnen:
+            return $jid;
         } 
         catch(PDOException $e) {
-            // Print PDOException message
-            echo $e->getMessage();
-        }      
-    }     
+            //Transaktion mit rollback beenden
+            $db->rollBack();
+            
+            // return PDOException message
+            return $e->getMessage();
+        }
+    }//Ende createJob
     
-    //erhält array mit inputwerten von jobangebot-anlegen.php und gibt id des jobs zurück
+    //erhält array mit inputwerten von jobangebot-anlegen.php und gibt true oder Fehlermeldung zurück
     public function updateJob($job, $job_id, $user_email){
         //Pfad zur DB
         $database = "../database/database.db";
@@ -174,7 +188,7 @@ class SQLiteJobDAO implements JobDAO {
                 throw new PDOException("Update fehlgeschlagen. Kein entsprechendes Jobangebot gefunden oder keine Rechte zum Löschen vorhanden.");
             }
             
-            // Default: Anzeige ist aktiv TODO: Das soll vom User noch verändert werden können?
+            // Default: Anzeige ist aktiv
             $status = 1;
             
             //Prüfe ob alle Pflichtangaben getätigt wurden. Falls nicht: Exception.
@@ -186,7 +200,7 @@ class SQLiteJobDAO implements JobDAO {
             $titel = $job['titel'];            
             $beschaeftigungsart = $job['art'];
             $fachrichtung = $job['fachrichtung'];
-            $beginn = $job['jdate']; //(Erstmal String, wird bei Refactoring der DB geändert)
+            $beginn = $job['jdate'];
             
             //Strasse, Hausnummer, PLZ und Stadt aus Array holen
             $strasse = $job['job_strasse'];
@@ -235,8 +249,8 @@ class SQLiteJobDAO implements JobDAO {
             }
             
             //Individuelle Beschreibung
-            $beschreibung = NULL;
-            if ( isset($job['message']) && $job['message'] == ''){
+            $beschreibung = '';
+            if ( isset($job['message']) ){
                 $beschreibung = $job['message'];
             }
 
@@ -245,7 +259,6 @@ class SQLiteJobDAO implements JobDAO {
             
             //update vorbereiten
             $stmt = $db->prepare($updatedJob);
-            
             //parameter binden
             $stmt->bindParam(':status', $status);  
             $stmt->bindParam(':titel', $titel);
@@ -272,7 +285,7 @@ class SQLiteJobDAO implements JobDAO {
             //Transaktion mit commit beenden
             $db->commit();
             
-            //Bei Fehlerfreiem Ablauf wird true zurückgeben
+            //Bei fehlerfreien Ablauf wird true zurückgeben
             return true;
             
         } catch(PDOException $e) {
@@ -281,12 +294,55 @@ class SQLiteJobDAO implements JobDAO {
             
             // return PDOException message
             return $e->getMessage();
-
         }
-        return null;
-    }     
+    }//Ende updateJob
     
-    //Erhält String mit unvollständiger Eingabe einer Jobbezeichnung und gibt mögliche Treffer zurück
+    //erhält job_id + usermail und gibt true oder eine Fehlermeldung zurück
+    public function deleteJob($job_id, $user_email){
+        $database = "../database/database.db";
+        $db = new PDO('sqlite:' . $database);
+        // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
+
+        try{
+            //Transaktion beginnen da mehrere DB-Zugriffe nötig
+            $db->beginTransaction();
+            
+            //Prüfen ob Job (Job-ID) zum User (Mailadresse) gehört:
+            $stmt = $db->prepare("select * from jobangebot, user where jobangebot.id = :job_id and jobangebot.user_id = user.id and user.mail = :user_mail");
+            // Parameter binden
+            $stmt->bindParam(':job_id', $job_id); 
+            $stmt->bindParam(':user_mail', $user_email); 
+             // Query ausführen
+            $stmt->execute();
+             // Das Ergebnis wird gespeichert
+            $job = $stmt->fetchAll(); 
+            //Wenn kein Jobangebot gefunden wurde: Exception
+            if ( $job == null) {
+                throw new Exception("Löschen fehlgeschlagen. Kein entsprechendes Jobangebot gefunden oder keine Rechte zum Löschen vorhanden.");
+            }
+            
+            // Job (Job-id) soll aus der DB entfernt werden:
+            $delJob = "delete from jobangebot where id = :id";
+            // Statement preparen und Parameter an Variable job_id binden
+            $stmt = $db->prepare($delJob);
+            $stmt->bindParam(':id', $job_id);
+            // Query ausführen
+            $stmt->execute();
+            
+            //Transaktion mit commit beenden
+            $db->commit();
+            
+            return true;
+        } catch(Exception $e) {
+            //Transaktion mit rollback beenden
+            $db->rollBack();
+            // Return Exception message
+            return $e->getMessage();
+        }   
+    } //Ende deleteJob
+    
+    //Erhält String mit unvollständiger Eingabe einer Jobbezeichnung (titel) per AJAX und gibt mögliche Treffer als Array zurück
     public function searchJobbez($part_Jobbez){
         try{
             //Pfad zur DB
@@ -308,16 +364,16 @@ class SQLiteJobDAO implements JobDAO {
             $job = $stmt->fetchAll();
             // und returned
             return $job;
-            
         }
         catch(PDOException $e) {
             // Print PDOException message           
-            echo $e->getMessage();
+            //echo $e->getMessage();
+            //null zurückgeben
+            return null;
         }
-    }
+    } //Ende searchJobbez
     
-    
-    //Erhält Array mit Inputwerten von Index.php (oder später von Filterbox aus Suchergebnisse.php) und gibt zwei-dimensionales Array mit den gefundenen Jobangeboten zurück 
+    //Erhält Array mit Inputwerten von Index.php oder der Filterbox aus Suchergebnisse.php und gibt zwei-dimensionales Array mit den gefundenen Jobangeboten zurück. Wird automatisch beim Aufruf von Suchergebnisse.php ausgeführt
     public function loadJobs($suchkrit){
         try{  
             //Pfad zur DB
@@ -542,7 +598,6 @@ class SQLiteJobDAO implements JobDAO {
             
             // Query ausführen
             $stmt->execute();
-            
             // Das Array wird gespeichert...
             $jobs = $stmt->fetchAll();  
             
@@ -551,9 +606,10 @@ class SQLiteJobDAO implements JobDAO {
         }
         catch(PDOException $e) {
             // Print PDOException message           
-            echo $e->getMessage();
+            //echo $e->getMessage();
+            return null;
         }
-    }
+    } //Ende loadJobs
     
     
     public function loadJobsOfUser($user_mail){
@@ -562,8 +618,12 @@ class SQLiteJobDAO implements JobDAO {
         // Verbindung wird durch das Erstellen von Instanzen der PDO-Basisklasse erzeugt: 
         $db = new PDO('sqlite:' . $database);
         // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
-        try{            
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        try{
+            //Transaktion beginnen
+            $db->beginTransaction();
+            
             // Hole die ID des Users mit der eingegebenen Mail
             $id = "select id from user where mail = :mail";
             // Statement vorbereten
@@ -572,24 +632,34 @@ class SQLiteJobDAO implements JobDAO {
             $stmt->bindParam(':mail', $user_mail); 
             // Statement ausführen
             $stmt->execute();
-             // zurückgegeber Wert aus der Spalte holen
+            // zurückgegeber Wert aus der Spalte holen
             $id = $stmt->fetchColumn();
+            
             // Fetch-Mode ändern, da sonst doppelte Einträge ins Array eingetragen werden
             $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
             // Alle Jobangebot des Users aus der DB holen
             $stmt = $db->prepare("select * from jobangebot where user_id = ?");
-             // Query ausführen und den Parameter binden
+            // Query ausführen und den Parameter binden
             $stmt->execute(array($id));
-             // Das Array wird gespeichert...
+            // Das Array wird gespeichert.
             $jobs = $stmt->fetchAll(); 
-            // und returned
+            
+            //Transaktion mit commit beenden
+            $db->commit();
+            
+            // Array wird returned
             return $jobs;
         } 
         catch(PDOException $e) {
             // Print PDOException message
-            echo $e->getMessage();
+            //echo $e->getMessage();
+            
+            //Transaktion mit rollback beenden
+            $db->rollBack();
+            
+            return null;
         }    
-    } 
+    } //Ende loadJobsOfUser
         
     
     public function loadJob($job_id){
@@ -615,60 +685,16 @@ class SQLiteJobDAO implements JobDAO {
         }
         catch(PDOException $e) {
             // Print PDOException message
-            echo $e->getMessage();
+            //echo $e->getMessage();
+            return null;
         }    
-    } 
-        
+    }//Ende loadJob
     
-    //erhält job_id + usermail und gibt true oder eine Fehlermeldung zurück
-    public function deleteJob($job_id, $user_email){
-        $database = "../database/database.db";
-        $db = new PDO('sqlite:' . $database);
-        // Errormode wird eingeschaltet, damit Fehler leichter nachvollziehbar sind.
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
-
-        try{
-            //Transaktion beginnen da mehrere DB-Zugriffe nötig
-            $db->beginTransaction();
-            
-            //Prüfen ob Job (Job-ID) zum User (Mailadresse) gehört:
-            $stmt = $db->prepare("select * from jobangebot, user where jobangebot.id = :job_id and jobangebot.user_id = user.id and user.mail = :user_mail");
-            // Parameter binden
-            $stmt->bindParam(':job_id', $job_id); 
-            $stmt->bindParam(':user_mail', $user_email); 
-             // Query ausführen
-            $stmt->execute();
-             // Das Ergebnis wird gespeichert
-            $job = $stmt->fetchAll(); 
-            //Wenn kein Jobangebot gefunden wurde: Exception
-            if ( $job == null) {
-                throw new Exception("Löschen fehlgeschlagen. Kein entsprechendes Jobangebot gefunden oder keine Rechte zum Löschen vorhanden.");
-            }
-            
-            // Job (Job-id) soll aus der DB entfernt werden:
-            $delJob = "delete from jobangebot where id = :id";
-            // Statement preparen und Parameter an Variable job_id binden
-            $stmt = $db->prepare($delJob);
-            $stmt->bindParam(':id', $job_id);
-            // Query ausführen
-            $stmt->execute();
-            
-            //Transaktion mit commit beenden
-            $db->commit();
-            
-            return true;
-        } catch(Exception $e) {
-            //Transaktion mit rollback beenden
-            $db->rollBack();
-            // Return Exception message
-            return $e->getMessage();
-        }   
-    }
 }//Ende SQLiteJobDAO
 
 
 
-//DummyJobDAO funktioniert wahrscheinlich nicht mehr vollständig
+//DummyJobDAO funktioniert nicht mehr, trotzdem zur Dokumentation des Prozesses nicht entfernt
 /*
 class DummyJobDAO implements JobDAO {
     
