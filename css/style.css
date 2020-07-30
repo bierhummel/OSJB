@@ -109,12 +109,12 @@ h3 {
 }
 
 #content {
-    min-height: 80%;
+    min-height: 100%;
     margin: 0;
 }
 
 #content-login {
-    min-height: 80%;
+    min-height: 100%;
     margin: 0;
     font-size: 120%;
 }
