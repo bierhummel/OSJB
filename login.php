@@ -23,12 +23,14 @@ session_start();
     <title>OSJB - Login</title>
 </head>
 
-<body class="background_login">
+<body>
 
     <?php
         $title = "OSJB";
         include "php/header.php";
-
+    ?>
+     <div id = "font-login">
+    <?php 
         //Alles nur anzeigen wenn nicht eingelogt, sonst Weiterleitung ins Profil
         if(isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == true){ 
             header( 'location: profil.php' );
@@ -196,13 +198,13 @@ session_start();
                             ?>
             
                             <input type="submit" class="btn btn-primary" id="registrieren" name="registrieren" value="Registrieren">
-                        </div>
+                           </div>
                     </fieldset>
                 </form>
             </section>
         </div>
     </div>
-    
+    </div> 
     <?php } //End of else ?>    
 
     <?php

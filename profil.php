@@ -30,7 +30,7 @@ include('php/process-jobDAO.php');
         $title = "OSJB";
         include "php/header.php";
     ?>
-    
+     <div id = "content">
     <!--Alles nur anzeigen wenn eingelogt, sonst Fehlermeldung-->
     <?php if(!isset($_SESSION["eingeloggt"]) || $_SESSION["eingeloggt"] != true){ ?>
     
@@ -253,7 +253,7 @@ include('php/process-jobDAO.php');
     </div>
 
     <?php } //End of else ?>
-    
+    </div>
     <?php
         include "php/footer.php";
     ?>

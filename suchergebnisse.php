@@ -32,7 +32,7 @@ include('php/process-jobDAO.php');
         $title = "OSJB";
         include "php/header.php";
     ?>
-    
+  <div id = "content">   
 
     <div class="container suchergebnisse">
         <div class="row">
@@ -301,7 +301,7 @@ include('php/process-jobDAO.php');
             </div>
         </div>
     </div>
-
+    </div>
     <?php
         include "php/footer.php";
     ?>

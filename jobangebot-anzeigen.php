@@ -29,7 +29,7 @@ include('php/process-jobDAO.php');
         $title = "OSJB";
         include "php/header.php";
     ?>
-    
+    <div id = "content">
     <!--Alles nur anzeigen wenn ein exitierendes Jobangebot ausgewählt wurde, sonst Fehlermeldung-->
     <?php if($jobs == null){ ?>
     
@@ -112,7 +112,7 @@ include('php/process-jobDAO.php');
     </div>
 
     <?php } //End of else ?>
-    
+    </div>
     <?php
         include "php/footer.php";
     ?>
