@@ -64,7 +64,7 @@ try{
         $stmt->bindParam(':stadt', $stadt);      
         $stmt->bindParam(':verified', $verified);
         $stmt->bindParam(':mail_verified', $mail_verified);
-        // Und führe die Transaktion letzlich aus.
+        // Und führe die Aktion letzlich aus.
         $stmt->execute();
 
         
@@ -98,7 +98,7 @@ try{
         $stmt->bindParam(':stadt', $stadt);      
         $stmt->bindParam(':verified', $verified);
         $stmt->bindParam(':mail_verified', $mail_verified);
-        // Und führe die Transaktion letzlich aus.
+        // Und führe die Aktion letzlich aus.
         $stmt->execute();  
 
         
@@ -132,7 +132,7 @@ try{
         $stmt->bindParam(':stadt', $stadt);      
         $stmt->bindParam(':verified', $verified);
         $stmt->bindParam(':mail_verified', $mail_verified);
-        // Und führe die Transaktion letzlich aus.
+        // Und führe die Aktion letzlich aus.
         $stmt->execute();      
 
 

@@ -35,7 +35,7 @@
             //Alle unkritischen Infos des Users in Session zwischenspeichern
             foreach ($user as $index => $value){
                 if( $index != "id" && $index != "password" && $index != "verified" && $index != "mail_verified"){
-                    $_SESSION[$index] = htmlspecialchars($value);
+                    $_SESSION[$index] = $value;
                 }
             }
             //Zusätzlich ein Token in der Session speichern zum Schutz vor CSRF-Angriffen
@@ -70,12 +70,14 @@
                     $_SESSION[$index] = htmlspecialchars($value);
                 }
             }
-
+            
+            //Danach Profil wieder aufrufen
             header( 'location: ../profil.php' );
             exit;
         } 
         //Update nicht erfolgreich
         else{
+            //Fehlermeldung setzen und Profil wieder aufrufen
             $_SESSION["update"] = "fail";
             header( 'location: ../login.php' );
            exit;
