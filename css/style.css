@@ -1,6 +1,11 @@
 @charset "utf 8";
 @import url('https://fonts.googleapis.com/css2?family=Raleway');
 
+* {
+
+    margin: 0;
+    padding: 0;
+}
 
 
 .header {
@@ -30,11 +35,15 @@
     padding: 10px;
 }
 
+
 html,
 body{
-    overflow-x: hidden;  
+
     background-color: rgb(159, 232, 229);
+    height: 100%;
+    margin: 0;
 }
+
 
 
 .img {
@@ -102,6 +111,7 @@ h3 {
     margin-right: auto;
     margin-left: auto;
     background-color: rgba(211,211,211,0.5);
+    
 }
 
 /*Auskommentiert weil nicht verstanden :( 
@@ -164,19 +174,19 @@ span:before {
     text-align: end;
 }
 
-.background_index{
+/*.background_index{
     background-image: url(../bilder/background-landing-page.jpg);
     background-repeat:no-repeat;
     background-size: 100% 110%;
     overflow-x: hidden;  
-}
+}*/
 
-.background_login{
+/*.background_login{
     background-image: url(../bilder/oldb-background-about.jpg);
     background-repeat:no-repeat;
     background-size: 100% 110%;
     overflow-x: hidden;  
-}
+}*/
 
 
 input,

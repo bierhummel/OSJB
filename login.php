@@ -23,7 +23,7 @@ session_start();
     <title>OSJB - Login</title>
 </head>
 
-<body class="background_login">
+<body>
 
     <?php
         $title = "OSJB";

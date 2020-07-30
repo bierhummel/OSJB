@@ -26,7 +26,7 @@ include_once("php/create-SQLiteDB.php");
     <title>OSJB - Startseite</title>
 </head>
 
-<body class="background_index">
+<body>
     
     <?php
         $title = "OSJB";
@@ -78,10 +78,13 @@ include_once("php/create-SQLiteDB.php");
                 </form>
             </div>
         </section>
-    </div>
 
-    <?php
+
+
+</div>
+            <?php
         include "php/footer.php";
     ?>
 </body>
+
 </html>
