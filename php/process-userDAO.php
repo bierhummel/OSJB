@@ -22,7 +22,7 @@
 
 //Aufgaben, für die diese Datei direkt aufgerufen wird: 
     //Login
-    if ( isset( $request_checked['login'] ) ) {
+    if ( isset($request_checked['login']) && isset($request_checked['email']) && isset($request_checked['passwort']) ) {
         
         //Aufruf von loginUser() des UserDAO
         $user = $UserDAO->loginUser($request_checked['email'], $request_checked['passwort']);
