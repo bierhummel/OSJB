@@ -192,6 +192,10 @@ include('php/process-jobDAO.php');
                 <h4 class="center">Meine Jobangebote</h4>
                 <p class="center"> 
                     <?php 
+                        if( isset($_SESSION["CreateError"]) && $_SESSION["CreateError"] != ""){
+                            echo $_SESSION["CreateError"];
+                            $_SESSION["CreateError"] = "";
+                        }
                         if( isset($_SESSION["UpdateError"]) && $_SESSION["UpdateError"] != ""){
                             echo $_SESSION["UpdateError"];
                             $_SESSION["UpdateError"] = "";

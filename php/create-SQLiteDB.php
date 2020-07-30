@@ -10,20 +10,22 @@
 $database = "database/database.db";
 $file_existed = false;
 
-
-
+//Prüfe ob DB bereits existiert
 if (file_exists($database)) {
     $file_existed = true;
 }
 
-// Es wird bei Nichtbestand der DB eine neue Datenbank erzeugt, wenn Skript ausgeführt wird.
+// PDO Objekt erzeugen. Es wird bei Nichtbestand der DB eine neue Datenbank erzeugt, wenn Skript ausgeführt wird, ansonsten wird bestehende DB verwendet.
 $db = new PDO('sqlite:' . $database);
-
-// Errormode wird angemacht, um potentielle Fehler nachvollziehen zu können
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
  
 try{
-    //Kreieren der Tables User und Jobangebot    
+    // Errormode wird angemacht, um potentielle Fehler nachvollziehen zu können
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+    //Transaktion beginnen
+    $db->beginTransaction();
+    
+    //Kreieren der Tables User und Jobangebot, falls sie nicht bereits existieren
     $db->exec("create table if not exists user (id integer primary key, uname text NOT NULL, vname text NOT NULL, nname text NOT NULL, password text NOT NULL, mail text UNIQUE, hash text NOT NULL, strasse text, hausnr text, plz text, stadt text, verified integer NOT NULL, mail_verified integer NOT NULL)");
     
     $db->exec("create table if not exists jobangebot (id integer primary key, user_id integer, status integer NOT NULL, titel text, strasse text NOT NULL, hausnr text NOT NULL, plz text NOT NULL, stadt text NOT NULL, geo_lat real, geo_lon real, beschreibung text, art text, zeitintensitaet text, im_bachelor integer NOT NULL, bachelor integer NOT NULL, im_master integer NOT NULL, master integer NOT NULL, ausbildung integer NOT NULL, fachrichtung text, logo blob, link text, beschaeftigungsbeginn text, erstellt_am integer, FOREIGN KEY (user_id) REFERENCES user(id))");
@@ -62,7 +64,7 @@ try{
         $stmt->bindParam(':stadt', $stadt);      
         $stmt->bindParam(':verified', $verified);
         $stmt->bindParam(':mail_verified', $mail_verified);
-        // Und führe die Transaktion letzlich aus.
+        // Und führe die Aktion letzlich aus.
         $stmt->execute();
 
         
@@ -96,7 +98,7 @@ try{
         $stmt->bindParam(':stadt', $stadt);      
         $stmt->bindParam(':verified', $verified);
         $stmt->bindParam(':mail_verified', $mail_verified);
-        // Und führe die Transaktion letzlich aus.
+        // Und führe die Aktion letzlich aus.
         $stmt->execute();  
 
         
@@ -130,7 +132,7 @@ try{
         $stmt->bindParam(':stadt', $stadt);      
         $stmt->bindParam(':verified', $verified);
         $stmt->bindParam(':mail_verified', $mail_verified);
-        // Und führe die Transaktion letzlich aus.
+        // Und führe die Aktion letzlich aus.
         $stmt->execute();      
 
 
@@ -254,7 +256,6 @@ try{
         $beschaeftigungsbeginn = "2020-06-10";
         $zeitintensitaet = 'Teilzeit';
         
-
         $stmt = $db->prepare($job2);   
         $stmt->bindParam(':uid', $uid); 
         $stmt->bindParam(':status', $status);  
@@ -303,7 +304,6 @@ try{
         $beschaeftigungsbeginn = "2020-06-10";
         $zeitintensitaet = '20h';
         
-
         $stmt = $db->prepare($job3);  
         $stmt->bindParam(':uid', $uid); 
         $stmt->bindParam(':status', $status);  
@@ -325,12 +325,17 @@ try{
         $stmt->bindParam(':link', $link);       
         $stmt->bindParam(':beschaeftigungsbeginn', $beschaeftigungsbeginn);  
         $stmt->bindParam(':zeitintensitaet', $zeitintensitaet);  
-        $stmt->execute();    
+        $stmt->execute();
     }
+    //Transaktion mit commit beenden
+    $db->commit();
 }
 catch(PDOException $e) {
     // Zeige PDOException message
     echo $e->getMessage();
+    
+    //Transaktion mit rollback beenden
+    $db->rollBack();
 }
 
 
@@ -342,7 +347,5 @@ if (!is_writable($database)) {
 // Fehlermeldungen
 error_reporting(E_ALL);
 ini_set('display_errors', true);        
-
-
 
 ?>
