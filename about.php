@@ -24,14 +24,13 @@ session_start();
 </head>
 
 <body>
-        <div id = "content">
     <?php
         $title = "OSJB";
         include "php/header.php";
     ?>
-
+    
     <div class="row">
-        <div class="container col-md-3">
+        <div class="container col-lg-3 col-md-12">
             <section>
                 <h2>
                     Unser Ziel
@@ -50,7 +49,7 @@ session_start();
             </section>
         </div>
 
-        <div class="container col-md-3">
+        <div class="container col-lg-3 col-md-12">
             <section>
                 <h2>
                     Wie funktioniert's?
@@ -68,7 +67,7 @@ session_start();
             </section>
         </div>
 
-        <div class="container col-md-3">
+        <div class="container col-lg-3 col-md-12">
             <section>
 
                 <h2>
@@ -83,7 +82,6 @@ session_start();
 
         </div>
     </div>
- </div>
     <?php
         include "php/footer.php";
     ?>
