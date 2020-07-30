@@ -1,6 +1,5 @@
-<footer>
-    <hr>
-    <nav class="container-fluid" id="footer">
+<footer id="footer">
+    <nav class="container-fluid">
         <div class="row">
             <div class="col-md-3 ">
                 <a href="impressum.php" class="btn btn-link">Impressum</a>
