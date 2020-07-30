@@ -29,7 +29,7 @@ session_start();
         $title = "OSJB";
         include "php/header.php";
     ?>
-     <div id = "content">
+     <div id = "content-login">
     <!--Alles nur anzeigen wenn nicht eingelogt, sonst Weiterleitung ins Profil-->
     <?php 
         if(isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == true){ 
@@ -199,7 +199,7 @@ session_start();
                                 <?php } elseif ($_SESSION["registrierung"] == "success") { ?>
                                     Benutzer erfolgreich registiert. Bitte anmelden (Übergangslösung)
                                 <?php } $_SESSION["registrierung"] = ""; } ?>
-            
+                            
                             <input type="submit" class="btn btn-primary" id="registrieren" name="registrieren" value="Registrieren">
                            </div>
                     </fieldset>
