@@ -195,10 +195,12 @@ session_start();
                                 <?php } elseif ($_SESSION["registrierung"] == "db_fail") { ?>
                                     Achtung: Fehler bei Registrierung, möglicherweise bereits registriert?.. (Übergangslösung)
                                 <?php } elseif ($_SESSION["registrierung"] == "verifizierung") { ?>
-                                   <a href="<?= $_SESSION["tokenpfad"]?>">Klicken Sie hier um die Registrierung abzuschließen. (Übergangslösung)             
+                                    <a href="<?= $_SESSION["tokenpfad"]?>">Klicken Sie hier um die Registrierung abzuschließen. (Übergangslösung)             
+                                <?php } elseif ($_SESSION["registrierung"] == "token_fail") { ?>
+                                    Kein entsprechender Token vorhanden.
                                 <?php } elseif ($_SESSION["registrierung"] == "success") { ?>
                                     Benutzer erfolgreich registiert. Bitte anmelden (Übergangslösung)
-                                <?php } $_SESSION["registrierung"] = ""; } 
+                                       <?php } $_SESSION["registrierung"] = ""; } 
                             ?>
             
                             <input type="submit" class="btn btn-primary" id="registrieren" name="registrieren" value="Registrieren">
