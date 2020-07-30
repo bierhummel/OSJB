@@ -27,7 +27,7 @@ session_start();
         $title = "OSJB";
         include "php/header.php";
     ?>
-
+     <div id = "content">
     <div class="container border">
 
         <section>
@@ -150,7 +150,7 @@ session_start();
         </section>
 
     </div>
-
+    </div>
     <?php
         include "php/footer.php";
     ?>

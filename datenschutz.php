@@ -27,8 +27,8 @@ session_start();
         $title = "OSJB";
         include "php/header.php";
     ?>
-
-    <div class="container border">
+    <div id="content">
+        <div class="container border">
 
         <section>
             <h1 class="center">Datenschutzerklärung</h1>
@@ -204,7 +204,7 @@ session_start();
         </section>
         
         
-
+        </div>
     </div>
 
     <?php

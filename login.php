@@ -23,13 +23,13 @@ session_start();
     <title>OSJB - Login</title>
 </head>
 
-<body class="background_login">
+<body>
 
     <?php
         $title = "OSJB";
         include "php/header.php";
     ?>
-    
+     <div id = "font-login">
     <!--Alles nur anzeigen wenn nicht eingelogt, sonst Weiterleitung ins Profil-->
     <?php 
         if(isset($_SESSION["eingeloggt"]) && $_SESSION["eingeloggt"] == true){ 
@@ -198,11 +198,10 @@ session_start();
                                    <a href="<?= $_SESSION["tokenpfad"]?>">Klicken Sie hier um die Registrierung abzuschließen. (Übergangslösung)             
                                 <?php } elseif ($_SESSION["registrierung"] == "success") { ?>
                                     Benutzer erfolgreich registiert. Bitte anmelden (Übergangslösung)
-                                <?php } $_SESSION["registrierung"] = ""; } 
-                            ?>
-            
+                                <?php } $_SESSION["registrierung"] = ""; } ?>
+                            
                             <input type="submit" class="btn btn-primary" id="registrieren" name="registrieren" value="Registrieren">
-                        </div>
+                           </div>
                     </fieldset>
                 </form>
 
@@ -210,7 +209,7 @@ session_start();
         </div>
 
     </div>
-    
+    </div> 
     <?php } //End of else ?>    
 
     <?php

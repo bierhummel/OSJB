@@ -32,6 +32,7 @@ include('php/process-jobDAO.php');
         //Alles nur anzeigen wenn eingelogt, sonst Fehlermeldung
         if(!isset($_SESSION["eingeloggt"]) || $_SESSION["eingeloggt"] != true){ 
     ?>
+    <div id = "content">
         <p class="center">Bitte anmelden!</p>
     
     <?php 
@@ -329,7 +330,7 @@ include('php/process-jobDAO.php');
             </form>
         </section>
     </div>
-    
+    </div>   
     <?php 
         } //End of else
     
