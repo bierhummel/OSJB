@@ -151,10 +151,22 @@ include('php/process-jobDAO.php');
                             <h6>Arbeitstelle: </h6>
                         </div>
                         
-                         <div class="col-md-12">
+                         <div class="col-md-5">
                             <label for="job_uname">Unternehmen:</label>
                             <input type="text" id="job_uname" name="job_uname" value="<?= $_SESSION["uname"]?>" required readonly>
                         </div>
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-5">
+                            <label for="logo">Firmenlogo nutzen:</label>
+                            <input type="checkbox" 
+                                   id="logo" name="logo" 
+                                   value="<?php if( isset($_SESSION["logo"]) ) echo($_SESSION["logo"])?>" 
+                                   <?php if( !isset($_SESSION["logo"]) ) echo("disabled")?> 
+                                   <?php if( isset($logo) ){ ?> checked <?php } ?>
+                                   >
+                        </div>
+                        
                         <div class="col-md-5">
                             <label for="job_strasse">Straße:</label>
                             <input type="text" id="job_strasse" name="job_strasse" required value="<?php if($jobs != null) {echo($strasse);} else{ echo $_SESSION["strasse"]; } ?>">
@@ -165,6 +177,7 @@ include('php/process-jobDAO.php');
                             <label for="job_hausnr">Hausnummer:</label>
                             <input type="text" id="job_hausnr" name="job_hausnr" required value="<?php if($jobs != null) {echo($hausnr);} else{ echo $_SESSION["hausnr"]; } ?>" >
                         </div>
+                        
                         <div class="col-md-5">
                             <label for="job_plz">PLZ:</label>
                             <input type="text" for="job_plz" name="job_plz" required value="<?php if($jobs != null) {echo($plz);} else{ echo $_SESSION["plz"]; } ?>" maxlength="5">
@@ -176,8 +189,6 @@ include('php/process-jobDAO.php');
                             <input type="text" id="job_stadt" name="job_stadt" required value="<?php if($jobs != null) {echo($stadt);} else{ echo $_SESSION["stadt"]; } ?>">
                         </div>
                     </div>
-
-
 
 
                 <!--Inhaltsreduzierung

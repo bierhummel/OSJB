@@ -40,7 +40,17 @@ include('php/process-jobDAO.php');
     <div class="container border">
         <div class="row">
             <section class="col-md-4 last_td center">
-                <img class="img-fluid" src="bilder/logo.png" alt="Firmenlogo" width="232" height="232">
+                <?php
+                    if( isset($logo) ){
+                ?>
+                        <img class="img-fluid" src="<?= $logo ?>" alt="Firmenlogo" width="232" height="232">
+                <?php
+                    } else {
+                ?>
+                        <img class="img-fluid" src="bilder/logo.png" alt="Muster-Firmenlogo" width="232" height="232">
+                <?php 
+                    }
+                ?>
             </section>
 
             <section class="col-md-8 last_td">

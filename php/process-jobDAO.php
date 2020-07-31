@@ -41,7 +41,7 @@
         //Wenn eine Job-ID zurückgegeben wird
         if( is_numeric($result) ) {
             //Erstelltes Jobangebot anzeigen
-            header( 'location: ../jobangebot-anzeigen.php?id=' . $jobs);
+            header( 'location: ../jobangebot-anzeigen.php?id=' . $result);
             exit;
         }
         //Sonst speichere die Fehlermeldung und rufe Profil auf, wo Fehlermeldung angezeigt wird.

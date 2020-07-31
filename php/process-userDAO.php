@@ -57,9 +57,24 @@
     //Userdaten updaten
     if ( isset( $request_checked['updaten']) && isset($_SESSION["eingeloggt"]) && isset($request_checked["csrf_token"]) && $request_checked['csrf_token'] == $_SESSION["csrf_token"] ) {
         
+        //Falls ein File hochgeladen wurde, den File-Upload erledigen
+        $uploadedFile = null;
+        if( isset($_FILES['new_logo']) ) {
+            include('helper-fileUpload.php');
+            $uploadedFile = fileUpload( $_FILES );
+        }
+        //Pfad der Hochgeladenen Datei an request anhängen
+        $request_checked['uploadedFile'] = $uploadedFile;
+        
+        
         //Aufruf von updateUser() des UserDAO
         $user = $UserDAO->updateUser($request_checked, $_SESSION["mail"]);
 
+        
+        /*var_dump($user);
+        echo "<br>";
+        exit;*/
+        
         //Update erfolgreich und neue auszugebende Userdaten als Array erhalten
         if( $user != NULL ){            
             $_SESSION["update"] = "success";
@@ -79,8 +94,8 @@
         else{
             //Fehlermeldung setzen und Profil wieder aufrufen
             $_SESSION["update"] = "fail";
-            header( 'location: ../login.php' );
-           exit;
+            header( 'location: ../profil.php' );
+            exit;
         } 
     }
 
