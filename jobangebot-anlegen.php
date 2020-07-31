@@ -162,24 +162,24 @@ include('php/process-jobDAO.php');
                         </div>
                         
                         <div class="col-md-5">
-                            <label for="job_strasse">Straße:</label>
+                            <label for="job_strasse">Straße: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</label>
                             <input type="text" id="job_strasse" name="job_strasse" required value="<?php if($jobs != null) {echo($strasse);} else{ echo $_SESSION["strasse"]; } ?>">
                         </div>
                         <div class="col-md-2">
                         </div>
                         <div class="col-md-5">
-                            <label for="job_hausnr">Hausnummer:</label>
+                            <label for="job_hausnr">Hausnummer: </label>
                             <input type="text" id="job_hausnr" name="job_hausnr" required value="<?php if($jobs != null) {echo($hausnr);} else{ echo $_SESSION["hausnr"]; } ?>" >
                         </div>
                         
                         <div class="col-md-5">
-                            <label for="job_plz">PLZ:</label>
+                            <label for="job_plz">PLZ: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</label>
                             <input type="text" for="job_plz" name="job_plz" required value="<?php if($jobs != null) {echo($plz);} else{ echo $_SESSION["plz"]; } ?>" maxlength="5">
                         </div>
                         <div class="col-md-2">
                         </div>
                         <div class="col-md-5 last_td">
-                            <label for="job_stadt">Stadt:</label>
+                            <label for="job_stadt">Stadt:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </label>
                             <input type="text" id="job_stadt" name="job_stadt" required value="<?php if($jobs != null) {echo($stadt);} else{ echo $_SESSION["stadt"]; } ?>">
                         </div>
                     </div>
