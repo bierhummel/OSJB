@@ -7,7 +7,7 @@ Namen der Studierenden der Gruppe:
 
 Voraussetzungen:
 -php.ini: PDO mit SQLite und fileupload müssen erlaubt sein
--Da kein Admin-Konnte vorliegt, spielt es keine Rolle, ob selbsterstelle Nutzerdaten oder die vergebenen Testdaten genutzt werden. Mit der Datei create-SQLiteDB.php wird die DB und die Testdaten neu erstellt, falls die DB gelöscht wird. Hier sind die Login-Daten für die Testbenutzer ggf. auslesbar.
+-Da kein Admin-Konto vorliegt, spielt es keine Rolle, ob selbsterstelle Nutzerdaten oder die vergebenen Testdaten genutzt werden. Mit der Datei create-SQLiteDB.php wird die DB und die Testdaten neu erstellt, falls die DB gelöscht wird. Hier sind die Login-Daten für die Testbenutzer ggf. auslesbar.
 
 Funktionalitäten:
 -Beim Aufruf des Index wird die SQLite-DB sowie ein paar Test-Nutzer und Test-Jobangebote automatisch erstellt, falls keine DB gefunden wurde
