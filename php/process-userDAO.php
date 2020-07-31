@@ -71,11 +71,6 @@
         
         //Aufruf von updateUser() des UserDAO
         $user = $UserDAO->updateUser($request_checked, $_SESSION["mail"]);
-
-        
-        /*var_dump($user);
-        echo "<br>";
-        exit;*/
         
         //Update erfolgreich und neue auszugebende Userdaten als Array erhalten
         if( $user != NULL ){            

@@ -1,7 +1,7 @@
 //Automatische Anzeigen von Suchergebnissen zur Laufzeit beim Eingeben einer Jobbezeichnung als Vorschläge zur automaitschen Vervollständigung mithilfe von AJAX
 
 
-//Funktion für onclick-Event für die Suchvorschläge
+//Funktion für 'onclick'-Event für die Suchvorschläge
 function nutze_vorschlag(vorschlag){
     document.getElementById("bez").value = vorschlag;   //Setze Wert des Textfelds auf den Vorschlag
     document.filter.submit();                           //automatischer Submit
@@ -23,7 +23,7 @@ function suche_jobbez(input){
             document.getElementById("tipps").innerHTML = this.responseText;
             
             //Eventlistener an jeden Vorschlag anhängen
-            //zeigt Fehler, funktioniert aber.. nach Vorlage von https://stackoverflow.com/questions/42080365/using-addeventlistener-and-getelementsbyclassname-to-pass-an-element-id
+            //zeigt Fehler in brackets, funktioniert aber.. nach Vorlage von https://stackoverflow.com/questions/42080365/using-addeventlistener-and-getelementsbyclassname-to-pass-an-element-id
             var vorschläge = document.getElementsByClassName("vorschlag"); //Vorschläge selectieren
             for(let i = 0; i < vorschläge.length; i++) {       
               vorschläge[i].addEventListener("mousedown", function(){ //Mousedown statt Click, da Click dazu geführt hat, dass immer der erste Vorschlag beim Drücken von Enter ausgewählt wurde (Roman weiß bescheid und hat auch keine andere Lösung gefunden)

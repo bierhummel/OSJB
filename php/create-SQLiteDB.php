@@ -332,7 +332,7 @@ try{
 }
 catch(PDOException $e) {
     // Zeige PDOException message
-    echo $e->getMessage();
+    //echo $e->getMessage();
     
     //Transaktion mit rollback beenden
     $db->rollBack();
