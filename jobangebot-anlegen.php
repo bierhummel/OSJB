@@ -75,13 +75,15 @@ include('php/process-jobDAO.php');
                         </div>
                         <div class="col-md-5 last_td">
                             <label> Jobbezeichnung:
-                                <input type="text" name="titel" maxlength="50" value="<?php if($jobs != null) echo($titel); ?>" placeholder="Jobbezeichnung" required>
+                                <div class="col-md-2">
+                                    </div>
+                                <input type="text" size="50"name="titel" maxlength="50" value="<?php if($jobs != null) echo($titel); ?>" placeholder="z.B. Softwareentwickler" required>
                             </label>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-lg-5 last_td">
+                        <div class="col-md-5 last_td">
                             <select class="form-control" name="fachrichtung" size="1">
                                 <option value="">Fachrichtung auswählen</option>
                                 <option value="Bildungs- und Sozialwissenschaften" <?php if($jobs != null && $fachrichtung == "Bildungs- und Sozialwissenschaften"){ ?> selected <?php } ?> >Bildungs- und Sozialwissenschaften</option>
@@ -92,13 +94,16 @@ include('php/process-jobDAO.php');
                                 <option value="Medizin und Gesundheitswissenschaften" <?php if($jobs != null && $fachrichtung == "Medizin und Gesundheitswissenschaften"){ ?> selected <?php } ?> >Medizin und Gesundheitswissenschaften</option>
                             </select>
                         </div>
-                        <div class="col-lg-2">
+                        <div class="col-md-2">
                         </div>
-                        <div class="col-lg-5 last_td">
-                            <label>
-                                Frühster Beginn der Beschäftigung:
-                                <input type="date" name="jdate" value="<?php if($jobs != null) echo($beschaeftigungsbeginn); ?>" required>
-                            </label>
+                        <div class="col-md-5 last_td" >
+                            <label title="Geben Sie hier einen Link zu Ihrem firmeneigenen Bewerbungsportal nach dem gegebenen Muster (ohne http oder https) ein" for="blink">
+                                Link zur direkten Bewerbung: 
+               
+                            <div class="col-md-2 ">
+                                    </div>
+                            <input type="text"  size="50" id="blink" name="blink" maxlength="100" placeholder="www.ihre-seite.de" value="<?php if($jobs != null) echo($link);  ?>">
+                            </label>   
                         </div>
                     </div>
 
@@ -126,10 +131,11 @@ include('php/process-jobDAO.php');
                         <div class="col-md-2">
                         </div>
                         <div class="col-md-5 last_td">
-                            <label title="Geben Sie hier einen Link zu Ihrem firmeneigenen Bewerbungsportal nach dem gegebenen Muster (ohne http oder https) ein" for="blink">
-                                Link zur direkten Bewerbung: 
-                            </label>    
-                            <input type="text" id="blink" name="blink" maxlength="50" placeholder="www.ihre-seite.de" value="<?php if($jobs != null) echo($link); ?>">
+                            <label>
+                                <br>Frühster Beginn der Beschäftigung:
+                                <input type="date" name="jdate" value="<?php if($jobs != null) echo($beschaeftigungsbeginn); ?>" required>
+                            </label>
+
                         </div>
                     </div>
 
