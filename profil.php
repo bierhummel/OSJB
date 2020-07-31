@@ -29,18 +29,14 @@ include('php/process-jobDAO.php');
     <?php
         $title = "OSJB";
         include "php/header.php";
-    ?>
-    
-     <div id = "content">
-         
-    <?php 
-         //Alles nur anzeigen wenn eingelogt, sonst Fehlermeldung
-         if(!isset($_SESSION["eingeloggt"]) || $_SESSION["eingeloggt"] != true){ 
+
+        //Alles nur anzeigen wenn eingelogt, sonst Fehlermeldung
+        if(!isset($_SESSION["eingeloggt"]) || $_SESSION["eingeloggt"] != true){ 
      ?>
-    <p class="center">Bitte anmelden!</p>
-    
-         
+        <p class="center">Bitte anmelden!</p>
     <?php } else { ?>
+    
+    <div id = "content">
     <div class="container-fluid">
         <div class="container border">
             <section>
@@ -49,13 +45,13 @@ include('php/process-jobDAO.php');
                     <?= $_SESSION["vname"] . " " . $_SESSION["nname"];?> 
                 </h3>
 
-                <!--Rückmeldung zum Update übergangsweise hier anzeigen-->
+                <!--Rückmeldung zum Update hier anzeigen-->
                 <p>
                     <?php 
-                        //Durch überprüfung von $_SESSION["update"] = "failed"; prüfen ob update fehlgeschlagen ist -> meldung ausgeben und $_SESSION["update"] auf "" ändern
+                        //Durch überprüfung von $_SESSION["update"] = "failed"; prüfen ob update fehlgeschlagen ist -> Meldung ausgeben und $_SESSION["update"] auf "" ändern
                         if (isset ($_SESSION["update"]) ) {
                             if($_SESSION["update"] == "fail") { ?>
-                                Fehler beim Update.
+                                Unbekannter Fehler beim Update. Probieren Sie es bitte erneut.
                             <?php } elseif ($_SESSION["update"] == "success") { ?>
                                 Nutzerdaten erfolgreich aktualisiert.
                             <?php } $_SESSION["update"] = ""; 
@@ -77,12 +73,12 @@ include('php/process-jobDAO.php');
                         <div class="col-sm">
                             <?= $_SESSION["mail"] ?>
                             
-                            <!--Mail lieber nicht änderbar machen?
+                            <!--Inhaltsreduzierung: Mail lieber nicht änderbar machen
                             <input type="email" id="new_email" name="new_email" value="<?= $_SESSION["mail"] ?>">-->
                         </div>
                     </div>
                     
-                    <!--passwort ändern später-->
+                    <!--Inhaltsreduzierung: Passwort ändern-->
                     <!--
                     <div class="row form-group">                        
                         <div class="col-sm">
@@ -134,10 +130,13 @@ include('php/process-jobDAO.php');
                         </div>
                     </div>
 
+                    <!--Inhaltsreduzierung: Button zum freischalten des Bearbeitens: 
+                        <input type="button" value="Bearbeiten" class="btn btn-secondary"
+                    -->
+                    
                     <!--Adresse-->
                     <div class="form-group">
                         <h6>Adresse:
-                            <!-- <input type="button" value="Bearbeiten" class="btn btn-secondary"-->
                         </h6>
                     </div>
 
@@ -177,12 +176,11 @@ include('php/process-jobDAO.php');
                         </div>
                     </div>
 
-                <!--Inhaltsreduzierung
-                    <div class="form-group">
-                        <input type="button" value="Bearbeiten" class="btn btn-secondary">
-                    </div>
-                -->
-                    
+                    <!--Inhaltsreduzierung
+                        <div class="form-group">
+                            <input type="button" value="Bearbeiten" class="btn btn-secondary">
+                        </div>
+                    -->
                     
                     <!--Submit des Update der Userdaten und Hidden-Input für CSRF-Token-->
                     <div class="form-group ">
@@ -219,6 +217,7 @@ include('php/process-jobDAO.php');
                 </p>
 
                 <?php 
+                    //Ausgeben der Jobangebote des Users
                     $count = 0;
                     if($jobs != null){ 
                         foreach($jobs as $job): 
@@ -230,10 +229,10 @@ include('php/process-jobDAO.php');
                     <!--Jobangebot anzeigen-->
                     <a class="mr-3" target="_blank" href="jobangebot-anzeigen.php?id=<?php echo($id)?>"> <?php echo($titel)?></a>
                     
-                <!--Inhaltsreduzierung
-                    (Datum an dem Jobangebot erstellt wurde)
-                    (Jobangeobt aktiv/inaktiv)
-                -->
+                    <!--Inhaltsreduzierung
+                        (Datum an dem Jobangebot erstellt wurde)
+                        (Jobangeobt aktiv/inaktiv)
+                    -->
                     
                     <!--Bearbeiten eines Jobangebotes-->
                     <form action="jobangebot-anlegen.php" method="post" target="_blank" class="mini-form">
@@ -258,10 +257,11 @@ include('php/process-jobDAO.php');
             </section>
         </div>
     </div>
-
-    <?php } //End of else ?>
     </div>
-    <?php
+    
+    <?php 
+         } //End of else ?
+    
         include "php/footer.php";
     ?>
 </body>
