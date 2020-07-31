@@ -38,13 +38,12 @@ session_start();
                 <p>
                     <img src="bilder/about.png" class="img-fluid mx-auto d-block rounded img_about mb-3" alt="text">
 
-
-                    Unser Ziel ist es, Studierenden und Absolventen dabei zu helfen,
-                    den perfekten Job zu finden! Darum haben wir uns dazu entschlossen, eine Platform zu gründen die auf die
-                    Bedürfnisse und Qualifikationen von Akademikern zugeschnitten ist. Egal ob Praktikum, Werkstudenten- oder
-                    Minijob; bei uns findest du eine breite Auswahl von Angeboten in deiner Nähe die auch mit deinem
-                    Studienalltag/Stundenplan vereinbar sind! Uns liegen die lokale Unternehmen und Start Ups am Herzen, deswegen
-                    möchten wir den Bewerbngsablauf so einfach und unbürokratisch wie möglich gestalten.
+                    Wir sind die Oldenburger Studenten-Jobbörse (OSJB) und unser Ziel ist es, Studierenden und Absolventen dabei zu helfen,
+                    den perfekten Job zu finden! Darum haben wir uns dazu entschlossen, eine Platform zu gründen, die auf die
+                    Bedürfnisse und Qualifikationen von jungen Akademikern zugeschnitten ist. Egal ob Praktikum, Werkstudenten- oder
+                    Minijob; bei uns findest du eine breite Auswahl von Angeboten in deiner Nähe, die auch mit deinem
+                    Studienalltag/Stundenplan vereinbar sind! Uns liegen die lokalen Unternehmen und Start Ups am Herzen, deswegen
+                    möchten wir den Bewerbungsablauf so einfach und unbürokratisch wie möglich gestalten.
                 </p>
             </section>
         </div>
@@ -57,9 +56,9 @@ session_start();
                 <p>
                     <img src="bilder/2.jpg" class="img-fluid mx-auto d-block rounded img_about mb-3" alt="text">
 
-                    Gib einfach auf unserer Startseite deine Postleitzahl, den gewünschten Umkreis und deine Fakultät an, wo du
+                    Gib einfach auf unserer Startseite deine Postleitzahl, den gewünschten Umkreis und ggf. deine Fachrichtung/Fakultät an, an der du
                     sudierst oder deinen Abschluss gemacht hast. Über die Filterfunktionen kannst du dann die Beschäftigungsart,
-                    Zeitintensität, etc auswählen. Über den Button "bewerben!" gelangst du direkt auf die Seite des Unternehmens
+                    Zeitintensität, usw. auswählen. Über den Button "bewerben!" gelangst du bei vielen Angeboten direkt auf die Seite des Unternehmens,
                     wo du deine Unterlagen einreichen kannst. <br>
                     <br>
                     Für dich als Arbeitnehmer ist somit keine Registrierung erforderlich!
@@ -69,7 +68,6 @@ session_start();
 
         <div class="container col-lg-3 col-md-12">
             <section>
-
                 <h2>
                     Für Arbeitgeber
                 </h2>
@@ -79,7 +77,6 @@ session_start();
                     Sofern Sie selbst eine Jobanzeige aufgeben möchten, bitten wir Sie sich zu registrieren und ein Profil zu hinterlegen.
                 </p>
             </section>
-
         </div>
     </div>
     <?php
