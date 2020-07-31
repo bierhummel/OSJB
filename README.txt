@@ -1,5 +1,5 @@
 Webprogrammierung Sose 2020
-Freitagstutorium (Roman) - Gruppe 2
+Freitagstutorium (Roman) - Gruppe B
 
 Namen der Studierenden der Gruppe: 
 -Alexandra Oswald
