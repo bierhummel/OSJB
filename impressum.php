@@ -27,7 +27,8 @@ session_start();
         $title = "OSJB";
         include "php/header.php";
     ?>
- <div id="content">
+    
+    <div id="content">
     <div class="container border">
         <section>
             <h1 class="center">Impressum und Disclaimer</h1>
@@ -62,7 +63,7 @@ session_start();
 
             <p>Quelle: <a href="https://www.e-recht24.de" target="_blank">e-recht24.de</a></p>
         </section>
-     </div>
+    </div>
     </div>
 
     <?php

@@ -79,8 +79,9 @@ include_once("php/create-SQLiteDB.php");
             </div>
         </section>
     </div>
-</div>
-            <?php
+    </div>
+    
+    <?php
         include "php/footer.php";
     ?>
 </body>

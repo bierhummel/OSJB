@@ -32,22 +32,23 @@ include('php/process-jobDAO.php');
         //Alles nur anzeigen wenn eingelogt, sonst Fehlermeldung
         if(!isset($_SESSION["eingeloggt"]) || $_SESSION["eingeloggt"] != true){ 
     ?>
-    <div id = "content">
-        <p class="center">Bitte anmelden!</p>
+    
+            <p class="center">Bitte anmelden!</p>
     
     <?php 
         } 
         //Wurde eine ID übergeben, aber trotzdem kein Job gefunden -> Fehlermeldung
         elseif( isset($request_checked["id"]) && $jobs == null ) { 
     ?>
-        <p class="center">Dieses Jobangebot existiert nicht oder es liegen keine Rechte zum Bearbeiten vor.</p>
+            <p class="center">Dieses Jobangebot existiert nicht oder es liegen keine Rechte zum Bearbeiten vor.</p>
     
     <?php 
         } 
         //Sonst: Seite anzeigen
         else { 
     ?>
-
+    
+    <div id = "content">
     <div class="container border">
         <section>
             <form action="php/process-jobDAO.php" method="post">
@@ -95,7 +96,6 @@ include('php/process-jobDAO.php');
                         </div>
                         <div class="col-lg-5 last_td">
                             <label>
-                                <!--später min=(heute)-->
                                 Frühster Beginn der Beschäftigung:
                                 <input type="date" name="jdate" value="<?php if($jobs != null) echo($beschaeftigungsbeginn); ?>" required>
                             </label>
@@ -126,25 +126,13 @@ include('php/process-jobDAO.php');
                         <div class="col-md-2">
                         </div>
                         <div class="col-md-5 last_td">
-                            <label title="Geben Sie hier einen Link zu Ihrem firmeneigenen Bewerbungsportal ein" for="blink">
-                                Link zur direkten Bewerbung (optional): 
+                            <label title="Geben Sie hier einen Link zu Ihrem firmeneigenen Bewerbungsportal nach dem gegebenen Muster (ohne http oder https) ein" for="blink">
+                                Link zur direkten Bewerbung: 
                             </label>    
                             <input type="text" id="blink" name="blink" maxlength="50" placeholder="www.ihre-seite.de" value="<?php if($jobs != null) echo($link); ?>">
                         </div>
                     </div>
 
-                    <!--
-                    <h4 class="center">Informationen zum Unternehmen "<?= $_SESSION["uname"]?>"</h4>
-                    
-                    <div class="row">
-                        <div class="col-md-12">
-                            Firma: <?= $_SESSION["uname"]?>
-                        </div>
-                        <div class="col-md-12 last_td">
-                            Adresse: <?= $_SESSION["strasse"] . " " . $_SESSION["hausnr"] . " " . $_SESSION["plz"] . " " . $_SESSION["stadt"] ?>
-                        </div>
-                    </div>
-                    -->
                     
                     <div class="row">
                         <div class="col-12">
@@ -153,12 +141,12 @@ include('php/process-jobDAO.php');
                         
                          <div class="col-md-5">
                             <label for="job_uname">Unternehmen:</label>
-                            <input type="text" id="job_uname" name="job_uname" value="<?= $_SESSION["uname"]?>" required readonly>
+                            <input type="text" id="job_uname" name="job_uname" value="<?= $_SESSION["uname"]?>" disabled readonly>
                         </div>
                         <div class="col-md-2">
                         </div>
                         <div class="col-md-5">
-                            <label for="logo">Firmenlogo nutzen:</label>
+                            <label for="logo" title="Nur verfügbar, wenn Logo im Profil hinterlegt">Firmenlogo nutzen:</label>
                             <input type="checkbox" 
                                    id="logo" name="logo" 
                                    value="<?php if( isset($_SESSION["logo"]) ) echo($_SESSION["logo"])?>" 
@@ -190,36 +178,33 @@ include('php/process-jobDAO.php');
                         </div>
                     </div>
 
-
-                <!--Inhaltsreduzierung
-                    <div class="row">
-                        !--später nur angezeigt falls vorhanden?--
-                        <div class="col-md-12 center">
-                            (Optional): Kontaktperson: Max Mustermann
+                    <!--Inhaltsreduzierung
+                        <div class="row">
+                            !--später nur angezeigt falls vorhanden?--
+                            <div class="col-md-12 center">
+                                (Optional): Kontaktperson: Max Mustermann
+                            </div>
+                            <div class="col-md-12 center">
+                                (Optional): E-Mailadresse: ABC@irgendwas.test
+                            </div>
                         </div>
-                        <div class="col-md-12 center">
-                            (Optional): E-Mailadresse: ABC@irgendwas.test
-                        </div>
-                    </div>
-                    !--(Werte später automatisch aus Profil des Arbeitgebers übertragen)--
-                -->
+                        !--(Werte später automatisch aus Profil des Arbeitgebers übertragen)--
+                    -->
                     
                 </section>
                 <hr>
 
                 <section>
-                    <h3 class="center">Gesuchte Qualifikationen (optional)</h3>
+                    <h3 class="center">Gesuchte Qualifikationen</h3>
                     <div class="row">
                         <div class="col-sm-12">
                             Abschlüsse:
-                            <!--(Lieber auch als datalist?)-->
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xl-4 col-md-6">
                             <input type="checkbox" id="abachelor" name="abachelor" value="abachelor" <?php if($jobs != null && $bachelor == 1){ ?> checked <?php } ?> > 
                             <label for="abachelor">Bachelor</label>
-                            
                         </div>
                         <div class="col-xl-4 col-md-6">
                             <label>
@@ -276,47 +261,45 @@ include('php/process-jobDAO.php');
                 </section>
 
                 <section>
-                    <h3 class="center">Individuelle Beschreibung (optional)</h3>
+                    <h3 class="center">Individuelle Beschreibung</h3>
                 
-                <!--Inhaltsreduzierung
-                    <div class="row">
-                        <div class="col">
-                            <p>Bitte füllen Sie das Textfeld mit einer individuellen Beschreibung aus und/oder laden Sie ein entsprechendes Dokument hoch.</p>
-                        </div>                                                
-                    </div>
-                    
-                
-                    <div class="row">
-                        <div class="col-lg-6 last_td">
-                             <textarea class="form-control" name="message" rows="10" cols="100"></textarea>                        
+                    <!--Inhaltsreduzierung
+                        <div class="row">
+                            <div class="col">
+                                <p>Bitte füllen Sie das Textfeld mit einer individuellen Beschreibung aus und/oder laden Sie ein entsprechendes Dokument hoch.</p>
+                            </div>                                                
                         </div>
-                        <div class="col-lg-2_">
-                        </div>
-                        <div class="col-lg-6 last_td align-self-center">
-                            <label>
-                                Bild hochladen:
-                                <input class="btn btn-secondary" type="file" name="image">
 
-                                !--Sicherstellen, dass nur Bilder hochgeladen werden?)--
-                            </label>
-                        </div>                                            
-                    </div>
-                -->
-                
-                <!--(Übergangsweise?) Nur Textfeld statt Textfeld + Upload-->
+
+                        <div class="row">
+                            <div class="col-lg-6 last_td">
+                                 <textarea class="form-control" name="message" rows="10" cols="100"></textarea>                        
+                            </div>
+                            <div class="col-lg-2_">
+                            </div>
+                            <div class="col-lg-6 last_td align-self-center">
+                                <label>
+                                    Bild hochladen:
+                                    <input class="btn btn-secondary" type="file" name="image">
+
+                                    !--Sicherstellen, dass nur Bilder hochgeladen werden?)--
+                                </label>
+                            </div>                                            
+                        </div>
+                    -->
+
+                    <!--(Übergangsweise?) Nur Textfeld statt Textfeld + Upload-->
+                    
                     <div class="row">
                         <div class="col">
                             <p>Bitte füllen Sie das Textfeld mit einer individuellen Beschreibung aus.</p>
                         </div>                                                
                     </div>
-                                    
                     <div class="row">
                         <div class="col-lg-12 last_td">
                              <textarea class="form-control" name="message" rows="10" cols="100"><?php if($jobs != null) echo($beschreibung); ?></textarea>                        
                         </div>                                                       
                     </div>
-                <!--Ende Übergangslösung-->
-                    
                 </section>
                 
                 <div class="row end">
@@ -341,7 +324,8 @@ include('php/process-jobDAO.php');
             </form>
         </section>
     </div>
-    </div>   
+    </div>
+    
     <?php 
         } //End of else
     

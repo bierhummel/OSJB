@@ -32,8 +32,8 @@ include('php/process-jobDAO.php');
         $title = "OSJB";
         include "php/header.php";
     ?>
-  <div id = "content">   
-
+    
+    <div id = "content">   
     <div class="container suchergebnisse">
         <div class="row">
             <div class="col-sm-6 col-md-4 col-lg-3 m-0 p-0">
@@ -58,7 +58,6 @@ include('php/process-jobDAO.php');
                             <form name="filter" action="" method="get">
                                 
                                 <!--Jobbezeichnung-->
-                                <!--Problem: Bei Enter wird automatisch erster Suchvorschlag ausgewählt und nicht das was im Eingabefeld steht...-->
                                 <div class="mb-2">
                                     <h5><label class="mb-0" for="bez">Jobbezeichnung</label></h5>
                                     <input type="text" id="bez" name="bez" class="form-control" placeholder="Jobbezeichnung" value="<?php if( isset($request_checked["bez"]) ) echo $request_checked["bez"] ?>">
@@ -131,25 +130,24 @@ include('php/process-jobDAO.php');
                                     <h5><label class="mb-0" for="Datum">Frühster Beginn</label></h5>
                                     <input class="form-control" id="Datum" type="date" name="Datum" value="<?php if( isset($request_checked["Datum"]) ) echo $request_checked["Datum"] ?>">
                                 </div>
-                                
 
                                 <!--Inhaltsreduzierung-->
-                                <!--
-                                <h5>Anzeigenalter</h5>
-                                <div>
-                                    <input type="checkbox" name="age[]" id="Neueste">
-                                    <label for="Neueste">Neueste</label>
+                                    <!--
+                                    <h5>Anzeigenalter</h5>
+                                    <div>
+                                        <input type="checkbox" name="age[]" id="Neueste">
+                                        <label for="Neueste">Neueste</label>
 
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="age[]" id="3Tage">
-                                    <label for="3Tage">Älter als 3 Tage</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" name="age[]" id="3Tage">
+                                        <label for="3Tage">Älter als 3 Tage</label>
 
-                                </div>
-                                <div class="mb-2">
-                                    <input type="checkbox" name="age[]" id="Woche">
-                                    <label for="Woche"> Älter als eine Woche</label>
-                                </div>
+                                    </div>
+                                    <div class="mb-2">
+                                        <input type="checkbox" name="age[]" id="Woche">
+                                        <label for="Woche"> Älter als eine Woche</label>
+                                    </div>
                                 -->
 
                                 <!--Beschäftigungsart-->
@@ -222,45 +220,45 @@ include('php/process-jobDAO.php');
                                 </div>
                                 
                                 <!--Inhaltsreduzierung da nur zu 2.-->
-                                <!--
-                                <h5>Weiteres</h5>
-                                <div class="mb-3">
-                                    <label for="Modulliste">Module: </label>
-                                    <input class="form-control" list="Module" id="Modulliste">
-                                    <datalist id="Module">
-                                        <option value="Internettechnologien">
-                                        <option value="Rechnernetze 1">
-                                        <option value="Buchhaltung und Abschluss">
-                                    </datalist>
-                                </div>-->
-                                <!--Falls möglich eine Liste aller Module der Uni Oldenburg einbinden-->
-                                
-                                <!--
-                                <div class="mb-3">
-                                    <label for="Fähigkeitenliste">Besondere Fähigkeiten und Kenntnisse: </label>
-                                    <input class="form-control" list="Fähigkeiten" id="Fähigkeitenliste">
-                                    <datalist id="Fähigkeiten">
-                                        <option value="Progammierung Java">
-                                        <option value="Webprogrammierung">
-                                        <option value="Zehnfingerschreiben">
-                                    </datalist>
-                                </div>
-                                -->
+                                    <!--
+                                    <h5>Weiteres</h5>
+                                    <div class="mb-3">
+                                        <label for="Modulliste">Module: </label>
+                                        <input class="form-control" list="Module" id="Modulliste">
+                                        <datalist id="Module">
+                                            <option value="Internettechnologien">
+                                            <option value="Rechnernetze 1">
+                                            <option value="Buchhaltung und Abschluss">
+                                        </datalist>
+                                    </div>-->
+                                    <!--Falls möglich eine Liste aller Module der Uni Oldenburg einbinden-->
 
-                                <!--Submit nur anzeigen wenn JS deaktiviert-->
-                                <!--<noscript>-->
-                                    <div class="mt-2 mb-3">
-                                         <input type="submit" id="submit_filter" value="Filter anwenden" class="btn btn-primary">
+                                    <!--
+                                    <div class="mb-3">
+                                        <label for="Fähigkeitenliste">Besondere Fähigkeiten und Kenntnisse: </label>
+                                        <input class="form-control" list="Fähigkeiten" id="Fähigkeitenliste">
+                                        <datalist id="Fähigkeiten">
+                                            <option value="Progammierung Java">
+                                            <option value="Webprogrammierung">
+                                            <option value="Zehnfingerschreiben">
+                                        </datalist>
                                     </div>
-                                <!--</noscript>-->
                                 
+
+                                    <!--Submit nur anzeigen wenn JS deaktiviert-->
+                                    <!--<noscript>-->
+                                        <div class="mt-2 mb-3">
+                                             <input type="submit" id="submit_filter" value="Filter anwenden" class="btn btn-primary">
+                                        </div>
+                                    <!--</noscript>--
+                                -->
                             </form>
                         </section>
                     </fieldset>
                 </aside>
             </div>
 
-            <!--Div das die gefunden Jobangebote enthält-->
+            <!--Div, das die gefunden Jobangebote enthält-->
             <div class="col-sm-6 col-md-8 col-lg-9">
                 
             <?php
@@ -311,6 +309,7 @@ include('php/process-jobDAO.php');
         </div>
     </div>
     </div>
+    
     <?php
         include "php/footer.php";
     ?>

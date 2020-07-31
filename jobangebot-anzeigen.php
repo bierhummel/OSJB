@@ -28,15 +28,16 @@ include('php/process-jobDAO.php');
     <?php
         $title = "OSJB";
         include "php/header.php";
+
+        //Alles nur anzeigen wenn ein exitierendes Jobangebot ausgewählt wurde, sonst Fehlermeldung
+        if($jobs == null){ 
     ?>
-    <div id = "content">
-    <!--Alles nur anzeigen wenn ein exitierendes Jobangebot ausgewählt wurde, sonst Fehlermeldung-->
-    <?php if($jobs == null){ ?>
     
-    <p class="center">Dieses Jobangebot existiert nicht.</p>
+            <p class="center">Dieses Jobangebot existiert nicht.</p>
     
     <?php } else { ?>
     
+    <div id = "content">
     <div class="container border">
         <div class="row">
             <section class="col-md-4 last_td center">
@@ -58,21 +59,19 @@ include('php/process-jobDAO.php');
                 <p>Zeitintensität: <?= $zeitintensitaet ?> </p>
                 <p>Beschäftigungsbeginn: <?= date_format(date_create($beschaeftigungsbeginn), 'd.m.yy') ?> </p>
                 
-                <!--<p>Firma: (fehlt noch in der DB)</p>-->
+                <p>Adresse des Arbeitsplatz: <?= $strasse . " " . $hausnr . " " . $plz . " " . $stadt ?> </p>
                 
-                <p>Adresse des Arbeitsplatz: <?= $strasse . " " . $hausnr . " " . $plz . " " . $stadt ?> </p> <!--später alternativer Standort ggf. möglich?-->
-                
-            <!--später hinzufügen?
-                <p>(Optional): Kontaktperson: Max Mustermann</p>
-                <p>(Optional): E-Mailadresse: ABC@irgendwas.test</p>
-            -->
+                <!--Inhaltsreduzierung
+                    <p>Firma: (fehlt in der DB...)</p>
+                    <p>Kontaktperson: Max Mustermann</p>
+                    <p>E-Mailadresse: ABC@irgendwas.test</p>
+                -->
                 
             </section>
         </div>
 
         <section>
             <h4 class="center">Gesuchte Qualifikationen:</h4>
-            <!--Es wird ggf. nur das angezeigt, was auch vorhanden ist? lieber als sub-array zurückgeben?-->
             <div class="row">
                 <div class="col-md-4">
                     <p>Liste der angegebenen Abschlüsse: </p>
@@ -85,32 +84,35 @@ include('php/process-jobDAO.php');
                     </ul>
                 </div>
                 
-            <!--Inhaltsreduzierung
-                <div class="col-md-4">
-                    <p>Liste der angegebenen Module</p>
-                    <ul>
-                        <li>Merkmal1</li>
-                        <li>Merkmal2</li>
-                        <li>Merkmal3</li>
-                    </ul>
-                </div>
-                <div class="col-md-4 last_td">
-                    <p>Liste der angegebenen Fähigkeiten</p>
-                    <ul>
-                        <li>Merkmal1</li>
-                        <li>Merkmal2</li>
-                        <li>Merkmal3</li>
-                    </ul>
-                </div>
-            -->
+                <!--Inhaltsreduzierung
+                    <div class="col-md-4">
+                        <p>Liste der angegebenen Module</p>
+                        <ul>
+                            <li>Merkmal1</li>
+                            <li>Merkmal2</li>
+                            <li>Merkmal3</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 last_td">
+                        <p>Liste der angegebenen Fähigkeiten</p>
+                        <ul>
+                            <li>Merkmal1</li>
+                            <li>Merkmal2</li>
+                            <li>Merkmal3</li>
+                        </ul>
+                    </div>
+                -->
                 
             </div>            
         </section>
 
         <section>
-            <h5>Weitere Beschreibung des Jobangebots: </h5> <!--(Falls vorhanden: Inhalt des Textfelds mit individueller Beschreibung)-->
+            <h5>Weitere Beschreibung des Jobangebots: </h5>
             <p> <?= $beschreibung ?> </p>
-            <!--<p><img src="dummy" alt="Bild mit individueller Beschreibung des Jobangebots" width="10" height="10"> (Nur angezeigt falls vorhanden?)-->
+            
+            <!--Inhaltsreduzierung
+                <p><img src="dummy" alt="Bild mit individueller Beschreibung des Jobangebots" width="10" height="10"> (Nur angezeigt falls vorhanden?)
+            -->
         </section>
 
         <section class="end">
@@ -120,10 +122,11 @@ include('php/process-jobDAO.php');
             <?php } ?>
         </section>
     </div>
-
-    <?php } //End of else ?>
     </div>
-    <?php
+    
+    <?php 
+        } //End of else 
+    
         include "php/footer.php";
     ?>
 </body>
