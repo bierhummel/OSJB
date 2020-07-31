@@ -67,13 +67,18 @@ input#hamburg {
     display: block;
 }
 
-/*Auf großen Bildschirmen Sidebar automatisch einblenden und ggf. Hamburgertransition abspielen. Hamburgerfunktionsweise invertieren*/
+/*Auf großen Bildschirmen Sidebar automatisch immer einblenden und Hamburger ausbleden
+(alt: Hamburgertransition abspielen. Hamburgerfunktionsweise invertieren)*/
 @media screen and (min-width: 576px) {
     aside {
         display: block;
     }
+    
+    .hamburg, label.hamburg {
+        display: none;
+    }
 
-    /*Hamburgertransition abspielen*/
+    /*Hamburgertransition abspielen*
     section .hamburg .line:nth-child(1) {
         transform: translateY(12px) rotate(-45deg);
     }
@@ -87,7 +92,7 @@ input#hamburg {
     }
 
 
-    /*Hamburgerfunktionsweise invertieren*/
+    /*Hamburgerfunktionsweise invertieren*
     #hamburg:checked + section .hamburg .line:nth-child(1) {
         transform: translateY(0px) rotate(0deg);
     }
@@ -102,5 +107,5 @@ input#hamburg {
 
     #hamburg:checked ~ aside {
         display: none;
-    }
+    }*/
 }
