@@ -68,7 +68,7 @@ include('php/process-jobDAO.php');
                     <!--email-->
                     <div class="row form-group">
                         <div class="col-sm">
-                            <label for="new_email">E-Mail:</label>
+                            <label>E-Mail:</label>
                         </div>
                         <div class="col-sm">
                             <?= $_SESSION["mail"] ?>
@@ -151,7 +151,7 @@ include('php/process-jobDAO.php');
                     
                     <div class="row form-group">
                         <div class="col-sm">
-                            <label for="straße">Hausnummer:</label>
+                            <label for="hausnr">Hausnummer:</label>
                         </div>
                         <div class="col-sm">
                             <input type="text" id="hausnr" name="new_hausnr" value="<?= $_SESSION["hausnr"] ?>">

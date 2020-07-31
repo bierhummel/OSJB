@@ -72,7 +72,7 @@ include_once("php/create-SQLiteDB.php");
                         </select>
                     </h4>
 
-                    <h4 class=""> 
+                    <h4> 
                         <input type="submit" id="suchen" value="Suche starten!" class="btn btn-primary">
                     </h4>
                 </form>
