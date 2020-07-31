@@ -95,40 +95,7 @@ h3 {
     color: #1e1e52;
 }
 
-/*p {
-    text-align: left;
-    color: black;
-    background-color: white;
 
-}*/
-
-#footer {
-    /*height: 0px;*/
-    
-    margin-top:auto; 
-    vertical-align: middle;
-    
-    /*position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    
-    bottom: 0;
-    width: 100%;*/
-    color: aquamarine;
-    background-color: black;
-    text-align: center;
-
-}
-
-#content {
-    /*min-height: 100%;
-    margin: 0;*/
-}
-
-#font-login {
-    font-size: 120%;
-}
 
 
 .container {
@@ -138,38 +105,7 @@ h3 {
     background-color: rgba(211,211,211,0.5);
 }
 
-/*Auskommentiert weil nicht verstanden :( 
-.container.suchergebnisse{
-    position: relative;
-    margin-right: auto;
-    margin-left: auto;     
-}*/
 
-.container_for_login {
-    display: flex;
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    padding-bottom: 100px;
-    margin-right: auto;
-    margin-left: auto;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(211,211,211,0.5);
-}
-
-.container_for_profile {
-    display: flex;
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    padding-bottom: 100px;
-    margin-right: auto;
-    margin-left: auto;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(211,211,211,0.5);
-}
 
 .goright {}
 
@@ -198,19 +134,6 @@ span:before {
     text-align: end;
 }
 
-/*.background_index{
-    background-image: url(../bilder/background-landing-page.jpg);
-    background-repeat:no-repeat;
-    background-size: 100% 110%;
-    overflow-x: hidden;  
-}*/
-
-/*.background_login{
-    background-image: url(../bilder/oldb-background-about.jpg);
-    background-repeat:no-repeat;
-    background-size: 100% 110%;
-    overflow-x: hidden;  
-}*/
 
 
 input,
@@ -221,7 +144,6 @@ textarea {
 
     overflow-x: hidden;
     box-sizing: border-box;
-    /*cursor: pointer; Das mag Roman gar nicht*/
 }
 
 section {
@@ -236,4 +158,22 @@ section {
 .login-links {
     text-align: center;
     vertical-align: sub;
+}
+
+#footer {    
+    margin-top:auto; 
+    vertical-align: middle;
+    color: aquamarine;
+    background-color: black;
+    text-align: center;
+
+}
+
+#content {
+    /*min-height: 100%;
+    margin: 0;*/
+}
+
+#font-login {
+    font-size: 120%;
 }
