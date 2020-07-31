@@ -30,38 +30,45 @@ include('php/process-jobDAO.php');
         $title = "OSJB";
         include "php/header.php";
     ?>
-     <div id = "content">
-    <!--Alles nur anzeigen wenn eingelogt, sonst Fehlermeldung-->
-    <?php if(!isset($_SESSION["eingeloggt"]) || $_SESSION["eingeloggt"] != true){ ?>
     
+     <div id = "content">
+         
+    <?php 
+         //Alles nur anzeigen wenn eingelogt, sonst Fehlermeldung
+         if(!isset($_SESSION["eingeloggt"]) || $_SESSION["eingeloggt"] != true){ 
+     ?>
     <p class="center">Bitte anmelden!</p>
     
+         
     <?php } else { ?>
-
-    
     <div class="container-fluid">
         <div class="container border">
             <section>
-                
- <!--Durch überprüfung von $_SESSION["update"] = "failed"; prüfen ob update fehlgeschlagen ist -> meldung ausgeben und $_SESSION["update"] auf "false" ändern-->
-                
-                <form action="php/process-userDAO.php" method="post">
-                    <h3 class="center mb-5">
-                        Profil von 
-                        <?= $_SESSION["vname"] . " " . $_SESSION["nname"];?> 
-                    </h3>
-                    
-                    <!--Rückmeldung zum Update übergangsweise hier anzeigen-->
-                    <p>
-                        <?php if (isset ($_SESSION["update"]) ) {
+                <h3 class="center mb-5">
+                    Profil von 
+                    <?= $_SESSION["vname"] . " " . $_SESSION["nname"];?> 
+                </h3>
+
+                <!--Rückmeldung zum Update übergangsweise hier anzeigen-->
+                <p>
+                    <?php 
+                        //Durch überprüfung von $_SESSION["update"] = "failed"; prüfen ob update fehlgeschlagen ist -> meldung ausgeben und $_SESSION["update"] auf "" ändern
+                        if (isset ($_SESSION["update"]) ) {
                             if($_SESSION["update"] == "fail") { ?>
                                 Fehler beim Update. (Übergangslösung)
                             <?php } elseif ($_SESSION["update"] == "success") { ?>
                                 Nutzerdaten erfolgreich aktualisiert. (Übergangslösung)
-                            <?php } $_SESSION["update"] = ""; } 
-                        ?>
-                    </p>
-                    
+                            <?php } $_SESSION["update"] = ""; 
+                        }
+                        if (isset ($_SESSION["fileUpload"]) ) {
+                            echo $_SESSION["fileUpload"];
+                            $_SESSION["fileUpload"] = "";
+                        }
+                    ?>
+                </p>
+                
+                <!--Formular zum Update von Userdaten-->
+                <form action="php/process-userDAO.php" method="post" enctype="multipart/form-data">
                     <!--email-->
                     <div class="row form-group">
                         <div class="col-sm">
@@ -100,10 +107,10 @@ include('php/process-jobDAO.php');
                     <!--Logo-->
                     <div class="row form-group">
                         <div class="col">
-                            <label for="logo">Firmenlogo: (noch in Bearbeitung)</label>
+                            <label for="logo">Firmenlogo: </label>
                         </div>
                         <div class="col-sm">
-                            <input class="btn btn-secondary" type="file" name="new_logo" id="logo">  <!--Sicherstellen, dass nur Bilder hochgeladen werden?-->
+                            <input class="btn btn-secondary" type="file" accept="image/*" name="new_logo" id="logo">  <!--Sicherstellen, dass nur Bilder hochgeladen werden?-->
                         </div>
                     </div>    
                     
