@@ -71,6 +71,12 @@ class SQLiteJobDAO implements JobDAO {
             
             
             //Optionale Angaben prüfen und ggf. aus Array holen:
+            //Logo
+            $logo = null;
+            if( isset($job['logo']) ){
+                $logo = $job['logo'];
+            }
+            
             //Zeitintesität aus den Array holen (jeweils Teilzeit, Vollzeit oder 20h)
             $intensitaet = null;
             if( isset($job['zeitintensitaet']) ){
@@ -112,7 +118,7 @@ class SQLiteJobDAO implements JobDAO {
             }
 
             // Erstellung der Query für das Eintragen des Jobangebots
-            $newJob = "insert into jobangebot (user_id, status, titel, strasse, hausnr, plz, stadt, geo_lat, geo_lon, beschreibung, art, zeitintensitaet, im_bachelor, bachelor, im_master, master, ausbildung, fachrichtung, link, beschaeftigungsbeginn, erstellt_am) values (:uid, :status, :titel, :strasse, :hausnr, :plz, :stadt, :geo_lat, :geo_lon, :beschreibung, :art, :zeitintensitaet, :im_bachelor, :bachelor, :im_master, :master, :ausbildung, :fachrichtung, :link, :beschaeftigungsbeginn, datetime('now'))";
+            $newJob = "insert into jobangebot (user_id, status, titel, strasse, hausnr, plz, stadt, geo_lat, geo_lon, beschreibung, art, zeitintensitaet, im_bachelor, bachelor, im_master, master, ausbildung, fachrichtung, logo, link, beschaeftigungsbeginn, erstellt_am) values (:uid, :status, :titel, :strasse, :hausnr, :plz, :stadt, :geo_lat, :geo_lon, :beschreibung, :art, :zeitintensitaet, :im_bachelor, :bachelor, :im_master, :master, :ausbildung, :fachrichtung, :logo, :link, :beschaeftigungsbeginn, datetime('now'))";
             
             // Statement preparen
             $stmt = $db->prepare($newJob);
@@ -134,7 +140,8 @@ class SQLiteJobDAO implements JobDAO {
             $stmt->bindParam(':master', $master);    
             $stmt->bindParam(':ausbildung', $ausbildung);
             $stmt->bindParam(':fachrichtung', $fachrichtung); 
-            $stmt->bindParam(':link', $link);       
+            $stmt->bindParam(':logo', $logo);
+            $stmt->bindParam(':link', $link);
             $stmt->bindParam(':beschaeftigungsbeginn', $beginn);  
             $stmt->bindParam(':zeitintensitaet', $intensitaet);
             // Statement ausführen
@@ -215,6 +222,11 @@ class SQLiteJobDAO implements JobDAO {
             
             
             //Optionale Angaben prüfen und ggf. aus Array holen:
+            //Logo
+            $logo = null;
+            if( isset($job['logo']) ){
+                $logo = $job['logo'];
+            }
             //Zeitintesität
             $intensitaet = null;
             if( isset($job['zeitintensitaet']) ){
@@ -255,7 +267,7 @@ class SQLiteJobDAO implements JobDAO {
             }
 
             //SQL Update        
-            $updatedJob = "update jobangebot set status = :status, titel = :titel, strasse = :strasse, hausnr = :hausnr, plz = :plz, stadt = :stadt, geo_lat = :geo_lat, geo_lon = :geo_lon, beschreibung = :beschreibung, art = :art, zeitintensitaet = :zeitintensitaet, im_bachelor = :im_bachelor, bachelor = :bachelor, im_master = :im_master, master = :master, ausbildung = :ausbildung, fachrichtung = :fachrichtung, link = :link, beschaeftigungsbeginn = :beschaeftigungsbeginn where id = :id";
+            $updatedJob = "update jobangebot set status = :status, titel = :titel, strasse = :strasse, hausnr = :hausnr, plz = :plz, stadt = :stadt, geo_lat = :geo_lat, geo_lon = :geo_lon, beschreibung = :beschreibung, art = :art, zeitintensitaet = :zeitintensitaet, im_bachelor = :im_bachelor, bachelor = :bachelor, im_master = :im_master, master = :master, ausbildung = :ausbildung, fachrichtung = :fachrichtung, logo = :logo, link = :link, beschaeftigungsbeginn = :beschaeftigungsbeginn where id = :id";
             
             //update vorbereiten
             $stmt = $db->prepare($updatedJob);
@@ -276,6 +288,7 @@ class SQLiteJobDAO implements JobDAO {
             $stmt->bindParam(':master', $master);
             $stmt->bindParam(':ausbildung', $ausbildung);
             $stmt->bindParam(':fachrichtung', $fachrichtung);
+            $stmt->bindParam(':logo', $logo);
             $stmt->bindParam(':link', $link);
             $stmt->bindParam(':beschaeftigungsbeginn', $beginn);
             $stmt->bindParam(':zeitintensitaet', $intensitaet);
