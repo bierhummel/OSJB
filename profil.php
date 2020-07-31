@@ -55,9 +55,9 @@ include('php/process-jobDAO.php');
                         //Durch überprüfung von $_SESSION["update"] = "failed"; prüfen ob update fehlgeschlagen ist -> meldung ausgeben und $_SESSION["update"] auf "" ändern
                         if (isset ($_SESSION["update"]) ) {
                             if($_SESSION["update"] == "fail") { ?>
-                                Fehler beim Update. (Übergangslösung)
+                                Fehler beim Update.
                             <?php } elseif ($_SESSION["update"] == "success") { ?>
-                                Nutzerdaten erfolgreich aktualisiert. (Übergangslösung)
+                                Nutzerdaten erfolgreich aktualisiert.
                             <?php } $_SESSION["update"] = ""; 
                         }
                         if (isset ($_SESSION["fileUpload"]) ) {

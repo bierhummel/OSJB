@@ -59,7 +59,9 @@
         
         //Falls ein File hochgeladen wurde, den File-Upload erledigen
         $uploadedFile = null;
-        if( isset($_FILES['new_logo']) ) {
+        
+        
+        if( isset($_FILES['new_logo']) && $_FILES['new_logo']["name"] != "" ) {
             include('helper-fileUpload.php');
             $uploadedFile = fileUpload( $_FILES );
         }
