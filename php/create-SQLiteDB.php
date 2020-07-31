@@ -26,7 +26,7 @@ try{
     $db->beginTransaction();
     
     //Kreieren der Tables User und Jobangebot, falls sie nicht bereits existieren
-    $db->exec("create table if not exists user (id integer primary key, uname text NOT NULL, vname text NOT NULL, nname text NOT NULL, password text NOT NULL, mail text UNIQUE, hash text NOT NULL, strasse text, hausnr text, plz text, stadt text, verified integer NOT NULL, mail_verified integer NOT NULL)");
+    $db->exec("create table if not exists user (id integer primary key, uname text NOT NULL, vname text NOT NULL, nname text NOT NULL, password text NOT NULL, mail text UNIQUE, hash text NOT NULL, logo text, strasse text, hausnr text, plz text, stadt text, verified integer NOT NULL, mail_verified integer NOT NULL)");
     
     $db->exec("create table if not exists jobangebot (id integer primary key, user_id integer, status integer NOT NULL, titel text, strasse text NOT NULL, hausnr text NOT NULL, plz text NOT NULL, stadt text NOT NULL, geo_lat real, geo_lon real, beschreibung text, art text, zeitintensitaet text, im_bachelor integer NOT NULL, bachelor integer NOT NULL, im_master integer NOT NULL, master integer NOT NULL, ausbildung integer NOT NULL, fachrichtung text, logo blob, link text, beschaeftigungsbeginn text, erstellt_am integer, FOREIGN KEY (user_id) REFERENCES user(id))");
 
