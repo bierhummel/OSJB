@@ -80,7 +80,7 @@ class SQLiteUserDAO implements UserDAO {
             $db->beginTransaction();
             
             //Statement entwerfen
-            $update = "update user set uname = :new_uname, vname = :new_vname, nname = :new_nname, strasse = :new_strasse, hausnr = :new_hausnr, plz = :new_plz, stadt = :new_stadt where mail = :mail";
+            $update = "update user set uname = :new_uname, vname = :new_vname, nname = :new_nname, logo = :new_logo, strasse = :new_strasse, hausnr = :new_hausnr, plz = :new_plz, stadt = :new_stadt where mail = :mail";
             
             //mail = :new_mail, rausgenommen nach Inhaltsreduzierung
             
@@ -92,6 +92,7 @@ class SQLiteUserDAO implements UserDAO {
             $stmt->bindParam(':new_vname', $updated_user["new_vorname"]);
             $stmt->bindParam(':new_nname', $updated_user["new_nachname"]);
             //$stmt->bindParam(':new_mail', $updated_user["new_email"]); rausgenommen nach Inhaltsreduzierung
+            $stmt->bindParam(':new_logo', $updated_user["uploadedFile"]);
             $stmt->bindParam(':new_strasse', $updated_user["new_strasse"]);
             $stmt->bindParam(':new_hausnr', $updated_user["new_hausnr"]);
             $stmt->bindParam(':new_plz', $updated_user["new_plz"]);       
