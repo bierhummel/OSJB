@@ -66,10 +66,9 @@ include('php/process-jobDAO.php');
                                 </div>
                                 
                                 <!--PLZ-->
-                                <!--Änderbar oder nicht?-->
                                 <div class="mb-2">
                                     <h5><label class="mb-0" for="plz">PLZ</label></h5>
-                                    <input type="text" id="plz" name="plz" class="form-control" maxlength="5" placeholder="Deine PLZ" readonly required value="<?php if( isset($request_checked["plz"]) ) echo $request_checked["plz"] ?>">
+                                    <input type="text" id="plz" name="plz" class="form-control" maxlength="5" placeholder="Deine PLZ" required value="<?php if( isset($request_checked["plz"]) ) echo $request_checked["plz"] ?>">
                                 </div>
 
                                 <!--Umkreis-->

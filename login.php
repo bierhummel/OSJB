@@ -46,7 +46,7 @@ session_start();
             <section id="login">
                 <form action="php/process-userDAO.php" method="post" class="was-validated">
                     <fieldset>
-                        <legend>Log in:</legend>
+                        <legend>Login:</legend>
                         
                         <div class="row form-group">
                             <div class="col-sm">
