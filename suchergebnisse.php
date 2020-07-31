@@ -55,7 +55,7 @@ include('php/process-jobDAO.php');
                         </header>
 
                         <section>
-                            <form name="filter" action="" method="get">
+                            <form name="filter" method="get">
                                 
                                 <!--Jobbezeichnung-->
                                 <div class="mb-2">
@@ -102,7 +102,7 @@ include('php/process-jobDAO.php');
                                 <!--Fachrichtung-->
                                 <div class="mb-2">
                                     <h5><label class="mb-0" for="fachrichtung">Fachrichtung</label></h5>
-                                    <select class="form-control" name="fachrichtung" size="1">
+                                    <select class="form-control" id="fachrichtung" name="fachrichtung" size="1">
                                         <option value="">Fachrichtung auswählen</option>
                                         <option value="Bildungs- und Sozialwissenschaften" <?php if(isset($request_checked["fachrichtung"]) && $request_checked["fachrichtung"] == "Bildungs- und Sozialwissenschaften"){ ?> selected <?php } ?> >
                                             Bildungs- und Sozialwissenschaften
@@ -242,7 +242,7 @@ include('php/process-jobDAO.php');
                                             <option value="Webprogrammierung">
                                             <option value="Zehnfingerschreiben">
                                         </datalist>
-                                    </div>
+                                    </div>-->
                                 
 
                                     <!--Submit nur anzeigen wenn JS deaktiviert-->

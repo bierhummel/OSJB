@@ -168,7 +168,7 @@ include('php/process-jobDAO.php');
                         
                         <div class="col-md-5">
                             <label for="job_plz">PLZ:</label>
-                            <input type="text" for="job_plz" name="job_plz" required value="<?php if($jobs != null) {echo($plz);} else{ echo $_SESSION["plz"]; } ?>" maxlength="5">
+                            <input type="text" id="job_plz" name="job_plz" required value="<?php if($jobs != null) {echo($plz);} else{ echo $_SESSION["plz"]; } ?>" maxlength="5">
                         </div>
                         <div class="col-md-2">
                         </div>
