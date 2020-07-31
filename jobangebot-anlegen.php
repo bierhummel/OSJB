@@ -81,7 +81,7 @@ include('php/process-jobDAO.php');
 
                     <div class="row">
                         <div class="col-lg-5 last_td">
-                            <select class="form-control" name="fachrichtung" size="1" required>
+                            <select class="form-control" name="fachrichtung" size="1">
                                 <option value="">Fachrichtung auswählen</option>
                                 <option value="Bildungs- und Sozialwissenschaften" <?php if($jobs != null && $fachrichtung == "Bildungs- und Sozialwissenschaften"){ ?> selected <?php } ?> >Bildungs- und Sozialwissenschaften</option>
                                 <option value="Informatik, Wirtschafts- und Rechtswissenschaften" <?php if($jobs != null && $fachrichtung == "Informatik, Wirtschafts- und Rechtswissenschaften"){ ?> selected <?php } ?> >Informatik, Wirtschafts- und Rechtswissenschaften</option>

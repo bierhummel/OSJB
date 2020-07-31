@@ -26,7 +26,7 @@ function suche_jobbez(input){
             //zeigt Fehler, funktioniert aber.. nach Vorlage von https://stackoverflow.com/questions/42080365/using-addeventlistener-and-getelementsbyclassname-to-pass-an-element-id
             var vorschläge = document.getElementsByClassName("vorschlag"); //Vorschläge selectieren
             for(let i = 0; i < vorschläge.length; i++) {       
-              vorschläge[i].addEventListener("click", function(){ 
+              vorschläge[i].addEventListener("mousedown", function(){ //Mousedown statt Click, da Click dazu geführt hat, dass immer der erste Vorschlag beim Drücken von Enter ausgewählt wurde (Roman weiß bescheid und hat auch keine andere Lösung gefunden)
                   nutze_vorschlag(vorschläge[i].innerHTML);
               })
             }

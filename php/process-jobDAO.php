@@ -91,6 +91,21 @@
         exit;
     }
 
+    //AJAX Suche nach Jobbezeichnungen 
+    if( isset($request_checked["suche"]) ){
+        //Rückgabearray abspeichern
+        $vorschläge = ($JobDAO->searchJobbez($request_checked["input"]));
+        if($vorschläge == null){ 
+            echo "Keine Jobangebote gefunden.";
+        }
+        else{
+            foreach($vorschläge as $vorschlag){
+                echo ('<button class="btn btn-primary mb-1 vorschlag">' . $vorschlag["titel"] . '</button >'); 
+            } 
+        }
+        exit;
+    }
+
 
 //Aufgaben für die diese Datei als include in der View enthalten ist:
     //Jobs entsprechend der Suchkriterien der Inputfelder laden
@@ -104,20 +119,6 @@
             $jobs = getJobsNearby($request_checked["umkreis"], $request_checked["plz"], $jobs);
         }
         //extract($jobs);
-    }
-
-    //AJAX Suche nach Jobbezeichnungen 
-    if( isset($request_checked["suche"]) ){
-        //Rückgabearray abspeichern
-        $vorschläge = ($JobDAO->searchJobbez($request_checked["input"]));
-        if($vorschläge == null){ 
-            echo "Keine Jobangebote gefunden.";
-        }
-        else{
-            foreach($vorschläge as $vorschlag){
-                echo ('<button class="btn btn-primary mb-1 vorschlag">' . $vorschlag["titel"] . '</button >'); 
-            } 
-        }
     }
 
     //Einzelnes Jobangebot laden zum Anzeigen
