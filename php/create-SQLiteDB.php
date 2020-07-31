@@ -81,7 +81,7 @@ try{
         $hausnr = "39";
         $plz = "26122";
         $stadt = "Oldenburg";    
-        $verified = 0;
+        $verified = 1;
         $mail_verified = 1;
 
         $stmt = $db->prepare($unternehmen1);
