@@ -78,4 +78,34 @@ input#hamburg {
         display: none;
     }
 
+    /*Hamburgertransition abspielen*
+    section .hamburg .line:nth-child(1) {
+        transform: translateY(12px) rotate(-45deg);
+    }
+
+    section .hamburg .line:nth-child(2) {
+        opacity: 0;
+    }
+
+    section .hamburg .line:nth-child(3) {
+        transform: translateY(-12px) rotate(45deg);
+    }
+
+
+    /*Hamburgerfunktionsweise invertieren*
+    #hamburg:checked + section .hamburg .line:nth-child(1) {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    #hamburg:checked + section .hamburg .line:nth-child(2) {
+        opacity: 1;
+    }
+
+    #hamburg:checked + section .hamburg .line:nth-child(3) {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    #hamburg:checked ~ aside {
+        display: none;
+    }*/
 }
